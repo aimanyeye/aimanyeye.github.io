@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="MySQL,数据库,">
 
 
 
@@ -79,12 +79,13 @@
 
 
 
-<meta name="description" content="title: MySQL快速入门（中）date: 2019-03-19 15:50:32tags: [MySQL,数据库]categories: [数据库,MySQL]  经过上次的MySQL快速入门（上）的学习，小艾已经有初步对MySQL的了解，前面学习的内容还是比较简单的，今天，就再深入的学习MySQL的查询吧。  目录 连接查询 子查询 union合并集合 limit使用 表">
+<meta name="description" content="经过上次的MySQL快速入门（上）的学习，小艾已经有初步对MySQL的了解，前面学习的内容还是比较简单的，今天，就再深入的学习MySQL的查询吧。  目录 连接查询 子查询 union合并集合 limit使用 表">
+<meta name="keywords" content="MySQL,数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="aimanyeye">
+<meta property="og:title" content="MySQL快速入门（中）">
 <meta property="og:url" content="https://aimanyeye.github.io/2019/03/19/2019-03-19-MySQL-快速入门(中) /index.html">
 <meta property="og:site_name" content="aimanyeye">
-<meta property="og:description" content="title: MySQL快速入门（中）date: 2019-03-19 15:50:32tags: [MySQL,数据库]categories: [数据库,MySQL]  经过上次的MySQL快速入门（上）的学习，小艾已经有初步对MySQL的了解，前面学习的内容还是比较简单的，今天，就再深入的学习MySQL的查询吧。  目录 连接查询 子查询 union合并集合 limit使用 表">
+<meta property="og:description" content="经过上次的MySQL快速入门（上）的学习，小艾已经有初步对MySQL的了解，前面学习的内容还是比较简单的，今天，就再深入的学习MySQL的查询吧。  目录 连接查询 子查询 union合并集合 limit使用 表">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-3da7ce8f3f9796db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-5a7769aaefaad808.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -216,10 +217,10 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ddd35b8739435fc5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-5f2c01cb3d68d579.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-9971623726a60988.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-19T13:06:17.435Z">
+<meta property="og:updated_time" content="2019-03-19T13:11:01.033Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="aimanyeye">
-<meta name="twitter:description" content="title: MySQL快速入门（中）date: 2019-03-19 15:50:32tags: [MySQL,数据库]categories: [数据库,MySQL]  经过上次的MySQL快速入门（上）的学习，小艾已经有初步对MySQL的了解，前面学习的内容还是比较简单的，今天，就再深入的学习MySQL的查询吧。  目录 连接查询 子查询 union合并集合 limit使用 表">
+<meta name="twitter:title" content="MySQL快速入门（中）">
+<meta name="twitter:description" content="经过上次的MySQL快速入门（上）的学习，小艾已经有初步对MySQL的了解，前面学习的内容还是比较简单的，今天，就再深入的学习MySQL的查询吧。  目录 连接查询 子查询 union合并集合 limit使用 表">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5418658-3da7ce8f3f9796db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -256,7 +257,7 @@
 
 
 
-  <title> | aimanyeye</title>
+  <title>MySQL快速入门（中） | aimanyeye</title>
   
 
 
@@ -442,7 +443,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">MySQL快速入门（中）</h1>
         
 
         <div class="post-meta">
@@ -454,7 +455,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-19T15:39:12+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-19T15:50:32+08:00">
                 2019-03-19
               </time>
             
@@ -464,6 +465,39 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -528,8 +562,7 @@
       
 
       
-        <p>title: MySQL快速入门（中）<br>date: 2019-03-19 15:50:32<br>tags: [MySQL,数据库]<br>categories: [数据库,MySQL]</p>
-<blockquote>
+        <blockquote>
 <p>经过上次的MySQL快速入门（上）的学习，小艾已经有初步对MySQL的了解，前面学习的内容还是比较简单的，今天，就再深入的学习MySQL的查询吧。</p>
 </blockquote>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
@@ -1293,7 +1326,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://aimanyeye.github.io/2019/03/19/2019-03-19-MySQL-快速入门(中) /" title>https://aimanyeye.github.io/2019/03/19/2019-03-19-MySQL-快速入门(中) /</a>
+    <a href="https://aimanyeye.github.io/2019/03/19/2019-03-19-MySQL-快速入门(中) /" title="MySQL快速入门（中）">https://aimanyeye.github.io/2019/03/19/2019-03-19-MySQL-快速入门(中) /</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1305,6 +1338,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
       
 
       
