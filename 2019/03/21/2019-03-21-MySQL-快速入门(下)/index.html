@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL,数据库,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="经过上次的MySQL快速入门（中）的学习，小艾对MySQL的多表查询有了更深刻的了解，掌握前面的内容，其实对于我们一般的开发也就足够了，今天就学习MySQL原理性一点的内容。  目录 存储引擎 事务 索引 视图 DBA命令 数据库设计三大范式">
+<meta name="keywords" content="MySQL,数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL快速入门（下）">
+<meta property="og:url" content="https://aimanyeye.github.io/2019/03/21/2019-03-21-MySQL-快速入门(下)/index.html">
+<meta property="og:site_name" content="aimanyeye">
+<meta property="og:description" content="经过上次的MySQL快速入门（中）的学习，小艾对MySQL的多表查询有了更深刻的了解，掌握前面的内容，其实对于我们一般的开发也就足够了，今天就学习MySQL原理性一点的内容。  目录 存储引擎 事务 索引 视图 DBA命令 数据库设计三大范式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-aec9ae5547eb2114.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-61724594c5d4ff66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-3187c2adc9589d60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-9a8e715b9fe47ea0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-545c0ca108afe1c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-8a9305d423a8db7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-2bb7fd58bb163b78.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-79d0e08a86c0c685.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-e122054bd89cb39e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-6512840caf62f427.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-eabf8709e70dced6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-8e8d3e47e46d7dec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-99f3832592436d2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-912064965e78f6f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ca9704d85b9cd0c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-84b54f12afd4c436.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-5bd7f9928dcaaae8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-286ae115a462e150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-84152c539c41a35f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-9a637c2bdb1f15f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-03-21T14:19:32.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL快速入门（下）">
+<meta name="twitter:description" content="经过上次的MySQL快速入门（中）的学习，小艾对MySQL的多表查询有了更深刻的了解，掌握前面的内容，其实对于我们一般的开发也就足够了，今天就学习MySQL原理性一点的内容。  目录 存储引擎 事务 索引 视图 DBA命令 数据库设计三大范式">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5418658-aec9ae5547eb2114.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aimanyeye.github.io/2019/03/21/2019-03-21-MySQL-快速入门(下)/">
+
+
+
+
+
+  <title>MySQL快速入门（下） | aimanyeye</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aimanyeye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">刻苦学习，解决眼前的苟且，追寻诗和远方...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/03/21/2019-03-21-MySQL-快速入门(下)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="艾曼爷爷">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aimanyeye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL快速入门（下）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-21T16:30:32+08:00">
+                2019-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  23 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>经过上次的MySQL快速入门（中）的学习，小艾对MySQL的多表查询有了更深刻的了解，掌握前面的内容，其实对于我们一般的开发也就足够了，今天就学习MySQL原理性一点的内容。</p>
+</blockquote>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li>存储引擎</li>
+<li>事务</li>
+<li>索引</li>
+<li>视图</li>
+<li>DBA命令</li>
+<li>数据库设计三大范式</li>
+</ol>
+<a id="more"></a>
+<h2 id="1-存储引擎"><a href="#1-存储引擎" class="headerlink" title="1. 存储引擎"></a>1. 存储引擎</h2><blockquote>
+<p>存储引擎是MySQL特有的，其它数据库没有</p>
+</blockquote>
+<h3 id="1-1-存储引擎的本质"><a href="#1-1-存储引擎的本质" class="headerlink" title="1.1 存储引擎的本质"></a>1.1 存储引擎的本质</h3><ul>
+<li>通过采用不同的技术将数据存储在文件戒内存中；</li>
+<li>每一种技术都有不同的存储机制，不同的存储机制提供不同的功能和能力；</li>
+<li>通过选择不同的技术，可以获得额外的速度戒功能，改善我们的应用；</li>
+</ul>
+<h3 id="1-2-MySQL支持很多种存储引擎"><a href="#1-2-MySQL支持很多种存储引擎" class="headerlink" title="1.2 MySQL支持很多种存储引擎"></a>1.2 MySQL支持很多种存储引擎</h3><p><strong>常见命令：</strong></p>
+<h4 id="1-2-1-show-engines-G"><a href="#1-2-1-show-engines-G" class="headerlink" title="1.2.1.show engines\G"></a>1.2.1.show engines\G</h4><p><img src="https://upload-images.jianshu.io/upload_images/5418658-aec9ae5547eb2114.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p>(1)在创建表时，可使用<strong>Engines</strong>选项为CREATE TABLE语句显示指定存储引擎</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE table_name(</span><br><span class="line">	NO INT</span><br><span class="line">)ENGINE = MyISAM;</span><br></pre></td></tr></table></figure>
+<p>(2)如果创建表时没有指定存储引擎，则使用当前默认的存储引擎；</p>
+<p>(3)默认的存储引擎可在 my.ini 配置文件中使用 default-storage-engin 选项指定；</p>
+<p>(4)修改表的存储引擎使用：<strong>ALTER TABLE</strong> 表名 ENGINE <em>**</em>= 存储引擎名称;</p>
+<p>(5)查看表使用的存储引擎，命令如下：</p>
+<p>SHOW CREATE TABLE emp\G;</p>
+<p>SHOW TABLE STATUS LIKE ‘emp’\G;</p>
+<h3 id="1-3-常用的存储引擎"><a href="#1-3-常用的存储引擎" class="headerlink" title="1.3 常用的存储引擎"></a>1.3 常用的存储引擎</h3><h4 id="1-3-1-MyISAM存储引擎"><a href="#1-3-1-MyISAM存储引擎" class="headerlink" title="1.3.1 MyISAM存储引擎"></a>1.3.1 MyISAM存储引擎</h4><p>MyISAM引擎是MySQL数据库最常用的；</p>
+<p>它管理的表具有以下<strong>特性</strong>：<br> 使用三个文件表示每个表：</p>
+<p><strong>格式文件</strong> — 存储表的结构（mytable.frm）<br><strong>数据文件</strong> — 存储表的数据（mytable.MYD）<br><strong>索引文件</strong> — 存储表的索引（mytable.MYI）<br> 可转换为压缩、叧读表来节省空间</p>
+<h4 id="1-3-2-InnoDB存储引擎"><a href="#1-3-2-InnoDB存储引擎" class="headerlink" title="1.3.2 InnoDB存储引擎"></a>1.3.2 InnoDB存储引擎</h4><p>InnoDB存储引擎是MySQL数据库的缺省引擎；</p>
+<p>它管理的表具体有以下特征：</p>
+<p>a)  每个InnoDB表在数据库目录中以.frm格式文件表示<br>b)  InnoDB表空间tablespace被用亍存储表的内容<br>c)  提供一组用来记录事务性活劢的日志文件<br>d)  用COMMIT（提交）、SAVEPOINT及ROLLBACK（回滚）支持事务处理<br>e)  提供全部ACID兼容<br>f)  在MySQL服务器崩溃后提供自劢恢复<br>g)  多版本（MVCC）和行级锁定<br>h)  支持外键及引用的完整性，包括级联更新和删除</p>
+<h4 id="1-3-3-MEMORY存储引擎"><a href="#1-3-3-MEMORY存储引擎" class="headerlink" title="1.3.3 MEMORY存储引擎"></a>1.3.3 MEMORY存储引擎</h4><p>使用MEMORY存储引擎的表，因为数据存储在内存中，且行的长度固定，所以使得MEMORY存储引擎非常快；</p>
+<p>MEMORY存储引擎管理的表具有下列特征：</p>
+<p>a)  在数据库目录内，每个表均以.frm格式文件表示；<br>b)  表数据及索引被存储在内存中；<br>c)  表级锁机制；<br>d)  字段属性不能包含TEXT戒BLOB字段；</p>
+<p>MEMORY存储引擎以前被称为HEAP引擎；</p>
+<h3 id="1-4-选择合适的存储引擎"><a href="#1-4-选择合适的存储引擎" class="headerlink" title="1.4 选择合适的存储引擎"></a>1.4 选择合适的存储引擎</h3><p>MyISAM表最适合于大量的数据读而少量数据更新的混合操作。MyISAM表的另一种适用情形是使用压缩的只读表。</p>
+<p>如果查询中包含较多的数据更新操作，应使用InnoDB。其行级锁机制和多版本的支持为数据读取和更新的混合提供了良好的并发机制。</p>
+<p>使用MEMORY存储引擎存储非永丽需要的数据，戒者是能够从基于磁盘的表中重新生成的数据。</p>
+<h2 id="2-事务"><a href="#2-事务" class="headerlink" title="2. 事务"></a>2. 事务</h2><h3 id="2-1-事务是什么（5点）"><a href="#2-1-事务是什么（5点）" class="headerlink" title="2.1 事务是什么（5点）"></a>2.1 事务是什么（5点）</h3><ul>
+<li>一个最小的不可再分的工作单元；</li>
+<li>通常一个事务对应一个完整的业务；（如：银行转账业务）</li>
+<li>而一个完整的业务需要批量的DML（insert、update、delete）语句共同完成</li>
+<li>事务只和DML语句有关系，戒者说叧有DML语句才有事务；</li>
+<li>以上所描述的批量DML语句共有多少DML诧句，这个和业务逻辑有关系，业务逻辑不同DML语句个数不同  ；</li>
+</ul>
+<h4 id="2-1-1-关与银行转账业务"><a href="#2-1-1-关与银行转账业务" class="headerlink" title="2.1.1 关与银行转账业务"></a>2.1.1 关与银行转账业务</h4><p><strong>银行转账业务：</strong>是一个完整的业务，最小的单元，不可再分，也就是说银行转账业务是一个完整的事务。</p>
+<p><strong>示例：</strong>账户转账 </p>
+<p><strong>t_act账户表：actno，balance</strong></p>
+<table>
+<thead>
+<tr>
+<th>actno</th>
+<th>balance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>act-001</td>
+<td>50000.0</td>
+</tr>
+<tr>
+<td>act-002</td>
+<td>10000.0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>act-001转10000.0给act-002，操作如下：</strong></p>
+<p>update t_act set balance = 40000.0 where actno = ‘act-001’;</p>
+<p>update t_act set balance = 20000.0 where actno = ‘act-002’;</p>
+<p><strong>分析：</strong></p>
+<p>（1）以上两条DML语句必须同时成功戒者同时失败，因为它为最小业务单元，不可拆分；</p>
+<p>（2）当第一条DML语句执行成功之后，并不能将底层数据库中的第一个账户的数据修改，而是将操作记录了一下，这个记录是在内存中完成的。</p>
+<p>（3）当第二条DML与句执行成功之后，和底层数据库文件中的数据完成同步。</p>
+<p>（4）若第二条DML语句执行失败，将清空所有的历史操作记录。</p>
+<p><strong>结论：</strong>要完成以上功能，必须借助事务 transaction。</p>
+<h3 id="2-2-概述"><a href="#2-2-概述" class="headerlink" title="2.2 概述"></a>2.2 概述</h3><p>事务可以保证多个操作原子性，要举全成功，要举全失败。对亍数据库来说，事务保证批量的DML要举全成功，要么全失败。</p>
+<h4 id="2-2-1-事务具有四个特征ACID："><a href="#2-2-1-事务具有四个特征ACID：" class="headerlink" title="2.2.1 事务具有四个特征ACID："></a>2.2.1 事务具有四个特征ACID：</h4><p>（1）原子性（Atomicity）<br>事务是最小单元，不可再分；</p>
+<p>（2）一致性（Consistency）<br>事务要求所有的DML语句操作的时候，必须保证同时成功或同时失败；</p>
+<p>（3）隔离性（Isolation）<br>一个事务不会影响其它事务的运行；</p>
+<p>（4）持久性（Durability）<br>在事务完成之后，该事务对数据库所作的更改将持久地保存在数据库中，并不会被回滚；</p>
+<h4 id="2-2-2-事务中的一些概念"><a href="#2-2-2-事务中的一些概念" class="headerlink" title="2.2.2 事务中的一些概念"></a>2.2.2 事务中的一些概念</h4><p>（1）开启事务：start transaction</p>
+<p>（2）结束事务：end transaction</p>
+<p>（3）提交事务：commit transaction</p>
+<p>（4）回滚事务：rollback transaction</p>
+<h4 id="2-3-3-和事务有关的两条SQL语句【TCL】"><a href="#2-3-3-和事务有关的两条SQL语句【TCL】" class="headerlink" title="2.3.3 和事务有关的两条SQL语句【TCL】"></a>2.3.3 和事务有关的两条SQL语句【TCL】</h4><p>COMMIT； 提交</p>
+<p>ROLLBACK； 回滚</p>
+<h4 id="2-3-4-事务开启和结束的标志是什么-？"><a href="#2-3-4-事务开启和结束的标志是什么-？" class="headerlink" title="2.3.4 事务开启和结束的标志是什么 ？"></a>2.3.4 事务开启和结束的标志是什么 ？</h4><p><strong>开始的标志</strong></p>
+<p>任何一条DML语句执行，标志事务的开启；</p>
+<p><strong>结束的标志</strong>  </p>
+<p> 提交（commit）或者回滚（rollback）</p>
+<p><strong>提交：</strong>成功的结束，将所有的DML与句操作记录和底层硬盘文件中数据进行一次同步；</p>
+<p><strong>回滚：</strong>失败的结束，将所有DML语句操作记录全部清空；</p>
+<h4 id="2-3-5-重点"><a href="#2-3-5-重点" class="headerlink" title="2.3.5 重点"></a>2.3.5 重点</h4><p>（1）在事务进行过程中，未结束之前，DML语句是不会修改底层数据库文件中的数据。</p>
+<p>（2）叧是将历史操作记录一下，在内存中完成记录。</p>
+<p>（3）叧有在事务结束的，而且是成功结束的时候才会修改底层硬盘文件中的数据。</p>
+<h4 id="2-3-6-MySQL事务的提交和回滚的演示"><a href="#2-3-6-MySQL事务的提交和回滚的演示" class="headerlink" title="2.3.6 MySQL事务的提交和回滚的演示"></a>2.3.6 MySQL事务的提交和回滚的演示</h4><p><strong>MySQL默认事务：</strong>自劢提交 show variables like ‘%commit%’;  </p>
+<p>在MySQL数据库管理系统中，默认情况下，事务是自动提交的；也就是说，叧要执行一条DML语句，就开启了事务，并且提交了事务；</p>
+<p>第一种：关闭MySQL事务自动提交  </p>
+<p>事务成功用法：start transaction；commit;</p>
+<p>第一步：start transaction; 手动开启事务<br>第二步：DML诧句…. 执行批量DML语句  .<br>第三步：commit;  手动提交事务【事务成功结束】</p>
+<p>演示例子：在t_user表中插入数据：事务成功提交</p>
+<p><strong>准备：</strong>窗口1—创建 t_user表：id为自增主键，name varchar(32)</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-61724594c5d4ff66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>第一步：窗口1，查询原表数据</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-3187c2adc9589d60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>第二步：窗口1，手动开启事务 start transaction，插入数据，查询数据</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-9a8e715b9fe47ea0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>第三步：窗口2，查询 t_user表数据</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-545c0ca108afe1c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>第四步：窗口1，手动提交事务commit</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-8a9305d423a8db7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>第五步：窗口2，查询 t_user 表</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-2bb7fd58bb163b78.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>回滚提交用法：start transaction; rollback;</strong><br>第一步：start transaction; 手动开启事务<br>第二步：DML语句…..  批量DML语句</p>
+<p><strong>演示例子：在 t_user表中插入数据，事务失败提交</strong></p>
+<p><strong>准备：</strong>窗口1—创建 t_user表：id为自增主键，name varchar(32)</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-79d0e08a86c0c685.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>第一步：窗口1，查询 t_user 表数据</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-e122054bd89cb39e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>第二步：窗口1，开启事务start transaction，并向t_user表插入数据</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-6512840caf62f427.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>第三步：窗口2，查询 t_user表数据</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-eabf8709e70dced6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>第四步：窗口1，rollback 回滚事务，并查询t_user表数据</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-8e8d3e47e46d7dec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>第五步：窗口2，查询t_user表数据</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-99f3832592436d2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>第二种：</strong>关闭MySQL事务自劢提交：只对当前会话有效  </p>
+<p>两种关闭自动提交事务<br>a） set autocommit = off<br>b） set session autocommit = off</p>
+<p>两种打开自劢提交事务<br>a） set autocommit = on<br>b） set session autocommit = on<br><strong>注：</strong>以上打开戒关闭事务叧对当前窗口有效；</p>
+<p> <strong>查询事务状态：</strong> show variables like ‘%commit%’;</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-912064965e78f6f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h4 id="2-3-7-事务的隔离级别"><a href="#2-3-7-事务的隔离级别" class="headerlink" title="2.3.7 事务的隔离级别"></a>2.3.7 事务的隔离级别</h4><p>事务四个特性ACID之一：隔离性（isolation）</p>
+<p>  隔离性有四个隔离级别：  </p>
+<p>1） read uncommitted  读未提交<br>2） read committed  读已提交<br>3） repeatable read  可重复读<br>4） serializable  串行化</p>
+<p><strong>read committed 读未提交（级别最低）</strong>  </p>
+<p>1） 事务A和和事务B，事务A未提交的数据，事务B可以读取<br>2） 这里读取到的数据可以叨做“脏数据”戒“脏读 Dirty Read”<br>3） 读未提交隔离级别最低，这种级别一般叧在理论上存在，数据库默认隔离级别一般都高于该隔离级别；</p>
+<p><strong>read committed 读已提交</strong>  </p>
+<p>1） 事务A和事务B，事务A提交的数据，事务B才可读取到；<br>2） 该隔离级别高亍“读未提交”级别<br>3） 换句话说：对方事务提交之后的数据，当前事务才可读取到。<br>4） 该隔离级别可以避免脏数据；<br>5） 该隔离级别能够导致“不可重复读取”<br>6） Oracle数据库管理系统默认隔离级别为“可重复读”</p>
+<p><strong>repeatable read 可重复读</strong>  </p>
+<p>1） 事务A和事务B，事务A提交之后的数据，事务B读取不到<br>2） 事务B是可重复读到数据的<br>3） 这种隔离级别高于“读已提交”<br>4） 换句话说，对方提交之后的数据，还是读取不到<br>5） 这种隔离级别可以避免“脏读和不可重复读”，达到“重复读取”；<br>6） MySQL数据库管理系统默认隔离级别为：可重复读<br>7） 虽然可以达到“可重复读”效果，但是会导致“幻象读”</p>
+<p><strong>serializable 串行化</strong>  </p>
+<p>1） 事务A和事务B，事务A在操作数据库表中数据的时候，事务B叧能排队等待；<br>2） 这种事务隔离级别一般很少使用，吞吐量太低，用户体验不好；<br>3） 这种隔离级别可以避免“幻象读”，每一次读取都是数据库表中真实的记录；<br>4） 事务A和事务B不再并发；</p>
+<p><strong>查看隔离级别</strong> </p>
+<p>1） 查看当前会话级隔离级别<br>select @@tx_isolation;<br>select @@session.tx_isolation;</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-ca9704d85b9cd0c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p>2） 查看当前全局隔离级别：</p>
+<p>@@global.tx_isolation;<br>select @@global.tx_isolation;</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-84b54f12afd4c436.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>设置服务器缺省隔离级别</strong>  </p>
+<p> <strong>第一种：修改my.ini配置文件</strong><br>在 my.ini 文件中的[mysqld]下面添加：<br>————————-my.ini——————————-<br>[mysqld]<br>transaction-isolation = READ-COMMITTED<br>————————–my.ini——————————-<br>a） 隔离级别可选项为：<br>–  READ-UNCOMMITTED<br>–  READ-COMMITTED<br>–  REPEATABLE-READ<br>–  SERIALIZABLE</p>
+<p><strong>第二种：通过命令方式设置事务隔离级别</strong><br>a） SET TRANSACTION ISOLATION LEVEL isolation-level;<br>b） isolation-level 可选值：<br>–  READ UNCOMMITTED<br>–  READ COMMITTED<br>–  REPEATABLE READ<br>–  SERIALIZABLE</p>
+<p><strong>设置隔离级别作用的范围</strong>  </p>
+<p>1） 事务隔离级别的作用范围分为两种：会话级、全局级<br>a） 会话级（session）：叧对当前会话有效<br>b） 全局级（global）：对所有会话有效<br>2） 使用方法如下</p>
+<p>a） 会话级：<br>SET TRANSACTION ISOLATION LEVEL ISOLATION-LEVEL;<br>SET SESSION TRANSACTION ISOLATION LEVEL ISOLATION-LEVEL;<br>b） 全局级<br>SET GLOBAL TRANSACTION ISOLATION LEVEL<isolation-level>;</isolation-level></p>
+<p>隔离级别不一致性问题的关系  </p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读</th>
+<th>不可重复地</th>
+<th>幻象读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>读未提交</td>
+<td>可能</td>
+<td>可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>读已提交</td>
+<td>不可能</td>
+<td>可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>可重复读</td>
+<td>不可能</td>
+<td>不可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>串行化</td>
+<td>不可能</td>
+<td>不可能</td>
+<td>不可能</td>
+</tr>
+</tbody>
+</table>
+<p>隔离级别不一致性问题的关系  </p>
+<p><strong>1）  读未提交  READ UNCOMMITTED</strong></p>
+<table>
+<thead>
+<tr>
+<th>会话一</th>
+<th>会话二</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>set global transaction isolation level read uncommitted;</td>
+<td></td>
+</tr>
+<tr>
+<td>退出DOS窗口</td>
+<td></td>
+</tr>
+<tr>
+<td>use bjpowernode;Drop table if exists t_user;create table t_user(no int(3) primary key auto_increment,name varchar(32));</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>use bjpowernode;</td>
+</tr>
+<tr>
+<td>start transaction;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>start transaction;</td>
+</tr>
+<tr>
+<td>insert into t_user(name) values(‘king’);</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>select * from t_user;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2）  读已提交  READ COMMITTED</strong></p>
+<table>
+<thead>
+<tr>
+<th>会话一</th>
+<th>会话二</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>set global transaction isolation level read committed;</td>
+<td></td>
+</tr>
+<tr>
+<td>退出DOS窗口</td>
+<td></td>
+</tr>
+<tr>
+<td>use bjpownode;Drop table if exists t_user;create table t_user(no int(3) primary key auto_increment,name varchar(32));</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>use bjpownode;</td>
+</tr>
+<tr>
+<td>start transaction;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>start transaction;</td>
+</tr>
+<tr>
+<td>insert into t_user(name) values(‘allen’);</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>select * from t_user;</td>
+</tr>
+<tr>
+<td>commit;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>select * from t_user;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3）  可重复读  REPEATABLE READ</strong></p>
+<table>
+<thead>
+<tr>
+<th>会话一</th>
+<th>会话二</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>set global transaction isolation level repeatable read;</td>
+<td></td>
+</tr>
+<tr>
+<td>退出DOS窗口</td>
+<td></td>
+</tr>
+<tr>
+<td>use bjpownode;Drop table if exists t_user;create table t_user(no int(3) primary key auto_increment,name varchar(32));</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>use bjpownode;</td>
+</tr>
+<tr>
+<td>start transaction;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>start transaction;</td>
+</tr>
+<tr>
+<td>select * from t_user;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>select * from t_user;</td>
+</tr>
+<tr>
+<td>insert into t_user(name) values(‘allen’);</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>select * from t_user;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4）  串行化 SERIALIZABLE</strong></p>
+<table>
+<thead>
+<tr>
+<th>会话一</th>
+<th>会话二</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>use bjpowernode;</td>
+<td></td>
+</tr>
+<tr>
+<td>Drop table if exists t_user;create table t_user(no int(3) primary key auto_increment,name varchar(32));insert into t_user(name) values(‘zhangsan’);insert into t_user(name) values(‘lisi’);</td>
+<td></td>
+</tr>
+<tr>
+<td>set global transaction isolation level serializable;</td>
+<td></td>
+</tr>
+<tr>
+<td>退出DOS窗口</td>
+<td></td>
+</tr>
+<tr>
+<td>use bjpownode;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>use bjpownode;</td>
+</tr>
+<tr>
+<td>start transaction;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>start transaction;</td>
+</tr>
+<tr>
+<td>select * from t_user;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>select * from t_user;</td>
+</tr>
+<tr>
+<td>insert into t_user(name) values(‘allen’);</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>select * from t_user;</td>
+</tr>
+<tr>
+<td>commit;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-索引"><a href="#3-索引" class="headerlink" title="3.索引"></a>3.索引</h2><h3 id="3-1-索引原理"><a href="#3-1-索引原理" class="headerlink" title="3.1 索引原理"></a>3.1 索引原理</h3><h4 id="3-1-1-什么索引"><a href="#3-1-1-什么索引" class="headerlink" title="3.1.1 什么索引"></a>3.1.1 什么索引</h4><p>索引对应的英语单词：index</p>
+<p><strong>索引作用：</strong> </p>
+<p>相当于一本字典目录，提高程序的检索 / 查询效率；表中每一个字段都可添加索引</p>
+<p><strong>主键自动添加索引：</strong> </p>
+<p>能够通过主键查询的尽量通过主键查询，效率较高；</p>
+<p>索引和表相同，存储在硬盘文件中  </p>
+<p>索引和表相同，都是一个对象，表是存储在硬盘文件中的，那举索引也是表的一部分，索引也存储在硬盘文件中；</p>
+<p>MySQL数据库中表的检索方式有2种：  </p>
+<p><strong>第一种：全表扫描（效率较低）</strong></p>
+<p>举例：查询ename=’KING’<br>假设有一张表：emp 员工表，select <em> from emp where ename = ‘KING’;<br>若ename没有添加索引，那举通过ename过滤数据的时候，ename字段会全表扫描；<br>假设有一张表：dept 部门表，select </em> from dept where dname = ‘ACCOUNTING’；<br>若dname没有添加索引，那举通过dname过滤数据的时候，dname字段会全表扫描；</p>
+<p><strong>第二种：通过索引检索（提高查询效率）</strong></p>
+<h4 id="3-1-2-什么情况下适合给表中字段添加索引"><a href="#3-1-2-什么情况下适合给表中字段添加索引" class="headerlink" title="3.1.2 什么情况下适合给表中字段添加索引"></a><strong>3.1.2 什么情况下适合给表中字段添加索引</strong></h4><p>1）  该字段数据量庞大<br>2）  该字段很少的DML操作（由亍索引也需要维护，DML操作多的话，也影响检索效率）<br>3）  该字段经常出现在where条件中<br><strong>注：</strong>实际开发中会根据项目需求或客户需求等综合因素来做调整</p>
+<h4 id="3-1-3-索引的应用"><a href="#3-1-3-索引的应用" class="headerlink" title="3.1.3 索引的应用"></a>3.1.3 索引的应用</h4><p><strong>创建索引</strong>  </p>
+<p>1）  语法结构：<br>a） create index 索引名 on 表名（列名）<br>b） create unique index 索引名 on 表名（列名）<br>注：添加unique表示在该表中的该列添加一个唯一性约束<br>示例：create index dept_dname_index on dept(dname);</p>
+<p><strong>查看索引</strong></p>
+<p>1）  语法结构：<br>a） show index from 表名<br>示例：show index from dept;</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-5bd7f9928dcaaae8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>删除索引</strong>  </p>
+<p>1）  语法结构：<br>a） drop index 索引名 on 表名;<br>示例：drop index dept_dname_index on dept;</p>
+<h2 id="4-视图"><a href="#4-视图" class="headerlink" title="4.视图"></a>4.视图</h2><h3 id="4-1-什么是视图"><a href="#4-1-什么是视图" class="headerlink" title="4.1 什么是视图"></a>4.1 什么是视图</h3><p>1） 视图对应英文单词：view<br>2） 视图在数据库管理系统中也是一个对象，也是以文件形式存在的<br>3） 视图也对应了一个查询结果，叧是从不同的角度查看数据</p>
+<h3 id="4-2-创建视图"><a href="#4-2-创建视图" class="headerlink" title="4.2 创建视图"></a>4.2 创建视图</h3><p><strong>语法结构：</strong>create view 视图名称 as 查询语句；</p>
+<p><strong>例子：</strong>从emp表查询empno,ename,sal，结果当作视图展示</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-286ae115a462e150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="4-3-删除视图"><a href="#4-3-删除视图" class="headerlink" title="4.3 删除视图"></a>4.3 删除视图</h3><p><strong>语法结构：</strong>drop view if exists 视图名称;</p>
+<p><strong>示例：</strong>删除myview视图：drop view if exists myview;</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-84152c539c41a35f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="4-4-修改视图"><a href="#4-4-修改视图" class="headerlink" title="4.4 修改视图"></a>4.4 修改视图</h3><p><strong>语法结构：</strong>alter view 视图名称 as 查询语句</p>
+<p><strong>示例：</strong>将myview视图修改为deptno,ename,job,sal</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5418658-9a637c2bdb1f15f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="4-5-视图作用"><a href="#4-5-视图作用" class="headerlink" title="4.5 视图作用"></a>4.5 视图作用</h3><h4 id="4-5-1-面向视图查询，可以提高查询效率"><a href="#4-5-1-面向视图查询，可以提高查询效率" class="headerlink" title="4.5.1 面向视图查询，可以提高查询效率"></a>4.5.1 面向视图查询，可以提高查询效率</h4><p><strong>例如</strong></p>
+<p>1） 单独执行：select e.ename,d.dname from emp e join dept d on e.deptno = d.deptno;<br>2） 将上面执行结果当作视图对象创建<br>create view myview as select e.ename,d.dname from emp e join dept d on e.deptno = d.deptno;<br>3） 面向视图查询：没有迚行表连接，提高检索效率<br>select * from myview;<br><strong>【非常重要】隐藏表的实现细节</strong></p>
+<p>1、 create view myview as select empno a,ename b,sal c from emp;<br>2、面向视图查询，叧知道myview视图中有a,b,c三个字段，不知道该视图背后真实表的结构是什么</p>
+<h2 id="5-DBA命令"><a href="#5-DBA命令" class="headerlink" title="5.DBA命令"></a>5.DBA命令</h2><h3 id="5-1-新建用户"><a href="#5-1-新建用户" class="headerlink" title="5.1 新建用户"></a>5.1 新建用户</h3><p>CREATE USER username IDENTIFIED BY ‘password’;</p>
+<p>username：你将创建的用户名,<br>password：该用户的登陆密码,密码可以为空,如果为空则该用户可以不需要密码登陆服务器.<br>示例：<br>create user p361 identified by ‘123’;<br>–可以登录但是叧可以看见一个库 information_schema</p>
+<h3 id="5-2-授权"><a href="#5-2-授权" class="headerlink" title="5.2 授权"></a>5.2 授权</h3><p><strong>命令详解</strong></p>
+<p><strong>示例：</strong>grant all privileges on dbname.tbname to ‘username‘@’login ip’ identified by ‘password’ with grant option;</p>
+<p>1) dbname=<em>表示所有数据库<br>2) tbname=</em>表示所有表<br>3) login ip=%表示任何ip<br>4) password为空，表示不需要密码即可登录<br>5) with grant option; 表示该用户还可以授权给其他用户<br><strong>细粒度授权</strong><br>1、首先以root用户进入mysql<br>2、然后键入命令：grant select,insert,update,delete on <em>.</em> to p361 @localhost Identified by “123”;<br>3、如果希望该用户能够在任何机器上登陆mysql，则将localhost改为 “%” 。</p>
+<p><strong>粗粒度授权</strong><br>我们测试用户一般使用该命令授权：<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘p361‘@’%’ Identified by “123”;<br>注意：用以上命令授权的用户不能给其它用户授权,如果想让该用户可以授权,用以下命令:<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘p361‘@’%’ Identified by “123” WITH GRANT OPTION;<br>用户权限privileges包括：<br>1） alter：修改数据库的表<br>2） create：创建新的数据库戒表<br>3） delete：删除表数据<br>4） drop：删除数据库/表<br>5） index：创建/删除索引<br>6） insert：添加表数据<br>7） select：查询表数据<br>8） update：更新表数据<br>9） all：允许任何操作<br>10）  usage：叧允许登录</p>
+<h3 id="5-3-回收授权"><a href="#5-3-回收授权" class="headerlink" title="5.3 回收授权"></a>5.3 回收授权</h3><p><strong>命令详解</strong></p>
+<p>revoke privileges on dbname[.tbname] from username;<br>revoke all privileges on <em>.</em> from p361;</p>
+<p>use mysql<br>select * from user<br>进入 mysql库中<br>修改密码;</p>
+<p>update user set password = password(‘qwe’) where user = ‘p646’;<br>刷新权限;<br>flush privileges</p>
+<h3 id="5-4-导入导出"><a href="#5-4-导入导出" class="headerlink" title="5.4 导入导出"></a>5.4 导入导出</h3><p><strong>导出：mysqldump</strong></p>
+<p><strong>导出整个数据库</strong><br>C: \Administrator&gt; mysqldump bjpowernode&gt;D:\bjpowernode.sql -uroot -p123<br><strong>导出指定库下的指定表</strong><br>C: \Administrator&gt;mysqldump bjpowernode emp&gt; D:\ bjpowernode.sql -uroot -p123</p>
+<p><strong>导入：source</strong></p>
+<p>登录MySQL数据库管理系统之后执行：<br>mysql&gt;source D:\ bjpowernode.sql</p>
+<h2 id="6-数据库设计三范式"><a href="#6-数据库设计三范式" class="headerlink" title="6.数据库设计三范式"></a>6.数据库设计三范式</h2><p>定义：设计数据库的时候所依据的规范，共有三个规范；</p>
+<h3 id="6-1-第一范式：主键、字段不能再分"><a href="#6-1-第一范式：主键、字段不能再分" class="headerlink" title="6.1 第一范式：主键、字段不能再分"></a>6.1 第一范式：主键、字段不能再分</h3><p>定义：要求有主键，数据库中不能出现重复记录，每一个字<br>段是原子性不能再分；</p>
+<p><strong>示例：不符合第一范式</strong></p>
+<table>
+<thead>
+<tr>
+<th>学生编号</th>
+<th>学生姓名</th>
+<th>联系方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1001</td>
+<td>张三</td>
+<td><a href="mailto:zs@gmail.com" target="_blank" rel="noopener">zs@gmail.com</a>,1359999999</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>李四</td>
+<td><a href="mailto:ls@gmail.com" target="_blank" rel="noopener">ls@gmail.com</a>,13699999999</td>
+</tr>
+<tr>
+<td>1001</td>
+<td>王五</td>
+<td><a href="mailto:ww@163.net" target="_blank" rel="noopener">ww@163.net</a>,13488888888</td>
+</tr>
+</tbody>
+</table>
+<p><strong>分析以上设计存在的问题：</strong><br>1） 数据存在重复记录，数据不唯一，没有主键<br>2） 联系方式可以再分，不是原子性<br><strong>修改以上设计方案：</strong></p>
+<table>
+<thead>
+<tr>
+<th>学生编号(pk)</th>
+<th>学生姓名</th>
+<th>email</th>
+<th>联系电话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1001</td>
+<td>张三</td>
+<td><a href="mailto:zs@gmail.com" target="_blank" rel="noopener">zs@gmail.com</a></td>
+<td>1359999999</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>李四</td>
+<td><a href="mailto:ls@gmail.com" target="_blank" rel="noopener">ls@gmail.com</a></td>
+<td>13699999999</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>王五</td>
+<td><a href="mailto:ww@163.net" target="_blank" rel="noopener">ww@163.net</a></td>
+<td>13488888888</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：关于第一范式</strong></p>
+<p>1、  每一行必须唯一，也就是每个表必须有主键，这是我们数据库设计的最基本要求，<br>2、  主键主要通常采用数值型或定长字符串表示<br>3、  关亍列丌可再分，应根据具体的情况来决定。如联系方式，为了开发上的便利可能就采用一个字段了；</p>
+<h3 id="6-2-第二范式：非主键字段完成依赖主键"><a href="#6-2-第二范式：非主键字段完成依赖主键" class="headerlink" title="6.2 第二范式：非主键字段完成依赖主键"></a>6.2 第二范式：非主键字段完成依赖主键</h3><p><strong>定义：</strong>第二范式是建立在第一范式基础之上，要求数据库中<br>所有非主键字段完全依赖主键，不能产生部分依赖；（严格意<br>义上说：尽量不要使用联合主键）</p>
+<p><strong>示例一：数据仍然可能重复</strong></p>
+<table>
+<thead>
+<tr>
+<th>学生编号</th>
+<th>学生姓名</th>
+<th>教师编号</th>
+<th>教师姓名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1001</td>
+<td>张三</td>
+<td>001</td>
+<td>王老师</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>李四</td>
+<td>002</td>
+<td>赵老师</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>王五</td>
+<td>001</td>
+<td>王老师</td>
+</tr>
+<tr>
+<td>1001</td>
+<td>张三</td>
+<td>002</td>
+<td>超老师</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例二：确定主键，学生编号、教师编号，出现冗余</strong></p>
+<table>
+<thead>
+<tr>
+<th>学生编号（PK）</th>
+<th>教师编号(PK)</th>
+<th>学生姓名</th>
+<th>教师姓名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1001</td>
+<td>001</td>
+<td>张三</td>
+<td>王老师</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>002</td>
+<td>李四</td>
+<td>赵老师</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>001</td>
+<td>王五</td>
+<td>王老师</td>
+</tr>
+<tr>
+<td>1001</td>
+<td>002</td>
+<td>张三</td>
+<td>赵老师</td>
+</tr>
+</tbody>
+</table>
+<p><strong>综合分析：</strong><br>1、 以上虽然确定了主键，但此表会出现大量冗余，主要涉及到的冗余字段为“学生姓名”和“教师姓名”；<br>2、 出现冗余的原因在亍：学生姓名部分依赖了主键的一个字段学生编号，而没有依赖教师编号，而教师姓名部分依赖了主键的一个字段教师编号，这就是第二范式部分依赖。</p>
+<p><strong>解决方案如下：</strong></p>
+<p><strong>学生信息表：</strong></p>
+<table>
+<thead>
+<tr>
+<th>学生编号（PK）</th>
+<th>学生姓名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1001</td>
+<td>张三</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>李四</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>王五</td>
+</tr>
+</tbody>
+</table>
+<p>教师信息表：</p>
+<table>
+<thead>
+<tr>
+<th>教师编号（PK）</th>
+<th>教师姓名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>001</td>
+<td>王老师</td>
+</tr>
+<tr>
+<td>002</td>
+<td>赵老师</td>
+</tr>
+</tbody>
+</table>
+<p><strong>教师和学生的关系表：</strong></p>
+<table>
+<thead>
+<tr>
+<th>学生编号(PK) fk-&gt;学生表的学生编号</th>
+<th>教师编号(PK) fk-&gt;教师表的教师编号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1001</td>
+<td>001</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>002</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>001</td>
+</tr>
+<tr>
+<td>1001</td>
+<td>002</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：</strong>一种典型的“多对多”的设计</p>
+<h3 id="6-3-第三范式"><a href="#6-3-第三范式" class="headerlink" title="6.3 第三范式"></a>6.3 第三范式</h3><p>定义：建立在第二范式基础之上，要求非主键字段不能产生<br>传递依赖于主键字段；</p>
+<p><strong>示例一：学生信息表</strong></p>
+<table>
+<thead>
+<tr>
+<th>学生编号（PK）</th>
+<th>学生姓名</th>
+<th>班级编号</th>
+<th>班级名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1001</td>
+<td>张三</td>
+<td>01</td>
+<td>一年一班</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>李四</td>
+<td>02</td>
+<td>一年二班</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>王五</td>
+<td>03</td>
+<td>一年三班</td>
+</tr>
+<tr>
+<td>1004</td>
+<td>六</td>
+<td>03</td>
+<td>一年三班</td>
+</tr>
+</tbody>
+</table>
+<p><strong>综合分析：</strong><br>1、从表中看出，班级名称字段存在冗余，因为班级名称字段没有直接依赖于主键<br>2、班级名称字段依赖于班级编号，班级编号依赖于学生编号，那么这就是传递依赖，</p>
+<p><strong>解决方案：</strong><br>1、 将冗余字段单独拿出来建立表<br>2、 如下表所示：学生信息表中班级编号设为外键FK<br><strong>学生信息表：</strong></p>
+<table>
+<thead>
+<tr>
+<th>学生编号（PK）</th>
+<th>学生姓名</th>
+<th>班级编号（FK）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1001</td>
+<td>张三</td>
+<td>01</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>李四</td>
+<td>02</td>
+</tr>
+<tr>
+<td>1003</td>
+<td>王五</td>
+<td>03</td>
+</tr>
+<tr>
+<td>1004</td>
+<td>赵六</td>
+<td>03</td>
+</tr>
+</tbody>
+</table>
+<p><strong>班级信息表：</strong></p>
+<table>
+<thead>
+<tr>
+<th>班级编号（PK）</th>
+<th>班级名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>一年一班</td>
+</tr>
+<tr>
+<td>02</td>
+<td>一年二班</td>
+</tr>
+<tr>
+<td>03</td>
+<td>一年三班</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：</strong> 典型的一对多<br>以上设计是一种典型的一对多的设计，一存储在一张表中，多存储在一张表中，在多的那张表中添加外键指向一的一方的主键</p>
+<h3 id="6-4-三范式总结"><a href="#6-4-三范式总结" class="headerlink" title="6.4 三范式总结"></a>6.4 三范式总结</h3><h4 id="6-4-1-一对一"><a href="#6-4-1-一对一" class="headerlink" title="6.4.1 一对一"></a>6.4.1 一对一</h4><p>第一种方案：分两张表存储，共享主键  </p>
+<p>1） 示例：t_husband 和 t_wife两张表<br>丈夫表 ：t_husband</p>
+<table>
+<thead>
+<tr>
+<th>hno（PK）</th>
+<th>hname</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Zhangsan</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Wangwu</td>
+</tr>
+<tr>
+<td>3</td>
+<td>zhaoliu</td>
+</tr>
+</tbody>
+</table>
+<p>妻子表：t_wife</p>
+<table>
+<thead>
+<tr>
+<th>wno（PK）【同时也是外键FK，引用t_husband的主键】</th>
+<th>wname</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>a</td>
+</tr>
+<tr>
+<td>2</td>
+<td>b</td>
+</tr>
+<tr>
+<td>1</td>
+<td>c</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第二种方案：</strong>分两张表存储，外键唯一  </p>
+<p><strong>示例：</strong>t_husband 和 t_wife两张表</p>
+<p>**丈夫表 ：t_husband</p>
+<table>
+<thead>
+<tr>
+<th>hno（PK）</th>
+<th>hname</th>
+<th>Wifeno（FK - unique）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Zhangsan</td>
+<td>100</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Wangwu</td>
+<td>200</td>
+</tr>
+<tr>
+<td>3</td>
+<td>zhaoliu</td>
+<td>300</td>
+</tr>
+</tbody>
+</table>
+<p><strong>妻子表：t_wife</strong></p>
+<table>
+<thead>
+<tr>
+<th>wno（PK）</th>
+<th>wname</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>a</td>
+</tr>
+<tr>
+<td>200</td>
+<td>b</td>
+</tr>
+<tr>
+<td>300</td>
+<td>c</td>
+</tr>
+</tbody>
+</table>
+<h4 id="6-4-2-一对多"><a href="#6-4-2-一对多" class="headerlink" title="6.4.2 一对多"></a>6.4.2 一对多</h4><p>分两张表存储，在多的一方添加外键，这个外键字段引用一的一方中的主键字段<br><strong>例如：</strong>学生信息表和班级信息表，<strong>请参考：20.3.2 示例一</strong></p>
+<h4 id="6-4-3-多对多"><a href="#6-4-3-多对多" class="headerlink" title="6.4.3 多对多"></a>6.4.3 多对多</h4><p><strong>例如：</strong>分三张表存储，在学生表中存储学生信息，在课程表中存储课程信息，在选课表中存储学<br>生选课信息，<strong>请参考：20.2</strong></p>
+<h3 id="6-5-实际开发中是怎么的？"><a href="#6-5-实际开发中是怎么的？" class="headerlink" title="6.5 实际开发中是怎么的？"></a>6.5 实际开发中是怎么的？</h3><p>1） 数据库设计尽量遵循三范式<br>2） 根据实际需求迚行取舍，有时可能会拿冗余换速度，最终用目的要满足<strong>客户需求。</strong></p>
+<blockquote>
+<p>好，终于学完MySQL了，那么MySQL的学习就暂告一段落了。这么多东西，小艾要去休息休息消化消化一下才行。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="艾曼爷爷 wechat" style="width: 200px; max-width: 100%;">
+    <div>扫描二维码关注微信公众号，了解更多</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赞赏是最好的支持与鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="艾曼爷爷 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="艾曼爷爷 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    艾曼爷爷
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://aimanyeye.github.io/2019/03/21/2019-03-21-MySQL-快速入门(下)/" title="MySQL快速入门（下）">https://aimanyeye.github.io/2019/03/21/2019-03-21-MySQL-快速入门(下)/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://aimanyeye.github.io/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/19/2019-03-19-MySQL-快速入门(中) /" rel="next" title="MySQL快速入门（中）">
+                <i class="fa fa-chevron-left"></i> MySQL快速入门（中）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="艾曼爷爷">
+            
+              <p class="site-author-name" itemprop="name">艾曼爷爷</p>
+              <p class="site-description motion-element" itemprop="description">微信公众号：aimanyeye</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-存储引擎"><span class="nav-number">2.</span> <span class="nav-text">1. 存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-存储引擎的本质"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 存储引擎的本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-MySQL支持很多种存储引擎"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 MySQL支持很多种存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-show-engines-G"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1.show engines\G</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-常用的存储引擎"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 常用的存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-MyISAM存储引擎"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.3.1 MyISAM存储引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-InnoDB存储引擎"><span class="nav-number">2.3.2.</span> <span class="nav-text">1.3.2 InnoDB存储引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-MEMORY存储引擎"><span class="nav-number">2.3.3.</span> <span class="nav-text">1.3.3 MEMORY存储引擎</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-选择合适的存储引擎"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 选择合适的存储引擎</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-事务"><span class="nav-number">3.</span> <span class="nav-text">2. 事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-事务是什么（5点）"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 事务是什么（5点）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-关与银行转账业务"><span class="nav-number">3.1.1.</span> <span class="nav-text">2.1.1 关与银行转账业务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-概述"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-事务具有四个特征ACID："><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1 事务具有四个特征ACID：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-事务中的一些概念"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2.2 事务中的一些概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3-和事务有关的两条SQL语句【TCL】"><span class="nav-number">3.2.3.</span> <span class="nav-text">2.3.3 和事务有关的两条SQL语句【TCL】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-4-事务开启和结束的标志是什么-？"><span class="nav-number">3.2.4.</span> <span class="nav-text">2.3.4 事务开启和结束的标志是什么 ？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-5-重点"><span class="nav-number">3.2.5.</span> <span class="nav-text">2.3.5 重点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-6-MySQL事务的提交和回滚的演示"><span class="nav-number">3.2.6.</span> <span class="nav-text">2.3.6 MySQL事务的提交和回滚的演示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-7-事务的隔离级别"><span class="nav-number">3.2.7.</span> <span class="nav-text">2.3.7 事务的隔离级别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-索引"><span class="nav-number">4.</span> <span class="nav-text">3.索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-索引原理"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 索引原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-什么索引"><span class="nav-number">4.1.1.</span> <span class="nav-text">3.1.1 什么索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-什么情况下适合给表中字段添加索引"><span class="nav-number">4.1.2.</span> <span class="nav-text">3.1.2 什么情况下适合给表中字段添加索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-索引的应用"><span class="nav-number">4.1.3.</span> <span class="nav-text">3.1.3 索引的应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-视图"><span class="nav-number">5.</span> <span class="nav-text">4.视图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-什么是视图"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 什么是视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-创建视图"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 创建视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-删除视图"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 删除视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-修改视图"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 修改视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-视图作用"><span class="nav-number">5.5.</span> <span class="nav-text">4.5 视图作用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-5-1-面向视图查询，可以提高查询效率"><span class="nav-number">5.5.1.</span> <span class="nav-text">4.5.1 面向视图查询，可以提高查询效率</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-DBA命令"><span class="nav-number">6.</span> <span class="nav-text">5.DBA命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-新建用户"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 新建用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-授权"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-回收授权"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 回收授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-导入导出"><span class="nav-number">6.4.</span> <span class="nav-text">5.4 导入导出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-数据库设计三范式"><span class="nav-number">7.</span> <span class="nav-text">6.数据库设计三范式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-第一范式：主键、字段不能再分"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 第一范式：主键、字段不能再分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-第二范式：非主键字段完成依赖主键"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 第二范式：非主键字段完成依赖主键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-第三范式"><span class="nav-number">7.3.</span> <span class="nav-text">6.3 第三范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-三范式总结"><span class="nav-number">7.4.</span> <span class="nav-text">6.4 三范式总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-1-一对一"><span class="nav-number">7.4.1.</span> <span class="nav-text">6.4.1 一对一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-2-一对多"><span class="nav-number">7.4.2.</span> <span class="nav-text">6.4.2 一对多</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-3-多对多"><span class="nav-number">7.4.3.</span> <span class="nav-text">6.4.3 多对多</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-实际开发中是怎么的？"><span class="nav-number">7.5.</span> <span class="nav-text">6.5 实际开发中是怎么的？</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">艾曼爷爷</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '3b1b21d6164dbd9a4aad',
+          clientSecret: '699e21661be860daeb91d1daf05d9b9daa2570ba',
+          repo: 'aimanyeye.github.io',
+          owner: 'aimanyeye',
+          admin: ['aimanyeye'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
