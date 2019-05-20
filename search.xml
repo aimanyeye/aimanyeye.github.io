@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F03%2F22%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    <title><![CDATA[Mybatis框架概述]]></title>
+    <url>%2F2019%2F05%2F20%2F2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0%2F</url>
+    <content type="text"><![CDATA[目录 什么是框架 JDBC编程的分析 1.1 什么是框架1.1.1 什么是框架框架（Framework）是整个或部分系统的可重用设计，表现为一组抽象构件及构件实例间交互的方法;另一种定义认为，框架是可被应用开发者定制的应用骨架。前者是从应用方面而后者是从目的方面给出的定义。 简而言之，框架其实就是某种应用的半成品，就是一组组件，供你选用完成你自己的系统。简单说就是使用别人搭好的舞台，你来做表演。而且，框架一般是成熟的，不断升级的软件。 1.1.2 框架要解决的问题框架要解决的最重要的一个问题是技术整合的问题，在 J2EE 的 框架中，有着各种各样的技术，不同的软件企业需要从 J2EE 中选择不同的技术，这就使得软件企业最终的应用依赖于这些技术，技术自身的复杂性和技术的风险性将会直接对应用造成冲击。而应用是软件企业的核心，是竞争力的关键所在，因此应该将应用自身的设计和具体的实现技术解耦。这样，软件企业的研发将集中在应用的设计上，而不是具体的技术实现，技术实现是应用的底层支撑，它不应该直接对应用产生影响。 框架一般处在低层应用平台（如 J2EE）和高层业务逻辑之间的中间层 。 1.1.3 软件开发的分层重要性框架的重要性在于它实现了部分功能，并且能够很好的将低层应用平台和高层业务逻辑进行了缓和。为了实现软件工程中的“高内聚、低耦合”。把问题划分开来各个解决，易于控制，易于延展，易于分配资源。 我们常见的MVC 软件设计思想就是很好的分层思想。 1.1.4 分层开发下的常见框架 1.1.5 MyBatis 框架概述mybatis是一个优秀的基于 java 的持久层框架，它内部封装了 jdbc，使开发者只需要关注 sql 语句本身，而不需要花费精力去处理加载驱动、创建连接、创建 statement 等繁杂的过程。 mybatis通过 xml 或注解的方式将要执行的各种statement配置起来，并通过java对象和statement 中sql 的动态参数进行映射生成最终执行的 sql 语句，最后由 mybatis 框架执行 sql 并将结果映射为 java 对象并返回。 采用 ORM 思想解决了实体和数据库映射的问题，对 jdbc进行了封装，屏蔽了 jdbc api 底层访问细节，使我们不用与 jdbc api 打交道，就可以完成对数据库的持久化操作。 为了我们能够更好掌握框架运行的内部过程，并且有更好的体验，下面我们将从自定义 Mybatis 框架开始来学习框架。此时我们将会体验框架从无到有的过程体验，也能够很好的综合前面阶段所学的基础。 1.2 JDBC 编程的分析1.2.1 jdbc 程序的回顾123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051public static void main(String[] args) &#123; Connection connection = null; PreparedStatement preparedStatement = null; ResultSet resultSet = null; try &#123; //加载数据库驱动 Class.forName("com.mysql.jdbc.Driver"); //通过驱动管理类获取数据库链接 connection = DriverManager .getConnection("jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8","root", "root"); //定义 sql 语句 ?表示占位符 String sql = "select * from user where username = ?"; //获取预处理 statement preparedStatement = connection.prepareStatement(sql); //设置参数，第一个参数为 sql 语句中参数的序号（从 1 开始），第二个参数为设置的参数值 preparedStatement.setString(1, "王五"); //向数据库发出 sql 执行查询，查询出结果集 resultSet = preparedStatement.executeQuery(); //遍历查询结果集 while(resultSet.next())&#123; System.out.println(resultSet.getString("id")+" "+resultSet.getString("username")); &#125; &#125; catch (Exception e) &#123; e.printStackTrace(); &#125;finally&#123; //释放资源 if(resultSet!=null)&#123; try &#123; resultSet.close(); &#125; catch (SQLException e) &#123; e.printStackTrace(); &#125; &#125; if(preparedStatement!=null)&#123; try &#123; preparedStatement.close(); &#125; catch (SQLException e) &#123; e.printStackTrace(); &#125; &#125; if(connection!=null)&#123; try &#123; connection.close(); &#125; catch (SQLException e) &#123; // TODO Auto-generated catch block e.printStackTrace(); &#125; &#125; &#125;&#125; 上边使用 jdbc 的原始方法（未经封装）实现了查询数据库表记录的操作。 1.2.2 jdbc 问题分析1、数据库链接创建、释放频繁造成系统资源浪费从而影响系统性能，如果使用数据库链接池可解决此问题。2、Sql 语句在代码中硬编码，造成代码不易维护，实际应用 sql 变化的可能较大，sql 变动需要改变 java代码。3、使用 preparedStatement 向占有位符号传参数存在硬编码，因为 sql 语句的 where 条件不一定，可能多也可能少，修改 sql 还要修改代码，系统不易维护。4、对结果集解析存在硬编码（查询列名），sql 变化导致解析代码变化，系统不易维护，如果能将数据库记录封装成 pojo 对象解析比较方便。]]></content>
+      <categories>
+        <category>Java</category>
+        <category>SSM框架</category>
+        <category>Mybatis</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>SSM框架</tag>
+        <tag>Mybatis</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[MySQL快速入门（下）]]></title>
