@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java,SSM框架,Mybatis,">
+  <meta name="keywords" content="软件工程,需求分析,详细设计,">
 
 
 
@@ -79,23 +79,32 @@
 
 
 
-<meta name="description" content="目录 什么是框架 JDBC编程的分析">
-<meta name="keywords" content="Java,SSM框架,Mybatis">
+<meta name="description" content="目录 软件生命周期 需求分析 详细设计">
+<meta name="keywords" content="软件工程,需求分析,详细设计">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis框架概述">
-<meta property="og:url" content="https://aimanyeye.github.io/2019/05/20/2019-05-20-Mybatis框架概述/index.html">
+<meta property="og:title" content="软件项目需求分析到详细设计">
+<meta property="og:url" content="https://aimanyeye.github.io/2019/05/21/2019-05-21-软件项目需求分析到详细设计/index.html">
 <meta property="og:site_name" content="aimanyeye">
-<meta property="og:description" content="目录 什么是框架 JDBC编程的分析">
+<meta property="og:description" content="目录 软件生命周期 需求分析 详细设计">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E5%88%86%E5%B1%82%E9%87%8D%E8%A6%81%E6%80%A7.png?raw=true">
-<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B61.png?raw=true">
-<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B62.png?raw=true">
-<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B63.png?raw=true">
-<meta property="og:updated_time" content="2019-05-20T10:56:47.087Z">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E7%80%91%E5%B8%83%E6%A8%A1%E5%9E%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%9E%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%A2%9E%E9%87%8F%E6%A8%A1%E5%9E%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E9%9C%80%E6%B1%82%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%8A%9F%E8%83%BD%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E7%94%A8%E4%BE%8B%E5%9B%BE.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%8A%9F%E8%83%BD%E7%94%A8%E4%BE%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%841.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%842.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%8A%9F%E8%83%BD%E6%9E%B6%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%9B%BE.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%83%A8%E7%BD%B2%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E7%89%A9%E7%90%86%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B.png?raw=true">
+<meta property="og:updated_time" content="2019-05-20T08:27:14.599Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis框架概述">
-<meta name="twitter:description" content="目录 什么是框架 JDBC编程的分析">
-<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E5%88%86%E5%B1%82%E9%87%8D%E8%A6%81%E6%80%A7.png?raw=true">
+<meta name="twitter:title" content="软件项目需求分析到详细设计">
+<meta name="twitter:description" content="目录 软件生命周期 需求分析 详细设计">
+<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E7%80%91%E5%B8%83%E6%A8%A1%E5%9E%8B.png?raw=true">
 
 
 
@@ -125,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://aimanyeye.github.io/2019/05/20/2019-05-20-Mybatis框架概述/">
+  <link rel="canonical" href="https://aimanyeye.github.io/2019/05/21/2019-05-21-软件项目需求分析到详细设计/">
 
 
 
 
 
-  <title>Mybatis框架概述 | aimanyeye</title>
+  <title>软件项目需求分析到详细设计 | aimanyeye</title>
   
 
 
@@ -300,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/05/20/2019-05-20-Mybatis框架概述/">
+    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/05/21/2019-05-21-软件项目需求分析到详细设计/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="艾曼爷爷">
@@ -317,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mybatis框架概述</h1>
+          <h1 class="post-title" itemprop="name headline">软件项目需求分析到详细设计</h1>
         
 
         <div class="post-meta">
@@ -329,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-20T13:50:32+08:00">
-                2019-05-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-21T13:50:32+08:00">
+                2019-05-21
               </time>
             
 
@@ -352,8 +361,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/软件工程/" itemprop="url" rel="index">
+                    <span itemprop="name">软件工程</span>
                   </a>
                 </span>
 
@@ -363,19 +372,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/SSM框架/" itemprop="url" rel="index">
-                    <span itemprop="name">SSM框架</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/SSM框架/Mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">Mybatis</span>
+                  <a href="/categories/软件工程/需求分析与详细设计/" itemprop="url" rel="index">
+                    <span itemprop="name">需求分析与详细设计</span>
                   </a>
                 </span>
 
@@ -410,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.3k 字
+                  2.3k 字
                 </span>
               
 
@@ -426,7 +424,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -447,27 +445,184 @@
       
 
       
-        <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h3><ol>
-<li>什么是框架</li>
-<li>JDBC编程的分析</li>
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h2><ol>
+<li>软件生命周期</li>
+<li>需求分析</li>
+<li>详细设计</li>
 </ol>
 <a id="more"></a>
-<h2 id="1-什么是框架"><a href="#1-什么是框架" class="headerlink" title="1. 什么是框架"></a>1. 什么是框架</h2><h3 id="1-1-什么是框架"><a href="#1-1-什么是框架" class="headerlink" title="1.1 什么是框架"></a>1.1 什么是框架</h3><p>框架（Framework）是整个或部分系统的可重用设计，表现为一组抽象构件及构件实例间交互的方法;另一种定义认为，框架是可被应用开发者定制的应用骨架。前者是从应用方面而后者是从目的方面给出的定义。</p>
-<p>简而言之，框架其实就是某种应用的半成品，就是一组组件，供你选用完成你自己的系统。简单说就是使用别人搭好的舞台，你来做表演。而且，框架一般是成熟的，不断升级的软件。 </p>
-<h3 id="1-2-框架要解决的问题"><a href="#1-2-框架要解决的问题" class="headerlink" title="1.2 框架要解决的问题"></a>1.2 框架要解决的问题</h3><p>框架要解决的最重要的一个问题是技术整合的问题，在 J2EE 的 框架中，有着各种各样的技术，不同的软件企业需要从 J2EE 中选择不同的技术，这就使得软件企业最终的应用依赖于这些技术，技术自身的复杂性和技术的风险性将会直接对应用造成冲击。而应用是软件企业的核心，是竞争力的关键所在，因此应该将应用自身的设计和具体的实现技术解耦。这样，软件企业的研发将集中在应用的设计上，而不是具体的技术实现，技术实现是应用的底层支撑，它不应该直接对应用产生影响。</p>
-<p><strong>框架一般处在低层应用平台（如 J2EE）和高层业务逻辑之间的中间层 。</strong></p>
-<h3 id="1-3-软件开发的分层重要性"><a href="#1-3-软件开发的分层重要性" class="headerlink" title="1.3 软件开发的分层重要性"></a>1.3 软件开发的分层重要性</h3><p>框架的重要性在于它实现了部分功能，并且能够很好的将低层应用平台和高层业务逻辑进行了缓和。为了实现软件工程中的“高内聚、低耦合”。把问题划分开来各个解决，易于控制，易于延展，易于分配资源。 我们常见的MVC 软件设计思想就是很好的分层思想。 </p>
-<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E5%88%86%E5%B1%82%E9%87%8D%E8%A6%81%E6%80%A7.png?raw=true" alt="è½¯ä&quot;¶å¼åçåå±éè¦æ§.png"></p>
-<h3 id="1-4-分层开发下的常见框架"><a href="#1-4-分层开发下的常见框架" class="headerlink" title="1.4 分层开发下的常见框架"></a>1.4 分层开发下的常见框架</h3><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B61.png?raw=true" alt="åå±å¼åä¸çå¸¸è§æ¡æ¶1.png"></p>
-<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B62.png?raw=true" alt="åå±å¼åä¸çå¸¸è§æ¡æ¶2.png"></p>
-<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B63.png?raw=true" alt="åå±å¼åä¸çå¸¸è§æ¡æ¶3.png"></p>
-<h3 id="1-5-MyBatis-框架概述"><a href="#1-5-MyBatis-框架概述" class="headerlink" title="1.5 MyBatis  框架概述"></a>1.5 MyBatis  框架概述</h3><p>mybatis是一个优秀的基于 java 的持久层框架，它内部封装了 jdbc，使开发者只需要关注 sql 语句本身，而不需要花费精力去处理加载驱动、创建连接、创建 statement 等繁杂的过程。</p>
-<p>mybatis通过 xml 或注解的方式将要执行的各种statement配置起来，并通过java对象和statement 中sql 的动态参数进行映射生成最终执行的 sql 语句，最后由 mybatis 框架执行 sql 并将结果映射为 java 对象并返回。</p>
-<p>采用 ORM 思想解决了实体和数据库映射的问题，对 jdbc进行了封装，屏蔽了 jdbc api 底层访问细节，使我们不用与 jdbc api 打交道，就可以完成对数据库的持久化操作。</p>
-<p>为了我们能够更好掌握框架运行的内部过程，并且有更好的体验，下面我们将从自定义 Mybatis 框架开始来学习框架。此时我们将会体验框架从无到有的过程体验，也能够很好的综合前面阶段所学的基础。</p>
-<h2 id="2-JDBC-编程的分析"><a href="#2-JDBC-编程的分析" class="headerlink" title="2. JDBC 编程的分析"></a>2. JDBC 编程的分析</h2><h3 id="2-1-jdbc-程序的回顾"><a href="#2-1-jdbc-程序的回顾" class="headerlink" title="2.1 jdbc  程序的回顾"></a>2.1 jdbc  程序的回顾</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Connection connection = <span class="keyword">null</span>;</span><br><span class="line">		PreparedStatement preparedStatement = <span class="keyword">null</span>;</span><br><span class="line">		ResultSet resultSet = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//加载数据库驱动</span></span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">			<span class="comment">//通过驱动管理类获取数据库链接</span></span><br><span class="line">			connection = DriverManager</span><br><span class="line">               .getConnection(<span class="string">"jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8"</span>,<span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">			<span class="comment">//定义 sql 语句 ?表示占位符</span></span><br><span class="line">			String sql = <span class="string">"select * from user where username = ?"</span>;</span><br><span class="line">			<span class="comment">//获取预处理 statement</span></span><br><span class="line">			preparedStatement = connection.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//设置参数，第一个参数为 sql 语句中参数的序号（从 1 开始），第二个参数为设置的参数值</span></span><br><span class="line">			preparedStatement.setString(<span class="number">1</span>, <span class="string">"王五"</span>);</span><br><span class="line">			<span class="comment">//向数据库发出 sql 执行查询，查询出结果集</span></span><br><span class="line">			resultSet = preparedStatement.executeQuery();</span><br><span class="line">			<span class="comment">//遍历查询结果集</span></span><br><span class="line">			<span class="keyword">while</span>(resultSet.next())&#123;</span><br><span class="line">			System.out.println(resultSet.getString(<span class="string">"id"</span>)+<span class="string">"</span></span><br><span class="line"><span class="string">				"</span>+resultSet.getString(<span class="string">"username"</span>));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">			<span class="comment">//释放资源</span></span><br><span class="line">			<span class="keyword">if</span>(resultSet!=<span class="keyword">null</span>)&#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					resultSet.close();</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(preparedStatement!=<span class="keyword">null</span>)&#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					preparedStatement.close();</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(connection!=<span class="keyword">null</span>)&#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					connection.close();</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">					<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上边使用 jdbc 的原始方法（未经封装）实现了查询数据库表记录的操作。</p>
-<h3 id="2-2-jdbc-问题分析"><a href="#2-2-jdbc-问题分析" class="headerlink" title="2.2 jdbc  问题分析"></a>2.2 jdbc  问题分析</h3><p>1、数据库链接创建、释放频繁造成系统资源浪费从而影响系统性能，如果使用数据库链接池可解决此问题。<br>2、Sql 语句在代码中硬编码，造成代码不易维护，实际应用 sql 变化的可能较大，sql 变动需要改变 java代码。<br>3、使用 preparedStatement 向占有位符号传参数存在硬编码，因为 sql 语句的 where 条件不一定，可能多也可能少，修改 sql 还要修改代码，系统不易维护。<br>4、对结果集解析存在硬编码（查询列名），sql 变化导致解析代码变化，系统不易维护，如果能将数据库记录封装成 pojo 对象解析比较方便。</p>
+<h2 id="1-软件生命周期"><a href="#1-软件生命周期" class="headerlink" title="1. 软件生命周期"></a>1. 软件生命周期</h2><h3 id="1-1-什么是软件生命周期"><a href="#1-1-什么是软件生命周期" class="headerlink" title="1.1    什么是软件生命周期"></a>1.1    什么是软件生命周期</h3><p>软件生命周期又称为软件生存周期或系统开发生命周期，是指从软件的产生直到报废的整个过程。</p>
+<p>软件生命周期过程包括：</p>
+<ul>
+<li><strong>问题定义：</strong></li>
+</ul>
+<p>用户需要计算机解决的问题是什么？</p>
+<p>电商系统：要计算机实现一个平台，商家通过平台销售自己的商品，一般用户通过平台购买商品。</p>
+<ul>
+<li><strong>可行性分析</strong></li>
+</ul>
+<p>用户需要计算机解决的问题是否可行？需要进行可行性分析。</p>
+<p>市场可行性分析，是否有市场价值。</p>
+<p>技术可行性分析，使用什么技术解决用户提出的问题。</p>
+<ul>
+<li><strong>需求分析（重点）</strong></li>
+</ul>
+<p>将用户提出的问题进行细化。</p>
+<p>先确定大模块：比如电商系统包括：前台（用户购买商品），后台（商家维护商品）。</p>
+<p>对每一个大模块进行细化。。。。。</p>
+<p>直到细化到不能细化为止（可以对需求分析的结果进行设计 ）。</p>
+<ul>
+<li><strong>设计（次重点）</strong></li>
+</ul>
+<p>确定细化问题的实现方法（比如：要设计什么接口，设计功能什么技术实现。。。）。</p>
+<ul>
+<li><strong>编码</strong></li>
+</ul>
+<p>去解决问题，依据需求和设计 文档进行开发。 </p>
+<ul>
+<li><strong>测试</strong></li>
+</ul>
+<p>验证是否已经解决用户提出的问题。</p>
+<p>单元测试（通过在开发阶段由开发人员进行测试）。</p>
+<p>集成测试（测试业务整体流程）。</p>
+<p>功能用例测试（对每个细化 的功能点进行测试）。</p>
+<p>性能测试(使用专业工具进行压力和稳定性测试)。</p>
+<ul>
+<li><strong>维护（占整个软件生命周期很大的比重）</strong></li>
+</ul>
+<p>修改性维护：前期没有测试出的问题，正式上线运行后bug（缺陷）显示出来了，对这些bug进行修改。</p>
+<p>完善性维护：在现有功能的基础上增加或完善功能。</p>
+<p>预防性维护：后期根据正式运行的情况对系统进行优化，避免一些问题的发生。</p>
+<h3 id="1-2-常用的开发模型"><a href="#1-2-常用的开发模型" class="headerlink" title="1.2 常用的开发模型"></a>1.2 常用的开发模型</h3><p>企业开发中对上边开发阶段常使用一些模型：</p>
+<h4 id="1-2-1-瀑布模型"><a href="#1-2-1-瀑布模型" class="headerlink" title="1.2.1 瀑布模型"></a>1.2.1 瀑布模型</h4><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E7%80%91%E5%B8%83%E6%A8%A1%E5%9E%8B.png?raw=true" alt="çå¸æ¨¡å.png"></p>
+<p><strong>强调：</strong>开发的每个阶段是顺序执行，从系统需求分析开始直到产品发布和维护，每个阶段都会产生循环反馈（为了解决问题需要重复执行），如何在某个阶段出现问题，需要从上一个阶段甚至更早的阶段去解决排查问题。</p>
+<p><strong>适用场合：</strong>需求明确，解决方案明确，常在一些中小型项目中使用。</p>
+<h4 id="1-2-2-原型模型"><a href="#1-2-2-原型模型" class="headerlink" title="1.2.2 原型模型"></a>1.2.2 原型模型</h4><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%9E%8B.png?raw=true" alt="ååæ¨¡å.png"></p>
+<p><strong>强调：</strong>逐步求精（每一次修改对上次原型的完善）对原型 进行修改优化，开发阶段围绕着原型（当成样品）进行实施。</p>
+<p><strong>适用场合：</strong>前期需求不确定，采用原型方法方便搜集需求。</p>
+<h4 id="1-2-3-增量模型"><a href="#1-2-3-增量模型" class="headerlink" title="1.2.3  增量模型"></a>1.2.3  增量模型</h4><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%A2%9E%E9%87%8F%E6%A8%A1%E5%9E%8B.png?raw=true" alt="å¢éæ¨¡å.png"></p>
+<p><strong>增量模型：</strong>瀑布模型加上原型模型，增量模型融合了瀑布模型的基本成分（重复应用）和原型实现的迭代特征。</p>
+<p>每一次增量经过了开发的每一个阶段（瀑布模型经过的所有阶段）</p>
+<p>每一次增量对功能进行完善（原型模型的逐步求精）</p>
+<p><strong>适用场合：</strong>大型项目，需求不明确。</p>
+<h2 id="2-需求分析（重点）"><a href="#2-需求分析（重点）" class="headerlink" title="2. 需求分析（重点）"></a>2. 需求分析（重点）</h2><h3 id="2-1-什么是需求分析"><a href="#2-1-什么是需求分析" class="headerlink" title="2.1 什么是需求分析"></a>2.1 什么是需求分析</h3><p>需求分析是在问题定义及可行性分析完成后细化用户对软件的功能和性能的要求，即用户希望软件能做什么事情，完成什么样的功能，达到什么性能。</p>
+<p><strong>包括：</strong>需求调研、需求描述（重要）、需求评审。</p>
+<p><strong>重要性：</strong>需求分析是软件工发的开端，我们设计的软件产品存在不完整性、不正确性大部分原因是需求分析错误所导致的，因此，需求分析是软件生命周期中最重要的过程。</p>
+<h3 id="2-2-需求调研"><a href="#2-2-需求调研" class="headerlink" title="2.2 需求调研"></a>2.2 需求调研</h3><p><strong>目标：</strong>挖掘用户需求</p>
+<p><strong>过程：</strong>首先确定目标用户，开发人员和目标用户确定一个问题领域，并定义一个描述该问题的系统，用户在这个问题领域和系统下提出需求，需求类型包括：功能需求、质量需求、用户体验需求等。</p>
+<p><strong>需求调研方法：</strong></p>
+<p>根据不同的项目、不同的用户群体采用不同的方法：</p>
+<ul>
+<li><p>与客户交谈，向用户提问题</p>
+</li>
+<li><p>参观用户工作流程，观察用户操作</p>
+</li>
+<li><p>向用户发调查问卷（通常是以选择题和是非题为主）</p>
+</li>
+<li><p>与同行、专家交谈，听取他们的意见</p>
+</li>
+<li><p>分析已经存在的软件产品，提取需求</p>
+</li>
+<li><p>从行业标准、规划中提取需求 </p>
+</li>
+<li><p>上网搜索相关资料                 </p>
+</li>
+</ul>
+<p><strong>成果物：</strong>需求调研报告.doc</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E9%9C%80%E6%B1%82%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A.png?raw=true" alt="éæ±è°ç æ¥å.png"></p>
+<h3 id="2-3-需求描述-重要"><a href="#2-3-需求描述-重要" class="headerlink" title="2.3 需求描述(重要)"></a>2.3 需求描述(重要)</h3><p>通过需求调研对收集到的资料进行分析、鉴别、综合和建模，清除用户需求的模糊性、歧义性和不一致性，分析系统的数据要求，为原始问题及目标软件建立逻辑模型。 </p>
+<p>分析人员需要编写“软件需求说明书”并与用户进行交流确认。 </p>
+<p><strong>成果物：</strong>“软件需求说明书”或“软件需求规格说明书”</p>
+<p><strong>重要性：</strong></p>
+<ul>
+<li><p>需求分析工作完成的一个基本标志是形成了一份完整的、规范的需求规格说明书</p>
+</li>
+<li><p>软件开发人员需要根据“软件需求规格说明书”进行设计和编码。</p>
+</li>
+</ul>
+<p>软件需求规格说明书的内容也是根据公司的项目管理水平而定。 </p>
+<p><strong>内容基本包括：</strong>系统概述、运行环境、功能模块图、功能用例、性能需求、接口需求、其它需求等。 </p>
+<p><strong>功能模块图/功能架构图：</strong>通常使用visio画。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%8A%9F%E8%83%BD%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true" alt="åè½æ¶æå¾.png"></p>
+<p><strong>使用powerDesigner画用例图：</strong></p>
+<p>描述 了每类用户所操作的功能点。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E7%94%A8%E4%BE%8B%E5%9B%BE.png?raw=true" alt="ç¨ä¾å¾.png"></p>
+<p><strong>功能用例：</strong></p>
+<p>描述功能点的具体内容。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%8A%9F%E8%83%BD%E7%94%A8%E4%BE%8B.png?raw=true" alt="åè½ç¨ä¾.png"></p>
+<p><strong>接口需求：</strong></p>
+<p>系统对外接口：</p>
+<p>接口描述内容：商品支付接口</p>
+<p>接口功能描述： 电商网站需要调用网银支付接口进行支付</p>
+<p>接口方向： 电商网站–&gt;网银</p>
+<p>接口协议：https</p>
+<p><strong>接口数据描述(重点)：</strong></p>
+<p>开发人员依据接口数据描述开发程序。</p>
+<p>电商网站要向网银发送什么数据格式（常用格式有xml或json）</p>
+<p>（包括请求和响应两部分数据）</p>
+<p><strong>建议：</strong>企业开发必须经过正规的需求分析过程。</p>
+<h3 id="2-4-需求评审"><a href="#2-4-需求评审" class="headerlink" title="2.4 需求评审"></a>2.4 需求评审</h3><p>由架构师、技术经理、需求分析人员、设计人员、开发人员对“需求规格说明书”进行审核。</p>
+<p><strong>审核内容：</strong></p>
+<p>1、看需求规格说明书是否符合文档规范。</p>
+<p>2、需求描述 是否详细（设计人员可以依据需求说明书进行设计）</p>
+<h2 id="3-设计"><a href="#3-设计" class="headerlink" title="3 设计"></a>3 设计</h2><p>根据软件需求说明书进行设计，设计系统整体架构、系统外部和内部接口、实现算法和核心代码编写等，总之包括两个阶段：总体设计（概要设计 ）、详细设计。</p>
+<h3 id="3-1-概要设计"><a href="#3-1-概要设计" class="headerlink" title="3.1 概要设计"></a>3.1 概要设计</h3><p>概要设计内容：    </p>
+<p>总体结构和模块间的关系；</p>
+<p>系统架构包括：技术架构和功能架构。</p>
+<ul>
+<li><strong>技术架构：</strong></li>
+</ul>
+<p>系统使用什么技术完成哪些模块的功能。</p>
+<p><strong>javaEE常用技术架构：</strong></p>
+<p>ssh：struts2+spring+hibernate</p>
+<p>主要开发中小型的传统企业应用系统。</p>
+<p>ssm：springmvc+mybatis</p>
+<p>主要开发分布式联系网项目。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%841.png?raw=true" alt="ææ¯æ¶æ1.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%842.png?raw=true" alt="ææ¯æ¶æ2.png"></p>
+<ul>
+<li>功能架构</li>
+</ul>
+<p>就是需求描述的功能框图</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E5%8A%9F%E8%83%BD%E6%9E%B6%E6%9E%84.png?raw=true" alt="åè½æ¶æ.png"></p>
+<ul>
+<li>业务流程图：</li>
+</ul>
+<p>使用visio画核心业务流程图：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%9B%BE.png?raw=true" alt="ä¸å¡æµç¨å¾.png"></p>
+<ul>
+<li>系统网络部署结构</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%83%A8%E7%BD%B2%E7%BB%93%E6%9E%84.png?raw=true" alt="ç³&quot;ç&quot;ç½ç&quot;é¨ç½²ç&quot;æ.png"></p>
+<ul>
+<li>定义系统的外部接口、及模块间的接口；</li>
+</ul>
+<p>接口描述内容：商品支付接口</p>
+<p>接口功能描述： 电商网站需要调用网银支付接口进行支付</p>
+<p>接口方向： 电商网站–&gt;网银</p>
+<p>接口协议：https</p>
+<ul>
+<li>接口数据描述(重点)：</li>
+</ul>
+<p>开发人员依据接口数据描述开发程序。</p>
+<p>电商网站要向网银发送什么数据格式（常用格式有xml或json）</p>
+<p>（包括请求和响应两部分数据）</p>
+<h3 id="3-2-详细设计"><a href="#3-2-详细设计" class="headerlink" title="3.2 详细设计"></a>3.2 详细设计</h3><p><strong>详细设计内容：</strong></p>
+<p>​         详细设计的主要任务是设计每个模块的类接口、所需的局部数据结构、物理数据模型、页面原型等。</p>
+<p><strong>注意：</strong>一般情况下公司根据人力现状不写详细设计文档的，可以在需求分析阶段和概要设计 阶段对详细设计的内容进行描述。</p>
+<ul>
+<li>每个模块的类接口：</li>
+</ul>
+<p>通过伪代码实现，描述接口参数、接口功能。 </p>
+<ul>
+<li><p>局部数据结构：需要自定义什么数据类型。。</p>
+</li>
+<li><p>物理数据模型（重点）：</p>
+</li>
+</ul>
+<p>使用powerDesigner设计物理数据模型(根据公司要求可能在需求分析阶段或概要设计 阶段实现)</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-21-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E5%88%B0%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E7%89%A9%E7%90%86%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B.png?raw=true" alt="ç©çæ°æ®æ¨¡å.png"></p>
+<p>通过powerDesigner创建数据库表、存储过程等元素。</p>
 
       
     </div>
@@ -525,7 +680,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://aimanyeye.github.io/2019/05/20/2019-05-20-Mybatis框架概述/" title="Mybatis框架概述">https://aimanyeye.github.io/2019/05/20/2019-05-20-Mybatis框架概述/</a>
+    <a href="https://aimanyeye.github.io/2019/05/21/2019-05-21-软件项目需求分析到详细设计/" title="软件项目需求分析到详细设计">https://aimanyeye.github.io/2019/05/21/2019-05-21-软件项目需求分析到详细设计/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -540,11 +695,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
+            <a href="/tags/软件工程/" rel="tag"># 软件工程</a>
           
-            <a href="/tags/SSM框架/" rel="tag"># SSM框架</a>
+            <a href="/tags/需求分析/" rel="tag"># 需求分析</a>
           
-            <a href="/tags/Mybatis/" rel="tag"># Mybatis</a>
+            <a href="/tags/详细设计/" rel="tag"># 详细设计</a>
           
         </div>
       
@@ -557,8 +712,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/21/2019-03-21-MySQL-快速入门(下)/" rel="next" title="MySQL快速入门（下）">
-                <i class="fa fa-chevron-left"></i> MySQL快速入门（下）
+              <a href="/2019/05/20/2019-05-20-Mybatis框架概述/" rel="next" title="Mybatis框架概述">
+                <i class="fa fa-chevron-left"></i> Mybatis框架概述
               </a>
             
           </div>
@@ -567,8 +722,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/21/2019-05-21-软件项目需求分析到详细设计/" rel="prev" title="软件项目需求分析到详细设计">
-                软件项目需求分析到详细设计 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/21/2019-05-21-Mybatis框架快速入门/" rel="prev" title="Mybatis框架快速入门">
+                Mybatis框架快速入门 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -705,7 +860,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是框架"><span class="nav-number"></span> <span class="nav-text">1. 什么是框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-什么是框架"><span class="nav-number">1.</span> <span class="nav-text">1.1 什么是框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-框架要解决的问题"><span class="nav-number">2.</span> <span class="nav-text">1.2 框架要解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-软件开发的分层重要性"><span class="nav-number">3.</span> <span class="nav-text">1.3 软件开发的分层重要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-分层开发下的常见框架"><span class="nav-number">4.</span> <span class="nav-text">1.4 分层开发下的常见框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-MyBatis-框架概述"><span class="nav-number">5.</span> <span class="nav-text">1.5 MyBatis  框架概述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-JDBC-编程的分析"><span class="nav-number"></span> <span class="nav-text">2. JDBC 编程的分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-jdbc-程序的回顾"><span class="nav-number">1.</span> <span class="nav-text">2.1 jdbc  程序的回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-jdbc-问题分析"><span class="nav-number">2.</span> <span class="nav-text">2.2 jdbc  问题分析</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-软件生命周期"><span class="nav-number">2.</span> <span class="nav-text">1. 软件生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-什么是软件生命周期"><span class="nav-number">2.1.</span> <span class="nav-text">1.1    什么是软件生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-常用的开发模型"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 常用的开发模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-瀑布模型"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1 瀑布模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-原型模型"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.2 原型模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-增量模型"><span class="nav-number">2.2.3.</span> <span class="nav-text">1.2.3  增量模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-需求分析（重点）"><span class="nav-number">3.</span> <span class="nav-text">2. 需求分析（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-什么是需求分析"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 什么是需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-需求调研"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 需求调研</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-需求描述-重要"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 需求描述(重要)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-需求评审"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 需求评审</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-设计"><span class="nav-number">4.</span> <span class="nav-text">3 设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-概要设计"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 概要设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-详细设计"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 详细设计</span></a></li></ol></li></ol></div>
             
 
           </div>
