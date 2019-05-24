@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="软件工程,系统功能设计,">
 
 
 
@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="微信公众号：aimanyeye">
-<meta property="og:type" content="website">
-<meta property="og:title" content="aimanyeye">
-<meta property="og:url" content="https://aimanyeye.github.io/categories/Hexo/index.html">
+<meta name="description" content="目录 什么是软件功能设计 功能设计在整个软件设计中的层次 功能设计在整个软件设计中的地位 功能设计与设计模式的关系 功能设计与详细设计的关系 功能设计要考虑的东西/评价标准 功能设计的实战方法——经验总结 关于软件设计的一些思考">
+<meta name="keywords" content="软件工程,系统功能设计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件系统功能设计概述">
+<meta property="og:url" content="https://aimanyeye.github.io/2019/05/24/2019-05-24-软件系统功能设计概述/index.html">
 <meta property="og:site_name" content="aimanyeye">
-<meta property="og:description" content="微信公众号：aimanyeye">
+<meta property="og:description" content="目录 什么是软件功能设计 功能设计在整个软件设计中的层次 功能设计在整个软件设计中的地位 功能设计与设计模式的关系 功能设计与详细设计的关系 功能设计要考虑的东西/评价标准 功能设计的实战方法——经验总结 关于软件设计的一些思考">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-24-%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%BF%B0/%E4%BB%BFQQ%E8%BD%AF%E4%BB%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1.png?raw=true">
+<meta property="og:updated_time" content="2019-05-24T09:19:01.568Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="aimanyeye">
-<meta name="twitter:description" content="微信公众号：aimanyeye">
+<meta name="twitter:title" content="软件系统功能设计概述">
+<meta name="twitter:description" content="目录 什么是软件功能设计 功能设计在整个软件设计中的层次 功能设计在整个软件设计中的地位 功能设计与设计模式的关系 功能设计与详细设计的关系 功能设计要考虑的东西/评价标准 功能设计的实战方法——经验总结 关于软件设计的一些思考">
+<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-24-%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%BF%B0/%E4%BB%BFQQ%E8%BD%AF%E4%BB%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1.png?raw=true">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://aimanyeye.github.io/categories/Hexo/">
+  <link rel="canonical" href="https://aimanyeye.github.io/2019/05/24/2019-05-24-软件系统功能设计概述/">
 
 
 
 
 
-  <title>分类: Hexo | aimanyeye</title>
+  <title>软件系统功能设计概述 | aimanyeye</title>
   
 
 
@@ -143,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -279,53 +283,318 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Hexo<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/05/24/2019-05-24-软件系统功能设计概述/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="艾曼爷爷">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aimanyeye">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/03/Hello-Hexo/" itemprop="url">
-              
-                <span itemprop="name">Hello Hexo</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">软件系统功能设计概述</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-03T13:50:32+08:00" content="2019-03-03">
-          03-03
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-24T13:50:32+08:00">
+                2019-05-24
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件工程/" itemprop="url" rel="index">
+                    <span itemprop="name">软件工程</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件工程/系统功能设计/" itemprop="url" rel="index">
+                    <span itemprop="name">系统功能设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h3><ol>
+<li>什么是软件功能设计</li>
+<li>功能设计在整个软件设计中的层次</li>
+<li>功能设计在整个软件设计中的地位</li>
+<li>功能设计与设计模式的关系</li>
+<li>功能设计与详细设计的关系</li>
+<li>功能设计要考虑的东西/评价标准</li>
+<li>功能设计的实战方法——经验总结</li>
+<li>关于软件设计的一些思考</li>
+</ol>
+<a id="more"></a>
+<h2 id="1-什么是软件功能设计"><a href="#1-什么是软件功能设计" class="headerlink" title="1. 什么是软件功能设计"></a>1. 什么是软件功能设计</h2><p>所谓软件的功能设计，指的是：针对软件中某一个具体的功能，所进行的设计。包括这个功能的实现方式、实现的基本结构、类的组成、职责的划分等。是软件设计中最重要的基本功。</p>
+<p>我们看一下一个仿QQ软件所需要设计的功能：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/2019-05-24-%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%BF%B0/%E4%BB%BFQQ%E8%BD%AF%E4%BB%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1.png?raw=true" alt="ä&quot;¿QQè½¯ä&quot;¶åè½è®¾è®¡.png"></p>
+<h2 id="2-功能设计在整个软件设计中的层次"><a href="#2-功能设计在整个软件设计中的层次" class="headerlink" title="2. 功能设计在整个软件设计中的层次"></a>2. 功能设计在整个软件设计中的层次</h2><p>软件设计的层次很多，不同的软件设计过程有不同的划分方式，大致可分为：架构设计、api/spi设计、数据库设计、功能设计、类设计、方法设计。</p>
+<p>从难度上说：公共类库&gt;公共框架&gt;基础平台/框架&gt;应用（产品&gt;项目）</p>
+<h2 id="3-功能设计在整个软件设计中的地位"><a href="#3-功能设计在整个软件设计中的地位" class="headerlink" title="3. 功能设计在整个软件设计中的地位"></a>3. 功能设计在整个软件设计中的地位</h2><p>功能设计从属详细设计，是整个系统功能实现的基石。</p>
+<h2 id="4-功能设计与设计模式的关系"><a href="#4-功能设计与设计模式的关系" class="headerlink" title="4. 功能设计与设计模式的关系"></a>4. 功能设计与设计模式的关系</h2><p>功能设计通常会综合应用多种设计模式，是各种设计思想的具体体现的载体。由于功能千变万化，因而要有较高的设计技巧和功力，才能设计出正确的、易用的、灵活的、扩展性高的、高性能实现。</p>
+<p>设计模式是业界公认的，优秀的设计经验和设计理念，理解、掌握、融会贯通、并能熟练变形应用设计模式，对于功能设计是有极大的帮助的。</p>
+<h2 id="5-功能设计与详细设计的关系"><a href="#5-功能设计与详细设计的关系" class="headerlink" title="5. 功能设计与详细设计的关系"></a>5. 功能设计与详细设计的关系</h2><p>功能设计只是详细设计中的一个部分，详细设计还包括很多其他的设计，比如：流程设计、对API/SPI的完善和细化、对数据库设计的完善和细化、对多个功能交互的控制、事务的规划、权限/安全的规划、例外的控制……很多很多</p>
+<h2 id="6-功能设计要考虑的东西-评价标准"><a href="#6-功能设计要考虑的东西-评价标准" class="headerlink" title="6. 功能设计要考虑的东西/评价标准"></a>6. 功能设计要考虑的东西/评价标准</h2><p>这个业界并没有统一的标准，而且不同类型、不同业务的系统考虑的东西并不一样，但还是有一些通常要考虑的东西：</p>
+<p>正确性、易用性、可扩展性、复杂性（易理解、开发难度等）、易维护、安全、性能、可复用、可测试……</p>
+<p>当然还有很多其他需要考虑的，比如：多线程、分布式、可靠性、稳定性、对资源的利用和消耗、可伸缩、可配置、可移植、可定制……</p>
+<h2 id="7-功能设计的实战方法——经验总结"><a href="#7-功能设计的实战方法——经验总结" class="headerlink" title="7. 功能设计的实战方法——经验总结"></a>7. 功能设计的实战方法——经验总结</h2><ol>
+<li>基本的功能实现方式，并进行细化</li>
+<li>分析每个步骤，每个细节中，哪些是可变的，哪些是不可变的。通常分析3个部分：数据输入、具体实现、数据产出。</li>
+<li>分析这个细节步骤的功能和其他步骤的关系，比如：顺序、平行、依赖等，以确定这些职责的粒度和分离方式，从而考虑他们之间的组合方式，也需要分离这些组合方式的变与不变。</li>
+<li>根据前面分析的结果，进行相应的类、方法的设计、进行职责的划分，并通过合适的方式把他们组织起来。通常这个时候，就会融合进一个或多个设计模式的应用。当然也可能是没有现成的设计模式，需要自己来灵活组织和实现。</li>
+<li>按照前面讲述的评价标准，进行系统的思考和调度，以形成最终的设计。</li>
+</ol>
+<h2 id="8-关于软件设计的一些思考"><a href="#8-关于软件设计的一些思考" class="headerlink" title="8. 关于软件设计的一些思考"></a>8. 关于软件设计的一些思考</h2><ul>
+<li>设计的基本技巧：发现和封装变化，进行抽象和封装，实现高内聚和低耦合。</li>
+<li>设计就是危险的平衡艺术，尽可能的找到最佳平衡点。</li>
+<li>没有完美的设计，设计总是在不断演变中。</li>
+<li>设计是没有标准答案的，只要能更好的实现功能，更好的满足那些评价标准，就是好东西。</li>
+<li>不要过度设计不等于不设计，而是更要精巧设计。</li>
+<li>关于重构的思考</li>
+<li>关于敏捷的思考</li>
+<li>设计是否增加了复杂度</li>
+<li>设计是否增加了软件成本</li>
+<li>关于训练功能设计的意义</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="艾曼爷爷 wechat" style="width: 200px; max-width: 100%;">
+    <div>扫描二维码关注微信公众号，了解更多</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赞赏是最好的支持与鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="艾曼爷爷 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="艾曼爷爷 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    艾曼爷爷
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://aimanyeye.github.io/2019/05/24/2019-05-24-软件系统功能设计概述/" title="软件系统功能设计概述">https://aimanyeye.github.io/2019/05/24/2019-05-24-软件系统功能设计概述/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://aimanyeye.github.io/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/软件工程/" rel="tag"># 软件工程</a>
+          
+            <a href="/tags/系统功能设计/" rel="tag"># 系统功能设计</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/23/2019-05-23-基于代理Dao实现CRUD操作/" rel="next" title="基于代理Dao实现CRUD操作">
+                <i class="fa fa-chevron-left"></i> 基于代理Dao实现CRUD操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/24/2019-05-24-Mybatis输入参数和输出结果封装/" rel="prev" title="Mybatis输入参数和输出结果封装">
+                Mybatis输入参数和输出结果封装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -333,6 +602,12 @@
 
 
           
+
+  
+    <div id="gitalk-container"></div>
+  
+
+
 
         </div>
         
@@ -353,8 +628,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -416,6 +700,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是软件功能设计"><span class="nav-number"></span> <span class="nav-text">1. 什么是软件功能设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-功能设计在整个软件设计中的层次"><span class="nav-number"></span> <span class="nav-text">2. 功能设计在整个软件设计中的层次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-功能设计在整个软件设计中的地位"><span class="nav-number"></span> <span class="nav-text">3. 功能设计在整个软件设计中的地位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-功能设计与设计模式的关系"><span class="nav-number"></span> <span class="nav-text">4. 功能设计与设计模式的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-功能设计与详细设计的关系"><span class="nav-number"></span> <span class="nav-text">5. 功能设计与详细设计的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-功能设计要考虑的东西-评价标准"><span class="nav-number"></span> <span class="nav-text">6. 功能设计要考虑的东西/评价标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-功能设计的实战方法——经验总结"><span class="nav-number"></span> <span class="nav-text">7. 功能设计的实战方法——经验总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-关于软件设计的一些思考"><span class="nav-number"></span> <span class="nav-text">8. 关于软件设计的一些思考</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -570,6 +870,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -610,6 +914,22 @@
 
 
 
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '3b1b21d6164dbd9a4aad',
+          clientSecret: '699e21661be860daeb91d1daf05d9b9daa2570ba',
+          repo: 'aimanyeye.github.io',
+          owner: 'aimanyeye',
+          admin: ['aimanyeye'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
 
 
   
