@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-23-%E5%9F%BA%E4%BA%8E%E4%BB%A3%E7%90%86Dao%E5%AE%9E%E7%8E%B0CRUD%E6%93%8D%E4%BD%9C/%E8%BE%93%E5%87%BA%E7%9A%84sql%E8%AF%AD%E5%8F%A5.png?raw=true">
 <meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-23-%E5%9F%BA%E4%BA%8E%E4%BB%A3%E7%90%86Dao%E5%AE%9E%E7%8E%B0CRUD%E6%93%8D%E4%BD%9C/%E8%BE%93%E5%87%BA%E7%9A%84sql%E8%AF%AD%E5%8F%A52.png?raw=true">
 <meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-23-%E5%9F%BA%E4%BA%8E%E4%BB%A3%E7%90%86Dao%E5%AE%9E%E7%8E%B0CRUD%E6%93%8D%E4%BD%9C/TextSqlNode%E7%B1%BB%E7%9A%84%E6%BA%90%E7%A0%81.png?raw=true">
-<meta property="og:updated_time" content="2019-05-23T14:33:24.116Z">
+<meta property="og:updated_time" content="2019-05-24T07:26:44.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于代理Dao实现CRUD操作">
 <meta name="twitter:description" content="目录 自定义流程再分析 Mybatis环境搭建步骤 根据ID查询 保存操作 用户更新 用户删除 用户模糊查询 查询使用聚合函数 Mybatis与JDBC编程的比较">
@@ -469,7 +469,7 @@
 <p>使用要求：</p>
 <p>1、持久层接口和持久层接口的映射配置必须在相同的包下</p>
 <p>2、持久层映射配置中mapper标签的namespace属性必须是持久层接口的全限定类名</p>
-<p>3、SQL语句的配置标签<select>、<insert>、<delete>、<update>的id属性必须和持久层接口的方法名相同。</update></delete></insert></select></p>
+<p>3、SQL语句的配置标签 <select>,<insert>,<delete>,<update> 的id属性必须和持久层接口的方法名相同。</update></delete></insert></select></p>
 <h2 id="3-根据ID查询"><a href="#3-根据ID查询" class="headerlink" title="3. 根据ID查询"></a>3. 根据ID查询</h2><h3 id="3-1-在持久层接口中添加findById方法"><a href="#3-1-在持久层接口中添加findById方法" class="headerlink" title="3.1 在持久层接口中添加findById方法"></a>3.1 在持久层接口中添加findById方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 根据 id 查询</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> userId</span></span><br><span class="line"><span class="comment">* <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">User <span class="title">findById</span><span class="params">(Integer userId)</span></span>;</span><br></pre></td></tr></table></figure>
 <h3 id="3-2-在用户的映射配置文件中配置"><a href="#3-2-在用户的映射配置文件中配置" class="headerlink" title="3.2 在用户的映射配置文件中配置"></a>3.2 在用户的映射配置文件中配置</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 根据 id 查询 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findById"</span> <span class="attr">resultType</span>=<span class="string">"com.itheima.domain.User"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">select * from user where id = #&#123;uid&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>细节：</strong></p>
@@ -628,6 +628,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/05/24/2019-05-24-Mybatis输入参数和输出结果封装/" rel="prev" title="Mybatis输入参数和输出结果封装">
+                Mybatis输入参数和输出结果封装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -707,7 +711,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
