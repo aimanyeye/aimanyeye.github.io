@@ -79,23 +79,31 @@
 
 
 
-<meta name="description" content="目录 什么是框架 JDBC编程的分析">
+<meta name="description" content="目录 Mybatis的连接池技术 Mybatis的事务控制">
 <meta name="keywords" content="Java,SSM框架,Mybatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis框架概述">
-<meta property="og:url" content="https://aimanyeye.github.io/2019/05/20/2019-05-20-Mybatis框架概述/index.html">
+<meta property="og:title" content="Mybatis连接池与事务深入">
+<meta property="og:url" content="https://aimanyeye.github.io/2019/05/25/2019-05-25-Mybatis连接池与事务深入/index.html">
 <meta property="og:site_name" content="aimanyeye">
-<meta property="og:description" content="目录 什么是框架 JDBC编程的分析">
+<meta property="og:description" content="目录 Mybatis的连接池技术 Mybatis的事务控制">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E5%88%86%E5%B1%82%E9%87%8D%E8%A6%81%E6%80%A7.png?raw=true">
-<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B61.png?raw=true">
-<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B62.png?raw=true">
-<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B63.png?raw=true">
-<meta property="og:updated_time" content="2019-05-20T10:56:47.087Z">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E6%95%B0%E6%8D%AE%E6%BA%90%E5%88%86%E7%B1%BB.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E6%95%B0%E6%8D%AE%E6%BA%90%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E6%95%B0%E6%8D%AE%E6%BA%90%E5%AE%9E%E7%8E%B0UML%E5%9B%BE.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/XMLConfiguration%E7%B1%BB%E5%88%86%E6%9E%901.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/XMLConfiguration%E7%B1%BB%E5%88%86%E6%9E%902.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/Mybatis%E4%B8%AD%E8%8E%B7%E5%8F%96%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B%E5%88%86%E6%9E%90.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/PooledDataSource%20%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E8%BF%9E%E6%8E%A5%E8%8E%B7%E5%8F%96%E7%9A%84%E6%BA%90%E7%A0%81.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/setAutoCommit%E6%96%B9%E6%B3%95.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C1.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/DefaultSqlSessionFactory%20%E7%B1%BB%E7%9A%84%E6%BA%90%E4%BB%A3%E7%A0%81.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C2.png?raw=true">
+<meta property="og:updated_time" content="2019-05-25T09:39:08.689Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis框架概述">
-<meta name="twitter:description" content="目录 什么是框架 JDBC编程的分析">
-<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E5%88%86%E5%B1%82%E9%87%8D%E8%A6%81%E6%80%A7.png?raw=true">
+<meta name="twitter:title" content="Mybatis连接池与事务深入">
+<meta name="twitter:description" content="目录 Mybatis的连接池技术 Mybatis的事务控制">
+<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E6%95%B0%E6%8D%AE%E6%BA%90%E5%88%86%E7%B1%BB.png?raw=true">
 
 
 
@@ -125,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="https://aimanyeye.github.io/2019/05/20/2019-05-20-Mybatis框架概述/">
+  <link rel="canonical" href="https://aimanyeye.github.io/2019/05/25/2019-05-25-Mybatis连接池与事务深入/">
 
 
 
 
 
-  <title>Mybatis框架概述 | aimanyeye</title>
+  <title>Mybatis连接池与事务深入 | aimanyeye</title>
   
 
 
@@ -300,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/05/20/2019-05-20-Mybatis框架概述/">
+    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/05/25/2019-05-25-Mybatis连接池与事务深入/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="艾曼爷爷">
@@ -317,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mybatis框架概述</h1>
+          <h1 class="post-title" itemprop="name headline">Mybatis连接池与事务深入</h1>
         
 
         <div class="post-meta">
@@ -329,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-20T13:50:32+08:00">
-                2019-05-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-25T13:50:32+08:00">
+                2019-05-25
               </time>
             
 
@@ -410,7 +418,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.3k 字
+                  1.6k 字
                 </span>
               
 
@@ -426,7 +434,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -448,26 +456,57 @@
 
       
         <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h3><ol>
-<li>什么是框架</li>
-<li>JDBC编程的分析</li>
+<li>Mybatis的连接池技术</li>
+<li>Mybatis的事务控制</li>
 </ol>
 <a id="more"></a>
-<h2 id="1-什么是框架"><a href="#1-什么是框架" class="headerlink" title="1. 什么是框架"></a>1. 什么是框架</h2><h3 id="1-1-什么是框架"><a href="#1-1-什么是框架" class="headerlink" title="1.1 什么是框架"></a>1.1 什么是框架</h3><p>框架（Framework）是整个或部分系统的可重用设计，表现为一组抽象构件及构件实例间交互的方法;另一种定义认为，框架是可被应用开发者定制的应用骨架。前者是从应用方面而后者是从目的方面给出的定义。</p>
-<p>简而言之，框架其实就是某种应用的半成品，就是一组组件，供你选用完成你自己的系统。简单说就是使用别人搭好的舞台，你来做表演。而且，框架一般是成熟的，不断升级的软件。 </p>
-<h3 id="1-2-框架要解决的问题"><a href="#1-2-框架要解决的问题" class="headerlink" title="1.2 框架要解决的问题"></a>1.2 框架要解决的问题</h3><p>框架要解决的最重要的一个问题是技术整合的问题，在 J2EE 的 框架中，有着各种各样的技术，不同的软件企业需要从 J2EE 中选择不同的技术，这就使得软件企业最终的应用依赖于这些技术，技术自身的复杂性和技术的风险性将会直接对应用造成冲击。而应用是软件企业的核心，是竞争力的关键所在，因此应该将应用自身的设计和具体的实现技术解耦。这样，软件企业的研发将集中在应用的设计上，而不是具体的技术实现，技术实现是应用的底层支撑，它不应该直接对应用产生影响。</p>
-<p><strong>框架一般处在低层应用平台（如 J2EE）和高层业务逻辑之间的中间层 。</strong></p>
-<h3 id="1-3-软件开发的分层重要性"><a href="#1-3-软件开发的分层重要性" class="headerlink" title="1.3 软件开发的分层重要性"></a>1.3 软件开发的分层重要性</h3><p>框架的重要性在于它实现了部分功能，并且能够很好的将低层应用平台和高层业务逻辑进行了缓和。为了实现软件工程中的“高内聚、低耦合”。把问题划分开来各个解决，易于控制，易于延展，易于分配资源。 我们常见的MVC 软件设计思想就是很好的分层思想。 </p>
-<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%9A%84%E5%88%86%E5%B1%82%E9%87%8D%E8%A6%81%E6%80%A7.png?raw=true" alt="è½¯ä&quot;¶å¼åçåå±éè¦æ§.png"></p>
-<h3 id="1-4-分层开发下的常见框架"><a href="#1-4-分层开发下的常见框架" class="headerlink" title="1.4 分层开发下的常见框架"></a>1.4 分层开发下的常见框架</h3><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B61.png?raw=true" alt="åå±å¼åä¸çå¸¸è§æ¡æ¶1.png"></p>
-<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B62.png?raw=true" alt="åå±å¼åä¸çå¸¸è§æ¡æ¶2.png"></p>
-<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-20-Mybatis%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0/%E5%88%86%E5%B1%82%E5%BC%80%E5%8F%91%E4%B8%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E6%A1%86%E6%9E%B63.png?raw=true" alt="åå±å¼åä¸çå¸¸è§æ¡æ¶3.png"></p>
-<h3 id="1-5-MyBatis-框架概述"><a href="#1-5-MyBatis-框架概述" class="headerlink" title="1.5 MyBatis  框架概述"></a>1.5 MyBatis  框架概述</h3><p>mybatis是一个优秀的基于 java 的持久层框架，它内部封装了 jdbc，使开发者只需要关注 sql 语句本身，而不需要花费精力去处理加载驱动、创建连接、创建 statement 等繁杂的过程。</p>
-<p>mybatis通过 xml 或注解的方式将要执行的各种statement配置起来，并通过java对象和statement 中sql 的动态参数进行映射生成最终执行的 sql 语句，最后由 mybatis 框架执行 sql 并将结果映射为 java 对象并返回。</p>
-<p>采用 ORM 思想解决了实体和数据库映射的问题，对 jdbc进行了封装，屏蔽了 jdbc api 底层访问细节，使我们不用与 jdbc api 打交道，就可以完成对数据库的持久化操作。</p>
-<p>为了我们能够更好掌握框架运行的内部过程，并且有更好的体验，下面我们将从自定义 Mybatis 框架开始来学习框架。此时我们将会体验框架从无到有的过程体验，也能够很好的综合前面阶段所学的基础。</p>
-<h2 id="2-JDBC-编程的分析"><a href="#2-JDBC-编程的分析" class="headerlink" title="2. JDBC 编程的分析"></a>2. JDBC 编程的分析</h2><h3 id="2-1-jdbc-程序的回顾"><a href="#2-1-jdbc-程序的回顾" class="headerlink" title="2.1 jdbc  程序的回顾"></a>2.1 jdbc  程序的回顾</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Connection connection = <span class="keyword">null</span>;</span><br><span class="line">		PreparedStatement preparedStatement = <span class="keyword">null</span>;</span><br><span class="line">		ResultSet resultSet = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//加载数据库驱动</span></span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">			<span class="comment">//通过驱动管理类获取数据库链接</span></span><br><span class="line">			connection = DriverManager</span><br><span class="line">               .getConnection(<span class="string">"jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8"</span>,<span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">			<span class="comment">//定义 sql 语句 ?表示占位符</span></span><br><span class="line">			String sql = <span class="string">"select * from user where username = ?"</span>;</span><br><span class="line">			<span class="comment">//获取预处理 statement</span></span><br><span class="line">			preparedStatement = connection.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//设置参数，第一个参数为 sql 语句中参数的序号（从 1 开始），第二个参数为设置的参数值</span></span><br><span class="line">			preparedStatement.setString(<span class="number">1</span>, <span class="string">"王五"</span>);</span><br><span class="line">			<span class="comment">//向数据库发出 sql 执行查询，查询出结果集</span></span><br><span class="line">			resultSet = preparedStatement.executeQuery();</span><br><span class="line">			<span class="comment">//遍历查询结果集</span></span><br><span class="line">			<span class="keyword">while</span>(resultSet.next())&#123;</span><br><span class="line">			System.out.println(resultSet.getString(<span class="string">"id"</span>)+<span class="string">"</span></span><br><span class="line"><span class="string">				"</span>+resultSet.getString(<span class="string">"username"</span>));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">			<span class="comment">//释放资源</span></span><br><span class="line">			<span class="keyword">if</span>(resultSet!=<span class="keyword">null</span>)&#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					resultSet.close();</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(preparedStatement!=<span class="keyword">null</span>)&#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					preparedStatement.close();</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(connection!=<span class="keyword">null</span>)&#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					connection.close();</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">					<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上边使用 jdbc 的原始方法（未经封装）实现了查询数据库表记录的操作。</p>
-<h3 id="2-2-jdbc-问题分析"><a href="#2-2-jdbc-问题分析" class="headerlink" title="2.2 jdbc  问题分析"></a>2.2 jdbc  问题分析</h3><p>1、数据库链接创建、释放频繁造成系统资源浪费从而影响系统性能，如果使用数据库链接池可解决此问题。<br>2、Sql 语句在代码中硬编码，造成代码不易维护，实际应用 sql 变化的可能较大，sql 变动需要改变 java代码。<br>3、使用 preparedStatement 向占有位符号传参数存在硬编码，因为 sql 语句的 where 条件不一定，可能多也可能少，修改 sql 还要修改代码，系统不易维护。<br>4、对结果集解析存在硬编码（查询列名），sql 变化导致解析代码变化，系统不易维护，如果能将数据库记录封装成 pojo 对象解析比较方便。</p>
+<h2 id="1-Mybatis的连接池技术"><a href="#1-Mybatis的连接池技术" class="headerlink" title="1. Mybatis的连接池技术"></a>1. Mybatis的连接池技术</h2><p>Mybatis 中也有连接池技术，但是它采用的是自己的连接池技术。在 Mybatis 的 SqlMapConfig.xml 配置文件中，通过<code>&lt;dataSource type=&quot;pooled&quot;&gt;</code>来实现 Mybatis 中连接池的配置。</p>
+<h3 id="1-1-Mybatis连接池的分类"><a href="#1-1-Mybatis连接池的分类" class="headerlink" title="1.1 Mybatis连接池的分类"></a>1.1 Mybatis连接池的分类</h3><p>在 Mybatis 中我们将它的数据源 dataSource 分为以下几类：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E6%95%B0%E6%8D%AE%E6%BA%90%E5%88%86%E7%B1%BB.png?raw=true" alt="æ°æ®æºåç±&quot;.png"></p>
+<p>可以看出 Mybatis 将它自己的数据源分为三类：<br>UNPOOLED 不使用连接池的数据源<br>POOLED 使用连接池的数据源<br>JNDI 使用 JNDI 实现的数据源<br>具体结构如下：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E6%95%B0%E6%8D%AE%E6%BA%90%E7%BB%93%E6%9E%84.png?raw=true" alt="æ°æ®æºç&quot;æ.png"></p>
+<p>相应地，MyBatis 内部分别定义了实现了 java.sql.DataSource 接口的 UnpooledDataSource，PooledDataSource 类来表示 UNPOOLED、POOLED 类型的数据源。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E6%95%B0%E6%8D%AE%E6%BA%90%E5%AE%9E%E7%8E%B0UML%E5%9B%BE.png?raw=true" alt="æ°æ®æºå®ç°UMLå¾.png"></p>
+<p>在这三种数据源中，我们一般采用的是 POOLED 数据源（很多时候我们所说的数据源就是为了更好的管理数据库连接，也就是我们所说的连接池技术）。</p>
+<h3 id="1-2-Mybatis-中数据源的配置"><a href="#1-2-Mybatis-中数据源的配置" class="headerlink" title="1.2 Mybatis 中数据源的配置"></a>1.2 Mybatis 中数据源的配置</h3><p>我们的数据源配置就是在 SqlMapConfig.xml 文件中，具体配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置数据源（连接池）信息 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.driver&#125;"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.url&#125;"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.username&#125;"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.password&#125;"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>MyBatis 在初始化时，根据<datasource>的 type 属性来创建相应类型的的数据源 DataSource，即：<br>type=”POOLED”：MyBatis 会创建 PooledDataSource 实例<br>type=”UNPOOLED” ： MyBatis 会创建 UnpooledDataSource 实例<br>type=”JNDI”：MyBatis 会从 JNDI 服务上查找 DataSource 实例，然后返回使用</datasource></p>
+<h3 id="1-3-Mybatis中DataSource的存取"><a href="#1-3-Mybatis中DataSource的存取" class="headerlink" title="1.3 Mybatis中DataSource的存取"></a>1.3 Mybatis中DataSource的存取</h3><p>MyBatis 是通过工厂模式来创建数据源 DataSource 对象的， MyBatis 定义了抽象的工厂接口:org.apache.ibatis.datasource.DataSourceFactory,通过其 getDataSource()方法返回数据源DataSource。</p>
+<p>下面是 DataSourceFactory 源码，具体如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.apache.ibatis.datasource;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"><span class="keyword">import</span> javax.sql.DataSource;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> Clinton Begin</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DataSourceFactory</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setProperties</span><span class="params">(Properties props)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">DataSource <span class="title">getDataSource</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>MyBatis 创建了 DataSource 实例后，会将其放到 Configuration 对象内的 Environment 对象中， 供以后使用。</p>
+<p>具体分析过程如下：</p>
+<p>1.先进入 XMLConfigBuilder 类中，可以找到如下代码：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/XMLConfiguration%E7%B1%BB%E5%88%86%E6%9E%901.png?raw=true" alt="XMLConfigurationç±&quot;åæ1.png"></p>
+<p>2.分析 configuration 对象的 environment 属性，结果如下：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/XMLConfiguration%E7%B1%BB%E5%88%86%E6%9E%902.png?raw=true" alt="XMLConfigurationç±&quot;åæ2.png"></p>
+<h3 id="1-4-Mybatis中连接的获取过程分析"><a href="#1-4-Mybatis中连接的获取过程分析" class="headerlink" title="1.4 Mybatis中连接的获取过程分析"></a>1.4 Mybatis中连接的获取过程分析</h3><p>当我们需要创建 SqlSession 对象并需要执行 SQL 语句时，这时候 MyBatis 才会去调用 dataSource 对象来创建java.sql.Connection对象。也就是说，java.sql.Connection对象的创建一直延迟到执行SQL语句的时候。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSql</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	InputStream in = Resources.getResourceAsStream(<span class="string">"SqlMapConfig.xml"</span>);</span><br><span class="line">	SqlSessionFactory factory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(in);</span><br><span class="line">	SqlSession sqlSession = factory.openSession();</span><br><span class="line">	List&lt;User&gt; list = sqlSession.selectList(<span class="string">"findUserById"</span>,<span class="number">41</span>);</span><br><span class="line">	System.out.println(list.size());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>只有当第 4 句sqlSession.selectList(“findUserById”)，才会触发 MyBatis 在底层执行下面这个方法来创建 java.sql.Connection 对象。</p>
+<p>如何证明它的加载过程呢？</p>
+<p>我们可以通过断点调试，在 PooledDataSource 中找到如下 popConnection()方法，如下所示：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/Mybatis%E4%B8%AD%E8%8E%B7%E5%8F%96%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B%E5%88%86%E6%9E%90.png?raw=true" alt="Mybatisä¸­è·åè¿æ¥è¿ç¨åæ.png"></p>
+<p>分析源代码，得出 PooledDataSource 工作原理如下：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/PooledDataSource%20%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png?raw=true" alt="PooledDataSource å·¥ä½åç.png"></p>
+<p>下面是连接获取的源代码：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E8%BF%9E%E6%8E%A5%E8%8E%B7%E5%8F%96%E7%9A%84%E6%BA%90%E7%A0%81.png?raw=true" alt="è¿æ¥è·åçæºç .png"></p>
+<p>最后我们可以发现，真正连接打开的时间点，只是在我们执行SQL语句时，才会进行。其实这样做我们也可以进一步发现，数据库连接是我们最为宝贵的资源，只有在要用到的时候，才去获取并打开连接，当我们用完了就再立即将数据库连接归还到连接池中。</p>
+<h2 id="2-Mybatis的事务控制"><a href="#2-Mybatis的事务控制" class="headerlink" title="2. Mybatis的事务控制"></a>2. Mybatis的事务控制</h2><h3 id="2-1-JDBC中事务的回顾"><a href="#2-1-JDBC中事务的回顾" class="headerlink" title="2.1 JDBC中事务的回顾"></a>2.1 JDBC中事务的回顾</h3><p>在 JDBC 中我们可以通过手动方式将事务的提交改为手动方式，通过 setAutoCommit()方法就可以调整。通过 JDK 文档，我们找到该方法如下：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/setAutoCommit%E6%96%B9%E6%B3%95.png?raw=true" alt="setAutoCommitæ¹æ³.png"></p>
+<p>那么我们的 Mybatis 框架因为是对 JDBC 的封装，所以 Mybatis 框架的事务控制方式，本身也是用 JDBC的setAutoCommit()方法来设置事务提交方式的。</p>
+<h3 id="2-2-Mybatis中事务提交方式"><a href="#2-2-Mybatis中事务提交方式" class="headerlink" title="2.2 Mybatis中事务提交方式"></a>2.2 Mybatis中事务提交方式</h3><p>Mybatis 中事务的提交方式，本质上就是调用 JDBC 的 setAutoCommit()来实现事务控制。<br>我们运行之前所写的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSaveUser</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	User user = <span class="keyword">new</span> User();</span><br><span class="line">	user.setUsername(<span class="string">"mybatis user09"</span>);</span><br><span class="line">	<span class="comment">//6.执行操作</span></span><br><span class="line">	<span class="keyword">int</span> res = userDao.saveUser(user);</span><br><span class="line">	System.out.println(res);</span><br><span class="line">	System.out.println(user.getId());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Before</span><span class="comment">//在测试方法执行之前执行</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span><span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	<span class="comment">//1.读取配置文件</span></span><br><span class="line">	in = Resources.getResourceAsStream(<span class="string">"SqlMapConfig.xml"</span>);</span><br><span class="line">	<span class="comment">//2.创建构建者对象</span></span><br><span class="line">	SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">	<span class="comment">//3.创建 SqlSession 工厂对象</span></span><br><span class="line">	factory = builder.build(in);</span><br><span class="line">	<span class="comment">//4.创建 SqlSession 对象</span></span><br><span class="line">	session = factory.openSession();</span><br><span class="line">	<span class="comment">//5.创建 Dao 的代理对象</span></span><br><span class="line">	userDao = session.getMapper(IUserDao.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@After</span><span class="comment">//在测试方法执行完成之后执行</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">	<span class="comment">//7.提交事务</span></span><br><span class="line">	session.commit();</span><br><span class="line">	<span class="comment">//8.释放资源</span></span><br><span class="line">	session.close();</span><br><span class="line">	in.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>观察在它在控制台输出的结果：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C1.png?raw=true" alt="è¾åºç&quot;æ1.png"></p>
+<p>这是我们的 Connection 的整个变化过程，通过分析我们能够发现之前的 CUD 操作过程中，我们都要手动进行事务的提交，原因是 setAutoCommit()方法，在执行时它的值被设置为 false 了，所以我们在 CUD 操作中，必须通过 sqlSession.commit()方法来执行提交操作。</p>
+<h3 id="2-3-Mybatis自动提交事务的设置"><a href="#2-3-Mybatis自动提交事务的设置" class="headerlink" title="2.3 Mybatis自动提交事务的设置"></a>2.3 Mybatis自动提交事务的设置</h3><p>通过上面的研究和分析，现在我们一起思考，为什么 CUD 过程中必须使用 sqlSession.commit()提交事务？主要原因就是在连接池中取出的连接，都会将调用 connection.setAutoCommit(false)方法，这样我们就必须使用 sqlSession.commit()方法，相当于使用了 JDBC 中的 connection.commit()方法实现事务提交。</p>
+<p>明白这一点后，我们现在一起尝试不进行手动提交，一样实现 CUD 操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Before</span><span class="comment">//在测试方法执行之前执行</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span><span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//1.读取配置文件</span></span><br><span class="line">    in = Resources.getResourceAsStream(<span class="string">"SqlMapConfig.xml"</span>);</span><br><span class="line">    <span class="comment">//2.创建构建者对象</span></span><br><span class="line">    SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();</span><br><span class="line">    <span class="comment">//3.创建 SqlSession 工厂对象</span></span><br><span class="line">    factory = builder.build(in);</span><br><span class="line">    <span class="comment">//4.创建 SqlSession 对象</span></span><br><span class="line">    session = factory.openSession(<span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">//5.创建 Dao 的代理对象</span></span><br><span class="line">    userDao = session.getMapper(IUserDao.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@After</span><span class="comment">//在测试方法执行完成之后执行</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">	<span class="comment">//7.释放资源</span></span><br><span class="line">	session.close();</span><br><span class="line">	in.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所对应的 DefaultSqlSessionFactory 类的源代码：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/DefaultSqlSessionFactory%20%E7%B1%BB%E7%9A%84%E6%BA%90%E4%BB%A3%E7%A0%81.png?raw=true" alt="DefaultSqlSessionFactory ç±&quot;çæºä&quot;£ç .png"></p>
+<p>运行的结果如下：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Mybatis/2019-05-25-Mybatis%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%B8%8E%E4%BA%8B%E5%8A%A1%E6%B7%B1%E5%85%A5/%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C2.png?raw=true" alt="è¾åºç&quot;æ2.png"></p>
+<p>我们发现，此时事务就设置为自动提交了，同样可以实现CUD操作时记录的保存。虽然这也是一种方式，但就编程而言，设置为自动提交方式为 false再根据情况决定是否进行提交，这种方式更常用。因为我们可以根据业务情况来决定提交是否进行提交。</p>
 
       
     </div>
@@ -525,7 +564,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://aimanyeye.github.io/2019/05/20/2019-05-20-Mybatis框架概述/" title="Mybatis框架概述">https://aimanyeye.github.io/2019/05/20/2019-05-20-Mybatis框架概述/</a>
+    <a href="https://aimanyeye.github.io/2019/05/25/2019-05-25-Mybatis连接池与事务深入/" title="Mybatis连接池与事务深入">https://aimanyeye.github.io/2019/05/25/2019-05-25-Mybatis连接池与事务深入/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -557,8 +596,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/21/2019-03-21-MySQL-快速入门(下)/" rel="next" title="MySQL快速入门（下）">
-                <i class="fa fa-chevron-left"></i> MySQL快速入门（下）
+              <a href="/2019/05/24/2019-05-24-Mybatis输入参数和输出结果封装/" rel="next" title="Mybatis输入参数和输出结果封装">
+                <i class="fa fa-chevron-left"></i> Mybatis输入参数和输出结果封装
               </a>
             
           </div>
@@ -566,10 +605,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/21/2019-05-21-软件项目需求分析到详细设计/" rel="prev" title="软件项目需求分析到详细设计">
-                软件项目需求分析到详细设计 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -705,7 +740,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是框架"><span class="nav-number"></span> <span class="nav-text">1. 什么是框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-什么是框架"><span class="nav-number">1.</span> <span class="nav-text">1.1 什么是框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-框架要解决的问题"><span class="nav-number">2.</span> <span class="nav-text">1.2 框架要解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-软件开发的分层重要性"><span class="nav-number">3.</span> <span class="nav-text">1.3 软件开发的分层重要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-分层开发下的常见框架"><span class="nav-number">4.</span> <span class="nav-text">1.4 分层开发下的常见框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-MyBatis-框架概述"><span class="nav-number">5.</span> <span class="nav-text">1.5 MyBatis  框架概述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-JDBC-编程的分析"><span class="nav-number"></span> <span class="nav-text">2. JDBC 编程的分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-jdbc-程序的回顾"><span class="nav-number">1.</span> <span class="nav-text">2.1 jdbc  程序的回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-jdbc-问题分析"><span class="nav-number">2.</span> <span class="nav-text">2.2 jdbc  问题分析</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Mybatis的连接池技术"><span class="nav-number"></span> <span class="nav-text">1. Mybatis的连接池技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Mybatis连接池的分类"><span class="nav-number">1.</span> <span class="nav-text">1.1 Mybatis连接池的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Mybatis-中数据源的配置"><span class="nav-number">2.</span> <span class="nav-text">1.2 Mybatis 中数据源的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Mybatis中DataSource的存取"><span class="nav-number">3.</span> <span class="nav-text">1.3 Mybatis中DataSource的存取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Mybatis中连接的获取过程分析"><span class="nav-number">4.</span> <span class="nav-text">1.4 Mybatis中连接的获取过程分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Mybatis的事务控制"><span class="nav-number"></span> <span class="nav-text">2. Mybatis的事务控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-JDBC中事务的回顾"><span class="nav-number">1.</span> <span class="nav-text">2.1 JDBC中事务的回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Mybatis中事务提交方式"><span class="nav-number">2.</span> <span class="nav-text">2.2 Mybatis中事务提交方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Mybatis自动提交事务的设置"><span class="nav-number">3.</span> <span class="nav-text">2.3 Mybatis自动提交事务的设置</span></a></li></ol></li></div>
             
 
           </div>
