@@ -87,48 +87,48 @@
 <meta property="og:site_name" content="aimanyeye">
 <meta property="og:description" content="JVM快速入门 听说Java虚拟机是我们成为一名优秀程序员必须掌握的一个知识，这也是我们和一般只会敲代码的程序员特别能体现差距的地方。所以小艾今天就赶紧的去学习了一下JVM。  目录 JVM体系结构概述 堆体系结构概述 堆参数调优入门 GC垃圾回收 总结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-1d5e9acc1de9a5ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-09bb637217a80f2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-93e2cafdce6b7726.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f33eac49951df548.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-3387c507fac1779f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-0c6cc56c54d39984.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-4546a9fadbe5b648.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-4e21ab1d0b5ec300.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-082db95fc6feb1ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-0dc348b29a093cbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-798b4bf8d1f5e425.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-04b9f24442f08674.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-880ca6d45df45e3f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f379f919b07c457a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-36bccba91dea12cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ec27758788d70a77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-3083520790c9bff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-e69981d140310122.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-8a282851687b9ed6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-480a7c760a9740a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-0a46fb924ac41c78.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-a7b9cd6eb9afc257.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-23d97f04e49c8443.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ed276e1583ab8496.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-d8c401d5ffd1b97d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-c135b96b79eb99cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-252fe531e06021dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-8f560af160b61a58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-68a1cbdd0dda6da2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-229f1e3679ef2a88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-d36b79dddf0b3921.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-9fc3bfd554b1cc16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-e405e3802a8d715f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ee001ccbeb1e3c76.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f02688c8e47c994a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-822cfd809688d83d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-4ddb3a93c0ebc466.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-16T09:07:16.158Z">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/JVM%E8%BF%90%E8%A1%8C%E5%9C%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B9%8B%E4%B8%8A.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/JVM%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/Java%E6%A0%88%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%A0%88%E5%B8%A7.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%A0%88%E5%A0%86%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E4%BA%A4%E4%BA%92%E5%85%B3%E7%B3%BB.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%A0%86%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/hotspot%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%96%B0%E7%94%9F%E4%BB%A3.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%97%A7%E7%94%9F%E4%BB%A3.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%96%B9%E6%B3%95%E5%8C%BA%E5%92%8C%E5%A0%86%E7%A9%BA%E9%97%B4.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/Java7%E5%A0%86%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/Java8%E5%A0%86%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%A0%86%E5%86%85%E5%AD%98%E8%B0%83%E4%BC%98.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/VM%E5%8F%82%E6%95%B0.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C2.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C3.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/MAT.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/MAT%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%AE%89%E8%A3%85MAT.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/GC%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE1.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE2.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE3.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE4.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE5.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE6.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE7.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE8.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE10.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE11.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE12.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE13.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE14.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE15.png?raw=true">
+<meta property="og:updated_time" content="2019-05-31T08:04:31.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM快速入门">
 <meta name="twitter:description" content="JVM快速入门 听说Java虚拟机是我们成为一名优秀程序员必须掌握的一个知识，这也是我们和一般只会敲代码的程序员特别能体现差距的地方。所以小艾今天就赶紧的去学习了一下JVM。  目录 JVM体系结构概述 堆体系结构概述 堆参数调优入门 GC垃圾回收 总结">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5418658-1d5e9acc1de9a5ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/JVM%E8%BF%90%E8%A1%8C%E5%9C%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B9%8B%E4%B8%8A.png?raw=true">
 
 
 
@@ -481,12 +481,12 @@
 </ol>
 <a id="more"></a>
 <h3 id="一、JVM体系结构概述"><a href="#一、JVM体系结构概述" class="headerlink" title="一、JVM体系结构概述"></a>一、JVM体系结构概述</h3><p>首先我们要知道JVM是运行在操作系统之上的，与硬件并没有直接的交互。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-1d5e9acc1de9a5ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/JVM%E8%BF%90%E8%A1%8C%E5%9C%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B9%8B%E4%B8%8A.png?raw=true" alt="JVMè¿è¡å¨æä½ç³&quot;ç&quot;ä¹ä¸.png"></p>
 <p>它的体系结构概览如下图所示：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-09bb637217a80f2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/JVM%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png?raw=true" alt="JVMä½ç³&quot;ç&quot;æ.png"></p>
 <p>其中的灰色区域<strong>Java栈</strong>、<strong>本地方法栈</strong>、<strong>程序计数器</strong>三块绝对不会有垃圾回收，而所谓的JVM调优就是调<strong>方法区</strong>和<strong>堆</strong>，主要是堆。记住这两点后，我们来详细的了解一下各个模块，先从红色的<strong>类装载子系统</strong>和<strong>执行引擎</strong>说起。</p>
 <h4 id="1-1-类装载器Class-Loader"><a href="#1-1-类装载器Class-Loader" class="headerlink" title="1.1 类装载器Class Loader"></a>1.1 类装载器Class Loader</h4><p>它类似于快递员，负责把硬盘上的<strong>class文件</strong>送去执行，也就是说只负责class文件的<strong>加载</strong>，至于它是否运行由<strong>Execution Engine</strong>决定。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-93e2cafdce6b7726.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8.png?raw=true" alt="ç±&quot;å è½½å¨.png"></p>
 <p>注意硬盘上的<strong>Car.class</strong>是小写的class，是指存在于硬盘上的一个文件。</p>
 <h5 id="1-1-1-类加载器的分类"><a href="#1-1-1-类加载器的分类" class="headerlink" title="1.1.1 类加载器的分类"></a>1.1.1 类加载器的分类</h5><p>Java是由C++演变过来的，分为<strong>“虚拟机自带的加载器”</strong>和<strong>“用户自定义加载器”</strong>。</p>
 <blockquote>
@@ -503,7 +503,7 @@
 <ul>
 <li>Java.lang.ClassLoader的子类，用户可以定制类的加载方式。</li>
 </ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f33eac49951df548.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB.png?raw=true" alt="ç±&quot;å è½½å¨çåç±&quot;.png"></p>
 <p>它的特点包括<strong>“双亲委派机制”</strong>和<strong>“沙箱安全机制”</strong></p>
 <ul>
 <li>双亲委派机制</li>
@@ -535,13 +535,13 @@
 <p>……. …….</p>
 <p>执行完毕后，先弹出F3栈帧，再弹出F2栈帧，再弹出F1栈帧… …</p>
 <p><strong>遵循“先进后出”/“后进先出”原则</strong>。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-3387c507fac1779f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/Java%E6%A0%88%E7%BB%93%E6%9E%84.png?raw=true" alt="Javaæ ç&quot;æ.png"></p>
 <p>栈帧2是最先被调用的方法，先入栈，然后方法2又调用了方法1，栈帧1处于栈顶的位置，栈帧2处于栈底，执行完毕后，依次弹出栈帧1和栈帧2，线程结束，栈释放。</p>
 <p>每次执行一个方法都会产生一个栈帧，保存到栈（后进先出）的顶部，顶部栈就是当前的方法，该方法执行完毕后会自动将此栈帧出栈。</p>
 <p>栈的大小也是<strong>有极限的</strong>。</p>
 <p>栈异常：<strong>Exception in thread “main” java.lang.StackOverflowError</strong> </p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-0c6cc56c54d39984.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h5 id="1-5-3-栈-堆-方法区的交互关系"><a href="#1-5-3-栈-堆-方法区的交互关系" class="headerlink" title="1.5.3 栈+堆+方法区的交互关系"></a>1.5.3 栈+堆+方法区的交互关系</h5><p><img src="https://upload-images.jianshu.io/upload_images/5418658-4546a9fadbe5b648.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%A0%88%E5%B8%A7.png?raw=true" alt="æ å¸§.png"></p>
+<h5 id="1-5-3-栈-堆-方法区的交互关系"><a href="#1-5-3-栈-堆-方法区的交互关系" class="headerlink" title="1.5.3 栈+堆+方法区的交互关系"></a>1.5.3 栈+堆+方法区的交互关系</h5><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%A0%88%E5%A0%86%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E4%BA%A4%E4%BA%92%E5%85%B3%E7%B3%BB.png?raw=true" alt="æ å æ¹æ³åºçäº¤äºå³ç³&quot;.png"></p>
 <p><strong>HotSpot</strong>是SUN公司的Java虚拟机版本名，是使用指针的方式来访问对象，<strong>Java堆</strong>中会存放访问类元数据的地址，即指向方法区中的模板文件，保证每一个实例一致性，<strong>reference</strong>存储的就直接是对象的地址。</p>
 <p><strong>三种JVM</strong></p>
 <ul>
@@ -556,14 +556,14 @@
 <li>Tenure generation Space 养老区                Old/Tenure</li>
 <li>Permanent Space              永久区                 Perm</li>
 </ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-4e21ab1d0b5ec300.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%A0%86%E7%BB%93%E6%9E%84.png?raw=true" alt="å ç&quot;æ.png"></p>
 <h5 id="2-1-1-新生区"><a href="#2-1-1-新生区" class="headerlink" title="2.1.1 新生区"></a>2.1.1 新生区</h5><p>新生区是类的诞生、成长、消亡的区域，一个类在这里产生，应用，最后被垃圾回收器收集，结束生命。新生区又分为两部分：<strong>伊甸区（Eden Space）</strong>和<strong>幸存者区（Survivor Space）</strong>，所有的类都是在伊甸区被new出来的。辛存区有两个：<strong>0区（Survivor 0 Space）</strong>和<strong>1区（Survivor 1 Space）</strong>。当伊甸区的空间用完时，程序又需要创建对象，JVM的垃圾回收器将对伊甸区进行垃圾回收<strong>（Minor GC）</strong>，将伊甸园区中不再被其他对象所引用的对象进行销毁。然后将伊甸园中的剩余对象移动到幸存0区。若幸存0区也满了，再对该区进行垃圾回收，然后移动到1区。那如果1区也满了呢？再移动到养老区。若养老区也满了，那么这个时候将产生<strong>Major GC（Full GC）</strong>，进行养老区的内存清理。若养老区执行了Full GC之后发现依然无法进行对象的保存，就会产生<strong>OOM异常“OutOfMemoryError”</strong>。</p>
 <p>如果出现<strong>java.lang.OutOfMemoryError：Java head space异常</strong>，说明Java虚拟机的<strong>堆内存不够</strong>。原因有二：</p>
 <p><strong>（1）</strong>Java虚拟机的堆内存设置不够，可以通过参数<strong>-Xms</strong>、<strong>-Xmx</strong>来调整。</p>
 <p><strong>（2）</strong>代码中创建了大量大对象，并且长时间不能被垃圾收集器收集（存在被引用）。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-082db95fc6feb1ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-0dc348b29a093cbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-798b4bf8d1f5e425.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/hotspot%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.png?raw=true" alt="hotspotåå­ç®¡ç.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%96%B0%E7%94%9F%E4%BB%A3.png?raw=true" alt="æ°çä&quot;£.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%97%A7%E7%94%9F%E4%BB%A3.png?raw=true" alt="æ§çä&quot;£.png"></p>
 <h5 id="2-1-2-永久区"><a href="#2-1-2-永久区" class="headerlink" title="2.1.2 永久区"></a>2.1.2 永久区</h5><p>永久存储区是一个常驻内存区域，<strong>用于存放JDK自身所携带的Class</strong>，Interface的元数据，也就是说它存储的是运行环境必须的类信息，被装载进此区域的数据是不会被垃圾回收器回收掉的，<strong>关闭JVM才会释放此区域所占用的内存</strong>。</p>
 <p>如果出现<strong>java.lang.OutOfMemoryError：PermGen Space</strong>，说明是Java虚拟机对永久代<strong>Perm内存设置不够</strong>。一般出现这种情况，都是程序启动需要加载大量的第三方jar包。例如：在一个Tomcat下部署了太多的应用。或者大量动态反射生成的类不断被加载，最终导致Perm区被占满。</p>
 <p><strong>JDK1.6及之前</strong>：有永久代，常量池1.6在<strong>方法区</strong></p>
@@ -575,34 +575,34 @@
 <p>实际而言，方法区（Method Area）和堆一样，是各个线程共享的内存区域，它用于存储虚拟机加载的：类信息+普通常量+静态常量+编译器编译后的代码等等，虽然JVM规范将方法区描述为堆的一个逻辑部分，但它却还有一个别名叫做Non-Heap（非堆），目的就是要和堆分开。</p>
 <p>对于HotSpot虚拟机，很多开发者习惯将方法区称之为“永久代（Parmanent Gen）”，但严格本质上说两者不同，或者说使用永久代来实现方法区而已，永久代是方法区（相当于一个接口interface）的一个实现，JDK1.7的版本中，已经将原本放在永久代的字符串常量池移走。</p>
 <p>常量池（Constant Pool）是方法区的一部分，Class文件除了有类的版本、字段、方法、接口等描述信息外，还有一项信息就是常量池，这部分内容将在类加载后进入方法区的运行时常量池中存放。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-04b9f24442f08674.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%96%B9%E6%B3%95%E5%8C%BA%E5%92%8C%E5%A0%86%E7%A9%BA%E9%97%B4.png?raw=true" alt="æ¹æ³åºåå ç©ºé´.png"></p>
 <h3 id="三、堆参数调优入门"><a href="#三、堆参数调优入门" class="headerlink" title="三、堆参数调优入门"></a>三、堆参数调优入门</h3><p>我们先来看看Java7和Java8的堆结构区别</p>
 <blockquote>
 <p>Java7</p>
 </blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-880ca6d45df45e3f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/Java7%E5%A0%86%E7%BB%93%E6%9E%84.png?raw=true" alt="Java7å ç&quot;æ.png"></p>
 <blockquote>
 <p>Java8之后最初的永久代取消了，由元空间取代。</p>
 </blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f379f919b07c457a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h4 id="3-1-堆内存调优简介01"><a href="#3-1-堆内存调优简介01" class="headerlink" title="3.1 堆内存调优简介01"></a>3.1 堆内存调优简介01</h4><p><img src="https://upload-images.jianshu.io/upload_images/5418658-36bccba91dea12cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/Java8%E5%A0%86%E7%BB%93%E6%9E%84.png?raw=true" alt="Java8å ç&quot;æ.png"></p>
+<h4 id="3-1-堆内存调优简介01"><a href="#3-1-堆内存调优简介01" class="headerlink" title="3.1 堆内存调优简介01"></a>3.1 堆内存调优简介01</h4><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%A0%86%E5%86%85%E5%AD%98%E8%B0%83%E4%BC%98.png?raw=true" alt="å åå­è°ä¼.png"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line"><span class="keyword">long</span> maxMemory = Runtime.getRuntime().maxMemory() ;<span class="comment">//返回 Java 虚拟机试图使用的最大内存量。</span></span><br><span class="line"><span class="keyword">long</span> totalMemory = Runtime.getRuntime().totalMemory() ;<span class="comment">//返回 Java 虚拟机中的内存总量。</span></span><br><span class="line">System.out.println(<span class="string">"MAX_MEMORY = "</span> + maxMemory + <span class="string">"（字节）、"</span> + (maxMemory / (<span class="keyword">double</span>)<span class="number">1024</span> / <span class="number">1024</span>) + <span class="string">"MB"</span>);</span><br><span class="line">System.out.println(<span class="string">"TOTAL_MEMORY = "</span> + totalMemory + <span class="string">"（字节）、"</span> + (totalMemory / (<span class="keyword">double</span>)<span class="number">1024</span> / <span class="number">1024</span>) + <span class="string">"MB"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>发现默认的情况下分配的内存是总内存的“1/4”、而初始化的内存为“1/64”</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-ec27758788d70a77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>VM参数</strong>： ==-Xms1024m -Xmx1024m -XX:+PrintGCDetails== </p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-3083520790c9bff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-e69981d140310122.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"www.atguigu.com"</span> ;</span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>) </span><br><span class="line">&#123;</span><br><span class="line">str += str + <span class="keyword">new</span> Random().nextInt(<span class="number">88888888</span>) + <span class="keyword">new</span> Random().nextInt(<span class="number">999999999</span>) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>VM参数</strong>：==-Xms8m -Xmx8m -XX:+PrintGCDetails== </p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-8a282851687b9ed6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h4 id="3-2-MAT"><a href="#3-2-MAT" class="headerlink" title="3.2 MAT"></a>3.2 MAT</h4><p><img src="https://upload-images.jianshu.io/upload_images/5418658-480a7c760a9740a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C.png?raw=true" alt="è¾åºç&quot;æ.png"></p>
+<p><strong>VM参数</strong>： <code>-Xms1024m -Xmx1024m -XX:+PrintGCDetails</code> </p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/VM%E5%8F%82%E6%95%B0.png?raw=true" alt="VMåæ°.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C2.png?raw=true" alt="è¾åºç&quot;æ2.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"www.atguigu.com"</span> ;</span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>) </span><br><span class="line">&#123;</span><br><span class="line">	str += str + <span class="keyword">new</span> Random().nextInt(<span class="number">88888888</span>) + <span class="keyword">new</span> Random().nextInt(<span class="number">999999999</span>) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>VM参数</strong>：<code>-Xms8m -Xmx8m -XX:+PrintGCDetails</code> </p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C3.png?raw=true" alt="è¾åºç&quot;æ3.png"></p>
+<h4 id="3-2-MAT"><a href="#3-2-MAT" class="headerlink" title="3.2 MAT"></a>3.2 MAT</h4><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/MAT.png?raw=true" alt="MAT.png"></p>
 <p><strong>官网访问地址</strong>：<a href="https://projects.eclipse.org/projects/tools.mat/downloads" target="_blank" rel="noopener">https://projects.eclipse.org/projects/tools.mat/downloads</a> </p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-0a46fb924ac41c78.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-a7b9cd6eb9afc257.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>==-XX:+HeapDumpOnOutOfMemoryError==</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/MAT%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80.png?raw=true" alt="MATä¸è½½å°å.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%AE%89%E8%A3%85MAT.png?raw=true" alt="å®è£MAT.png"></p>
+<p><code>-XX:+HeapDumpOnOutOfMemoryError</code></p>
 <p>OOM时导出堆到文件。</p>
-<p>==-Xms1m -Xmx8m -XX:+HeapDumpOnOutOfMemoryError== </p>
-<h3 id="四、GC垃圾回收"><a href="#四、GC垃圾回收" class="headerlink" title="四、GC垃圾回收"></a>四、GC垃圾回收</h3><p><img src="https://upload-images.jianshu.io/upload_images/5418658-23d97f04e49c8443.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>-Xms1m -Xmx8m -XX:+HeapDumpOnOutOfMemoryError</code> </p>
+<h3 id="四、GC垃圾回收"><a href="#四、GC垃圾回收" class="headerlink" title="四、GC垃圾回收"></a>四、GC垃圾回收</h3><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/GC%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F.png?raw=true" alt="GCçä½ç¨å.png"></p>
 <h4 id="4-1-GC是什么（分代算法）"><a href="#4-1-GC是什么（分代算法）" class="headerlink" title="4.1 GC是什么（分代算法）"></a>4.1 GC是什么（分代算法）</h4><p><strong>GC</strong>俗称<strong>垃圾回收器</strong> <strong>（java Garbage Collection）</strong></p>
 <ul>
 <li>次数上频繁收集Young区</li>
@@ -620,7 +620,7 @@
 </blockquote>
 <p><strong>Minor GC</strong>会把<strong>Eden</strong>中的所有<strong>活的对象</strong>都移到<strong>Survivor区域</strong>中，如果Survivor区中放不下，那么剩下的活的对象就被移到<strong>Old  generation</strong>中，也即一旦收集后，<strong>Eden区就变成空</strong>的了。</p>
 <p>当对象在 Eden ( 包括一个 Survivor 区域，这里假设是 <strong>from 区域</strong> ) 出生后，<strong>在经过一次 Minor GC 后，如果对象还存活</strong>，并且能够被另外一块 Survivor 区域所容纳( 上面已经假设为 from 区域，这里应为 <strong>to 区域</strong>，即 to 区域有足够的内存空间来存储 Eden 和 from 区域中存活的对象 )，则使用复制算法将这些仍然还存活的对象复制到另外一块 Survivor 区域 ( 即 to 区域 ) 中，然后清理所使用过的 Eden 以及 Survivor 区域 ( 即 from 区域 )，并且将这些对象的<strong>年龄设置为1</strong>，以后对象在 Survivor 区每熬过一次 Minor GC，<strong>就将对象的年龄 + 1</strong>，当对象的年龄达到某个值时 ( <strong>默认是 15 岁</strong>，通过==-XX:MaxTenuringThreshold== 来设定参数)，<strong>这些对象就会成为老年代</strong>。</p>
-<p>==-XX:MaxTenuringThreshold — 设置对象在新生代中存活的次数==</p>
+<p><code>-XX:MaxTenuringThreshold — 设置对象在新生代中存活的次数</code></p>
 <blockquote>
 <p><strong>解析：</strong></p>
 </blockquote>
@@ -631,12 +631,12 @@
 <blockquote>
 <p><strong>动图</strong></p>
 </blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-ed276e1583ab8496.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-d8c401d5ffd1b97d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-c135b96b79eb99cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-252fe531e06021dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-8f560af160b61a58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-68a1cbdd0dda6da2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE1.png?raw=true" alt="å¨å¾1.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE2.png?raw=true" alt="å¨å¾2.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE3.png?raw=true" alt="å¨å¾3.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE4.png?raw=true" alt="å¨å¾4.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE5.png?raw=true" alt="å¨å¾5.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE6.png?raw=true" alt="å¨å¾6.png"></p>
 <blockquote>
 <p> <strong>缺点</strong></p>
 </blockquote>
@@ -656,9 +656,9 @@
 <blockquote>
 <p><strong>动图</strong></p>
 </blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-229f1e3679ef2a88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-d36b79dddf0b3921.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-9fc3bfd554b1cc16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE7.png?raw=true" alt="å¨å¾7.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE8.png?raw=true" alt="å¨å¾8.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE10.png?raw=true" alt="å¨å¾10.png"></p>
 <blockquote>
 <p><strong>缺点：</strong></p>
 </blockquote>
@@ -677,16 +677,16 @@
 <h5 id="4-2-5-标记清除压缩"><a href="#4-2-5-标记清除压缩" class="headerlink" title="4.2.5 标记清除压缩"></a>4.2.5 标记清除压缩</h5><blockquote>
 <p><strong>动图</strong></p>
 </blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-e405e3802a8d715f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-ee001ccbeb1e3c76.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f02688c8e47c994a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-822cfd809688d83d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-4ddb3a93c0ebc466.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE11.png?raw=true" alt="å¨å¾11.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE12.png?raw=true" alt="å¨å¾12.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE13.png?raw=true" alt="å¨å¾13.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE14.png?raw=true" alt="å¨å¾14.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/JVM/2019-03-16-JVM-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E5%8A%A8%E5%9B%BE15.png?raw=true" alt="å¨å¾15.png"></p>
 <h5 id="4-2-6-这几种算法的比较"><a href="#4-2-6-这几种算法的比较" class="headerlink" title="4.2.6 这几种算法的比较"></a>4.2.6 这几种算法的比较</h5><p><strong>内存效率：</strong>复制算法&gt;标记清除算法&gt;标记整理算法（此处的效率只是简单的对比时间复杂度，实际情况不一定如此）。<br><strong>内存整齐度：</strong>复制算法=标记整理算法&gt;标记清除算法。<br><strong>内存利用率：</strong>标记整理算法=标记清除算法&gt;复制算法。 </p>
 <p>可以看出，<strong>效率上</strong>来说，<strong>复制算法</strong>是当之无愧的老大，但是却<strong>浪费了太多内存</strong>，而为了尽量兼顾上面所提到的三个指标，<strong>标记/整理算法相对来说更平滑一些，但效率上依然不尽如人意</strong>，它比复制算法多了一个标记的阶段，又比标记/清除多了一个整理内存的过程。</p>
 <p>　　难道就没有一种最优算法吗？ 猜猜看</p>
 <p>答案是没有，没有最好，只有更好，最适合的算法。</p>
-<h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><p>通过上面的学习，相信你已经对Java虚拟机有了初步的了解，接来下，小艾会分模块，再深入一点学习JVM的知识。</p>
+<h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><p>通过上面的学习，相信你已经对Java虚拟机有了初步的了解，接来下还需要再深入一点学习JVM的知识。</p>
 
       
     </div>
