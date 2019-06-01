@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,SSM框架,Spring,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="目录 明确：写在前面 环境搭建 常用注解 Spring管理对象细节 Spring的纯注解配置 测试类中的问题和解决思路 配置步骤 为什么不把测试类配置到xml中">
+<meta name="keywords" content="Java,SSM框架,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于注解的IoC配置和整合Junit">
+<meta property="og:url" content="https://aimanyeye.github.io/2019/06/01/2019-06-01-基于注解的IoC配置和整合Junit/index.html">
+<meta property="og:site_name" content="aimanyeye">
+<meta property="og:description" content="目录 明确：写在前面 环境搭建 常用注解 Spring管理对象细节 Spring的纯注解配置 测试类中的问题和解决思路 配置步骤 为什么不把测试类配置到xml中">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Spring/2019-06-01-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IoC%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B4%E5%90%88Junit/%E6%8B%B7%E8%B4%9D%E5%BF%85%E5%A4%87%E7%9A%84jar%E5%8C%85.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Spring/2019-06-01-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IoC%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B4%E5%90%88Junit/%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Spring/2019-06-01-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IoC%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B4%E5%90%88Junit/xml%E5%92%8C%E6%B3%A8%E8%A7%A3%E7%9A%84%E6%AF%94%E8%BE%83.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Spring/2019-06-01-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IoC%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B4%E5%90%88Junit/%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Spring/2019-06-01-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IoC%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B4%E5%90%88Junit/%E6%8B%B7%E8%B4%9D%E6%95%B4%E5%90%88junit%E5%BF%85%E5%A4%87%E7%9A%84jar%E5%8C%85.png?raw=true">
+<meta property="og:updated_time" content="2019-06-01T02:47:25.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于注解的IoC配置和整合Junit">
+<meta name="twitter:description" content="目录 明确：写在前面 环境搭建 常用注解 Spring管理对象细节 Spring的纯注解配置 测试类中的问题和解决思路 配置步骤 为什么不把测试类配置到xml中">
+<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Spring/2019-06-01-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IoC%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B4%E5%90%88Junit/%E6%8B%B7%E8%B4%9D%E5%BF%85%E5%A4%87%E7%9A%84jar%E5%8C%85.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aimanyeye.github.io/2019/06/01/2019-06-01-基于注解的IoC配置和整合Junit/">
+
+
+
+
+
+  <title>基于注解的IoC配置和整合Junit | aimanyeye</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aimanyeye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">刻苦学习，解决眼前的苟且，追寻诗和远方...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/06/01/2019-06-01-基于注解的IoC配置和整合Junit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="艾曼爷爷">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aimanyeye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于注解的IoC配置和整合Junit</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T13:50:32+08:00">
+                2019-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/SSM框架/" itemprop="url" rel="index">
+                    <span itemprop="name">SSM框架</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/SSM框架/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.4k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h3><ol>
+<li>明确：写在前面</li>
+<li>环境搭建</li>
+<li>常用注解</li>
+<li>Spring管理对象细节</li>
+<li>Spring的纯注解配置</li>
+<li>测试类中的问题和解决思路</li>
+<li>配置步骤</li>
+<li>为什么不把测试类配置到xml中</li>
+</ol>
+<a id="more"></a>
+<h2 id="1-明确：写在前面"><a href="#1-明确：写在前面" class="headerlink" title="1. 明确：写在前面"></a>1. 明确：写在前面</h2><p>学习基于注解的 IoC 配置，大家脑海里首先得有一个认知，即注解配置和 xml 配置要实现的功能都是一样<br>的，都是要降低程序间的耦合。只是配置的形式不一样。</p>
+<p>关于实际的开发中到底使用xml还是注解，每家公司有着不同的使用习惯。所以这两种配置方式我们都需要掌<br>握。</p>
+<h2 id="2-环境搭建"><a href="#2-环境搭建" class="headerlink" title="2. 环境搭建"></a>2. 环境搭建</h2><h3 id="2-1-第一步：拷贝必备jar包到工程的lib目录"><a href="#2-1-第一步：拷贝必备jar包到工程的lib目录" class="headerlink" title="2.1 第一步：拷贝必备jar包到工程的lib目录"></a>2.1 第一步：拷贝必备jar包到工程的lib目录</h3><p><strong>注意：</strong>在基于注解的配置中，我们还要多拷贝一个 aop 的 jar 包。如下图：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Spring/2019-06-01-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IoC%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B4%E5%90%88Junit/%E6%8B%B7%E8%B4%9D%E5%BF%85%E5%A4%87%E7%9A%84jar%E5%8C%85.png?raw=true" alt="æ·è´å¿å¤çjarå.png"></p>
+<h3 id="2-2-第二步：使用-Component注解配置管理的资源"><a href="#2-2-第二步：使用-Component注解配置管理的资源" class="headerlink" title="2.2 第二步：使用@Component注解配置管理的资源"></a>2.2 第二步：使用@Component注解配置管理的资源</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 账户的业务层实现类</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> 黑马程序员</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Company</span> http://www.ithiema.com</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@Component</span>(<span class="string">"accountService"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">IAccountService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> IAccountDao accountDao;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAccountDao</span><span class="params">(IAccountDao accountDao)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.accountDao = accountDao;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 账户的持久层实现类</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> 黑马程序员</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Company</span> http://www.ithiema.com</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@Component</span>(<span class="string">"accountDao"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountDaoImpl</span> <span class="keyword">implements</span> <span class="title">IAccountDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> DBAssit dbAssit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>当我们使用注解注入时，set 方法不用写</p>
+<h3 id="2-3-第三步：创建Spring的xml配置文件并开启对注解的支持"><a href="#2-3-第三步：创建Spring的xml配置文件并开启对注解的支持" class="headerlink" title="2.3 第三步：创建Spring的xml配置文件并开启对注解的支持"></a>2.3 第三步：创建Spring的xml配置文件并开启对注解的支持</h3><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Spring/2019-06-01-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IoC%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B4%E5%90%88Junit/%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png?raw=true" alt="åå&quot;ºéç½®æä&quot;¶.png"></p>
+<p><strong>注意：</strong><br>基于注解整合时，导入约束时需要多导入一个 context 名称空间下的约束。<br>由于我们使用了注解配置，此时不能在继承 JdbcDaoSupport，需要自己配置一个 JdbcTemplate</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">		http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">		http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">		http://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 告知 spring 创建容器时要扫描的包 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.itheima"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 配置 dbAssit --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dbAssit"</span> <span class="attr">class</span>=<span class="string">"com.itheima.dbassit.DBAssit"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 配置数据源 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"com.mchange.v2.c3p0.ComboPooledDataSource"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql:///spring_day02"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">value</span>=<span class="string">"root"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"1234"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-常用注解"><a href="#3-常用注解" class="headerlink" title="3. 常用注解"></a>3. 常用注解</h2><h3 id="3-1-用于创建对象的"><a href="#3-1-用于创建对象的" class="headerlink" title="3.1 用于创建对象的"></a>3.1 用于创建对象的</h3><p> 相当于：<code>&lt;bean id=&quot;&quot; class=&quot;&quot;&gt;</code></p>
+<h4 id="3-1-1-Componet"><a href="#3-1-1-Componet" class="headerlink" title="3.1.1 @Componet"></a>3.1.1 @Componet</h4><p><strong>作用：</strong><br>把资源让 spring 来管理。相当于在 xml 中配置一个 bean。<br><strong>属性：</strong><br>value：指定 bean 的 id。如果不指定 value 属性，默认 bean 的 id 是当前类的类名。首字母小写。</p>
+<h4 id="3-1-2-Controller-Service-Repository"><a href="#3-1-2-Controller-Service-Repository" class="headerlink" title="3.1.2 @Controller @Service @Repository"></a>3.1.2 @Controller @Service @Repository</h4><p>他们三个注解都是针对一个的衍生注解，他们的作用及属性都是一模一样的。<br>他们只不过是提供了更加明确的语义化。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Controller ：一般用于表现层的注解。</span><br><span class="line">@Service ：一般用于业务层的注解。</span><br><span class="line">@Repository ：一般用于持久层的注解。</span><br></pre></td></tr></table></figure>
+<p><strong>细节：</strong>如果注解中有且只有一个属性 要赋值时是 ，且名称是 value ，value </p>
+<h3 id="3-2-用于注入数据的"><a href="#3-2-用于注入数据的" class="headerlink" title="3.2 用于注入数据的"></a>3.2 用于注入数据的</h3><p>相当于：<code>&lt;property name=&quot;&quot; ref=&quot;&quot;&gt;</code>、<code>&lt;property name=&quot;&quot; value=&quot;&quot;&gt;</code></p>
+<h4 id="3-2-1-Autowired"><a href="#3-2-1-Autowired" class="headerlink" title="3.2.1 @Autowired"></a>3.2.1 @Autowired</h4><p><strong>作用：</strong><br>自动按照类型注入。当使用注解注入属性时，set方法可以省略。它只能注入其他 bean 类型。当有多个类型匹配时，使用要注入的对象变量名称作为 bean 的 id，在 spring 容器查找，找到了也可以注入成功。找不到就报错。</p>
+<h4 id="3-2-2-Qualifier"><a href="#3-2-2-Qualifier" class="headerlink" title="3.2.2 @Qualifier"></a>3.2.2 @Qualifier</h4><p><strong>作用：</strong><br>在自动按照类型注入的基础之上，再按照 Bean 的 id 注入。它在给字段注入时不能独立使用，必须和@Autowire 一起使用；但是给方法参数注入时，可以独立使用。<br><strong>属性：</strong><br>value：指定 bean 的 id。</p>
+<h4 id="3-2-3-Resource"><a href="#3-2-3-Resource" class="headerlink" title="3.2.3 @Resource"></a>3.2.3 @Resource</h4><p><strong>作用：</strong><br>直接按照 Bean 的 id 注入。它也只能注入其他 bean 类型。<br><strong>属性：</strong><br>name：指定 bean 的 id。</p>
+<h4 id="3-2-4-Value"><a href="#3-2-4-Value" class="headerlink" title="3.2.4 @Value"></a>3.2.4 @Value</h4><p><strong>作用：</strong><br>注入基本数据类型和 String 类型数据的<br><strong>属性：</strong><br>value：用于指定值</p>
+<h3 id="3-3-用于改变作用范围的"><a href="#3-3-用于改变作用范围的" class="headerlink" title="3.3 用于改变作用范围的"></a>3.3 用于改变作用范围的</h3><p>相当于：<code>&lt;bean id=&quot;&quot; class=&quot;&quot; scope=&quot;&quot;&gt;</code></p>
+<h4 id="3-3-1-Scope"><a href="#3-3-1-Scope" class="headerlink" title="3.3.1 @Scope"></a>3.3.1 @Scope</h4><p><strong>作用：</strong><br>指定 bean 的作用范围。<br><strong>属性：</strong><br>value：指定范围的值。<br>取值：singleton prototype request session globalsession</p>
+<h3 id="3-4-和生命期相关的"><a href="#3-4-和生命期相关的" class="headerlink" title="3.4 和生命期相关的"></a>3.4 和生命期相关的</h3><p>相当于：<code>&lt;bean id=&quot;&quot; class=&quot;&quot; init-method=&quot;&quot; destroy-method=&quot;&quot; /&gt;</code></p>
+<h4 id="3-4-1-PostConstruct"><a href="#3-4-1-PostConstruct" class="headerlink" title="3.4.1 @PostConstruct"></a>3.4.1 @PostConstruct</h4><p><strong>作用：</strong>用于指定初始化方法。</p>
+<h4 id="3-4-2-PreDestroy"><a href="#3-4-2-PreDestroy" class="headerlink" title="3.4.2 @PreDestroy"></a>3.4.2 @PreDestroy</h4><p><strong>作用：</strong>用于指定销毁方法。</p>
+<h3 id="3-5-关于Spring注解和XML的选择问题"><a href="#3-5-关于Spring注解和XML的选择问题" class="headerlink" title="3.5 关于Spring注解和XML的选择问题"></a>3.5 关于Spring注解和XML的选择问题</h3><p><strong>注解的优势：</strong><br>配置简单，维护方便（我们找到类，就相当于找到了对应的配置）。<br><strong>XML  的优势：</strong><br>修改时，不用改源码。不涉及重新编译和部署。<br><strong>Spring  管理 Bean 方式的比较：</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Spring/2019-06-01-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IoC%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B4%E5%90%88Junit/xml%E5%92%8C%E6%B3%A8%E8%A7%A3%E7%9A%84%E6%AF%94%E8%BE%83.png?raw=true" alt="xmlåæ³¨è§£çæ¯è¾.png"></p>
+<h2 id="4-Spring管理对象细节"><a href="#4-Spring管理对象细节" class="headerlink" title="4. Spring管理对象细节"></a>4. Spring管理对象细节</h2><p>基于注解的 spring IoC 配置中，bean 对象的特点和基于 XML 配置是一模一样的。</p>
+<h2 id="5-Spring的纯注解配置"><a href="#5-Spring的纯注解配置" class="headerlink" title="5. Spring的纯注解配置"></a>5. Spring的纯注解配置</h2><p>写到此处，基于注解的 IoC 配置已经完成，但是大家都发现了一个问题：我们依然离不开 spring 的 xml 配置文件，那么能不能不写这个 bean.xml，所有配置都用注解来实现呢？</p>
+<p>当然，同学们也需要注意一下，我们选择哪种配置的原则是简化开发和配置方便，而非追求某种技术。</p>
+<h3 id="5-1-待改造的问题"><a href="#5-1-待改造的问题" class="headerlink" title="5.1 待改造的问题"></a>5.1 待改造的问题</h3><p>我们发现，之所以我们现在离不开 xml 配置文件，是因为我们有一句很关键的配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 告知spring框架在，读取配置文件，创建容器时，扫描注解，依据注解创建对象，并存入容器中 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.itheima"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果他要也能用注解配置，那么我们就离脱离 xml 文件又进了一步。</p>
+<p>另外，数据源和 JdbcTemplate 的配置也需要靠注解来实现。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置 dbAssit --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dbAssit"</span> <span class="attr">class</span>=<span class="string">"com.itheima.dbassit.DBAssit"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置数据源 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"com.mchange.v2.c3p0.ComboPooledDataSource"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql:///spring_day02"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">value</span>=<span class="string">"root"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"1234"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-2-新注解说明"><a href="#5-2-新注解说明" class="headerlink" title="5.2 新注解说明"></a>5.2 新注解说明</h3><h4 id="5-2-1-Configuration"><a href="#5-2-1-Configuration" class="headerlink" title="5.2.1 @Configuration"></a>5.2.1 @Configuration</h4><p><strong>作用：</strong><br>用于指定当前类是一个 spring 配置类，当创建容器时会从该类上加载注解。获取容器时需要使用AnnotationApplicationContext(有@Configuration 注解的类.class)。<br><strong>属性：</strong><br>value:用于指定配置类的字节码</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* spring 的配置类，相当于 bean.xml 文件</span><br><span class="line">* @author 黑马程序员</span><br><span class="line">* @Company http://www.ithiema.com</span><br><span class="line">* @Version 1.0</span><br><span class="line">*/</span><br><span class="line">@Configuration</span><br><span class="line">	public class SpringConfiguration &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong><br>我们已经把配置文件用类来代替了，但是如何配置创建容器时要扫描的包呢？请看下一个注解。</p>
+<h4 id="5-2-2-ComponentScan"><a href="#5-2-2-ComponentScan" class="headerlink" title="5.2.2 @ComponentScan"></a>5.2.2 @ComponentScan</h4><p><strong>作用：</strong><br>用于指定 spring 在初始化容器时要扫描的包。作用和在 spring 的 xml 配置文件中的：<br><code>&lt;context:component-scan base-package=&quot;com.itheima&quot;/&gt;</code>是一样的。<br><strong>属性：</strong><br>basePackages：用于指定要扫描的包。和该注解中的 value 属性作用一样。<br><strong>示例代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* spring 的配置类，相当于 bean.xml 文件</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> 黑马程序员</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Company</span> http://www.ithiema.com</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(<span class="string">"com.itheima"</span>)</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringConfiguration</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong><br>我们已经配置好了要扫描的包，但是数据源和 JdbcTemplate 对象如何从配置文件中移除呢？请看下一个注解。</p>
+<h4 id="5-2-3-Bean"><a href="#5-2-3-Bean" class="headerlink" title="5.2.3 @Bean"></a>5.2.3 @Bean</h4><p><strong>作用：</strong><br>该注解只能写在方法上，表明使用此方法创建一个对象，并且放入 spring 容器。<br><strong>属性：</strong><br>name：给当前@Bean 注解方法创建的对象指定一个名称(即 bean 的 id）。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 连接数据库的配置类</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> 黑马程序员</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Company</span> http://www.ithiema.com</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcConfig</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 创建一个数据源，并存入 spring 容器中</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="meta">@Bean</span>(name=<span class="string">"dataSource"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">createDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">try</span> &#123;</span><br><span class="line">    		ComboPooledDataSource ds = <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line">    		ds.setUser(<span class="string">"root"</span>);</span><br><span class="line">    		ds.setPassword(<span class="string">"1234"</span>);</span><br><span class="line">    		ds.setDriverClass(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">    		ds.setJdbcUrl(<span class="string">"jdbc:mysql:///spring_day02"</span>);</span><br><span class="line">    		<span class="keyword">return</span> ds;</span><br><span class="line">    	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    		<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 创建一个 DBAssit，并且也存入 spring 容器中</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> dataSource</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="meta">@Bean</span>(name=<span class="string">"dbAssit"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DBAssit <span class="title">createDBAssit</span><span class="params">(DataSource dataSource)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="keyword">new</span> DBAssit(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意:</strong><br>我们已经把数据源和 DBAssit 从配置文件中移除了，此时可以删除 bean.xml 了。但是由于没有了配置文件，创建数据源的配置又都写死在类中了。如何把它们配置出来呢？请看下一个注解。</p>
+<h4 id="5-2-4-PropertySource"><a href="#5-2-4-PropertySource" class="headerlink" title="5.2.4 @PropertySource"></a>5.2.4 @PropertySource</h4><p><strong>作用：</strong>用于加载.properties 文件中的配置。例如我们配置数据源时，可以把连接数据库的信息写到properties 配置文件中，就可以使用此注解指定 properties 配置文件的位置。<br><strong>属性：</strong>value[]：用于指定 properties 文件位置。如果是在类路径下，需要写上 classpath:</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 连接数据库的配置类</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> 黑马程序员</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Company</span> http://www.ithiema.com</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.driver&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String driver;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.url&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.username&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;jdbc.password&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 创建一个数据源，并存入 spring 容器中</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="meta">@Bean</span>(name=<span class="string">"dataSource"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">createDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">try</span> &#123;</span><br><span class="line">    		ComboPooledDataSource ds = <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line">    		ds.setDriverClass(driver);</span><br><span class="line">    		ds.setJdbcUrl(url);</span><br><span class="line">    		ds.setUser(username);</span><br><span class="line">    		ds.setPassword(password);</span><br><span class="line">    		<span class="keyword">return</span> ds;</span><br><span class="line">    	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    		<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">   	 	&#125;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>jdbc.properties 文件：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver=com.mysql.jdbc.Driver</span><br><span class="line">jdbc.url=jdbc:mysql://localhost:3306/day44_ee247_spring</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=1234</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong><br>此时我们已经有了两个配置类，但是他们还没有关系。如何建立他们的关系呢？请看下一个注解。</p>
+<h4 id="5-2-5-Import"><a href="#5-2-5-Import" class="headerlink" title="5.2.5 @Import"></a>5.2.5 @Import</h4><p><strong>作用：</strong><br>用于导入其他配置类，在引入其他配置类时，可以不用再写@Configuration 注解。当然，写上也没问题。<br><strong>属性：</strong><br>value[]：用于指定其他配置类的字节码。<br><strong>示例代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(basePackages = <span class="string">"com.itheima.spring"</span>)</span><br><span class="line"><span class="meta">@Import</span>(&#123; JdbcConfig.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringConfiguration</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:jdbc.properties"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcConfig</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong><br>我们已经把要配置的都配置好了，但是新的问题产生了，由于没有配置文件了，如何获取容器呢？请看下一小节。</p>
+<h4 id="5-2-6-通过注解获取容器"><a href="#5-2-6-通过注解获取容器" class="headerlink" title="5.2.6 通过注解获取容器"></a>5.2.6 通过注解获取容器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext ac =</span><br><span class="line"><span class="keyword">new</span> AnnotationConfigApplicationContext(SpringConfiguration.class);</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-工程结构图"><a href="#5-3-工程结构图" class="headerlink" title="5.3 工程结构图"></a>5.3 工程结构图</h3><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Spring/2019-06-01-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IoC%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B4%E5%90%88Junit/%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84%E5%9B%BE.png?raw=true" alt="å·¥ç¨ç&quot;æå¾.png"></p>
+<h2 id="6-测试类中的问题和解决思路"><a href="#6-测试类中的问题和解决思路" class="headerlink" title="6. 测试类中的问题和解决思路"></a>6. 测试类中的问题和解决思路</h2><h3 id="6-1-问题"><a href="#6-1-问题" class="headerlink" title="6.1 问题"></a>6.1 问题</h3><p>在测试类中，每个测试方法都有以下两行代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean.xml"</span>);</span><br><span class="line">IAccountService as = ac.getBean(<span class="string">"accountService"</span>,IAccountService.class);</span><br></pre></td></tr></table></figure>
+<p>这两行代码的作用是获取容器，如果不写的话，直接会提示空指针异常。所以又不能轻易删掉。</p>
+<h3 id="6-2-解决思路分析"><a href="#6-2-解决思路分析" class="headerlink" title="6.2 解决思路分析"></a>6.2 解决思路分析</h3><p>针对上述问题，我们需要的是程序能自动帮我们创建容器。一旦程序能自动为我们创建spring 容器，我们就无须手动创建了，问题也就解决了。<br>我们都知道，junit 单元测试的原理（在 web 阶段课程中讲过），但显然，junit 是无法实现的，因为它自己都无法知晓我们是否使用了 spring 框架，更不用说帮我们创建 spring 容器了。不过好在，junit 给我们暴露了一个注解，可以让我们替换掉它的运行器。<br>这时，我们需要依靠 spring 框架，因为它提供了一个运行器，可以读取配置文件（或注解）来创建容器。我们只需要告诉它配置文件在哪就行了。</p>
+<h2 id="7-配置步骤"><a href="#7-配置步骤" class="headerlink" title="7. 配置步骤"></a>7. 配置步骤</h2><h3 id="7-1-第一步：拷贝整合junit的必备jar包到lib目录"><a href="#7-1-第一步：拷贝整合junit的必备jar包到lib目录" class="headerlink" title="7.1 第一步：拷贝整合junit的必备jar包到lib目录"></a>7.1 第一步：拷贝整合junit的必备jar包到lib目录</h3><p>此处需要注意的是，导入 jar 包时，需要导入一个 spring 中 aop 的 jar 包。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Spring/2019-06-01-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84IoC%E9%85%8D%E7%BD%AE%E5%92%8C%E6%95%B4%E5%90%88Junit/%E6%8B%B7%E8%B4%9D%E6%95%B4%E5%90%88junit%E5%BF%85%E5%A4%87%E7%9A%84jar%E5%8C%85.png?raw=true" alt="æ·è´æ´åjunitå¿å¤çjarå.png"></p>
+<h3 id="7-2-第二步：使用-RunWith注解替换原有运行器"><a href="#7-2-第二步：使用-RunWith注解替换原有运行器" class="headerlink" title="7.2 第二步：使用@RunWith注解替换原有运行器"></a>7.2 第二步：使用@RunWith注解替换原有运行器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 测试类</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> 黑马程序员</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Company</span> http://www.ithiema.com</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceTest</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-3-第三步：使用-ContextConfiguration指定Spring配置文件的位置"><a href="#7-3-第三步：使用-ContextConfiguration指定Spring配置文件的位置" class="headerlink" title="7.3 第三步：使用@ContextConfiguration指定Spring配置文件的位置"></a>7.3 第三步：使用@ContextConfiguration指定Spring配置文件的位置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 测试类</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> 黑马程序员</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Company</span> http://www.ithiema.com</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</span><br><span class="line"><span class="meta">@ContextConfiguration</span>(locations= &#123;<span class="string">"classpath:bean.xml"</span>&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceTest</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>@ContextConfiguration  注解：</strong><br><strong>locations  属性：</strong>用于指定配置文件的位置。如果是类路径下，需要用 classpath:表明<br><strong>classes  属性：</strong>用于指定注解的类。当不使用 xml 配置时，需要用此属性指定注解类的位置。</p>
+<h3 id="7-4-第四步：使用-Autowired给测试类中的变量注入数据"><a href="#7-4-第四步：使用-Autowired给测试类中的变量注入数据" class="headerlink" title="7.4 第四步：使用@Autowired给测试类中的变量注入数据"></a>7.4 第四步：使用@Autowired给测试类中的变量注入数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 测试类</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> 黑马程序员</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Company</span> http://www.ithiema.com</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Version</span> 1.0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</span><br><span class="line"><span class="meta">@ContextConfiguration</span>(locations= &#123;<span class="string">"classpath:bean.xml"</span>&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> IAccountService as ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="8-为什么不把测试类配置到xml中"><a href="#8-为什么不把测试类配置到xml中" class="headerlink" title="8. 为什么不把测试类配置到xml中"></a>8. 为什么不把测试类配置到xml中</h2><p>在解释这个问题之前，先解除大家的疑虑，配到 XML 中能不能用呢？<br>答案是肯定的，没问题，可以使用。<br>那么为什么不采用配置到 xml 中的方式呢？<br><strong>这个原因是这样的：</strong><br><strong>第一：</strong>当我们在 xml 中配置了一个 bean，spring 加载配置文件创建容器时，就会创建对象。<br><strong>第二：</strong>测试类只是我们在测试功能时使用，而在项目中它并不参与程序逻辑，也不会解决需求上的问题，所以创建完了，并没有使用。那么存在容器中就会造成资源的浪费。<br>所以，基于以上两点，我们不应该把测试配置到 xml 文件中。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="艾曼爷爷 wechat" style="width: 200px; max-width: 100%;">
+    <div>扫描二维码关注微信公众号，了解更多</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赞赏是最好的支持与鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="艾曼爷爷 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="艾曼爷爷 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    艾曼爷爷
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://aimanyeye.github.io/2019/06/01/2019-06-01-基于注解的IoC配置和整合Junit/" title="基于注解的IoC配置和整合Junit">https://aimanyeye.github.io/2019/06/01/2019-06-01-基于注解的IoC配置和整合Junit/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://aimanyeye.github.io/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/SSM框架/" rel="tag"># SSM框架</a>
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/31/2019-05-31-EasyUI快速入门/" rel="next" title="EasyUI快速入门">
+                <i class="fa fa-chevron-left"></i> EasyUI快速入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="艾曼爷爷">
+            
+              <p class="site-author-name" itemprop="name">艾曼爷爷</p>
+              <p class="site-description motion-element" itemprop="description">微信公众号：aimanyeye</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#1-明确：写在前面"><span class="nav-number"></span> <span class="nav-text">1. 明确：写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-环境搭建"><span class="nav-number"></span> <span class="nav-text">2. 环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-第一步：拷贝必备jar包到工程的lib目录"><span class="nav-number">1.</span> <span class="nav-text">2.1 第一步：拷贝必备jar包到工程的lib目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-第二步：使用-Component注解配置管理的资源"><span class="nav-number">2.</span> <span class="nav-text">2.2 第二步：使用@Component注解配置管理的资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-第三步：创建Spring的xml配置文件并开启对注解的支持"><span class="nav-number">3.</span> <span class="nav-text">2.3 第三步：创建Spring的xml配置文件并开启对注解的支持</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-常用注解"><span class="nav-number"></span> <span class="nav-text">3. 常用注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-用于创建对象的"><span class="nav-number">1.</span> <span class="nav-text">3.1 用于创建对象的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-Componet"><span class="nav-number">1.1.</span> <span class="nav-text">3.1.1 @Componet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-Controller-Service-Repository"><span class="nav-number">1.2.</span> <span class="nav-text">3.1.2 @Controller @Service @Repository</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-用于注入数据的"><span class="nav-number">2.</span> <span class="nav-text">3.2 用于注入数据的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-Autowired"><span class="nav-number">2.1.</span> <span class="nav-text">3.2.1 @Autowired</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-Qualifier"><span class="nav-number">2.2.</span> <span class="nav-text">3.2.2 @Qualifier</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3-Resource"><span class="nav-number">2.3.</span> <span class="nav-text">3.2.3 @Resource</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-4-Value"><span class="nav-number">2.4.</span> <span class="nav-text">3.2.4 @Value</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-用于改变作用范围的"><span class="nav-number">3.</span> <span class="nav-text">3.3 用于改变作用范围的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-Scope"><span class="nav-number">3.1.</span> <span class="nav-text">3.3.1 @Scope</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-和生命期相关的"><span class="nav-number">4.</span> <span class="nav-text">3.4 和生命期相关的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-1-PostConstruct"><span class="nav-number">4.1.</span> <span class="nav-text">3.4.1 @PostConstruct</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-2-PreDestroy"><span class="nav-number">4.2.</span> <span class="nav-text">3.4.2 @PreDestroy</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-关于Spring注解和XML的选择问题"><span class="nav-number">5.</span> <span class="nav-text">3.5 关于Spring注解和XML的选择问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Spring管理对象细节"><span class="nav-number"></span> <span class="nav-text">4. Spring管理对象细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Spring的纯注解配置"><span class="nav-number"></span> <span class="nav-text">5. Spring的纯注解配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-待改造的问题"><span class="nav-number">1.</span> <span class="nav-text">5.1 待改造的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-新注解说明"><span class="nav-number">2.</span> <span class="nav-text">5.2 新注解说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1-Configuration"><span class="nav-number">2.1.</span> <span class="nav-text">5.2.1 @Configuration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2-ComponentScan"><span class="nav-number">2.2.</span> <span class="nav-text">5.2.2 @ComponentScan</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-3-Bean"><span class="nav-number">2.3.</span> <span class="nav-text">5.2.3 @Bean</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-4-PropertySource"><span class="nav-number">2.4.</span> <span class="nav-text">5.2.4 @PropertySource</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-5-Import"><span class="nav-number">2.5.</span> <span class="nav-text">5.2.5 @Import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-6-通过注解获取容器"><span class="nav-number">2.6.</span> <span class="nav-text">5.2.6 通过注解获取容器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-工程结构图"><span class="nav-number">3.</span> <span class="nav-text">5.3 工程结构图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-测试类中的问题和解决思路"><span class="nav-number"></span> <span class="nav-text">6. 测试类中的问题和解决思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-问题"><span class="nav-number">1.</span> <span class="nav-text">6.1 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-解决思路分析"><span class="nav-number">2.</span> <span class="nav-text">6.2 解决思路分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-配置步骤"><span class="nav-number"></span> <span class="nav-text">7. 配置步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-第一步：拷贝整合junit的必备jar包到lib目录"><span class="nav-number">1.</span> <span class="nav-text">7.1 第一步：拷贝整合junit的必备jar包到lib目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-第二步：使用-RunWith注解替换原有运行器"><span class="nav-number">2.</span> <span class="nav-text">7.2 第二步：使用@RunWith注解替换原有运行器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-第三步：使用-ContextConfiguration指定Spring配置文件的位置"><span class="nav-number">3.</span> <span class="nav-text">7.3 第三步：使用@ContextConfiguration指定Spring配置文件的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-第四步：使用-Autowired给测试类中的变量注入数据"><span class="nav-number">4.</span> <span class="nav-text">7.4 第四步：使用@Autowired给测试类中的变量注入数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-为什么不把测试类配置到xml中"><span class="nav-number"></span> <span class="nav-text">8. 为什么不把测试类配置到xml中</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">艾曼爷爷</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '3b1b21d6164dbd9a4aad',
+          clientSecret: '699e21661be860daeb91d1daf05d9b9daa2570ba',
+          repo: 'aimanyeye.github.io',
+          owner: 'aimanyeye',
+          admin: ['aimanyeye'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
