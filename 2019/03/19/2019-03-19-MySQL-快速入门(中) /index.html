@@ -87,141 +87,141 @@
 <meta property="og:site_name" content="aimanyeye">
 <meta property="og:description" content="经过上次的MySQL快速入门（上）的学习，小艾已经有初步对MySQL的了解，前面学习的内容还是比较简单的，今天，就再深入的学习MySQL的查询吧。  目录 连接查询 子查询 union合并集合 limit使用 表">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-3da7ce8f3f9796db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-5a7769aaefaad808.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-db77749b7bf8c79b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-343078afa97fdb0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-7a54ea054bec8537.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-dd3c46a7113bcd6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-b0c5680fd5d50ade.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-bfa853df155a40b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-b2fd2c8ecfa7d023.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-dd95d3706f738435.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-86cbcae3c523065e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ec4136e7a392c230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-78af4c95d70cea11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-1aa06086ed26b157.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-0318ca763be1d0b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-e07cfcf9a91ba377.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f44c5ed6912889ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-71cd62778601a533.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f1d63ca53aad015c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-976d7c1baba5e02a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-80251a1afa6c728e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-98623925d554aebb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-cb65cbdcd93bd197.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-57ad496e59b7804a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-fd5a22e09b692049.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-6b32a883186f1fee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-2087053e5b41a2a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-37ba4a381dd9051d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-2039717465a3dd03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f5d5dcadee14901b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-eaa201c75183393e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-d65683ce83ec92cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f086d130ad8e28f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f411276ea8d8ab03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-c2a927987916e413.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-45b04bbc0dd97a40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-48c69765144085bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-325df05f3847363a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-75d90e1a38bf24f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-78228dcf6d78b38c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-b1031f97d960db90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-e08b82058208c665.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-3098b7887e970bbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-75bdd180f3666311.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-3302e7dd861a8772.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-cc9eb4b8093fd305.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-b3b74774219fb027.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f8c342e2fa854b80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-300f955bf6b065a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-faa7706c8b92bc69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ceeb0475d0b7e414.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-7a11a121c968dfcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ea220b4c139ac583.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-42a1d7ad6d5b2164.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-d270723c2564d950.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-e7d0b539636cdc19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-caf666c562dbb93b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-6989d35749797467.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-2e8cc5e7cb19cd8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-5db06e39b233629e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-450bec7cf4bec456.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-69ed48e51f012e71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-db4ed842f2e4f421.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-6f7546d60113ef7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-c3e00fd306d15674.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-898875232ffbb648.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-813cccded4d3566a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-3566c6f7a6218989.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-a4cb67d255f7d9ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ed94b2cefe3a2ca8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-278fc73dc00696dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-4e1e967006c61037.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-a7adc5e9e4db6ddf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-76167e2ed22c58cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-b641b50988895284.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-8729fe759e06ee64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-368890d1e5f55e2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-c19e840d9a2eab2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f23a107528cc2f71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f6422a2ef6c773ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-398ec5d5bda697bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-b167e5dd3797415b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-b10b705086d4f536.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-af74d31eab93c427.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-f570620848ec6823.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-40c80a4ab5b8e700.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-a726814ac020d7e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-8d97c45acab25d3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-771fccdbcb0f5f77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-0288abd144cbad51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-fb0ddf045ef87a1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-0be90eb3a22962fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-351c33de340f6154.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-3bfab10ad2739dcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-75b1f8ccfc91ab84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-75b1da805215e022.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-a2ebe6f179573484.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-e38d3c392f022c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-57ef4519d2890948.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-61bbd42bc753d975.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ae83802ccc5b72bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-8ba29eaf48e54e55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-db2ce66c78d98d36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-c8877e4529b01bea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-dc6d20796347f106.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-431297c8a8a03e13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-e0a8e0f25650e143.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-a027eb414098eb39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-86e48833566479b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-22680342dbcd14ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-d8c1ae6996cfd6c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-1280618b3f63e53d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ef0638603ed492a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-bbfcec4926c63808.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-7d72d49968adbd59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-b57ebe1cd2b3cd2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-4b9b8a979151f3e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/2019-03-19-MySQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E4%B8%AD/%E6%98%BE%E7%A4%BA%E6%AF%8F%E4%B8%AA%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF%EF%BC%8C%E5%B9%B6%E6%98%BE%E7%A4%BA%E6%89%80%E5%B1%9E%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/2019-03-19-MySQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E4%B8%AD/%E6%98%BE%E7%A4%BA%E5%91%98%E5%B7%A5%E5%A7%93%E5%90%8D%E5%92%8C%E5%AF%B9%E5%BA%94%E7%9A%84%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0.png?raw=true">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/显示员工姓名和对应的部门名称2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/先查询出员工姓名和部门编号.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/再查询出部门编号和部门名称.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/预测查询结果1.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/验证预测结果1.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/从员工信息表查询出员工姓名和部门编号.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/从部门信息表查询出部门编号和部门名称.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/等值查询.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/从员工信息表查询出员工的姓名和工资.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/从工资等级表查询出工资等级信息.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/从员工信息表查询出员工编号员工名称和领导编号.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/从领导信息表查询出领导姓名和领导编号.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/内连接.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/先查询出每一个员工对应的部门名称.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询部门信息.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/外连接中的右外连接.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/外连接中的左外连接.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/显示每一个员工对应的领导名.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/通过左外连接查询全部员工.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/通过左外连接查询全部员工2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询出员工对应的部门编号和工作.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查出部门信息.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查出工资等级信息.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/员工表和部门表连接再与工资等级表连接.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/多表连接查询结果.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/找出薪水比公司平均薪水高的员工错误示范.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/找出公司的平均薪水.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/找出薪水比公司平均薪水高的员工.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/将平均薪水替换为它的查询语句.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/根据部门分组找出每个部门的平均薪水.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询出薪水等级信息.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/将第一步查询结果当作一张临时表，然后与薪水等级表进行表连接.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/select后的子查询.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询出job为manager和salesman的员工错误示范.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询出job为manager和salesman的员工错误示范2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询出job为manager和salesman的员工.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询字段类型在MySQL中不必完全相同1.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询字段类型在MySQL中不必完全相同2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询包含manager和salesman的员工信息.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询包含manager和salesman的员工信息2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询出全部员工的信息.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/使用limit取出前5个员工的信息.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/使用limit取出前5个员工的信息2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/按照工资降序排列.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/取出前5名员工.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/按照工资降序排列2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/使用limit取出排名在3到9的员工.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建表语法.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/MySQL常用数据类型.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建学生信息表.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建学生信息表2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向学生表中所有字段插入数据.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向学生表中部分字段插入数据.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/不可以向为null的字段插入值.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向学生表中所有字段插入数据2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/不建议将前面的字段省略.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/插入中文.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查看建表语句.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查看变量.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/设置结果编码集之后.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建表时给字段设置默认值.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建表时给字段设置默认值2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建表时给字段设置默认值3.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/获取数据库系统当前时间.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建机构表.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/完全复制emp表到emp1.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/选择性复制emp表到emp2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/从emp2表中查询出员工工资为3000的，同时将查询结果插入到emp2表中.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建学生信息表3.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/给学生表添加一个电话字段.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/将字段tel长度扩展到20个长度.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/将学生表中的tel字段删除.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建学生信息表4.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/省略字段插入.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向学生表中插入数据.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/将编号no为3的记录name改为张三邮箱改.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/将所有名字改为李四.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/将名字中包含o的改为王五.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/将表中工作岗位为manager和salesman员工的工资上调10.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/删除学号为3的学生.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/将学生表中的数据全部删除.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/将表中部门编号为20的manager删除.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建用户表.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建用户表2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向用户表中插入数据.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/保证邮箱地址唯一.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向用户表中插入数据2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向用户表中插入数据3.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/保证邮箱地址唯一2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/name和email两个字段联合唯一.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/name和email两个字段联合唯一2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向用户表中插入数据4.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向用户表中插入数据5.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/表级联合约束限制.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询唯一性约束的名字.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查看information_schema库的表.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/table_constraint专门存储约束信息.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查询出用户表中唯一约束名称.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/用户名既不能为空也不能重复.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向用户表中插入数据6.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向用户表中插入数据7.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/向用户表中插入数据8.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建用户表加主键.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查看用户表结构.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/单一主键约束.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/已命名的表级主键.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查看用户表结构2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/给多个字段添加一个主键约束.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/复合主键命名.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/查看用户表结构3.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/测试联合主键功能.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/创建用户表自增主键.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/测试自增主键1.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/测试自增主键2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/外键测试.png">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-c45245c7caf46f6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-c4c8aeb13e24caa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-d7586f1aa23096b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-647d1142e7cb60cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-e8dcb67beac693d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-68c73b86b7410995.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-994de8dba9651ba9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-10a1f7baeb3d168b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-579906452be6badb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ec844ec555358fa2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-ddd35b8739435fc5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-5f2c01cb3d68d579.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5418658-9971623726a60988.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-19T13:11:01.033Z">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/外键测试2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/找出每个学生的班级名称1.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/找出每个学生的班级名称2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/删除外键约束.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/添加外键约束及级联删除.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/级联删除测试1.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/级联删除测试2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/删除外键约束2.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/更新外键约束和添加级联更新功能.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/删除学生表中的数据.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/级联更新测试.png">
+<meta property="og:image" content="d:/blog-img/数据库/Mysql/2019-03-19-MySQL快速入门-中/级联更新测试2.png">
+<meta property="og:updated_time" content="2019-07-03T14:02:34.610Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL快速入门（中）">
 <meta name="twitter:description" content="经过上次的MySQL快速入门（上）的学习，小艾已经有初步对MySQL的了解，前面学习的内容还是比较简单的，今天，就再深入的学习MySQL的查询吧。  目录 连接查询 子查询 union合并集合 limit使用 表">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5418658-3da7ce8f3f9796db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/2019-03-19-MySQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E4%B8%AD/%E6%98%BE%E7%A4%BA%E6%AF%8F%E4%B8%AA%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF%EF%BC%8C%E5%B9%B6%E6%98%BE%E7%A4%BA%E6%89%80%E5%B1%9E%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0.png?raw=true">
 
 
 
@@ -525,7 +525,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  7.9k 字
+                  8k 字
                 </span>
               
 
@@ -574,28 +574,28 @@
 </ol>
 <a id="more"></a>
 <h2 id="1-连接查询"><a href="#1-连接查询" class="headerlink" title="1. 连接查询"></a>1. 连接查询</h2><p>在实际开发中，数据往往不是存放储一张表中，而是同时存储在多张表中，这些表与表存在着关系，我们在检索数据的时候往往需要多张表联合起来检索，这种多表联合检索被称为连表查询或跨表查询。</p>
-<h3 id="1-1-笛卡尔积现象"><a href="#1-1-笛卡尔积现象" class="headerlink" title="1.1 笛卡尔积现象"></a>1.1 笛卡尔积现象</h3><p><strong>含义：</strong>若两张表迚行连接查询的时候没有任何条件限制，最终的查询结果总数是两张表记录的乘积，该现在称为笛卡尔积现象。</p>
-<h4 id="1-1-1-显示每个员工信息，并显示所属部门名称"><a href="#1-1-1-显示每个员工信息，并显示所属部门名称" class="headerlink" title="1.1.1 显示每个员工信息，并显示所属部门名称"></a>1.1.1 显示每个员工信息，并显示所属部门名称</h4><p><img src="https://upload-images.jianshu.io/upload_images/5418658-3da7ce8f3f9796db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="1-1-笛卡尔积现象"><a href="#1-1-笛卡尔积现象" class="headerlink" title="1.1 笛卡尔积现象"></a>1.1 笛卡尔积现象</h3><p><strong>含义：</strong>若两张表进行连接查询的时候没有任何条件限制，最终的查询结果总数是两张表记录的乘积，该现在称为笛卡尔积现象。</p>
+<h4 id="1-1-1-显示每个员工信息，并显示所属部门名称"><a href="#1-1-1-显示每个员工信息，并显示所属部门名称" class="headerlink" title="1.1.1 显示每个员工信息，并显示所属部门名称"></a>1.1.1 显示每个员工信息，并显示所属部门名称</h4><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/2019-03-19-MySQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E4%B8%AD/%E6%98%BE%E7%A4%BA%E6%AF%8F%E4%B8%AA%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF%EF%BC%8C%E5%B9%B6%E6%98%BE%E7%A4%BA%E6%89%80%E5%B1%9E%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0.png?raw=true" alt="æ¾ç¤ºæ¯ä¸ªåå·¥ä¿¡æ¯ï¼å¹¶æ¾ç¤ºæå±é¨é¨åç§°.png"></p>
 <h3 id="1-2连接查询根据：年代分类"><a href="#1-2连接查询根据：年代分类" class="headerlink" title="1.2连接查询根据：年代分类"></a>1.2连接查询根据：年代分类</h3><h4 id="1-2-1-SQL92语法"><a href="#1-2-1-SQL92语法" class="headerlink" title="1.2.1 SQL92语法"></a>1.2.1 SQL92语法</h4><p><strong>语法结构：</strong><br>select xxxx from A表名,B表名 where 表连接条件 and 数据查询条件;</p>
-<p><strong>示例：</strong>查询每一个员工所在的部门名称，要求最终显示员工姓<br>名和对应的部门名称。</p>
-<p>select d.dname,e.ename from emp e,dept d where e.deptno = d.deptno;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-5a7769aaefaad808.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>示例：</strong>查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称。</p>
+<p><code>select d.dname,e.ename from emp e,dept d where e.deptno = d.deptno;</code></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/2019-03-19-MySQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8-%E4%B8%AD/%E6%98%BE%E7%A4%BA%E5%91%98%E5%B7%A5%E5%A7%93%E5%90%8D%E5%92%8C%E5%AF%B9%E5%BA%94%E7%9A%84%E9%83%A8%E9%97%A8%E5%90%8D%E7%A7%B0.png?raw=true" alt="æ¾ç¤ºåå·¥å§ååå¯¹åºçé¨é¨åç§°.png"></p>
 <p><strong>缺点：</strong>表连接条件与查询条件放在一起，没有分离；</p>
 <h4 id="1-2-2-SQL99语法【只掌握SQL99】"><a href="#1-2-2-SQL99语法【只掌握SQL99】" class="headerlink" title="1.2.2 SQL99语法【只掌握SQL99】"></a>1.2.2 SQL99语法【只掌握SQL99】</h4><p><strong>语法结构：</strong><br>select xxxx from A表名 join B表名 on 表的连接条件;</p>
-<p><strong>示例：</strong>查询每一个员工所在的部门名称，要求最终显示员工姓<br>名和对应的部门名称。</p>
-<p>select d.dname,e.ename from emp e join dept d on e.deptno = d.deptno;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-db77749b7bf8c79b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>示例：</strong>查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称。</p>
+<p><code>select d.dname,e.ename from emp e join dept d on e.deptno = d.deptno;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\显示员工姓名和对应的部门名称2.png" alt="image"></p>
 <p><strong>优点：表连接独立，结构清晰，</strong>如果结果数据不满足要求，<strong>可再追加where条件进行过滤；</strong></p>
-<h3 id="1-3连接查询根据：连接方式分类"><a href="#1-3连接查询根据：连接方式分类" class="headerlink" title="1.3连接查询根据：连接方式分类"></a>1.3连接查询根据：连接方式分类</h3><h4 id="1-3-1-内连接"><a href="#1-3-1-内连接" class="headerlink" title="1.3.1 内连接"></a>1.3.1 内连接</h4><p><strong>定义：</strong>只连接匹配的行，即A表不B表相连接，能够匹配的记录查询出来。</p>
+<h3 id="1-3连接查询根据：连接方式分类"><a href="#1-3连接查询根据：连接方式分类" class="headerlink" title="1.3连接查询根据：连接方式分类"></a>1.3连接查询根据：连接方式分类</h3><h4 id="1-3-1-内连接"><a href="#1-3-1-内连接" class="headerlink" title="1.3.1 内连接"></a>1.3.1 内连接</h4><p><strong>定义：</strong>只连接匹配的行，即A表与B表相连接，能够匹配的记录查询出来。</p>
 <p><strong>（1）等值连接</strong></p>
 <p><strong>示例：</strong>查询员工的名称和员工所对应的部门名称</p>
-<p>select e.ename,d.dname from emp e join dept d on <strong>e.deptno = d.deptno;</strong><br>select e.ename,d.dname from emp e inner join dept d on <strong>e.deptno = d.deptno;</strong><br><strong>注：inner可忽略</strong></p>
+<p><code>select e.ename,d.dname from emp e join dept d on e.deptno = d.deptno;</code><br><code>select e.ename,d.dname from emp e inner join dept d on e.deptno = d.deptno;</code><br><strong>注：inner可忽略</strong></p>
 <p><strong>（2）非等值连接</strong></p>
 <p><strong>示例：查询员工的工资等级</strong></p>
-<p>select e.ename,e.sal,s.grade from emp e join salgrade s on <strong>e.sal between s.losal and s.hisal;</strong><br><strong>注：inner可忽略</strong></p>
+<p><code>select e.ename,e.sal,s.grade from emp e join salgrade s on e.sal between s.losal and s.hisal;</code><br><strong>注：inner可忽略</strong></p>
 <p><strong>（3）自连接</strong></p>
 <p><strong>示例：</strong>查询员工的名称和员工对应的领导名称</p>
-<p>select a.ename empname ,b.ename leadername from emp a join emp b on <strong>a.mgr = b.empno;</strong><br><strong>注：inner可忽略</strong></p>
+<p><code>select a.ename empname ,b.ename leadername from emp a join emp b on a.mgr = b.empno;</code><br><strong>注：inner可忽略</strong></p>
 <h4 id="1-3-2-外连接"><a href="#1-3-2-外连接" class="headerlink" title="1.3.2 外连接"></a>1.3.2 外连接</h4><p><strong>定义：</strong>A表和B表能够完全匹配的记录查询出来之外，将其中一张表的记录无条件的完全查询出来，对方表没有匹配的记录时，会自动模拟出null值与之匹配；<br><strong>注意：</strong>外连接的查询结果条数 &gt;= 内连接的查询结果条数</p>
 <p><strong>（1）左外连接（左连接）</strong></p>
 <p><strong>定义：</strong>包含左边表的全部行（不管右边的表中是否存在不它们匹配的行），以及右边表中全部匹配的行；</p>
@@ -605,148 +605,151 @@
 <p>定义：包含左、右两个表的全部行，不管另外一边的表中是否存在不它们匹配的行。</p>
 <h3 id="1-4七大案例详解"><a href="#1-4七大案例详解" class="headerlink" title="1.4七大案例详解"></a>1.4七大案例详解</h3><h4 id="1-4-1-查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（笛卡尔积）"><a href="#1-4-1-查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（笛卡尔积）" class="headerlink" title="1.4.1 查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（笛卡尔积）"></a>1.4.1 查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（笛卡尔积）</h4><p><strong>注意：</strong>多张表查询时，通常会对表起别名，若两张表中有相同名称的字段时，该相同名称字段不知道属亍哪张表中，这时需要通过对表起别名来限制该字段属于哪张表，并且提高SQL语句的效率，可读性也高。</p>
 <p><strong>思路分析：</strong><br><strong>（1） Step 1：</strong>先查询出员工姓名和部门编号；emp员工表</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-343078afa97fdb0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\先查询出员工姓名和部门编号.png" alt="image"></p>
 <p><strong>（2）Step 2：</strong>再查询出部门编号和部门名称；dept部门表</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-7a54ea054bec8537.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\再查询出部门编号和部门名称.png" alt="image"></p>
 <p><strong>联想：</strong>当多张表连接查询时，若没有任何条件限制，会发生什么？</p>
-<p>select e.ename,d.dname from emp e,dept d;<br><strong>预测查询结果：</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-dd3c46a7113bcd6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>select e.ename,d.dname from emp e,dept d;</code><br><strong>预测查询结果：</strong></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\预测查询结果1.png" alt="image"></p>
 <p><strong>验证结果：</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-b0c5680fd5d50ade.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\验证预测结果1.png" alt="image"></p>
 <p><strong>结论：</strong>为了避免笛卡尔积现象的发生，必须在进行表连接的时候添加限制条件；</p>
 <h4 id="1-4-2-查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（内连接：等值）"><a href="#1-4-2-查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（内连接：等值）" class="headerlink" title="1.4.2 查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（内连接：等值）"></a>1.4.2 查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称<strong>（内连接：等值）</strong></h4><p><strong>思路分析</strong><br><strong>（1）  Step 1：</strong>从<strong>emp e 员工信息表</strong>查询出员工姓名、部门编号；</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-bfa853df155a40b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\从员工信息表查询出员工姓名和部门编号.png" alt="image"></p>
 <p><strong>（2）Step 2：</strong>从<strong>dept d部门信息表</strong>查询出部门编号、部门名称；</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-b2fd2c8ecfa7d023.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\从部门信息表查询出部门编号和部门名称.png" alt="image"></p>
 <p><strong>注意：</strong>在连接查询时，即使我们使用的了限制条件，但是匹配次数没有减少，只显示有效数据；</p>
 <p><strong>（3）Step 3：</strong>内连接等值条件：<strong>e.deptno=d.deptno</strong></p>
-<p><strong>SQL92语法：</strong>内连接中的等值连接<strong>（不建议）</strong><br>select e.ename,d.dname from emp e,dept d where e.deptno = d.deptno;</p>
-<p><strong>SQL99语法：</strong><br>select e.ename,d.dname from emp e <strong>inner join</strong> dept d <strong>on</strong> e.deptno = d.deptno;<br>select e.ename,d.dname from emp e <strong>join</strong> dept d <strong>on</strong> e.deptno = d.deptno;<strong>//inner可省略</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-dd95d3706f738435.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>SQL92语法：</strong>内连接中的等值连接<strong>（不建议）</strong><br><code>select e.ename,d.dname from emp e,dept d where e.deptno = d.deptno;</code></p>
+<p><strong>SQL99语法：</strong><br><code>select e.ename,d.dname from emp e inner join dept d on e.deptno = d.deptno;</code><br><code>select e.ename,d.dname from emp e join dept d on e.deptno = d.deptno;</code><strong>//inner可省略</strong></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\等值查询.png" alt="image"></p>
 <h4 id="1-4-3-找出每一个员工对应的工资等级，要求显示员工姓名、工资、工资等级（内连接：非等值）"><a href="#1-4-3-找出每一个员工对应的工资等级，要求显示员工姓名、工资、工资等级（内连接：非等值）" class="headerlink" title="1.4.3 找出每一个员工对应的工资等级，要求显示员工姓名、工资、工资等级（内连接：非等值）"></a>1.4.3 找出每一个员工对应的工资等级，要求显示员工姓名、工资、工资等级（内连接：非等值）</h4><p><strong>思路分析</strong></p>
 <p><strong>（1）Step 1</strong>：从<strong>emp e员工信息表</strong>查询出员工的姓名、工资</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-86cbcae3c523065e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\从员工信息表查询出员工的姓名和工资.png" alt="image"></p>
 <p><strong>（2）Step 2：</strong>从<strong>salgrade s工资等级表</strong>查询出工资等级信息</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-ec4136e7a392c230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\从工资等级表查询出工资等级信息.png" alt="image"></p>
 <p><strong>（3）Step 3：</strong>内连接非等值条件：<strong>between s.losal and s.hisal;</strong></p>
-<p><strong>SQL92语法：（不建议）</strong><br>select e.ename,e.sal,s.grade from emp e , salgrade s where e.sal between s.losal and s.hisal;</p>
-<p><strong>SQL99语法：内连接中的非等值连接</strong><br>select e.ename,e.sal,s.grade from emp e inner join salgrade s on e.sal between s.losal and s.hisal;</p>
-<p>select e.ename,e.sal,s.grade from emp e join salgrade s on e.sal between s.losal and s.hisal;<br><strong>注：inner可以省略</strong></p>
+<p><strong>SQL92语法：（不建议）</strong><br><code>select e.ename,e.sal,s.grade from emp e , salgrade s where e.sal between s.losal and s.hisal;</code></p>
+<p><strong>SQL99语法：内连接中的非等值连接</strong><br><code>select e.ename,e.sal,s.grade from emp e inner join salgrade s on e.sal between s.losal and s.hisal;</code></p>
+<p><code>select e.ename,e.sal,s.grade from emp e join salgrade s on e.sal between s.losal and s.hisal;</code><br><strong>注：inner可以省略</strong></p>
 <h4 id="1-4-4-找出每一个员工的上级领导，要求显示员工姓名及对应的领导姓名（内连接：自连接）"><a href="#1-4-4-找出每一个员工的上级领导，要求显示员工姓名及对应的领导姓名（内连接：自连接）" class="headerlink" title="1.4.4 找出每一个员工的上级领导，要求显示员工姓名及对应的领导姓名（内连接：自连接）"></a>1.4.4 找出每一个员工的上级领导，要求显示员工姓名及对应的领导姓名（内连接：自连接）</h4><p><strong>思路分析：</strong></p>
 <p><strong>（1）Step 1</strong>：从<strong>emp a员工信息表</strong>查询出员工编号、员工名称、领导编号</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-78af4c95d70cea11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\从员工信息表查询出员工编号员工名称和领导编号.png" alt="image"></p>
 <p><strong>（2）Step 2</strong>：从<strong>emp b领导信息表</strong>查询出领导姓名、领导编号</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-1aa06086ed26b157.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\从领导信息表查询出领导姓名和领导编号.png" alt="image"></p>
 <p><strong>（3）Step 3：</strong>自连接条件为：<strong>领导编号=员工编号</strong></p>
 <p><strong>SQL92语法：（不建议）</strong></p>
-<p>select a.ename empname,b.ename leadername from emp a,emp bwhere a.mgr = b.empno;</p>
+<p><code>select a.ename empname,b.ename leadername from emp a,emp bwhere a.mgr = b.empno;</code></p>
 <p><strong>SQL99语法：内连接中的自连接</strong></p>
-<p>select a.ename empname ,b.ename leadername from emp a inner join emp b on a.mgr = b.empno;<br>select a.ename empname ,b.ename leadername from emp a join emp b on a.mgr = b.empno ;<br><strong>注：inner可以省略</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-0318ca763be1d0b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>select a.ename empname ,b.ename leadername from emp a inner join emp b on a.mgr = b.empno;</code><br><code>select a.ename empname ,b.ename leadername from emp a join emp b on a.mgr = b.empno ;</code><br><strong>注：inner可以省略</strong></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\内连接.png" alt="image"></p>
 <h4 id="1-4-5-找出每一个员工对应的部门名称，要求部门名称全部显示（左-右外连接）"><a href="#1-4-5-找出每一个员工对应的部门名称，要求部门名称全部显示（左-右外连接）" class="headerlink" title="1.4.5 找出每一个员工对应的部门名称，要求部门名称全部显示（左/右外连接）"></a>1.4.5 找出每一个员工对应的部门名称，要求部门名称全部显示（左/右外连接）</h4><p><strong>思路分析：</strong></p>
 <p><strong>（1）Step 1：</strong>先查询出每一个员工对应的部门名称</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-e07cfcf9a91ba377.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\先查询出每一个员工对应的部门名称.png" alt="image"></p>
 <p><strong>（2）Step 2：</strong>查询部门信息</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f44c5ed6912889ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询部门信息.png" alt="image"></p>
 <p><strong>（3）Step 3：</strong>右外连接条件：<strong>员工表的部门编号=部门表的部门编号</strong></p>
 <p><strong>SQL99语法：</strong>外连接中的右外连接【右连接】</p>
-<p>select e.ename,d.dname from emp e right outer join dept d on e.deptno = d.deptno;<br>select e.ename,d.dname from emp e right join dept d on e.deptno = d.deptno;<br><strong>//outer可省略</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-71cd62778601a533.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>select e.ename,d.dname from emp e right outer join dept d on e.deptno = d.deptno;</code><br><code>select e.ename,d.dname from emp e right join dept d on e.deptno = d.deptno;</code><strong>//outer可省略</strong></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\外连接中的右外连接.png" alt="image"></p>
 <p><strong>SQL99语法：</strong>外连接中的左外连接【左连接】</p>
-<p>select e.ename,d.dname from dept d left outer join emp e on e.deptno = d.deptno;<br>select e.ename,d.dname from dept d left join emp e on e.deptno = d.deptno;<br><strong>//outer可省略</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f1d63ca53aad015c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>select e.ename,d.dname from dept d left outer join emp e on e.deptno = d.deptno;</code><br><code>select e.ename,d.dname from dept d left join emp e on e.deptno = d.deptno;</code><strong>//outer可省略</strong></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\外连接中的左外连接.png" alt="image"></p>
 <p><strong>注意：</strong>任何一个右外连接都可写成左外连接，任何一个左外连接都可写成右外连接；</p>
 <h4 id="1-4-6-为什么-inner-和-outer-可以省略，加上去有什么好处？"><a href="#1-4-6-为什么-inner-和-outer-可以省略，加上去有什么好处？" class="headerlink" title="1.4.6 为什么 inner 和 outer 可以省略，加上去有什么好处？"></a>1.4.6 为什么 inner 和 outer 可以省略，加上去有什么好处？</h4><p><strong>可以省略，</strong>因为区分内连接与外连接不是依靠这两个关键字，而是看SQL语句中的left/right关键字；加上left、right关键字增强SQL语句的可读性。</p>
 <h4 id="1-4-7-找出每一个员工对应的领导名，要求显示所有员工（左外连接）"><a href="#1-4-7-找出每一个员工对应的领导名，要求显示所有员工（左外连接）" class="headerlink" title="1.4.7 找出每一个员工对应的领导名，要求显示所有员工（左外连接）"></a>1.4.7 找出每一个员工对应的领导名，要求显示所有员工（左外连接）</h4><p><strong>思路分析：</strong></p>
 <p><strong>（1）Step 1：</strong>显示每一个员工对应的领导名</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-976d7c1baba5e02a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\显示每一个员工对应的领导名.png" alt="image"></p>
 <p><strong>（2）Step 2：</strong>以上查询结果缺少一位员工King，通过左外连接查询全部员工。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-80251a1afa6c728e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>SQL99语法：</strong><br>select a.ename empname ,b.ename leadername from emp a left join emp b on a.mgr = b.empno;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-98623925d554aebb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\通过左外连接查询全部员工.png" alt="image"></p>
+<p><strong>SQL99语法：</strong><br><code>select a.ename empname ,b.ename leadername from emp a left join emp b on a.mgr = b.empno;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\通过左外连接查询全部员工2.png" alt="image"></p>
 <h4 id="1-4-8-找出每一个员工对应的部门名称，以及该员工对应的工资等级，要求显示员工姓名、部门名称、工资等级。"><a href="#1-4-8-找出每一个员工对应的部门名称，以及该员工对应的工资等级，要求显示员工姓名、部门名称、工资等级。" class="headerlink" title="1.4.8 找出每一个员工对应的部门名称，以及该员工对应的工资等级，要求显示员工姓名、部门名称、工资等级。"></a>1.4.8 找出每一个员工对应的部门名称，以及该员工对应的工资等级，要求显示员工姓名、部门名称、工资等级。</h4><p><strong>思路分析：</strong></p>
 <p><strong>（1）Step 1：</strong>查询出员工对应的部门编号和工资<strong>emp e表</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-cb65cbdcd93bd197.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询出员工对应的部门编号和工作.png" alt="image"></p>
 <p><strong>（2）Step 2：</strong>查询出部门信息<strong>dept d表</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-57ad496e59b7804a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查出部门信息.png" alt="image"></p>
 <p><strong>（3）Step 3：</strong>查询出工资等级信息<strong>salgrade s表</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-fd5a22e09b692049.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>（4）多表连接条件：员工表不部门表连接（e.deptno = d.deptno），再与工资等级表连接（e.sal between s.losal and s.hisal）</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-6b32a883186f1fee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查出工资等级信息.png" alt="image"></p>
+<p>（4）多表连接条件：员工表与部门表连接（e.deptno = d.deptno），再与工资等级表连接（e.sal between s.losal and s.hisal）</p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\员工表和部门表连接再与工资等级表连接.png" alt="image"></p>
 <p><strong>重点：多张表进行表连接的语法格式：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select</span><br><span class="line">	xxxx</span><br><span class="line">from</span><br><span class="line">	A表</span><br><span class="line">join</span><br><span class="line">	B表</span><br><span class="line">on</span><br><span class="line">	连接条件1</span><br><span class="line">join</span><br><span class="line">	C表</span><br><span class="line">on</span><br><span class="line">	连接条件2；</span><br></pre></td></tr></table></figure>
 <p><strong>原理：</strong>A表和B表通过连接条件1连接之后，A表再和C表通过连接条件2进行连接；</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">emp e表、dept d表、salgrade s表</span><br><span class="line">select</span><br><span class="line">	e.ename,d.dname,e.sal,s.grade</span><br><span class="line">from</span><br><span class="line">	emp e</span><br><span class="line">join</span><br><span class="line">	dept d</span><br><span class="line">on</span><br><span class="line">	e.deptno = d.deptno</span><br><span class="line">join</span><br><span class="line">	salgrade s</span><br><span class="line">on</span><br><span class="line">	e.sal between s.losal and s.hisal;</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-2087053e5b41a2a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\多表连接查询结果.png" alt="image"></p>
 <h2 id="2-子查询"><a href="#2-子查询" class="headerlink" title="2.子查询"></a>2.子查询</h2><p><strong>定义：</strong>select 语句嵌套 select 语句被称为子查询；<br><strong>注意：</strong>select子句可出现在select、from、where关键字后面，<strong>如下：</strong><br>select … (select)…【很少很少使用了解即可】<br>from  …(select)…<br>where …(select)…</p>
 <h3 id="2-1-案例"><a href="#2-1-案例" class="headerlink" title="2.1 案例"></a>2.1 案例</h3><h4 id="2-1-1-（where后）找出薪水比公司平均薪水高的员工，要求显示员工名和薪水"><a href="#2-1-1-（where后）找出薪水比公司平均薪水高的员工，要求显示员工名和薪水" class="headerlink" title="2.1.1 （where后）找出薪水比公司平均薪水高的员工，要求显示员工名和薪水"></a>2.1.1 （where后）找出薪水比公司平均薪水高的员工，要求显示员工名和薪水</h4><p><strong>注意：</strong>select ename,sal from emp where sal &gt; avg(sal);<br><strong>执行错误：</strong>因为分组函数不能直接使用在where关键字后面</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-37ba4a381dd9051d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\找出薪水比公司平均薪水高的员工错误示范.png" alt="image"></p>
 <p><strong>思路分析：</strong></p>
 <p><strong>（1）第一步：</strong>找出公司的平均薪水，平均薪水：2073.214286</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-2039717465a3dd03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\找出公司的平均薪水.png" alt="image"></p>
 <p><strong>（2）第二步：</strong>找出薪水比公司平均薪水：2073.214286高的员工</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f5d5dcadee14901b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>（3）第三步：</strong>将平均薪水2073.214286值替换为它的查询诧句即可；</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-eaa201c75183393e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\找出薪水比公司平均薪水高的员工.png" alt="image"></p>
+<p><strong>（3）第三步：</strong>将平均薪水2073.214286值替换为它的查询语句即可；</p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\将平均薪水替换为它的查询语句.png" alt="image"></p>
 <h4 id="2-1-2-（from后）找出每个部门的平均薪水，并且要求显示平均薪水的薪水等级"><a href="#2-1-2-（from后）找出每个部门的平均薪水，并且要求显示平均薪水的薪水等级" class="headerlink" title="2.1.2 （from后）找出每个部门的平均薪水，并且要求显示平均薪水的薪水等级"></a>2.1.2 （from后）找出每个部门的平均薪水，并且要求显示平均薪水的薪水等级</h4><p><strong>思路分析：</strong></p>
 <p><strong>（1）第一步：</strong>根据部门分组找出每个部门的平均薪水</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-d65683ce83ec92cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\根据部门分组找出每个部门的平均薪水.png" alt="image"></p>
 <p><strong>（2）第二步：</strong>查询出薪水等级信息</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f086d130ad8e28f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>（3）第三步：</strong>将第一步查询结果当作一张临时表 t，然后将t表不薪水等级表做进行表连接，条件t.avgsal between s.losal and s.hisal;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f411276ea8d8ab03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询出薪水等级信息.png" alt="image"></p>
+<p><strong>（3）第三步：</strong>将第一步查询结果当作一张临时表 t，然后将t表与薪水等级表做进行表连接，条件t.avgsal between s.losal and s.hisal;</p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\将第一步查询结果当作一张临时表，然后与薪水等级表进行表连接.png" alt="image"></p>
 <p><strong>小窍门：</strong>可将查询结果当做临时表</p>
-<h4 id="2-1-3-（select后使用了解）"><a href="#2-1-3-（select后使用了解）" class="headerlink" title="2.1.3 （select后使用了解）"></a>2.1.3 （select后使用了解）</h4><p>select e.ename,(select d.dname from dept d where e.deptno = d.deptno) as dname from emp e;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-c2a927987916e413.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h4 id="2-1-3-（select后使用了解）"><a href="#2-1-3-（select后使用了解）" class="headerlink" title="2.1.3 （select后使用了解）"></a>2.1.3 （select后使用了解）</h4><p><code>select e.ename,(select d.dname from dept d where e.deptno = d.deptno) as dname from emp e;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\select后的子查询.png" alt="image"></p>
 <h2 id="3-union合并集合"><a href="#3-union合并集合" class="headerlink" title="3.union合并集合"></a>3.union合并集合</h2><p><strong>定义：</strong>将查询的结果集合幵<br><strong>注意事项：</strong><br>合并结果集的时候，查询字段个数必须相同；</p>
-<h3 id="3-1-示例"><a href="#3-1-示例" class="headerlink" title="3.1 示例"></a>3.1 示例</h3><h4 id="3-1-1-查询出job为MANAGER和SALESMAN的员工"><a href="#3-1-1-查询出job为MANAGER和SALESMAN的员工" class="headerlink" title="3.1.1 查询出job为MANAGER和SALESMAN的员工"></a>3.1.1 查询出job为MANAGER和SALESMAN的员工</h4><p>select empno,ename,job from emp where job = ‘MANAGER’<br>union<br>select ename,job from emp where job = ‘SALESMAN’;<br>以上写法错误：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-45b04bbc0dd97a40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-48c69765144085bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>正确写法：</strong><br>select empno,ename,job from emp where job = ‘MANAGER’<br>union<br>select empno,ename,job from emp where job = ‘SALESMAN’;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-325df05f3847363a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="3-1-示例"><a href="#3-1-示例" class="headerlink" title="3.1 示例"></a>3.1 示例</h3><h4 id="3-1-1-查询出job为MANAGER和SALESMAN的员工"><a href="#3-1-1-查询出job为MANAGER和SALESMAN的员工" class="headerlink" title="3.1.1 查询出job为MANAGER和SALESMAN的员工"></a>3.1.1 查询出job为MANAGER和SALESMAN的员工</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select empno,ename,job from emp where job = ‘MANAGER’</span><br><span class="line">union</span><br><span class="line">select ename,job from emp where job = ‘SALESMAN’;</span><br></pre></td></tr></table></figure>
+<p>以上写法错误：</p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询出job为manager和salesman的员工错误示范.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询出job为manager和salesman的员工错误示范2.png" alt="image"></p>
+<p><strong>正确写法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select empno,ename,job from emp where job = ‘MANAGER’</span><br><span class="line">union</span><br><span class="line">select empno,ename,job from emp where job = ‘SALESMAN’;</span><br></pre></td></tr></table></figure>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询出job为manager和salesman的员工.png" alt="image"></p>
 <p><strong>注意：</strong>查询字段类型在MySQL中不必完全相同，但是Oracle中一定要类型也相同；</p>
 <p><strong>写法错误：</strong></p>
-<p>select e.empno,e.ename from emp e<br>union<br>select d.dname,d.loc from dept d;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-75d90e1a38bf24f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>正确写法：</strong><br>select e.empno,e.ename from emp e<br>union<br>select d.deptno,d.loc from dept d;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-78228dcf6d78b38c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select e.empno,e.ename from emp e</span><br><span class="line">union</span><br><span class="line">select d.dname,d.loc from dept d;</span><br></pre></td></tr></table></figure>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询字段类型在MySQL中不必完全相同1.png" alt="image"></p>
+<p><strong>正确写法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select e.empno,e.ename from emp e</span><br><span class="line">union</span><br><span class="line">select d.deptno,d.loc from dept d;</span><br></pre></td></tr></table></figure>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询字段类型在MySQL中不必完全相同2.png" alt="image"></p>
 <h4 id="3-1-2-查询包含-MANAGER-和-SALESMAN-的员工信息"><a href="#3-1-2-查询包含-MANAGER-和-SALESMAN-的员工信息" class="headerlink" title="3.1.2 查询包含 MANAGER 和 SALESMAN 的员工信息"></a>3.1.2 查询包含 MANAGER 和 SALESMAN 的员工信息</h4><p><strong>（1）第一种方式：</strong>in (‘MANAGER’,‘SALESMAN’)</p>
-<p>select <em> from emp where job in(‘MANAGER’,‘SALESMAN’);<br>select </em> from emp where job = ‘MANAGER’or job = ‘SALESMAN’; </p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-b1031f97d960db90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>select * from emp where job in(‘MANAGER’,‘SALESMAN’);</code><br><code>select * from emp where job = ‘MANAGER’or job = ‘SALESMAN’;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询包含manager和salesman的员工信息.png" alt="image"></p>
 <p><strong>（2）第二种试：</strong>使用 union关键字查询</p>
-<p>select <em> from emp where job = ‘MANAGER’<br>union<br>select </em> from emp where job = ‘SALESMAN’;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-e08b82058208c665.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h2 id="4-limit使用"><a href="#4-limit使用" class="headerlink" title="4.limit使用"></a>4.limit使用</h2><p><strong>作用：</strong>（<strong>只在MySQL中起作用</strong>）获取一表前几条戒中间某几行数据；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from emp where job = &apos;MANAGER&apos;</span><br><span class="line">union</span><br><span class="line">select * from emp where job = &apos;SALESMAN&apos;;</span><br></pre></td></tr></table></figure>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询包含manager和salesman的员工信息2.png" alt="image"></p>
+<h2 id="4-limit使用"><a href="#4-limit使用" class="headerlink" title="4.limit使用"></a>4.limit使用</h2><p><strong>作用：</strong>（<strong>只在MySQL中起作用</strong>）获取一表前几条或中间某几行数据；</p>
 <h3 id="4-1-用法：limit-起始下标m-长度n"><a href="#4-1-用法：limit-起始下标m-长度n" class="headerlink" title="4.1 用法：limit 起始下标m,长度n"></a><strong>4.1 用法：limit 起始下标m,长度n</strong></h3><p>m：记录开始的index，默认从 0 开始，表示第一条记录；<br>n ：指从第 m+1 条开始，取 n 条；</p>
 <h3 id="4-2-取前5个员工信息"><a href="#4-2-取前5个员工信息" class="headerlink" title="4.2 取前5个员工信息"></a><strong>4.2 取前5个员工信息</strong></h3><p><strong>思路分析</strong></p>
 <p><strong>（1）第一步：查询出全部员工的信息</strong>  </p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-3098b7887e970bbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询出全部员工的信息.png" alt="image"></p>
 <p><strong>（2）第二步：使用limit取出前5个员工的信息</strong>  </p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-75bdd180f3666311.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>以上SQL诧句中的“limit 5”中的“5”表示：从表中记录下标0开始，取5条记录，等同亍 select * from emp limit 0,5;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-3302e7dd861a8772.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h3 id="4-3-找出工资掋名在前5的员工"><a href="#4-3-找出工资掋名在前5的员工" class="headerlink" title="4.3 找出工资掋名在前5的员工"></a>4.3 找出工资掋名在前5的员工</h3><p><strong>思路分析：</strong></p>
-<p><strong>（1）第一步：</strong>按照工资降序掋列 order by desc  </p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-cc9eb4b8093fd305.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>（2）第二步：</strong>在以上基础上，取前5个员工<strong>limit出现在SQL诧句的最后位置</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-b3b74774219fb027.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\使用limit取出前5个员工的信息.png" alt="image"></p>
+<p>以上SQL语句中的“limit 5”中的“5”表示：从表中记录下标0开始，取5条记录，等同于 <code>select * from emp limit 0,5;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\使用limit取出前5个员工的信息2.png" alt="image"></p>
+<h3 id="4-3-找出工资排名在前5的员工"><a href="#4-3-找出工资排名在前5的员工" class="headerlink" title="4.3 找出工资排名在前5的员工"></a>4.3 找出工资排名在前5的员工</h3><p><strong>思路分析：</strong></p>
+<p><strong>（1）第一步：</strong>按照工资降序排列 order by desc  </p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\按照工资降序排列.png" alt="image"></p>
+<p><strong>（2）第二步：</strong>在以上基础上，取前5个员工<strong>limit出现在SQL语句的最后位置</strong></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\取出前5名员工.png" alt="image"></p>
 <h3 id="4-4-找出工资掋名在-3-9-的员工"><a href="#4-4-找出工资掋名在-3-9-的员工" class="headerlink" title="4.4 找出工资掋名在[ 3-9 ]的员工"></a>4.4 找出工资掋名在[ 3-9 ]的员工</h3><p><strong>思路分析：</strong></p>
 <p><strong>（1）第一步：</strong>按照工资降序排列 order by desc </p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f8c342e2fa854b80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>（2）第二步：</strong>使用limit取出掋名在3到9的员工  </p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-300f955bf6b065a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h3 id="4-5-MySQL中通用的分页SQL诧句"><a href="#4-5-MySQL中通用的分页SQL诧句" class="headerlink" title="4.5 MySQL中通用的分页SQL诧句"></a>4.5 MySQL中通用的分页SQL诧句</h3><p><strong>提示：每页显示3条记录（长度为3）</strong></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\按照工资降序排列2.png" alt="image"></p>
+<p><strong>（2）第二步：</strong>使用limit取出排名在3到9的员工  </p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\使用limit取出排名在3到9的员工.png" alt="image"></p>
+<h3 id="4-5-MySQL中通用的分页SQL语句"><a href="#4-5-MySQL中通用的分页SQL语句" class="headerlink" title="4.5 MySQL中通用的分页SQL语句"></a>4.5 MySQL中通用的分页SQL语句</h3><p><strong>提示：每页显示3条记录（长度为3）</strong></p>
 <p>第1页：0，3  包含页：1，2，3  limit 0,3<br>第2页：3，3  包含页：4，5，6  limit 3,3<br>第3页：6，3  包含页：7，8，9  limit 6,3<br>… …<br>每页显示pageSize条记录<br>第pageNo页：(pageNo – 1) * pageSize，pageSize</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select</span><br><span class="line">	ename</span><br><span class="line">from</span><br><span class="line">	emp</span><br><span class="line">order by</span><br><span class="line">	sal desc</span><br><span class="line">limit</span><br><span class="line">	(pageNo – 1) * pageSize , pageSize;</span><br></pre></td></tr></table></figure>
 <p>通用分页SQL【只适用于MySQL数据库管理系统】</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select</span><br><span class="line">	t.*</span><br><span class="line">from</span><br><span class="line">	t</span><br><span class="line">order by</span><br><span class="line">	t.xx desc/asc</span><br><span class="line">limit</span><br><span class="line">	(pageNo – 1) * pageSize , pageSize;</span><br></pre></td></tr></table></figure>
 <h2 id="5-表"><a href="#5-表" class="headerlink" title="5.表"></a>5.表</h2><h3 id="5-1-定义："><a href="#5-1-定义：" class="headerlink" title="5.1 定义："></a>5.1 定义：</h3><p><strong>表（table）：</strong>是数据库最基本的组成单元，数据库是用来存储数据的，数据库中有很多表，每一个表都是一个独立的单元，表也是一个结构化的文件，由行和列组成，行称为数据或记录，列称为字段，字段又包含：字段名称、字段类型、长度、约束。</p>
-<h3 id="5-2-创建表"><a href="#5-2-创建表" class="headerlink" title="5.2 创建表"></a>5.2 创建表</h3><h4 id="5-2-1-语法格式-create-table-表名称-字段名-类型-长度-约束-；"><a href="#5-2-1-语法格式-create-table-表名称-字段名-类型-长度-约束-；" class="headerlink" title="5.2.1 语法格式:create table 表名称(字段名 类型(长度) 约束)；"></a>5.2.1 语法格式:create table 表名称(字段名 类型(长度) 约束)；</h4><p><img src="https://upload-images.jianshu.io/upload_images/5418658-faa7706c8b92bc69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h4 id="5-2-2-MySQL常用数据类型"><a href="#5-2-2-MySQL常用数据类型" class="headerlink" title="5.2.2 MySQL常用数据类型"></a>5.2.2 MySQL常用数据类型</h4><p><img src="https://upload-images.jianshu.io/upload_images/5418658-ceeb0475d0b7e414.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h3 id="5-2-创建表"><a href="#5-2-创建表" class="headerlink" title="5.2 创建表"></a>5.2 创建表</h3><h4 id="5-2-1-语法格式-create-table-表名称-字段名-类型-长度-约束-；"><a href="#5-2-1-语法格式-create-table-表名称-字段名-类型-长度-约束-；" class="headerlink" title="5.2.1 语法格式:create table 表名称(字段名 类型(长度) 约束)；"></a>5.2.1 语法格式:create table 表名称(字段名 类型(长度) 约束)；</h4><p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建表语法.png" alt="image"></p>
+<h4 id="5-2-2-MySQL常用数据类型"><a href="#5-2-2-MySQL常用数据类型" class="headerlink" title="5.2.2 MySQL常用数据类型"></a>5.2.2 MySQL常用数据类型</h4><p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\MySQL常用数据类型.png" alt="image"></p>
 <p><strong>（1）VARCHAR：可变长度字符串</strong></p>
-<p>VARCH AR(3)表示存储的数据长度丌能超过3个字符长度</p>
+<p>VARCHAR(3)表示存储的数据长度不能超过3个字符长度</p>
 <p><strong>（2）CHAR：定长字符串</strong></p>
-<p>CHAR(3) 表示存储的数据长度丌能超过3个字符长度</p>
+<p>CHAR(3) 表示存储的数据长度不能超过3个字符长度</p>
 <p><strong>（3）INT：整数型</strong></p>
 <p>INT(3)表示最大可以存储999</p>
 <p><strong>（4）BIGINT：长整型</strong></p>
@@ -773,10 +776,10 @@
 <h4 id="5-2-3-创建表格-lt-t-student-学生信息表-gt"><a href="#5-2-3-创建表格-lt-t-student-学生信息表-gt" class="headerlink" title="5.2.3 创建表格&lt;t_student 学生信息表&gt;"></a>5.2.3 创建表格&lt;t_student 学生信息表&gt;</h4><p><strong>学生信息表字段包括：</strong> </p>
 <p>学号：no INT(10)<br>姓名：name varchar(32)<br>性别：sex char(1)<br>出生日期：birth date<br>邮箱：email varchar(128)</p>
 <p><strong>建表语句，如下图：</strong>  </p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-7a11a121c968dfcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建学生信息表.png" alt="image"></p>
 <p><strong>注意：</strong></p>
-<p>表格名称最好以 t_ 戒 tbl_ 开始，增强可读性<br>VARCHAR长度最好是2的倍数，方便存储中文</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-ea220b4c139ac583.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p>表格名称最好以 t_ 或 tbl_ 开始，增强可读性<br>VARCHAR长度最好是2的倍数，方便存储中文</p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建学生信息表2.png" alt="image"></p>
 <p><strong>5.2.4 删除表格：</strong></p>
 <ul>
 <li>drop table t_student;（如果数据库中没有该表格，则会报错）；</li>
@@ -786,30 +789,30 @@
 <p><strong>插入数据 insert 语法</strong></p>
 <p>Insert into 表名(字段名1，字段名2，…) values(值1, 值1,…);</p>
 <p><strong>注意：</strong>字段和数值必须一 一对应，字段不数据个数必须相同，数据类型必须一致；<br><strong>第一种方式：</strong>向 t_student 表格中所有字段插入数据</p>
-<p>INSERT  INTO  t_student(no,name,sex,birth,email) VALUES(1,’zhangsan’,’m’,’1970-01-01’,<a href="mailto:&#39;zhangsan@powernode.com" target="_blank" rel="noopener">&#39;zhangsan@powernode.com</a>‘);<br>INSERT INTO t_student(no,name,sex,birth,email) VALUES(2,’lisi’,’f’,’1978-10-10’,<a href="mailto:&#39;lisi@powernode.com" target="_blank" rel="noopener">&#39;lisi@powernode.com</a>‘);</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-42a1d7ad6d5b2164.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>第二种方式：</strong>向 t_student 表格中部分字段插入数据<br>insert into t_student(name,email) values(‘wangwu’,<a href="mailto:&#39;wangwu@163.com" target="_blank" rel="noopener">&#39;wangwu@163.com</a>‘);</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-d270723c2564d950.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>注意：</strong>默认情况下，当表创建乊后，没有指定约束也没指定默认值，系统默认值就是NULL ，默认值NULL表示：若插入的时候没有指定仸何数据，默认插入 NULL 值。<br>目前wangwu的 no、sex、birth 值为 null ，我们可以往里插入值吗？</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-e7d0b539636cdc19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>以上执行insert 诧句叧能导致底层数据表中新增一条记录；<br>若希望NULL值变为其它值，我们必须使用UPDATE更新诧句；<br><strong>第三种方式：</strong>向 t_student 表格中所有字段插入数据<br>INSERT INTO t_student VALUES(4,’zhaoliu’,’m’,’1990-01-18’,<a href="mailto:&#39;zhaoliu@126.com" target="_blank" rel="noopener">&#39;zhaoliu@126.com</a>‘);</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-caf666c562dbb93b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-6989d35749797467.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>INSERT  INTO  t_student(no,name,sex,birth,email) VALUES(1,&#39;zhangsan&#39;,&#39;m&#39;,&#39;1970-01-01&#39;,&#39;zhangsan@powernode.com&#39;);</code><br><code>INSERT INTO t_student(no,name,sex,birth,email) VALUES(2,&#39;lisi&#39;,&#39;f&#39;,&#39;1978-10-10&#39;,&#39;lisi@powernode.com&#39;);</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向学生表中所有字段插入数据.png" alt="image"></p>
+<p><strong>第二种方式：</strong>向 t_student 表格中部分字段插入数据<br><code>insert into t_student(name,email) values(&#39;wangwu&#39;,&#39;wangwu@163.com&#39;);</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向学生表中部分字段插入数据.png" alt="image"></p>
+<p><strong>注意：</strong>默认情况下，当表创建之后，没有指定约束也没指定默认值，系统默认值就是NULL ，默认值NULL表示：若插入的时候没有指定任何数据，默认插入 NULL 值。<br>目前wangwu的 no、sex、birth 值为 null ，我们可以往里插入值吗？</p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\不可以向为null的字段插入值.png" alt="image"></p>
+<p>以上执行insert 语句叧能导致底层数据表中新增一条记录；<br>若希望NULL值变为其它值，我们必须使用UPDATE更新语句；<br><strong>第三种方式：</strong>向 t_student 表格中所有字段插入数据<br><code>INSERT INTO t_student VALUES(4,&#39;zhaoliu&#39;,&#39;m&#39;,&#39;1990-01-18&#39;,&#39;zhaoliu@126.com&#39;);</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向学生表中所有字段插入数据2.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\不建议将前面的字段省略.png" alt="image"></p>
 <p><strong>结论：不</strong>建议将前面的字段省略，若省略就表示要将表中所有字段必须赋值，并且程序不健壮，若修改表结构，将可能导致INSERT语句执行失败；</p>
 <p><strong>插入中文试试？</strong></p>
 <p>insert into t_student(no,name) values(5,’李丽’);</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-2e8cc5e7cb19cd8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>查看建表语句：</strong>show create table t_student;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-5db06e39b233629e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\插入中文.png" alt="image"></p>
+<p><strong>查看建表语句：</strong><code>show create table t_student;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查看建表语句.png" alt="image"></p>
 <p><strong>错误原因：</strong>DOS窗口字符编码为GBK，数据库字符编码为UTF-8，可以使用MySQL-Front工具插入数据，该MySQL客户端开发软件在实际工作中使用较多；</p>
-<p><strong>查看变量：</strong>show variables like ‘%char%’;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-450bec7cf4bec456.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>查看变量：</strong><code>show variables like &#39;%char%&#39;;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查看变量.png" alt="image"></p>
 <p>设置结果编码集（叧对当前窗口有效）</p>
-<p>set character_set_results = ‘GBK’;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-69ed48e51f012e71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h4 id="5-2-6-创建表格时给字段设置默认值-default-默认值"><a href="#5-2-6-创建表格时给字段设置默认值-default-默认值" class="headerlink" title="5.2.6 创建表格时给字段设置默认值:default 默认值"></a>5.2.6 创建表格时给字段设置默认值:default 默认值</h4><p><img src="https://upload-images.jianshu.io/upload_images/5418658-db4ed842f2e4f421.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-6f7546d60113ef7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-c3e00fd306d15674.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>set character_set_results = &#39;GBK&#39;;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\设置结果编码集之后.png" alt="image"></p>
+<h4 id="5-2-6-创建表格时给字段设置默认值-default-默认值"><a href="#5-2-6-创建表格时给字段设置默认值-default-默认值" class="headerlink" title="5.2.6 创建表格时给字段设置默认值:default 默认值"></a>5.2.6 创建表格时给字段设置默认值:default 默认值</h4><p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建表时给字段设置默认值.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建表时给字段设置默认值2.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建表时给字段设置默认值3.png" alt="image"></p>
 <p><strong>联想知识点：</strong></p>
 <ul>
 <li>该文件是一个普通的文本文件，以.sql后缀结尾的文件我们称为SQL脚本；</li>
@@ -818,62 +821,62 @@
 <li>如果脚本过大，我们可以使用Sublime Text这个软件；</li>
 </ul>
 <p><strong>额外小知识点：</strong>获取数据库系统当前时间 使用 now() 函数</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-898875232ffbb648.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\获取数据库系统当前时间.png" alt="image"></p>
 <p><strong>创建机构表：</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-813cccded4d3566a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建机构表.png" alt="image"></p>
 <p>获取系统时间另外方式，通过java的Date对象也可获取；</p>
 <h4 id="5-2-7-表的复制"><a href="#5-2-7-表的复制" class="headerlink" title="5.2.7 表的复制"></a>5.2.7 表的复制</h4><p><strong>定义：</strong>将查询结果当作一张表创建  </p>
 <p><strong>语法结构：</strong>CREATE TABLE 表名 as select查询语句； </p>
 <p><strong>（1）完全复制emp表到emp1：</strong></p>
-<p>create table emp1 as select * from emp;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-3566c6f7a6218989.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>create table emp1 as select * from emp;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\完全复制emp表到emp1.png" alt="image"></p>
 <p><strong>（2）选择性复制emp表到emp2:</strong></p>
-<p>create table emp2 as select ename,sal from emp;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-a4cb67d255f7d9ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h4 id="5-2-8-将查询结果插入到某张表中"><a href="#5-2-8-将查询结果插入到某张表中" class="headerlink" title="5.2.8 将查询结果插入到某张表中"></a>5.2.8 将查询结果插入到某张表中</h4><p><strong>语法结构:</strong> INSERT INTO 表名 select查询诧句；</p>
+<p><code>create table emp2 as select ename,sal from emp;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\选择性复制emp表到emp2.png" alt="image"></p>
+<h4 id="5-2-8-将查询结果插入到某张表中"><a href="#5-2-8-将查询结果插入到某张表中" class="headerlink" title="5.2.8 将查询结果插入到某张表中"></a>5.2.8 将查询结果插入到某张表中</h4><p><strong>语法结构:</strong> INSERT INTO 表名 select查询语句；</p>
 <p><strong>（1）从emp2表中查询出员工工资为3000的，同时将查询结果插入到emp2表中</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-ed94b2cefe3a2ca8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\从emp2表中查询出员工工资为3000的，同时将查询结果插入到emp2表中.png" alt="image"></p>
 <p><strong>（2）复制emp表为emp_bak，再将emp表中数据插入到emp_bak中</strong></p>
-<p>create table emp_bak as select <em> from emp;<br>insert into emp_bak select </em> from emp2 where sal = 3000;</p>
+<p><code>create table emp_bak as select * from emp;</code><br><code>insert into emp_bak select * from emp2 where sal = 3000;</code></p>
 <h3 id="5-3-增-删-改-表结构"><a href="#5-3-增-删-改-表结构" class="headerlink" title="5.3 增 / 删 / 改 表结构"></a>5.3 增 / 删 / 改 表结构</h3><h4 id="5-3-1-语法结构："><a href="#5-3-1-语法结构：" class="headerlink" title="5.3.1 语法结构："></a>5.3.1 语法结构：</h4><p><strong>新增：</strong>ALTER TABLE 表名 ADD 字段名 字段类型（长度）；<br><strong>修改：</strong>ALTER TABLE 表名 MODIFY 字段名 字段类型（长度）；<br><strong>删除：</strong>ALTER TABLE 表名 DROP 字段名;</p>
 <h4 id="5-3-2-创建t-student表：no-int-10-、name-varchar-32"><a href="#5-3-2-创建t-student表：no-int-10-、name-varchar-32" class="headerlink" title="5.3.2 创建t_student表：no int(10)、name varchar(32)"></a>5.3.2 创建t_student表：no int(10)、name varchar(32)</h4><p><strong>编号：</strong>no int(10)<br><strong>姓名：</strong>name varchar(32)</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-278fc73dc00696dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h4 id="5-3-3-【增加】给-t-student-表添加一个电话字段"><a href="#5-3-3-【增加】给-t-student-表添加一个电话字段" class="headerlink" title="5.3.3 【增加】给 t_student 表添加一个电话字段"></a>5.3.3 【增加】给 t_student 表添加一个电话字段</h4><p>alter table t_student add tel varchar(10);</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-4e1e967006c61037.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h4 id="5-3-4-【修改】将字段-tel-长度扩展到20个长度"><a href="#5-3-4-【修改】将字段-tel-长度扩展到20个长度" class="headerlink" title="5.3.4 【修改】将字段 tel 长度扩展到20个长度"></a>5.3.4 【修改】将字段 tel 长度扩展到20个长度</h4><p>alter table t_student modify tel varchar(20);</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-a7adc5e9e4db6ddf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<h4 id="5-3-5-【删除】将-t-student-表中的-tel-字段删除"><a href="#5-3-5-【删除】将-t-student-表中的-tel-字段删除" class="headerlink" title="5.3.5 【删除】将 t_student 表中的 tel 字段删除"></a>5.3.5 【删除】将 t_student 表中的 tel 字段删除</h4><p>alter table t_student drop tel;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-76167e2ed22c58cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建学生信息表3.png" alt="image"></p>
+<h4 id="5-3-3-【增加】给-t-student-表添加一个电话字段"><a href="#5-3-3-【增加】给-t-student-表添加一个电话字段" class="headerlink" title="5.3.3 【增加】给 t_student 表添加一个电话字段"></a>5.3.3 【增加】给 t_student 表添加一个电话字段</h4><p><code>alter table t_student add tel varchar(10);</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\给学生表添加一个电话字段.png" alt="image"></p>
+<h4 id="5-3-4-【修改】将字段-tel-长度扩展到20个长度"><a href="#5-3-4-【修改】将字段-tel-长度扩展到20个长度" class="headerlink" title="5.3.4 【修改】将字段 tel 长度扩展到20个长度"></a>5.3.4 【修改】将字段 tel 长度扩展到20个长度</h4><p><code>alter table t_student modify tel varchar(20);</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\将字段tel长度扩展到20个长度.png" alt="image"></p>
+<h4 id="5-3-5-【删除】将-t-student-表中的-tel-字段删除"><a href="#5-3-5-【删除】将-t-student-表中的-tel-字段删除" class="headerlink" title="5.3.5 【删除】将 t_student 表中的 tel 字段删除"></a>5.3.5 【删除】将 t_student 表中的 tel 字段删除</h4><p><code>alter table t_student drop tel;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\将学生表中的tel字段删除.png" alt="image"></p>
 <h3 id="5-4-添加-修改-删除-表数据"><a href="#5-4-添加-修改-删除-表数据" class="headerlink" title="5.4 添加 / 修改 / 删除 表数据"></a>5.4 添加 / 修改 / 删除 表数据</h3><h4 id="5-4-1-DML数据操作诧句：insert-、update-、delete；"><a href="#5-4-1-DML数据操作诧句：insert-、update-、delete；" class="headerlink" title="5.4.1 DML数据操作诧句：insert 、update 、delete；"></a>5.4.1 DML数据操作诧句：insert 、update 、delete；</h4><h4 id="5-4-2-insert-添加数据"><a href="#5-4-2-insert-添加数据" class="headerlink" title="5.4.2 insert 添加数据"></a>5.4.2 insert 添加数据</h4><p><strong>语法格式：</strong>insert into 表名(字段名1，字段名2,…) values(值1,值2,…);</p>
 <p>创建表 s_student</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-b641b50988895284.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建学生信息表4.png" alt="image"></p>
 <p><strong>省略字段插入</strong>  </p>
-<p>insert into t_student values(4,’zhaoliu’,’m’,’1990-01-18’,<a href="mailto:&#39;zhaoliu@126.com" target="_blank" rel="noopener">&#39;zhaoliu@126.com</a>‘);</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-8729fe759e06ee64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>insert into t_student values(4,&#39;zhaoliu&#39;,&#39;m&#39;,&#39;1990-01-18&#39;,&#39;zhaoliu@126.com&#39;);</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\省略字段插入.png" alt="image"></p>
 <p><strong>注意：</strong>不建议使用此种方式，因为当数据库表中的字段位置发生改变的时候会影响到insert语句</p>
 <h4 id="5-4-3-update-修改数据"><a href="#5-4-3-update-修改数据" class="headerlink" title="5.4.3 update 修改数据"></a>5.4.3 update 修改数据</h4><p><strong>语法格式：</strong>UPDATE 表名 SET 字段名 = 字段值，字段名 = 字段值 WHERE 条件；<br><strong>注意：</strong>update如果没有条件限制，将把整张表的数据全部更新；</p>
 <p><strong>示例一：向 t_student 表中插入数据</strong>  </p>
 <p><strong>准备工作：</strong><br>1、  向t_student表添加 email varchar(128)<br>2、  向t_student表插入测试数据</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-368890d1e5f55e2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向学生表中插入数据.png" alt="image"></p>
 <p>（1）将编号no为3的记录name改为zhangsan,email改为<a href="mailto:zhangsan@126.com" target="_blank" rel="noopener">zhangsan@126.com</a>；</p>
-<p>update t_student set name = ‘zhangsan’,email = <a href="mailto:&#39;zhangsan@126.com" target="_blank" rel="noopener">&#39;zhangsan@126.com</a>‘ where no = 3;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-c19e840d9a2eab2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>update t_student set name = &#39;zhangsan&#39;,email = &#39;zhangsan@126.com&#39; where no = 3;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\将编号no为3的记录name改为张三邮箱改.png" alt="image"></p>
 <p>（2）将所有名字 name 改为 lisi</p>
-<p>update t_student set name = ‘lisi’;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f23a107528cc2f71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>（3）将 emp_bak 表中的 name 包含“o”字母的改为 wangwu ;<br>update emp_bak set name=’wangwu’ where email like ‘%O%’;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f6422a2ef6c773ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>（4）将 emp_bak 表中工作岗位为 MANAGER 和 SALESMAN 员工的工资上调10%；<br>update emp_bak set sal=sal*1.1 where job in (‘MANAGER’,’SALESMAN’);</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-398ec5d5bda697bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><code>update t_student set name = &#39;lisi&#39;;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\将所有名字改为李四.png" alt="image"></p>
+<p>（3）将 emp_bak 表中的 name 包含“o”字母的改为 wangwu ;<br><code>update emp_bak set name=&#39;wangwu&#39; where email like &#39;%O%&#39;;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\将名字中包含o的改为王五.png" alt="image"></p>
+<p>（4）将 emp_bak 表中工作岗位为 MANAGER 和 SALESMAN 员工的工资上调10%；<br><code>update emp_bak set sal=sal*1.1 where job in (&#39;MANAGER&#39;,&#39;SALESMAN&#39;);</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\将表中工作岗位为manager和salesman员工的工资上调10.png" alt="image"></p>
 <h4 id="5-4-4-delete-删除数据"><a href="#5-4-4-delete-删除数据" class="headerlink" title="5.4.4 delete 删除数据"></a>5.4.4 delete 删除数据</h4><p><strong>语法格式：</strong> DELETE FROM 表名 WHERE 条件限制；<br><strong>注意：</strong>若没有条件限制，会将表中所有记录全部删除；</p>
-<p><strong>示例一：</strong>将 t_student 表中 no 为 3的学生删除<br>delete from t_student where no = 3;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-b167e5dd3797415b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>示例二：</strong>将 t_student 表中的数据全部删除<br>delete from t_student;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-b10b705086d4f536.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><strong>示例一：</strong>将 t_student 表中 no 为 3的学生删除<br><code>delete from t_student where no = 3;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\删除学号为3的学生.png" alt="image"></p>
+<p><strong>示例二：</strong>将 t_student 表中的数据全部删除<br><code>delete from t_student;</code></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\将学生表中的数据全部删除.png" alt="image"></p>
 <p><strong>将 emp_bak 表中部门编号为20的 MANAGER 删除掉；</strong><br>delete from emp_bak where deptno = 20 and job = ‘MANAGER’;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-af74d31eab93c427.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\将表中部门编号为20的manager删除.png" alt="image"></p>
 <h3 id="5-5-创建表加入约束"><a href="#5-5-创建表加入约束" class="headerlink" title="5.5 创建表加入约束"></a>5.5 创建表加入约束</h3><p>英文单词：constraint<br><strong>什么是约束？</strong><br>实际上是对表中数据的限制条件；<br><strong>设计表时加入约束的目的？</strong><br>保证表中数据的完整和有效；</p>
-<h4 id="5-5-1-非空约束（not-null）"><a href="#5-5-1-非空约束（not-null）" class="headerlink" title="5.5.1 非空约束（not null）"></a>5.5.1 非空约束（not null）</h4><p><strong>作用</strong>：not null约束的字段丌能为 NULL 值，必须赋具体数据；<br><strong>示例：</strong>需求如下所示：创建t_user表，name字段丌能为空<br><strong>表名：</strong>t_user</p>
+<h4 id="5-5-1-非空约束（not-null）"><a href="#5-5-1-非空约束（not-null）" class="headerlink" title="5.5.1 非空约束（not null）"></a>5.5.1 非空约束（not null）</h4><p><strong>作用</strong>：not null约束的字段不能为 NULL 值，必须赋具体数据；<br><strong>示例：</strong>需求如下所示：创建t_user表，name字段不能为空<br><strong>表名：</strong>t_user</p>
 <table>
 <thead>
 <tr>
@@ -899,47 +902,47 @@
 </tr>
 </tbody>
 </table>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-f570620848ec6823.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-40c80a4ab5b8e700.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建用户表.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建用户表2.png" alt="image"></p>
 <p><strong>向 t_user 表中插入数据</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-a726814ac020d7e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向用户表中插入数据.png" alt="image"></p>
 <h4 id="5-5-2-唯一性约束（unique）"><a href="#5-5-2-唯一性约束（unique）" class="headerlink" title="5.5.2 唯一性约束（unique）"></a>5.5.2 唯一性约束（unique）</h4><p><strong>作用：</strong>unique约束的字段具有唯一性，不可重复</p>
 <p><strong>示例：</strong>创建t_user表，name丌能为空，email保证唯一<br><strong>方法一：</strong>【列级约束】保证邮箱email地址唯一<br>email varchar(128) unique</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-8d97c45acab25d3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\保证邮箱地址唯一.png" alt="保证邮箱地址唯一"></p>
 <p><strong>向 t_user 表中插入数据</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-771fccdbcb0f5f77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-0288abd144cbad51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向用户表中插入数据2.png" alt="向用户表中插入数据2"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向用户表中插入数据3.png" alt="1562161037642"></p>
 <p><strong>注意：</strong>”unique约束”约束的字段不能重复，但是可以为NULL，NULL不是一个值，也不能用等号比较；</p>
 <p><strong>方法二：</strong>【表级约束】保证邮箱email地址唯一<br>unique(email)</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-fb0ddf045ef87a1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\保证邮箱地址唯一2.png" alt="image"></p>
 <p>以上写法与例1效果相同</p>
 <p><strong>使用表级约束给多个字段联合添加约束：</strong></p>
 <p>【以下程序表示：name和email两个字段联合唯一】</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-0be90eb3a22962fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-351c33de340f6154.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\name和email两个字段联合唯一.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\name和email两个字段联合唯一2.png" alt="image"></p>
 <p><strong>向 t_user 表中插入数据</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-3bfab10ad2739dcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-75b1f8ccfc91ab84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向用户表中插入数据4.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向用户表中插入数据5.png" alt="image"></p>
 <p><strong>以上语句执行失败，原因：表级联合约束限制；</strong></p>
 <p>表级约束还可以给约束起名字，<strong>原因：</strong>以后可通过名字操作这个约束</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-75b1da805215e022.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\表级联合约束限制.png" alt="image"></p>
 <p>查询唯一性约束的名字</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-a2ebe6f179573484.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询唯一性约束的名字.png" alt="image"></p>
 <p>查看 information_schema 库的表</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-e38d3c392f022c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>table_constraint 该表格与门存储约束信息</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-57ef4519d2890948.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查看information_schema库的表.png" alt="image"></p>
+<p>table_constraint 该表格专门存储约束信息</p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\table_constraint专门存储约束信息.png" alt="image"></p>
 <p>查询出表 t_user 中的唯一约束名称</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-61bbd42bc753d975.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查询出用户表中唯一约束名称.png" alt="image"></p>
 <p><strong>组合使用 not null 和 unique</strong>  </p>
 <p><strong>作用：</strong>被 not null 和 unique 约束的字段，该字段即不能为null 也不能重复；<br><strong>示例：</strong> 需求，创建t_user表，用户编号为id，用户名称name即不能为空也不能重复</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-ae83802ccc5b72bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\用户名既不能为空也不能重复.png" alt="image"></p>
 <p>向 t_user 表中插入数据</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-8ba29eaf48e54e55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向用户表中插入数据6.png" alt="image"></p>
 <p>正确写法：insert into t_user(id,name) values(3,’jack’);</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-db2ce66c78d98d36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>错诨写法：insert into t_user(id) values(3);</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-c8877e4529b01bea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向用户表中插入数据7.png" alt="image"></p>
+<p>错误写法：insert into t_user(id) values(3);</p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\向用户表中插入数据8.png" alt="image"></p>
 <p><strong>错误原因：</strong>name 字段约束条件：即不为空也不能重复</p>
 <h4 id="5-5-3-主键约束PK（primary-key）"><a href="#5-5-3-主键约束PK（primary-key）" class="headerlink" title="5.5.3 主键约束PK（primary key）"></a>5.5.3 主键约束PK（primary key）</h4><p>主键约束 <strong>primary key</strong> 简称 PK</p>
 <p><strong>实例讲解主键：中国公民身份信息</strong>  </p>
@@ -982,35 +985,35 @@
 <p>创建单一主键约束【列/表级】</p>
 <p>【列级】单一主键约束：id int(10) primary key</p>
 <p>创建t_user表：包含：id int(10) 主键、name varchar(32)</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-dc6d20796347f106.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-431297c8a8a03e13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建用户表加主键.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查看用户表结构.png" alt="image"></p>
 <p>【表级】单一主键约束:</p>
 <p>表级单一主键命名：constraint t_uer_id_pk primary key(id)</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-e0a8e0f25650e143.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\单一主键约束.png" alt="image"></p>
 <p>以上方式实际工作中最常用；</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-a027eb414098eb39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-86e48833566479b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\已命名的表级主键.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查看用户表结构2.png" alt="查看用户表结构2"></p>
 <p><strong>【复合主键】</strong>是给多个字段联合添加一个主键约束；</p>
 <p><strong>需求：</strong>创建t_user表包含id,name,email，id和name是复合主键<br>primary key(id,name)</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-22680342dbcd14ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\给多个字段添加一个主键约束.png" alt="1562161845129"></p>
 <p>复合主键命名：</p>
 <p>constraint t_user_id_name_pk primary key(id,name)</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-d8c1ae6996cfd6c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-1280618b3f63e53d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\复合主键命名.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\查看用户表结构3.png" alt="image"></p>
 <p><strong>插入数据测试结果</strong></p>
 <p>创建 t_uer 表，测试联合主键功能</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-ef0638603ed492a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\测试联合主键功能.png" alt="image"></p>
 <p>表中主键个数（<strong>只能有一个</strong>）  </p>
 <p>无论是单一主键还是复合主键，一张表中主键约束只能有一个；</p>
 <p>主键根据性质分类：自然主键、业务主键  </p>
-<p><strong>自然主键：</strong>主键值若是一个自然数，幵丏这个自然数不业务没有仸何关系，这种主键称为自然主键；<br> <strong>业务主键：</strong>主键值若和当前表中的业务紧密相关，那么这种主键值被业务主键；如果业务发生改变时，业务主键往往会受到影响，所以业务主键使用较少，大多情况使用自然主键。 【如：身仹证号位数扩展】</p>
-<p><strong>MySQL中自劢生成主键值（MySQL特有）</strong> </p>
+<p><strong>自然主键：</strong>主键值若是一个自然数，并且这个自然数与业务没有任何关系，这种主键称为自然主键；<br> <strong>业务主键：</strong>主键值若和当前表中的业务紧密相关，那么这种主键值被业务主键；如果业务发生改变时，业务主键往往会受到影响，所以业务主键使用较少，大多情况使用自然主键。 【如：身份证号位数扩展】</p>
+<p><strong>MySQL中自动生成主键值（MySQL特有）</strong> </p>
 <p><strong>定义：</strong>MySQL数据库管理系统中提供了一个自增数字auto_increment，与门用来自动生成主键值，主键值丌需要用户去维护，也丌需要用户生成，MySQL会自劢生成。自增数字默认从1开始，以1递增：1、2、3、4、…</p>
 <p><strong>示例：</strong> 递增关键字：auto_increment</p>
 <p>创建 t_user表：id,name，id为自增主键</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-bbfcec4926c63808.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-7d72d49968adbd59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-b57ebe1cd2b3cd2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\创建用户表自增主键.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\测试自增主键1.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\测试自增主键2.png" alt="image"></p>
 <h4 id="5-5-4-外键约束FK（foreign-key）"><a href="#5-5-4-外键约束FK（foreign-key）" class="headerlink" title="5.5.4  外键约束FK（foreign key）"></a>5.5.4  外键约束FK（foreign key）</h4><p>外键约束 foreign key 简称：FK  </p>
 <p>外键涉及到的术语：外键约束、外键字段、外键值  </p>
 <p>外键约束、外键字段、外键值三者之间的关系？  </p>
@@ -1222,52 +1225,52 @@
 <li>有了外键引用乊后，表分为父表和子表，以上父表：班级表 t_class； 子表是：学生表 t_student；创建表时先创建父表，再删除子表；插入数据时，先插入父表数据,再插入子表数据；</li>
 </ul>
 <p>示例一的完整实现</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-4b9b8a979151f3e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\外键测试.png" alt="image"></p>
 <p><strong>测试：</strong>在t_student表中插入一个班级编号为400的</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/5418658-c45245c7caf46f6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-c4c8aeb13e24caa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><strong>执行失败原因：</strong>引用外键值在外键表 t_class 中 cno数据中丌存在；</p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\外键测试2.png" alt="image"></p>
+<p><strong>执行失败原因：</strong>引用外键值在外键表 t_class 中 cno数据中不存在；</p>
 <p><strong>示例二：</strong>找出每个学生的班级名称  </p>
 <p>找出每个学生的班级名称</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-d7586f1aa23096b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-647d1142e7cb60cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\找出每个学生的班级名称1.png" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\找出每个学生的班级名称2.png" alt="image"></p>
 <p><strong>重点：</strong>典型的一对多设计是，<strong>在多的一方加外键。</strong></p>
-<p><strong>在MySQL中没有提供修改外键约束的诧法功能</strong>  </p>
+<p><strong>在MySQL中没有提供修改外键约束的语法功能</strong>  </p>
 <h4 id="5-5-5-级联更新与级联删除"><a href="#5-5-5-级联更新与级联删除" class="headerlink" title="5.5.5 级联更新与级联删除"></a>5.5.5 级联更新与级联删除</h4><p><strong>用法：</strong>在添加级联更新不级联删除的时候，需要在外键约束后面添关键字；</p>
 <p><strong>注意：</strong>级联更新不级联删除操作谨慎使用，因为级联操作会将数据改变或者删除【数据无价】</p>
 <p><strong>（1）级联删除：on delete cascade</strong>  </p>
 <p><strong>定义：</strong>在删除父表数据的时候，级联删除子表中数据；</p>
 <p><strong>删除外键约束</strong></p>
 <p><strong>语法：</strong> <strong>ALTER TABLE</strong> 表名 <strong>DROP FOREIGN KEY</strong> 外键字段;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-e8dcb67beac693d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\删除外键约束.png" alt="image"></p>
 <p><strong>添加外键约束及级联删除功能</strong></p>
-<p><strong>语法：**</strong>ALTER TABLE** 表名</p>
+<p><strong>语法：ALTER TABLE</strong> 表名</p>
 <p><strong>ADD CONSTRAINT</strong> 外键名称 <strong>FOREIGN KEY</strong>(外键字段)<br><strong>REFERENCES</strong> 引用表名(引用表中字段名称) <strong>ON DELETE CASCADE;</strong></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-68c73b86b7410995.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\添加外键约束及级联删除.png" alt="image"></p>
 <p><strong>级联删除—完整示例</strong></p>
 <p><strong>第一步：</strong>删除t_student中的外键</p>
-<p>alter table t_student drop foreign key t_student_classno_fk;</p>
+<p><code>alter table t_student drop foreign key t_student_classno_fk;</code></p>
 <p><strong>第二步：</strong>增加t_student_classno_fk外键，幵加入级联删除 on delete cascade;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-994de8dba9651ba9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\级联删除测试1.png" alt="image"></p>
 <p><strong>第三步：</strong>删除t_class表中班级编号为200的信息，包括所在班级的学生信息</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-10a1f7baeb3d168b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\级联删除测试2.png" alt="image"></p>
 <p><strong>（2）级联更新：on update cascade</strong>  </p>
 <p><strong>定义：</strong>在更新父表中数据的时候，级联更新子表中数据；</p>
-<p><strong>删除外键约束（没有修改外键约束诧法）</strong></p>
+<p><strong>删除外键约束（没有修改外键约束语法）</strong></p>
 <p><strong>语法：</strong> <strong>ALTER TABLE</strong> 表名 <strong>DROP FOREIGN KEY</strong> 外键字段;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-579906452be6badb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\删除外键约束2.png" alt="image"></p>
 <p><strong>更新外键约束和添加级联更新功能</strong></p>
 <p><strong>语法：**</strong>ALTER TABLE<strong> 表名
 </strong>ADD CONSTRAINT<strong> 外键名称 </strong>FOREIGN KEY<strong>(外键字段)
 </strong>REFERENCES<strong> 引用表名称(引用表字段) </strong>ON UPDATE CASCADE;**</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-ec844ec555358fa2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\更新外键约束和添加级联更新功能.png" alt="image"></p>
 <p><strong>级联更新—完整示例</strong></p>
 <p><strong>第一步：</strong>删除 t_student中的外键<br>alter table t_student drop foreign key t_student_classno_fk;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-ddd35b8739435fc5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\删除学生表中的数据.png" alt="image"></p>
 <p><strong>第二步：</strong>增加t_student_classno_fk外键，幵加入级联更新 on update cascade;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-5f2c01cb3d68d579.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\级联更新测试.png" alt="image"></p>
 <p><strong>第三步：</strong>更新t_class表中班级编号200改为100，包括所在班级的学生信息</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5418658-9971623726a60988.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p><img src="D:\blog-img\数据库\Mysql\2019-03-19-MySQL快速入门-中\级联更新测试2.png" alt="image"></p>
 <p>好，今天就学这么多先~好好休息一下，慢慢吸收。</p>
 
       
@@ -1504,7 +1507,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-连接查询"><span class="nav-number">2.</span> <span class="nav-text">1. 连接查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-笛卡尔积现象"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 笛卡尔积现象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-显示每个员工信息，并显示所属部门名称"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1.1 显示每个员工信息，并显示所属部门名称</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2连接查询根据：年代分类"><span class="nav-number">2.2.</span> <span class="nav-text">1.2连接查询根据：年代分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-SQL92语法"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1 SQL92语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-SQL99语法【只掌握SQL99】"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.2 SQL99语法【只掌握SQL99】</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3连接查询根据：连接方式分类"><span class="nav-number">2.3.</span> <span class="nav-text">1.3连接查询根据：连接方式分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-内连接"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.3.1 内连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-外连接"><span class="nav-number">2.3.2.</span> <span class="nav-text">1.3.2 外连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4七大案例详解"><span class="nav-number">2.4.</span> <span class="nav-text">1.4七大案例详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1-查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（笛卡尔积）"><span class="nav-number">2.4.1.</span> <span class="nav-text">1.4.1 查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（笛卡尔积）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-2-查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（内连接：等值）"><span class="nav-number">2.4.2.</span> <span class="nav-text">1.4.2 查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（内连接：等值）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-3-找出每一个员工对应的工资等级，要求显示员工姓名、工资、工资等级（内连接：非等值）"><span class="nav-number">2.4.3.</span> <span class="nav-text">1.4.3 找出每一个员工对应的工资等级，要求显示员工姓名、工资、工资等级（内连接：非等值）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-4-找出每一个员工的上级领导，要求显示员工姓名及对应的领导姓名（内连接：自连接）"><span class="nav-number">2.4.4.</span> <span class="nav-text">1.4.4 找出每一个员工的上级领导，要求显示员工姓名及对应的领导姓名（内连接：自连接）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-5-找出每一个员工对应的部门名称，要求部门名称全部显示（左-右外连接）"><span class="nav-number">2.4.5.</span> <span class="nav-text">1.4.5 找出每一个员工对应的部门名称，要求部门名称全部显示（左/右外连接）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-6-为什么-inner-和-outer-可以省略，加上去有什么好处？"><span class="nav-number">2.4.6.</span> <span class="nav-text">1.4.6 为什么 inner 和 outer 可以省略，加上去有什么好处？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-7-找出每一个员工对应的领导名，要求显示所有员工（左外连接）"><span class="nav-number">2.4.7.</span> <span class="nav-text">1.4.7 找出每一个员工对应的领导名，要求显示所有员工（左外连接）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-8-找出每一个员工对应的部门名称，以及该员工对应的工资等级，要求显示员工姓名、部门名称、工资等级。"><span class="nav-number">2.4.8.</span> <span class="nav-text">1.4.8 找出每一个员工对应的部门名称，以及该员工对应的工资等级，要求显示员工姓名、部门名称、工资等级。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-子查询"><span class="nav-number">3.</span> <span class="nav-text">2.子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-案例"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-（where后）找出薪水比公司平均薪水高的员工，要求显示员工名和薪水"><span class="nav-number">3.1.1.</span> <span class="nav-text">2.1.1 （where后）找出薪水比公司平均薪水高的员工，要求显示员工名和薪水</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-（from后）找出每个部门的平均薪水，并且要求显示平均薪水的薪水等级"><span class="nav-number">3.1.2.</span> <span class="nav-text">2.1.2 （from后）找出每个部门的平均薪水，并且要求显示平均薪水的薪水等级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-（select后使用了解）"><span class="nav-number">3.1.3.</span> <span class="nav-text">2.1.3 （select后使用了解）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-union合并集合"><span class="nav-number">4.</span> <span class="nav-text">3.union合并集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-示例"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-查询出job为MANAGER和SALESMAN的员工"><span class="nav-number">4.1.1.</span> <span class="nav-text">3.1.1 查询出job为MANAGER和SALESMAN的员工</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-查询包含-MANAGER-和-SALESMAN-的员工信息"><span class="nav-number">4.1.2.</span> <span class="nav-text">3.1.2 查询包含 MANAGER 和 SALESMAN 的员工信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-limit使用"><span class="nav-number">5.</span> <span class="nav-text">4.limit使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-用法：limit-起始下标m-长度n"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 用法：limit 起始下标m,长度n</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-取前5个员工信息"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 取前5个员工信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-找出工资掋名在前5的员工"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 找出工资掋名在前5的员工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-找出工资掋名在-3-9-的员工"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 找出工资掋名在[ 3-9 ]的员工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-MySQL中通用的分页SQL诧句"><span class="nav-number">5.5.</span> <span class="nav-text">4.5 MySQL中通用的分页SQL诧句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-表"><span class="nav-number">6.</span> <span class="nav-text">5.表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-定义："><span class="nav-number">6.1.</span> <span class="nav-text">5.1 定义：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-创建表"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 创建表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1-语法格式-create-table-表名称-字段名-类型-长度-约束-；"><span class="nav-number">6.2.1.</span> <span class="nav-text">5.2.1 语法格式:create table 表名称(字段名 类型(长度) 约束)；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2-MySQL常用数据类型"><span class="nav-number">6.2.2.</span> <span class="nav-text">5.2.2 MySQL常用数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-3-创建表格-lt-t-student-学生信息表-gt"><span class="nav-number">6.2.3.</span> <span class="nav-text">5.2.3 创建表格&lt;t_student 学生信息表&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-5-向t-student表格中插入数据"><span class="nav-number">6.2.4.</span> <span class="nav-text">5.2.5 向t_student表格中插入数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-6-创建表格时给字段设置默认值-default-默认值"><span class="nav-number">6.2.5.</span> <span class="nav-text">5.2.6 创建表格时给字段设置默认值:default 默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-7-表的复制"><span class="nav-number">6.2.6.</span> <span class="nav-text">5.2.7 表的复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-8-将查询结果插入到某张表中"><span class="nav-number">6.2.7.</span> <span class="nav-text">5.2.8 将查询结果插入到某张表中</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-增-删-改-表结构"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 增 / 删 / 改 表结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-语法结构："><span class="nav-number">6.3.1.</span> <span class="nav-text">5.3.1 语法结构：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2-创建t-student表：no-int-10-、name-varchar-32"><span class="nav-number">6.3.2.</span> <span class="nav-text">5.3.2 创建t_student表：no int(10)、name varchar(32)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-3-【增加】给-t-student-表添加一个电话字段"><span class="nav-number">6.3.3.</span> <span class="nav-text">5.3.3 【增加】给 t_student 表添加一个电话字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-4-【修改】将字段-tel-长度扩展到20个长度"><span class="nav-number">6.3.4.</span> <span class="nav-text">5.3.4 【修改】将字段 tel 长度扩展到20个长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-5-【删除】将-t-student-表中的-tel-字段删除"><span class="nav-number">6.3.5.</span> <span class="nav-text">5.3.5 【删除】将 t_student 表中的 tel 字段删除</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-添加-修改-删除-表数据"><span class="nav-number">6.4.</span> <span class="nav-text">5.4 添加 / 修改 / 删除 表数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-1-DML数据操作诧句：insert-、update-、delete；"><span class="nav-number">6.4.1.</span> <span class="nav-text">5.4.1 DML数据操作诧句：insert 、update 、delete；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-2-insert-添加数据"><span class="nav-number">6.4.2.</span> <span class="nav-text">5.4.2 insert 添加数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-3-update-修改数据"><span class="nav-number">6.4.3.</span> <span class="nav-text">5.4.3 update 修改数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-4-delete-删除数据"><span class="nav-number">6.4.4.</span> <span class="nav-text">5.4.4 delete 删除数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-创建表加入约束"><span class="nav-number">6.5.</span> <span class="nav-text">5.5 创建表加入约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-1-非空约束（not-null）"><span class="nav-number">6.5.1.</span> <span class="nav-text">5.5.1 非空约束（not null）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-2-唯一性约束（unique）"><span class="nav-number">6.5.2.</span> <span class="nav-text">5.5.2 唯一性约束（unique）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-3-主键约束PK（primary-key）"><span class="nav-number">6.5.3.</span> <span class="nav-text">5.5.3 主键约束PK（primary key）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-4-外键约束FK（foreign-key）"><span class="nav-number">6.5.4.</span> <span class="nav-text">5.5.4  外键约束FK（foreign key）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-5-级联更新与级联删除"><span class="nav-number">6.5.5.</span> <span class="nav-text">5.5.5 级联更新与级联删除</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-连接查询"><span class="nav-number">2.</span> <span class="nav-text">1. 连接查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-笛卡尔积现象"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 笛卡尔积现象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-显示每个员工信息，并显示所属部门名称"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1.1 显示每个员工信息，并显示所属部门名称</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2连接查询根据：年代分类"><span class="nav-number">2.2.</span> <span class="nav-text">1.2连接查询根据：年代分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-SQL92语法"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1 SQL92语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-SQL99语法【只掌握SQL99】"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.2 SQL99语法【只掌握SQL99】</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3连接查询根据：连接方式分类"><span class="nav-number">2.3.</span> <span class="nav-text">1.3连接查询根据：连接方式分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-内连接"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.3.1 内连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-外连接"><span class="nav-number">2.3.2.</span> <span class="nav-text">1.3.2 外连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4七大案例详解"><span class="nav-number">2.4.</span> <span class="nav-text">1.4七大案例详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1-查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（笛卡尔积）"><span class="nav-number">2.4.1.</span> <span class="nav-text">1.4.1 查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（笛卡尔积）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-2-查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（内连接：等值）"><span class="nav-number">2.4.2.</span> <span class="nav-text">1.4.2 查询每一个员工所在的部门名称，要求最终显示员工姓名和对应的部门名称（内连接：等值）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-3-找出每一个员工对应的工资等级，要求显示员工姓名、工资、工资等级（内连接：非等值）"><span class="nav-number">2.4.3.</span> <span class="nav-text">1.4.3 找出每一个员工对应的工资等级，要求显示员工姓名、工资、工资等级（内连接：非等值）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-4-找出每一个员工的上级领导，要求显示员工姓名及对应的领导姓名（内连接：自连接）"><span class="nav-number">2.4.4.</span> <span class="nav-text">1.4.4 找出每一个员工的上级领导，要求显示员工姓名及对应的领导姓名（内连接：自连接）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-5-找出每一个员工对应的部门名称，要求部门名称全部显示（左-右外连接）"><span class="nav-number">2.4.5.</span> <span class="nav-text">1.4.5 找出每一个员工对应的部门名称，要求部门名称全部显示（左/右外连接）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-6-为什么-inner-和-outer-可以省略，加上去有什么好处？"><span class="nav-number">2.4.6.</span> <span class="nav-text">1.4.6 为什么 inner 和 outer 可以省略，加上去有什么好处？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-7-找出每一个员工对应的领导名，要求显示所有员工（左外连接）"><span class="nav-number">2.4.7.</span> <span class="nav-text">1.4.7 找出每一个员工对应的领导名，要求显示所有员工（左外连接）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-8-找出每一个员工对应的部门名称，以及该员工对应的工资等级，要求显示员工姓名、部门名称、工资等级。"><span class="nav-number">2.4.8.</span> <span class="nav-text">1.4.8 找出每一个员工对应的部门名称，以及该员工对应的工资等级，要求显示员工姓名、部门名称、工资等级。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-子查询"><span class="nav-number">3.</span> <span class="nav-text">2.子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-案例"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-（where后）找出薪水比公司平均薪水高的员工，要求显示员工名和薪水"><span class="nav-number">3.1.1.</span> <span class="nav-text">2.1.1 （where后）找出薪水比公司平均薪水高的员工，要求显示员工名和薪水</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-（from后）找出每个部门的平均薪水，并且要求显示平均薪水的薪水等级"><span class="nav-number">3.1.2.</span> <span class="nav-text">2.1.2 （from后）找出每个部门的平均薪水，并且要求显示平均薪水的薪水等级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-（select后使用了解）"><span class="nav-number">3.1.3.</span> <span class="nav-text">2.1.3 （select后使用了解）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-union合并集合"><span class="nav-number">4.</span> <span class="nav-text">3.union合并集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-示例"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-查询出job为MANAGER和SALESMAN的员工"><span class="nav-number">4.1.1.</span> <span class="nav-text">3.1.1 查询出job为MANAGER和SALESMAN的员工</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-查询包含-MANAGER-和-SALESMAN-的员工信息"><span class="nav-number">4.1.2.</span> <span class="nav-text">3.1.2 查询包含 MANAGER 和 SALESMAN 的员工信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-limit使用"><span class="nav-number">5.</span> <span class="nav-text">4.limit使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-用法：limit-起始下标m-长度n"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 用法：limit 起始下标m,长度n</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-取前5个员工信息"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 取前5个员工信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-找出工资排名在前5的员工"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 找出工资排名在前5的员工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-找出工资掋名在-3-9-的员工"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 找出工资掋名在[ 3-9 ]的员工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-MySQL中通用的分页SQL语句"><span class="nav-number">5.5.</span> <span class="nav-text">4.5 MySQL中通用的分页SQL语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-表"><span class="nav-number">6.</span> <span class="nav-text">5.表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-定义："><span class="nav-number">6.1.</span> <span class="nav-text">5.1 定义：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-创建表"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 创建表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1-语法格式-create-table-表名称-字段名-类型-长度-约束-；"><span class="nav-number">6.2.1.</span> <span class="nav-text">5.2.1 语法格式:create table 表名称(字段名 类型(长度) 约束)；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2-MySQL常用数据类型"><span class="nav-number">6.2.2.</span> <span class="nav-text">5.2.2 MySQL常用数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-3-创建表格-lt-t-student-学生信息表-gt"><span class="nav-number">6.2.3.</span> <span class="nav-text">5.2.3 创建表格&lt;t_student 学生信息表&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-5-向t-student表格中插入数据"><span class="nav-number">6.2.4.</span> <span class="nav-text">5.2.5 向t_student表格中插入数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-6-创建表格时给字段设置默认值-default-默认值"><span class="nav-number">6.2.5.</span> <span class="nav-text">5.2.6 创建表格时给字段设置默认值:default 默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-7-表的复制"><span class="nav-number">6.2.6.</span> <span class="nav-text">5.2.7 表的复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-8-将查询结果插入到某张表中"><span class="nav-number">6.2.7.</span> <span class="nav-text">5.2.8 将查询结果插入到某张表中</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-增-删-改-表结构"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 增 / 删 / 改 表结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-语法结构："><span class="nav-number">6.3.1.</span> <span class="nav-text">5.3.1 语法结构：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2-创建t-student表：no-int-10-、name-varchar-32"><span class="nav-number">6.3.2.</span> <span class="nav-text">5.3.2 创建t_student表：no int(10)、name varchar(32)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-3-【增加】给-t-student-表添加一个电话字段"><span class="nav-number">6.3.3.</span> <span class="nav-text">5.3.3 【增加】给 t_student 表添加一个电话字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-4-【修改】将字段-tel-长度扩展到20个长度"><span class="nav-number">6.3.4.</span> <span class="nav-text">5.3.4 【修改】将字段 tel 长度扩展到20个长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-5-【删除】将-t-student-表中的-tel-字段删除"><span class="nav-number">6.3.5.</span> <span class="nav-text">5.3.5 【删除】将 t_student 表中的 tel 字段删除</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-添加-修改-删除-表数据"><span class="nav-number">6.4.</span> <span class="nav-text">5.4 添加 / 修改 / 删除 表数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-1-DML数据操作诧句：insert-、update-、delete；"><span class="nav-number">6.4.1.</span> <span class="nav-text">5.4.1 DML数据操作诧句：insert 、update 、delete；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-2-insert-添加数据"><span class="nav-number">6.4.2.</span> <span class="nav-text">5.4.2 insert 添加数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-3-update-修改数据"><span class="nav-number">6.4.3.</span> <span class="nav-text">5.4.3 update 修改数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-4-delete-删除数据"><span class="nav-number">6.4.4.</span> <span class="nav-text">5.4.4 delete 删除数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-创建表加入约束"><span class="nav-number">6.5.</span> <span class="nav-text">5.5 创建表加入约束</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-1-非空约束（not-null）"><span class="nav-number">6.5.1.</span> <span class="nav-text">5.5.1 非空约束（not null）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-2-唯一性约束（unique）"><span class="nav-number">6.5.2.</span> <span class="nav-text">5.5.2 唯一性约束（unique）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-3-主键约束PK（primary-key）"><span class="nav-number">6.5.3.</span> <span class="nav-text">5.5.3 主键约束PK（primary key）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-4-外键约束FK（foreign-key）"><span class="nav-number">6.5.4.</span> <span class="nav-text">5.5.4  外键约束FK（foreign key）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-5-级联更新与级联删除"><span class="nav-number">6.5.5.</span> <span class="nav-text">5.5.5 级联更新与级联删除</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
