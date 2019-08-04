@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java面试,计算机网络,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="目录 网路基础知识 TCP与UDP HTTP相关知识 Socket相关知识 网络知识总结">
+<meta name="keywords" content="Java面试,计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java面试知识点总结-计算机网络篇">
+<meta property="og:url" content="https://aimanyeye.github.io/2019/08/03/2019-08-03-Java面试知识点总结-计算机网络篇/index.html">
+<meta property="og:site_name" content="aimanyeye">
+<meta property="og:description" content="目录 网路基础知识 TCP与UDP HTTP相关知识 Socket相关知识 网络知识总结">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/01OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/02OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/03TCPIP%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/04TCPIP%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/05TCPIP%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/06TCP%E6%8A%A5%E6%96%87%E5%A4%B4%E9%83%A8.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/07TCP%E6%8A%A5%E6%96%87%E5%A4%B4%E9%83%A8.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/08TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/09TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/10TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/11TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/12UDP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/13UDP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/14TCP%E7%9A%84%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/15TCP%E4%BC%9A%E8%AF%9D%E7%9A%84%E5%8F%91%E9%80%81%E6%96%B9.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/16%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%8F%91%E9%80%81%E7%AB%AF.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/17TCP%E4%BC%9A%E8%AF%9D%E7%9A%84%E6%8E%A5%E6%94%B6%E6%96%B9.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/18HTTP%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/19HTTP%E7%9A%84%E8%AF%B7%E6%B1%82%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/19HTTP%E7%9A%84%E8%AF%B7%E6%B1%82%E7%BB%93%E6%9E%842.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/20HTTP%E7%9A%84%E5%93%8D%E5%BA%94%E7%BB%93%E6%9E%84.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/20HTTP%E7%9A%84%E5%93%8D%E5%BA%94%E7%BB%93%E6%9E%842.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/21%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E8%BE%93%E5%85%A5URL.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/22%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E8%BE%93%E5%85%A5URL.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/23HTTP%E7%8A%B6%E6%80%81%E7%A0%81.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/24HTTP%E5%B8%B8%E8%A7%81%E7%8A%B6%E6%80%81%E7%A0%81.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/25Cookie%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%8F%8A%E5%8F%91%E9%80%81%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/26session%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/27https.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/28https.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/29%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/30%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/31https%E5%8A%A0%E5%AF%86.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/34Socket%E7%AE%80%E4%BB%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/32Socket%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/33Socket%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/35%E7%BB%93%E6%9E%9C.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/36%E7%BB%93%E6%9E%9C.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/37%E7%BB%93%E6%9E%9C.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/38%E7%BB%93%E6%9E%9C.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/39%E6%80%BB%E7%BB%93.png?raw=true">
+<meta property="og:updated_time" content="2019-08-04T12:02:56.941Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java面试知识点总结-计算机网络篇">
+<meta name="twitter:description" content="目录 网路基础知识 TCP与UDP HTTP相关知识 Socket相关知识 网络知识总结">
+<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/01OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aimanyeye.github.io/2019/08/03/2019-08-03-Java面试知识点总结-计算机网络篇/">
+
+
+
+
+
+  <title>Java面试知识点总结-计算机网络篇 | aimanyeye</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aimanyeye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">刻苦学习，解决眼前的苟且，追寻诗和远方...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/08/03/2019-08-03-Java面试知识点总结-计算机网络篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="艾曼爷爷">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aimanyeye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java面试知识点总结-计算机网络篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-03T13:50:32+08:00">
+                2019-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java面试/" itemprop="url" rel="index">
+                    <span itemprop="name">Java面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java面试/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  18.8k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  67 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h3><ol>
+<li>网路基础知识</li>
+<li>TCP与UDP</li>
+<li>HTTP相关知识</li>
+<li>Socket相关知识</li>
+<li>网络知识总结</li>
+</ol>
+<a id="more"></a>
+<h2 id="1-网路基础知识"><a href="#1-网路基础知识" class="headerlink" title="1. 网路基础知识"></a>1. 网路基础知识</h2><p>当前市面上分别存在四层、五层、七层协议。国际标准化组织ISO制定的OSI七层协议模型，是业界提出来的概念型框架。</p>
+<h3 id="1-1-OSI开放式互联参考模型"><a href="#1-1-OSI开放式互联参考模型" class="headerlink" title="1.1 OSI开放式互联参考模型"></a>1.1 OSI开放式互联参考模型</h3><p>OSI是一个定义良好的协议规范基，并由许多可选部分完成类似的任务，它定义了开放系统的层次结构，层次之间的相互关系，以及各层所包括的可能的任务。是作为一个框架来协调和组织各层所提供的服务。</p>
+<p>OSI参考模型并没有提供一个可以实现的方法，而是描述了一些概念，用来协调进程间通信标准的制定。即OSI参考模型并不是一个标准，而是一个在自定义标准时所使用的概念型框架。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/01OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B.png?raw=true" alt="01OSIä¸å±æ¨¡å.png"></p>
+<h4 id="1-1-1-物理层"><a href="#1-1-1-物理层" class="headerlink" title="1.1.1 物理层"></a>1.1.1 物理层</h4><ul>
+<li>首先要解决两台物理机之间的通讯需求，机器A往机器B发送比特流，而机器B可以接受到这些比特流。</li>
+<li>物理层主要定义了物理设备的标准，如网线的类型、光纤的接口类型、各种传输介质的传输速率等。</li>
+<li>它的主要作用是传输比特流，即“0101”二进制数据。将它们转换为电流强弱来进行传输，到达目的地之后，在转化为“0101”的机器码，即我们常说的数模转换与模数转换。</li>
+<li>物理层的数据叫做比特。</li>
+<li>网卡工作在物理层。</li>
+</ul>
+<h4 id="1-1-2-数据链路层"><a href="#1-1-2-数据链路层" class="headerlink" title="1.1.2 数据链路层"></a>1.1.2 数据链路层</h4><ul>
+<li>在传输比特流的过程中，会产生错传、数据传输不完整的可能，因此数据链路层应运而生。</li>
+<li>数据链路层定义了如何格式化数据以进行传输，以及如何控制对物理介质的访问。</li>
+<li>数据链路层通常还提供错误检测和纠正，以确保数据传输的可靠性。</li>
+<li>数据链路层将比特数据组成帧。</li>
+<li>交换机工作在数据链路层，对帧解码，并根据帧中包含的信息，把数据发送到正确的接收方。</li>
+</ul>
+<h4 id="1-1-3-网络层"><a href="#1-1-3-网络层" class="headerlink" title="1.1.3 网络层"></a>1.1.3 网络层</h4><ul>
+<li>随着网络节点的不断增加，点对点通信时要通过多个节点，如何找到目标节点，如何选择最佳路径便成为了首要需求。此时，便有了网络层。</li>
+<li>网络层的主要功能是将网络地址翻译成对应的物理地址，并决定如何将数据从发送方路由到接收方。</li>
+<li>网络层通过综合考虑发送优先权、网络拥塞程度、服务质量以及可选路由的话费，来决定从一个网络中的节点A到另一个网络中的节点B的最佳路径。</li>
+<li>由于网络层处理并智能指导数据传送，路由器连接于网络各段，所以路由器属于网络层。</li>
+<li>网络层的数据称之为数据包。</li>
+<li>网络层我们主要关注的协议是IP协议。</li>
+</ul>
+<h4 id="1-1-4-传输层"><a href="#1-1-4-传输层" class="headerlink" title="1.1.4 传输层"></a>1.1.4 传输层</h4><ul>
+<li>随着网络通信需求的进一步扩大，通信过程中需要发送大量的数据，如海量文件传输等，可能需要很长时间，而网络在通信的过程中会中断好多次。此时为了保证传输大量文件时的准确性，需要对发出去的数据进行切分，切割为一个一个的段落(Segment)进行发送。其中一个段落丢失后是否需要重传，每个段落是否需要按照顺序到达，是传输层需要考虑的问题。</li>
+<li>传输层解决了主机间的数据传输，数据间的传输可以是不同网络的。</li>
+<li>传输层解决了传输质量的问题，该层被称之为OSI模型中最重要的一层。</li>
+<li>传输层传输协议同时进行流量控制，或是基于接收方可接收数据的快慢程度，规定适当的发送速率。</li>
+<li>传输层按照网络能处理的最大尺寸，将较长的数据包进行强制分割，例如以太网无法接收大于1500字节的数据包。发送方节点的传输层，将数据分割成较小的数据片，同时对每一个数据片安排一个序列号，以便数据到达接收方节点的传输层时，能以正确的顺序重组。该过程称之为排序。</li>
+<li>传输层中需要关注的协议有TCP协议、UDP协议。</li>
+</ul>
+<h4 id="1-1-5-会话层"><a href="#1-1-5-会话层" class="headerlink" title="1.1.5 会话层"></a>1.1.5 会话层</h4><ul>
+<li>传输层过后我们已经可以保证给正确的计算机发送正确的封装过后的信息。但是用户级别的体验不好，肯定不能每次都调用TCP去打包，调用IP协议去找路由，自己去发送。所以我们要建立一个自动收发包、自动寻址的功能，于是发明了会话层。</li>
+<li>会话层的作用就是建立和管理应用程序之间的通信。</li>
+</ul>
+<h4 id="1-1-6-表示层"><a href="#1-1-6-表示层" class="headerlink" title="1.1.6 表示层"></a>1.1.6 表示层</h4><ul>
+<li>会话层之后能够保证应用程序自动收发包和寻址了。但若要跨系统发包，例如在linux系统给windows系统发包，两系统语法不一致，例如安装包exe不能再linux系统上执行，shell在windows下也不能直接运行。于是需要表示层。</li>
+<li>表示层帮我们解决不同系统之间的通信语法问题。</li>
+<li>在表示层数据将按照网络能理解的方案进行格式化，这种格式化也因所使用网络类型的不同而不同。</li>
+</ul>
+<h4 id="1-1-7-应用层"><a href="#1-1-7-应用层" class="headerlink" title="1.1.7 应用层"></a>1.1.7 应用层</h4><ul>
+<li>表示层之后发送方虽然知道自己发送的是什么东西，转换成字节数组之后有多长，但接收方肯定不知道，所以应用层网络协议诞生了。</li>
+<li>应用层规定发送方和接收方必须使用一个固定长度的消息头。消息头必须使用某种固定的组成，而且消息头里必须记录消息体的长度等一系列信息，以方便接收方能够正确的解析发送方发送的数据。</li>
+<li>应用层旨在让你更方便的应用从网络中接收到的数据。至于数据的传递，没有该层，也可以在两台电脑间进行传递，只不过传递的是1和0组成的字节数组。</li>
+<li>应用层需要重点关注的是HTTP协议。</li>
+</ul>
+<h3 id="网络数据处理流程"><a href="#网络数据处理流程" class="headerlink" title="网络数据处理流程"></a>网络数据处理流程</h3><p>从应用层开始，都会对要传输的数据头部进行处理，加上本层的一些信息。最终由物理层通过以太网电缆等介质，将数据解析成比特流，在网络中传输。数据传输到目标地址，并自底而上的将先前对应层的头部给解析分离出来。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/02OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B.png?raw=true" alt="02OSIä¸å±æ¨¡å.png"></p>
+<h3 id="1-2-TCP-IP参考模型"><a href="#1-2-TCP-IP参考模型" class="headerlink" title="1.2 TCP/IP参考模型"></a>1.2 TCP/IP参考模型</h3><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/03TCPIP%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.png?raw=true" alt="03TCPIPåèæ¨¡å.png"></p>
+<ul>
+<li>OSI模型的实现：TCP/IP四层架构参考模型</li>
+<li>TCP/IP参考模型是首先由ARPANET所使用的网络体系结构，后来该结构被美国国防部用来作为计算机网络的标准，市面上绝大多数的厂商也已该标准为主，用以商用。</li>
+<li>TCP/IP协议并不完全符合OSI的七层参考模型，但我们依然可以理解为它是OSI的一种实现。</li>
+<li>在很多情况下，TCP/IP只是利用IP进行通信时，所必须用到的协议群的统称。例如：IP、ICMP、TCP、UDP、Talnet、FTP以及HTTP都属于TCP/IP协议。他们与TCP或IP的关系紧密，是互联网必不可少的组成部分。TCP/IP协议泛指这些协议，因此有时也称TCP/IP为网际协议群。</li>
+<li>TCP/IP在分层模块上与OSI稍有区别，TCP/IP中的应用层可以约等于OSI模型中的会话层、表示层、应用层；OSI中的物理层和数据链路层被归并为链路层。</li>
+<li>OSI模型注重通信协议必要的功能是什么，而TCP/IP协议则更强调在计算机上实现协议，应该开发哪种程序。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/04TCPIP%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.png?raw=true" alt="04TCPIPåèæ¨¡å.png"></p>
+<p>和OSI一样，TCP/IP的每个分层中，都会对所发送的数据附加一个头部。在这个头部中，包含了该层所必要的信息，如发送的目标地址，以及协议相关的信息。通常为协议提供的信息为报头的首部，所要发送的内容为数据。从下一层角度上看，数据被传送到接收端之后，再层层解套出来。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/05TCPIP%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.png?raw=true" alt="05TCPIPåèæ¨¡å.png"></p>
+<h2 id="2-TCP与UDP"><a href="#2-TCP与UDP" class="headerlink" title="2. TCP与UDP"></a>2. TCP与UDP</h2><h3 id="2-1-TCP的三次握手"><a href="#2-1-TCP的三次握手" class="headerlink" title="2.1 TCP的三次握手"></a>2.1 TCP的三次握手</h3><h4 id="2-1-1-IP协议"><a href="#2-1-1-IP协议" class="headerlink" title="2.1.1 IP协议"></a>2.1.1 IP协议</h4><p>IP协议是无连接的通信协议，它不会占用两个正在通信的计算机之间的通信线路。这样IP就降低了对网络线路的需求，每条线可以同时满足许多不同的计算机之间的通讯需要。通过IP，消息或者其他数据会被分割为较小的独立的包，并通过因特网在计算机之间传送。IP负责将每个包路由至它的目的地，但IP协议没有做任何事情来确认数据包是否按顺序发送，或者包是否被破坏，所以IP数据包是不可靠的。需要由它的上层协议来做出控制。</p>
+<h4 id="2-1-2-TCP协议"><a href="#2-1-2-TCP协议" class="headerlink" title="2.1.2 TCP协议"></a>2.1.2 TCP协议</h4><p>TCP（传输控制协议）是属于传输层的协议</p>
+<ul>
+<li>TCP是一种面向连接的、可靠的、基于字节流的传输层通信协议。</li>
+<li>数据传输时应用层向TCP发送数据流，TCP将数据流分割成适当长度的报文段，报文段长度通常受该计算机连接的网络的数据链路层的最大传输单元（即MTU）的限制。之后TCP把结果包传给IP层，由它来通过网络将包传送给目标节点的TCP层。</li>
+<li>TCP为了保证不丢失包，就给每个包一个序号，即Sequence Number，同时序号也保证了传送到目标节点的包的按序处理。接收端实体对已成功接收到的包发回一个相应的确认，即ACK确认。如果发送端实体在合理的往返时延（即RTT）内未收到确认，那么对应的数据包就会被假设为已丢失，并且将会对其进行重传。</li>
+<li>TCP用一个奇偶校验和函数来检验数据是否有错误，在发送和接收时都要计算校验和。</li>
+</ul>
+<h4 id="2-1-3-TCP报文头部"><a href="#2-1-3-TCP报文头部" class="headerlink" title="2.1.3 TCP报文头部"></a>2.1.3 TCP报文头部</h4><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/06TCP%E6%8A%A5%E6%96%87%E5%A4%B4%E9%83%A8.png?raw=true" alt="06TCPæ¥æå¤´é¨.png"></p>
+<ul>
+<li>Source Port和Destination Port分别表示源端口和目的端口，各占两个字节。TCP和UDP的数据包都是不包含IP地址信息的，那是IP层的事情。但是TCP和UDP均会有源端口和目的端口。</li>
+<li>两个进程在计算机内部进行通信：用 ①管道②内存共享③信号量④消息队列 等方法进行通信。而两个进程如果需要进行通信，最基本的一个前提是能够唯一的标识一个进程。通过该唯一标识，找到对应的进程。在本地进程通信中，我们可以使用PID，即我们的进程标识符（进程号），来唯一标识一个进程。但PID只在本地唯一，如果把两个进程放到了不同的两台计算机，它们要进行通讯的话，PID已经不足够，这时就需要另外的手段。解决这个问题的方法，就是在传输层中使用协议端口号。IP地址可以唯一标识主机，而TCP协议和端口号可以唯一标识主机中的一个进程，这样我们可以利用“IP地址+协议+端口号”这个唯一标识去标识网络中的一个进程。在一些场合也将这种唯一标识的模式称之为套接字（即socket）。即是说虽然通信的重点是应用进程，但我们只要把要传送的报文交到目的主机的某一个合适的端口，剩下的工作就由TCP来完成。</li>
+<li>Sequence Number表示序列号，它占据了4个字节，TCP连接中传送的字节流中的每个字节，都按顺序去编号。例如一段报文的序号字段值为107，而携带的数据共有100个字段；那么如果有下一个报文段的话，其序号应该是从107+100=207开始。</li>
+<li>Acknowledgment Number（ACK确认号），同样占4个字节，是期望收到对方下一个报文的第一个数据字节的序号。例如B收到A发送来的报文，其序列号字段为301，而数据长度是200字节，这表明B正确收到了A发送的到序号500为止的数据。因此B期望收到A的下一个数据序号是501，于是B在发送给A的确认报文段中，会把ACK确认号，置为501。</li>
+<li>Offset（数据偏移），由于头部有可选字段，长度不固定，因此它指出TCP报文的数据距离TCP报文的起始处有多远。</li>
+<li>Reserved是保留域，保留今后使用的，但目前都被标为0。</li>
+<li>TCP flags（控制位），主要由八个标志位来组成，每一个标志位表示一个控制功能。</li>
+</ul>
+<p>①URG: 紧急指针标志，当其为1时表示紧急指针有效，为0则忽略紧急指针。<br><strong>②ACK: 确认序号标志，为1时表示确认号有效，为0表示报文中不含确认信息，忽略确认号字段。Acknowledgment Number是否有效就是通过该位控制的。</strong><br>③PSH: push标志，为1表示是带有push标志的数据，指示接收方在接收到该报文段以后，应尽快将这个报文段交给应用程序，而不是在缓冲区排队。<br>④RST（即reset），即重置链接标志，用于重置由于主机崩溃或其他原因而出现错误的连接，或者用于拒绝非法的报文段和拒绝连接请求。<br><strong>⑤SYN，同步序列号，用于建立链接过程。在链接请求中，SYN=1和ACK=0表示该数据段没有使用捎带的确认域；而链接应答捎带一个确认，即SYN=1和ACK=1。</strong><br><strong>⑥FIN，即finish标志，用于释放链接，为1时表示发送方已经没有数据发送了，即关闭本方数据流。</strong></p>
+<ul>
+<li>Window窗口，指的是滑动窗口的大小，用来告知发送端接收端的缓存大小，以此控制发送端发送数据的速率，从而达到流量控制。</li>
+<li>CheckSum，检验和，指的是奇偶校验，此校验和是对整个的TCP报文段，包括TCP头部和TCP数据，以16位进行计算所得，由发送端计算和存储，并由接收端进行验证。</li>
+<li>Urgent Pointer，即紧急指针，只有当TCP flag中的URG为1时才有效，指出本报文段中的紧急数据的字节数。</li>
+<li>TCP Options，可选项，其长度可变，定义一些其他的可选参数。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/07TCP%E6%8A%A5%E6%96%87%E5%A4%B4%E9%83%A8.png?raw=true" alt="07TCPæ¥æå¤´é¨.png"></p>
+<h4 id="2-1-4-三次握手"><a href="#2-1-4-三次握手" class="headerlink" title="2.1.4 三次握手"></a>2.1.4 三次握手</h4><p>当应用程度希望通过TCP与另一个应用程序通讯时，它会发送一个通讯请求，这个请求必须被送到一个确切的地址，在双方“握手”之后，TCP将在两个应用之间建立一个全双工（A可以给B发送信息，与此同时B也可以给A发送信息）的通信。这个全双工的通信，将占用两个计算机之间的通信线路，直到它被一方或双方关闭为止。此处所说的“握手”即TCP的三次握手。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/08TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png?raw=true" alt="08TCPä¸æ¬¡æ¡æ.png"></p>
+<h4 id="（1）过程："><a href="#（1）过程：" class="headerlink" title="（1）过程："></a>（1）过程：</h4><p>假设A和B首次进行通信</p>
+<ul>
+<li>一开始客户端和服务器均处于CLOSED状态，假设客户端主动打开连接，服务端被动打开连接。</li>
+<li>刚开始时，TCP服务器进程先创建传输控制块TCB，时刻准备接受其他客户进程发送过来的连接请求，此时服务端进入了LISTEN，即监听的状态。</li>
+<li>TCP客户端进程创建一个传输控制块TCB，向服务器发出连接请求报文，TCP flags中的同步序号SYN=1，同时选择一个初始序号seq=x（任意正整数值），此时TCP客户端进程就进入了SYN-SENT的同步已发送的状态。此时发送过去的数据包（即报文段）会被称为SYN报文段，其不能携带数据，但是要消耗掉一个序号，这便是第一次握手。</li>
+<li>服务器接收到请求报文之后，如果同意连接，则发出确认报文，确认报文中包含了TCP flags中的两个位的字段，一个是ACK=1，另一个是SYN=1，它的确认号ack=x+1（原因是我们在SYN报文中指定了seq，那作为回应它要回应跟x相关的信息，并且由于上面的一个报文消耗掉了一个序号，因此ack=x+1），同时为自己的缓存初始化一个序列号，即seq=y。此时，服务器就进入到了SYN-RCVD，即同步收到的状态，此报文也不能携带数据，并且同样需要消耗一个序号，这便是第二次握手。</li>
+<li>当TCP客户进程收到确认报文之后，还要向服务器给出一个确认，确认报文的ACK=1,ack=y+1(原因是因为刚刚服务器给客户端发送了一个seq=y，同时此报文也需要消耗掉一个序号，因此作为回应，ack=y+1)，同时因为服务器告知客户端序号seq已经加1了，因此自己的序号就是seq=x+1。此时TCP连接建立，客户端就进入了ESTABLISHED状态，即已建立连接的状态。TCP规定，这个ack报文段可以携带数据，前两个均不允许携带，当然其也可以不携带数据，如果不携带数据就不会消耗序号。这便是第三次握手。</li>
+<li>当服务器收到客户端的确认后，也会进入到ESTABLISHED状态，此后，双方就可以开始通信了。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/09TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png?raw=true" alt="09TCPä¸æ¬¡æ¡æ.png"></p>
+<h4 id="（2）为什么需要三次握手才能建立起连接，两次不可以么？"><a href="#（2）为什么需要三次握手才能建立起连接，两次不可以么？" class="headerlink" title="（2）为什么需要三次握手才能建立起连接，两次不可以么？"></a>（2）为什么需要三次握手才能建立起连接，两次不可以么？</h4><p>①为了初始化Sequence Number的初始值，通信的双方要互相通知对方自己的初始化的Sequence Number，即上述的x和y。这个号要作为以后的数据通信的序号，以保证应用层接收到的数据不会因为网络上的传输问题而乱序，即TCP会用该序号来拼接数据。因此服务器在回发它的Sequence Number，即第二次握手之后，还需要发送确认报文给服务器，告知服务器客户端已经收到服务器的初始化的Sequence Number了。</p>
+<p>②为了防止<strong>已失效的链接请求报文突然又传送到了服务端</strong>，因而产生错误。</p>
+<ul>
+<li>正常的情况：A 发出连接请求，但因连接请求报文丢失而未收到确认，于是 A 再重传一次连接请求。后来收到了确认，建立了连接。数据传输完毕后，就释放了连接。A 共发送了两个连接请求报文段，其中第一个丢失，第二个到达了 B。没有 “已失效的连接请求报文段”。</li>
+<li>现假定出现了一种异常情况：即 A 发出的第一个连接请求报文段并没有丢失，而是在某个网络结点长时间的滞留了，以致延误到连接释放以后的某个时间才到达 B。本来这是一个早已失效的报文段。但 B 收到此失效的连接请求报文段后，就误认为是 A 再次发出的一个新的连接请求。于是就向 A 发出确认报文段，同意建立连接。</li>
+</ul>
+<p>假设不采用“三次握手”，那么只要 B 发出确认，新的连接就建立了。由于现在 A 并没有发出建立连接的请求，因此不会理睬 B 的确认，也不会向 B 发送数据。但 B 却以为新的运输连接已经建立，并一直等待 A 发来数据。这样，B 的很多资源就白白浪费掉了。采用“三次握手”的办法可以防止上述现象发生。</p>
+<h4 id="（3）首次握手的隐患——SYN超时"><a href="#（3）首次握手的隐患——SYN超时" class="headerlink" title="（3）首次握手的隐患——SYN超时"></a>（3）首次握手的隐患——SYN超时</h4><p><strong>问题起因分析：</strong></p>
+<p>①Server收到Client的SYN，回复SYN-ACK的时候未收到ACK确认（Client掉线），此时这个连接就会处于一个中间状态，即没有成功也没有失败。<br>②Server端在一定时间内没有收到客户端的回执，则Server会不断重发SYN-ACK直至超时，在Linux下，默认重试次数为5次。重试的时间从1s开始，每次都翻倍，总共为31s。在第五次发出之后，还需要等待32s才能够被判定为超时，所以总共63s之后，TCP才会断开此连接。</p>
+<p><strong>造成问题：</strong></p>
+<p>可能会使服务器遭到SYN-Flood攻击的风险，恶意程序会给服务器发一个SYN报文，发之后下线，于是服务器需要默认等63s才会断开此连接。这样攻击者就可以把服务器SYN连接的队列耗尽，让正常的连接请求不能处理。</p>
+<p><strong>针对SYN-Flood的防护措施：</strong></p>
+<p>①在Linux下会通过tcp_syncoodies参数来应对。当SYN队列满时，TCP会通过目标地址端口、源地址端口和时间戳打造出一个特别的Sequence Number回发回去，这个Sequence Number简称SYN Cookie。<br>②如果是攻击者，则不会有相应；如果是正常连接，则Client会回发SYN Cookie，服务端可以通过这个Cookie建立连接。<br>③通过SYN Cookie，即便此时SYN队列满了，本次连接请求不在队列中，依然能够建立连接，进而解决了该问题的发生。</p>
+<h4 id="（4）建立连接后，Client出现故障怎么办"><a href="#（4）建立连接后，Client出现故障怎么办" class="headerlink" title="（4）建立连接后，Client出现故障怎么办"></a>（4）建立连接后，Client出现故障怎么办</h4><p><strong>TCP设有保活机制</strong></p>
+<ul>
+<li>在一段时间（称之为保活时间）内，连接处于非活动状态，开启保活功能的一端将向对方发送一个保活探测报文。如果发送端没有收到响应报文，那么经过一个提前配置好的保活时间间隔，将继续发送保活探测报文。</li>
+<li>当发送探测报文的次数达到保活探测数，这时对方主机将被确认为不可达，连接也将被中断。</li>
+</ul>
+<h3 id="2-2-TCP的四次挥手"><a href="#2-2-TCP的四次挥手" class="headerlink" title="2.2 TCP的四次挥手"></a>2.2 TCP的四次挥手</h3><ul>
+<li>所谓四次挥手，即终止TCP连接。就是指断开一个TCP连接时，需要客户端和服务端总共发出4个包，已确认连接的断开。</li>
+<li>在Socket编程中，这个过程由客户端或服务端任一方执行CLOSED来触发。</li>
+<li>假设由客户端主动触发CLOSED，流程图如下：</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/10TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png?raw=true" alt="10TCPåæ¬¡æ¥æ.png"></p>
+<h4 id="（1）过程"><a href="#（1）过程" class="headerlink" title="（1）过程"></a>（1）过程</h4><ul>
+<li>数据传送完毕之后，双方都可释放连接。最开始客户端和服务端都处于ESTABLISHED的状态，客户端主动关闭，服务器被动关闭。</li>
+<li>首先客户端进程发出连接释放报文，并且停止发送数据。在该数据报的报头中，TCP flags中的FIN=1，这时假设客户端定义的序列号seq=u（该值等于前面ESTABLISHED状态下数据最后一次发送时，已经传送过来的数据的最后一个字节的序号再加1）。此时客户端就进入了FIN-WAIT-1这样一个终止等待1的状态。TCP规定，即使FIN报文段不携带任何数据，也要消耗掉一个序号，即回执时u会加1。</li>
+<li>当服务器收到连接释放报文时，也要发出确认报文。即ACK=1，这里作为回应，ack=u+1，并且携带上了自己的序列号seq=v。此时服务端就进入了CLOSE-WAIT这样一个关闭等待的状态<strong>（重要）</strong>。TCP服务器通知高层的应用进程客户端要释放与TCP通信的连接了，这时候会处于半关闭的状态。即客户端已经没有数据要发送了，但服务器若要发送数据，客户端仍然能够接收。这个状态要持续一段时间，该时间等于整个CLOSE-WAIT状态所持续的时间。</li>
+<li>客户端收到服务器的确认请求后，也就是第二次挥手时，客户端就进入了FIN-WAIT-2，即终止等待2状态。等待服务器发送释放连接报文，即等待它发送第三次挥手的请求。因此在这段时间内，客户端有可能还需要接收服务器发送的最后的数据。</li>
+<li>服务器将最后的数据发送完毕后，就会向客户端发送连接释放报文。这里FIN=1，ACK=1，ack=u+1。由于在半关闭的状态，服务器很可能又发送了一些数据，假定此时的序号seq=w。此时服务器就进入了LAST-ACK，即最后确认状态，等待客户端的最后确认。</li>
+<li>客户端在收到服务器的连接释放报文之后，必须发出确认，即ACK=1,将服务器发来的w变为ack=w+1回发回去，自己的序号此时为seq=u+1(按照之前的报文加1)。此时客户端就进入了TIME-WAIT，即时间等待的状态，注意此时客户端的TCP连接还没有释放。必须经过2*MSL(最长报文段寿命，RFC-793定义了MSL的值为2分钟，而Linux设置成了30秒)的时间后，我们的连接才会真正的释放，才进入到CLOSED的状态。</li>
+<li>服务器收到了客户端发出的确认后，立即就进入了CLOSED的状态。因此服务器结束TCP连接的时间要比客户端稍早一些。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/11TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png?raw=true" alt="11TCPåæ¬¡æ¥æ.png"></p>
+<h4 id="（2）为什么会有TIME-WAIT状态"><a href="#（2）为什么会有TIME-WAIT状态" class="headerlink" title="（2）为什么会有TIME-WAIT状态"></a>（2）为什么会有TIME-WAIT状态</h4><ul>
+<li>TIME-WAIT状态是用来保证有足够的时间让对端收到ACK包，如果被动关闭方没有收到ACK，就会触发被动端重发FIN包，一来一去刚好是2*MSL的时间。</li>
+<li>有足够的时间让这个连接不会跟后面的连接混在一起，因为有些路由器会缓存IP数据包。如果连接被重用了，那么这些延迟收到的包就有可能跟新连接混在一起。</li>
+</ul>
+<h4 id="（3）为什么需要四次挥手来中断连接"><a href="#（3）为什么需要四次挥手来中断连接" class="headerlink" title="（3）为什么需要四次挥手来中断连接"></a>（3）为什么需要四次挥手来中断连接</h4><ul>
+<li>全双工的意思，是允许数据在两个方向上同时传输。即在同一时间，服务器可以发送数据给客户端，客户端也可以发送数据给服务器。</li>
+<li>因为TCP是全双工的，所以发送方和接收方都需要FIN报文和ACK报文。也就是说发送方和接收方，各自需要两次挥手，只不过有一方是被动的。所以看上去就成了所谓的四次挥手。</li>
+</ul>
+<h4 id="（4）服务器出现大量CLOSE-WAIT状态的原因"><a href="#（4）服务器出现大量CLOSE-WAIT状态的原因" class="headerlink" title="（4）服务器出现大量CLOSE-WAIT状态的原因"></a>（4）服务器出现大量CLOSE-WAIT状态的原因</h4><p><strong>①原因</strong></p>
+<ul>
+<li>问题的其中一个表现是客户端一直在请求，但是返回给客户端的信息是异常的，服务端压根没有收到请求。</li>
+<li>服务器保持大量的CLOSE-WAIT的情况是，在对方发送FIN报文之后，程序这边没有进一步发送ACK报文或者FIN报文以确认。换言之，就是在对方关闭socket连接后，程序中没有检测到，或者程序忘记了此时需要关闭连接，于是资源一直被程序占用着。（我方忙于读或写，没有及时关闭连接）</li>
+</ul>
+<p><strong>②处理方式</strong></p>
+<ul>
+<li>多数可能是程序里有bug，通常是某些连接没有及时释放导致。</li>
+<li>或者某些配置，如线程池中的线程数之类的配置不合理，此时需要我们结合实际业务区排查。</li>
+</ul>
+<h4 id="（5）查看网络机器状况的指令"><a href="#（5）查看网络机器状况的指令" class="headerlink" title="（5）查看网络机器状况的指令"></a>（5）查看网络机器状况的指令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">netstat -n | awk &apos;/^tcp/&#123;++S[$NF]&#125;END&#123;for (a in S) print(a,S[a])&#125;&apos;</span><br><span class="line">TIME_WAIT 1507</span><br><span class="line">CLOSE_WAIT 588</span><br><span class="line">FIN_WAIT2 5</span><br><span class="line">ESTABLISHED 413</span><br></pre></td></tr></table></figure>
+<p>当CLOSE-WAIT数量很多时，比如几千，就需要我们去排查问题了。因为对于Linux服务器来说，会为每个用户分配有限的文件句柄数，而我们的连接也是和文件句柄一一对应的。而CLOSE-WAIT状态如果一直被保持，意味着对应数目的通道一直被占用着，一旦达到了上限，则新的请求就无法被处理。接着就是大量的too many open files异常，有可能会造成软件服务器的崩溃，即有可能让我们的Tomcat、Nginx或者Apache崩溃。</p>
+<h3 id="2-3-TCP和UDP的区别"><a href="#2-3-TCP和UDP的区别" class="headerlink" title="2.3 TCP和UDP的区别"></a>2.3 TCP和UDP的区别</h3><h4 id="2-3-1-UDP简介"><a href="#2-3-1-UDP简介" class="headerlink" title="2.3.1 UDP简介"></a>2.3.1 UDP简介</h4><p>UDP（User Datagram Protocol，即用户数据报协议）</p>
+<h4 id="2-3-2-UDP报文结构"><a href="#2-3-2-UDP报文结构" class="headerlink" title="2.3.2 UDP报文结构"></a>2.3.2 UDP报文结构</h4><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/12UDP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84.png?raw=true" alt="12UDPæ¥æç&quot;æ.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/13UDP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84.png?raw=true" alt="13UDPæ¥æç&quot;æ.png"></p>
+<p>相比TCP报文，UDP报文的域少了很多，简单了很多。由源端口、目标端口、数据包长度、奇偶校验值以及用户数据来组成。</p>
+<h4 id="2-3-3-UDP特点"><a href="#2-3-3-UDP特点" class="headerlink" title="2.3.3 UDP特点"></a>2.3.3 UDP特点</h4><p>简单的报文结构也就意味着UDP不像TCP那样支持错误重传、滑动窗口等精细控制。</p>
+<ul>
+<li><strong>面向非连接：</strong>UDP是一个非连接的协议，传输数据之前，源端和终端不建立连接。当它想传送时，就简单的去抓取来自应用程序的数据，并尽可能快的把它扔到网络上。在发送端UDP传送数据的速度，仅仅是受应用程序生成数据的速度、计算机的能力和传输带宽的限制。在接收端，UDP把每个消息段放在队列中，应用程序每次在队列中读取一个消息段。</li>
+<li><strong>不维护连接状态：</strong>由于传输数据不建立连接，因此不需要维护连接状态，包括收发状态等。因此一台服务器可同时向多个客户端传输相同的消息。</li>
+<li><strong>开销较少：</strong>UDP信息包的报头很短，只有8个字节，相对于TCP报头的20个字节的信息包，额外开销小很多。</li>
+<li><strong>吞吐量：</strong>吞吐量不收拥挤控制算法的调节，只受应用软件生成数据的速率、传输带宽以及源端和终端主机性能的限制。</li>
+<li><strong>不需要维护状态：</strong>UDP尽最大努力交付，即不保证可靠交付，因此主机不需要维持复杂的链接状态表。</li>
+<li><strong>面向报文：</strong>UDP是面向报文的，发送方的UDP对应用程序交下来的报文，在添加首部后，就向下交付给IP层，既不拆分也不合并，而是保留这些报文的边界。因此应用程序需要选择合适的报文大小，也就是说UDP将绝大多数的控制交由上层去解决。</li>
+</ul>
+<h4 id="2-3-4-TCP和UDP的区别"><a href="#2-3-4-TCP和UDP的区别" class="headerlink" title="2.3.4 TCP和UDP的区别"></a>2.3.4 TCP和UDP的区别</h4><p>TCP和UDP是OSI模型中的运输层中的协议，TCP提供可靠的通信传输，而UDP则常被用于让网络和细节交给应用层的通信传输。</p>
+<ul>
+<li><strong>是否连接：</strong>TCP面向连接，而UDP面向无连接。TCP有三次握手的连接过程，UDP适合消息的多播发布，由单个点向多个点传输信息。</li>
+<li><strong>可靠性：</strong>TCP是可靠的，TCP通过握手、确认和重传机制，提供了可靠性保证。UDP则可能会丢失，不知道到底有没有被接收。</li>
+<li><strong>有序性：</strong>TCP通过序列号保证了消息报的顺序交付，到达可能无序，但TCP最终会排序；而UDP不具备有序性。</li>
+<li><strong>速度：</strong>TCP速度较慢（因为要创建连接，保证消息的可靠性和有序性等，需要做额外的很多事情）。UDP则更适合对速度比较敏感的应用，比如在线视频媒体、电视广播、多人在线游戏等。</li>
+<li><strong>量级：</strong>TCP属于重量级，UDP属于轻量级。体现在源数据的头部大小，TCP头部20个字节，UDP头部仅有8个字节。</li>
+</ul>
+<h3 id="2-4-TCP的滑动窗口"><a href="#2-4-TCP的滑动窗口" class="headerlink" title="2.4 TCP的滑动窗口"></a>2.4 TCP的滑动窗口</h3><h4 id="2-4-1-RTT和RTO"><a href="#2-4-1-RTT和RTO" class="headerlink" title="2.4.1 RTT和RTO"></a>2.4.1 RTT和RTO</h4><ul>
+<li><strong>RTT：</strong>发送一个数据包到收到对应的ACK，所花费的时间。简言之，即我发送一个数据包，对端回一个ACK所经过的时间。</li>
+<li><strong>RTO：</strong>重传时间间隔。TCP在发送一个数据包之后，会启动一个重传定时器，RTO就是这个定时器的重传时间。我一开始预先算一个定时器时间，如果你回复了ACK，那么重传定时器就自动失效，也就是说不用重传了。如果没有回复给我ACK，然而RTO定时器的时间又到了，我就重传。由于RTO是本次发送当前数据包所预估的超时时间，那么RTO就需要一个很好的算法来统计，来更好的预测这次的超时时间。RTO不是固定写死的配置，而是经过RTT计算出来的。有了RTT，才能计算出RTO。基于RTO我们便有了重传机制，才能支撑起接下来的滑动窗口。</li>
+</ul>
+<h4 id="2-4-2-滑动窗口"><a href="#2-4-2-滑动窗口" class="headerlink" title="2.4.2 滑动窗口"></a>2.4.2 滑动窗口</h4><p><strong>①背景：</strong></p>
+<p>TCP会将数据拆分成段进行发送，出于效率和传输速度的考虑，我们不可能等一段一段数据去发送，等到上一段数据被确认之后再发送下一段数据，这个效率是非常低的。我们需要实现对数据的批量发送。TCP必须要解决可靠传输以及包乱序的问题。所以TCP需要知道网络实际的数据处理带宽或是数据处理速度，这样才不会引起网络拥塞，导致丢包。TCP使用滑动窗口做流量控制与乱序重排。</p>
+<p><strong>②作用：</strong></p>
+<p>TCP的滑动窗口主要有两个作用：</p>
+<ul>
+<li>提供TCP的可靠性</li>
+<li>提供TCP的流控特性。</li>
+</ul>
+<p>TCP报文头部中的Window字段，用于接收方通知发送方自己还有多少缓冲区可以接收数据。发送方根据接收方的处理能力来发送数据，不会导致接收方处理不过来，这就是流量控制。同时滑动窗口机制还体现了面向字节流的设计思路。</p>
+<p><strong>③窗口数据的计算过程</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/14TCP%E7%9A%84%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.png?raw=true" alt="14TCPçæ&quot;å¨çªå£.png"></p>
+<ul>
+<li>如图所示，左图是TCP协议的发送端缓冲区，右图是接收端缓冲区，左边往右边发数据。两图中下面的长方形表示要发送的数据流，里面假设装满了数据，并且需要按照顺序从左向右发送或者接受。我们假设对应的数据段位置序号也是从左到右去增长的。</li>
+<li>对于发送方来讲，LastByteAcked指向收到的连续最大的ack的位置。也就是从左端算起，连续已经被接收端的程序发送ACK回执确认已收到的Sequence Number。LastByteSent指向已发送的最后一个字节的位置，该位置只是发送，但是还没有收到ACK回应。而LastByteWritten，指向上层应用已写完的最后一个字节的位置，即当前程序已经准备好的需要发送的最新的一个数据段。LastByteAcked~LastByteSent之间是发送出去但是还没有收到确认的，LastByteAcked之前的是已经发送出去并已经收到接收端确认的。从LastByteAcked到LastByteWritten都没有出现间隔的，都是连续的。</li>
+<li>对于接收方来讲，LastByteRead指向上层应用已经读完的最后一个字节的位置，即收到了发送方的数据，并且已经处理并回执的最后一个位置。而NextByteExpected指向收到的连续最大的Sequence的位置，即LastByteRead~NextByteExpected是已经收到了，但是还没有发送回执的。而LastByteRcvd，指向已收到的最后一个字节的位置。可以看到NextByteExpected和LastByteRcvd中间，有一些Sequence还没有到达，对应为空白区域。此时我们可以根据上面的数值，计算出接收方的AdvertisedWindow的大小，之后回发给发送方，让发送方计算出发送方剩余可发送的数据大小，即EffectiveWindow大小。</li>
+<li>AdvertisedWindow = MacRcvBuffer(接收方能接收的最大数据量，也可以理解为接收端缓存池的大小) - (LastByteRcvd - LastByteRead)(表示接收方已为接收到的数据，或者还没有接收到的预定的数据留出来的空间，当前空间已经占据了一定的缓存)</li>
+<li>发送方在接收到AdvertisedWindow后，要保证LastByteSent-LastByteAcked&lt;=AdvertisedWindow，即已发送且待确认的数据量要小于接收方的Window大小。</li>
+<li>EffectiveWindow(窗口内剩余可发送的数据大小) = AdvertisedWindow - (LastByteSent-LastByteAcked)(待确认的数据量)。这样才能保证接收方可以处理后面发送的数据。</li>
+</ul>
+<p><strong>④滑动窗口的基本原理</strong></p>
+<p><strong>TCP会话的发送方：</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/15TCP%E4%BC%9A%E8%AF%9D%E7%9A%84%E5%8F%91%E9%80%81%E6%96%B9.png?raw=true" alt="15TCPä¼è¯çåéæ¹.png"></p>
+<p>依次分为，已经发送并得到对端回应的，已经发送但还没收到对端回应的，未发送但对端允许发送的，以及未发送且由于达到了Window的大小对端不允许发送的数据。其中中间两部分组成的连续空间被称之为发送窗口。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/16%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%8F%91%E9%80%81%E7%AB%AF.png?raw=true" alt="16æ&quot;å¨çªå£åéç&quot;¯.png"></p>
+<ul>
+<li>当收到接收方新的ACK，对于发送窗口中后续字节的确认时，窗口就会进行滑动，滑动原理如上图所示。</li>
+<li>示例：对于原滑动窗口，假设原先滑动窗口的边界是从32~51。我们假设已发送但未被确认的序号是32~40，而41~51为未发送但对端允许发送的。此时只有收到对端大于32的序号的ACK，即收到32~40之间的某个ACK序号回执时，我们的滑动窗口才会发生移动。而此时序号大于或等于52的数据，即窗口外的数据，是不能发送的。这里我们假设收到了对端序号为36的ACK回执，则滑动窗口会向右移动四位到36处。进而我们的程序就能发送序号为52~55的数据了。</li>
+</ul>
+<p><strong>TCP会话的接收方：</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/17TCP%E4%BC%9A%E8%AF%9D%E7%9A%84%E6%8E%A5%E6%94%B6%E6%96%B9.png?raw=true" alt="17TCPä¼è¯çæ¥æ¶æ¹.png"></p>
+<ul>
+<li>对于TCP的接收方来讲，在某一时刻在其接收缓存内会存在三种状态：已接收并且已发送回执单状态、未接收但是可以接收（即准备接收）的状态、未接受并且不能接收的状态（因为达到了窗口的阈值，因此不能接收）。由于ACK直接由TCP这样回复，默认没有应用延迟，不存在已接收但是未回复ACK的状态。</li>
+<li>未接受但准备接收的这一段空间被称为接收窗口。接收窗口的滑动机制和前面发送方的一致。</li>
+</ul>
+<p><strong>总结：</strong></p>
+<ul>
+<li>TCP最基本的传输可靠性来源于确认重传机制，TCP的滑动窗口的可靠性也是建立在确认重传基础上的。发送窗口只有收到接收端对于本段发送窗口内字节的ACK确认，才会移动发送窗口的左边界；接收窗口只有在前面所有的段都确认的情况下，才会移动左边界。当在前面还有字节未接收，但收到后面字节的情况下，窗口是不会移动的，并不对后续字节确认，以此确保对端会对这些数据进行重传。以上便是滑动窗口的基本原理。</li>
+<li>滑动窗口的大小可以依据一定的策略动态调整，应用会根据自身处理能力的变化，通过本端TCP接收窗口大小的控制，来实现对发送端的发送窗口进行流量限制。</li>
+</ul>
+<h2 id="3-HTTP相关知识"><a href="#3-HTTP相关知识" class="headerlink" title="3. HTTP相关知识"></a>3. HTTP相关知识</h2><h3 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h3><ul>
+<li>HTTP，即超文本传输协议，是属于应用层的协议。它是一个基于请求与响应模式的无状态的应用层的协议，常基于TCP的连接方式。</li>
+<li>HTTP/1.1中给出一种持续连接的机制，Keep-Alive。</li>
+<li>、绝大多数的Web开发都是构建在HTTP协议之上的Web应用。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/18HTTP%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%93%8D%E5%BA%94.png?raw=true" alt="18HTTPè¯·æ±ä¸ååº.png"></p>
+<h3 id="1-2-主要特点"><a href="#1-2-主要特点" class="headerlink" title="1.2 主要特点"></a>1.2 主要特点</h3><ul>
+<li><strong>支持客户/服务器模式。</strong>HTTP协议工作于客户端——服务端架构之上，浏览器通过HTTP客户端通过URL向HTTP服务端，即Web服务器发送所有请求。Web服务器根据接收到的请求，向客户端发送响应信息。</li>
+<li><strong>简单快速。</strong>客户端向服务器请求服务时，只需传送请求方法和路径，请求方法常用的有GET、HEAD、POST、PUT等。每种方法决定了客户与服务器联系的类型不同，由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。</li>
+<li><strong>灵活。</strong>HTTP允许传输任意类型的数据对象，正在传输的类型由Content-Type加以标记。</li>
+<li><strong>无连接。</strong>无连接的含义是限制每次连接只处理一个请求，服务器处理完客户的请求，并受到客户的应答之后，就断开连接。采用这种方式可以节省传输时间，从HTTP/1.1起默认使用了长连接，即服务器需要等待一定时间后，才断开连接，以保证连接特性。虽然目前的一些技术，如keep-alive，使用了长连接优化效率，但这些都是属于HTTP请求之外的。也就是在每个独立的HTTP请求中，你是无法知道当前的HTTP是否处于长连接的状态。你始终都要认为，HTTP请求在结束后，连接就会关闭，这是HTTP的特性。至于下层实现是否在结束请求后关闭连接，都不会改变这个特性。长连接可以理解为下层实现对上层透明。</li>
+<li><strong>无状态。</strong>HTTP协议是无状态协议，无状态是指协议对于事务处理没有记忆能力。缺少状态，意味着如果后续处理需要前面的信息，则必须被重传。这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时，它的应答较快。HTTP协议目前正处于多个版本共存的情况，包括仍被广泛采用的1.0，主流应用广泛的1.1，还有应用较少但更新较大的2.0。1.1和1.0最明显的区别是引入了Keep-Alive这项长连接技术，2.0虽然更合理更先进，但是因为1.1完全能够满足目前的应用，并且升级上2.0的成本太大所以推广不广泛。</li>
+</ul>
+<h3 id="1-3-HTTP的请求响应模型"><a href="#1-3-HTTP的请求响应模型" class="headerlink" title="1.3 HTTP的请求响应模型"></a>1.3 HTTP的请求响应模型</h3><h4 id="1-3-1-HTTP的请求结构"><a href="#1-3-1-HTTP的请求结构" class="headerlink" title="1.3.1 HTTP的请求结构"></a>1.3.1 HTTP的请求结构</h4><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/19HTTP%E7%9A%84%E8%AF%B7%E6%B1%82%E7%BB%93%E6%9E%84.png?raw=true" alt="19HTTPçè¯·æ±ç&quot;æ.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/19HTTP%E7%9A%84%E8%AF%B7%E6%B1%82%E7%BB%93%E6%9E%842.png?raw=true" alt="19HTTPçè¯·æ±ç&quot;æ2.png"></p>
+<ul>
+<li>主要由请求行、请求头部、空行以及数据（即请求正文）这四个部分组成。</li>
+<li>请求行中包括三个部分。第一部分为请求方法，如GET、HEAD、POST、PUT等等，第二部分为URL，第三部分为协议版本号，包括HTTP/1.0、HTTP/1.1、HTTP/2.0。之后跟一个回车换行标志。</li>
+<li>请求头部由若干个报头组成，每个报头的结构都是名字加冒号再加空格再加值的形式组成。其中名字大小写无关，这些报头用来设置HTTP请求的一些参数，例如Host表示被请求资源的主机和端口号。其他字段例如Content-Type等等。</li>
+<li>数据体只在POST请求里面用到，表示要上传的数据，数据体和头部直接存在一个空行（必须的）。即使请求数据为空，也必须有空行。浏览器发送一个空白行来通知服务器它已经结束了该头信息的发送。</li>
+<li>发送请求报文后，正常情况下能收到其相应报文。</li>
+</ul>
+<h4 id="1-3-2-HTTP的响应结构"><a href="#1-3-2-HTTP的响应结构" class="headerlink" title="1.3.2 HTTP的响应结构"></a>1.3.2 HTTP的响应结构</h4><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/20HTTP%E7%9A%84%E5%93%8D%E5%BA%94%E7%BB%93%E6%9E%84.png?raw=true" alt="20HTTPçååºç&quot;æ.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/20HTTP%E7%9A%84%E5%93%8D%E5%BA%94%E7%BB%93%E6%9E%842.png?raw=true" alt="20HTTPçååºç&quot;æ2.png"></p>
+<ul>
+<li>服务器接收并处理客户端发过来的请求后，会返回一个HTTP的响应消息，即我们的响应报文。响应报文主要包括三个部分，第一个为状态行，第二个是响应头部，第三个是响应正文。</li>
+<li>状态行主要由协议版本、状态码以及状态码描述这三个部分来组成。</li>
+<li>响应报头是用来说明客户端要使用的一些附加信息，例如Date用来生成响应的日期和时间，Content-Type就指定了内容类型，一般是指网页中存在的Content-Type，用于定义网络文件的类型和网页的编码。</li>
+</ul>
+<h4 id="1-3-3-总结"><a href="#1-3-3-总结" class="headerlink" title="1.3.3 总结"></a>1.3.3 总结</h4><p>HTTP协议定义了Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。HTTP协议采用了请求响应模型，客户端向服务器发送一个请求报文，请求报文包含请求的方法、URL、协议版本、请求头部和请求数据。服务器以一个状态行作为响应，响应的内容包括协议的版本、成功或者错误代码、服务器信息、响应头部和相应数据。</p>
+<h4 id="1-3-4-请求-响应步骤"><a href="#1-3-4-请求-响应步骤" class="headerlink" title="1.3.4 请求/响应步骤"></a>1.3.4 请求/响应步骤</h4><ul>
+<li><strong>客户端连接到Web服务器。</strong>一个HTTP客户端通常是浏览器与Web服务器的HTTP端口，默认端口号是80，建立一个TCP套接字连接。</li>
+<li><strong>发送HTTP请求。</strong>即通过TCP套接字，客户端向Web服务器发送一个文本的请求报文。</li>
+<li>服务器接收到客户端的请求并返回HTTP响应，Web服务器解析该请求，定位请求资源，服务器将资源副本写到TCP套接字，由客户端读取。</li>
+<li><strong>释放TCP连接。</strong>若我们的连接模式为Close，则服务器主动关闭TCP连接，客户端被动关闭连接，释放TCP连接；若模式为Keep-Alive，则该连接会保持一段时间，在该时间内，可以继续接收请求。</li>
+<li><strong>客户端浏览器拿到了HTML请求，并进行解析。</strong>客户端浏览器首先去解析状态行，查看表明请求是否成功的状态代码，然后解析每一个响应头部，响应头告知以下为若干字节的HTML文档以及文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法，对其进行格式化，并在浏览器窗口中显示。</li>
+</ul>
+<h3 id="1-4-在浏览器地址栏输入URL，按下回车之后经历的流程"><a href="#1-4-在浏览器地址栏输入URL，按下回车之后经历的流程" class="headerlink" title="1.4 在浏览器地址栏输入URL，按下回车之后经历的流程"></a>1.4 在浏览器地址栏输入URL，按下回车之后经历的流程</h3><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/21%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E8%BE%93%E5%85%A5URL.png?raw=true" alt="21å¨æµè§å¨å°åè¾å¥URL.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/22%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E8%BE%93%E5%85%A5URL.png?raw=true" alt="22å¨æµè§å¨å°åè¾å¥URL.png"></p>
+<ul>
+<li><strong>DNS解析：</strong>首先浏览器会依据URL，逐层查询DNS服务器缓存，解析URL中的域名所对应的IP地址。DNS缓存由近到远依次是：浏览器缓存、系统缓存、路由器缓存、IPS服务器缓存、根域名服务器缓存、顶级域名服务器缓存。从哪个缓存找到对应的ip，则直接返回，不再查询后面的缓存。</li>
+<li><strong>TCP连接：</strong>找到ip地址之后，会根据该ip地址和对应端口（默认是80端口）和服务器建立TCP连接。（结合三次握手来讲解）</li>
+<li><strong>发送HTTP请求：</strong>浏览器会发出读取文件的HTTP请求，该请求将发送给服务器（前面HTTP部分提及的内容）。</li>
+<li><strong>服务器处理请求并返回HTTP报文：</strong>服务器对浏览器请求做出响应并把对应的带有HTML文本的HTTP响应报文发送给浏览器。</li>
+<li><strong>浏览器解析渲染页面：</strong>浏览器收到HTML，并在显示窗口内去渲染页面。</li>
+<li><strong>连接结束：</strong>浏览器释放TCP连接（该步骤即前面所提到的四次挥手过程）。</li>
+</ul>
+<p>其中渲染页面和释放TCP连接可以视为是同时发生的，哪一步在前没有特别的要求。</p>
+<h3 id="1-5-HTTP状态码"><a href="#1-5-HTTP状态码" class="headerlink" title="1.5 HTTP状态码"></a>1.5 HTTP状态码</h3><ul>
+<li>当程序返回200这个状态码时，证明信息是正常返回的。在工作中我们需要通过状态码来判定大致出现问题的原因。</li>
+<li>状态码由三位数来组成，第一个数字定义了响应的类别，主要有五种类型：</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/23HTTP%E7%8A%B6%E6%80%81%E7%A0%81.png?raw=true" alt="23HTTPç¶æç .png"></p>
+<p><strong>常见状态码：</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/24HTTP%E5%B8%B8%E8%A7%81%E7%8A%B6%E6%80%81%E7%A0%81.png?raw=true" alt="24HTTPå¸¸è§ç¶æç .png"></p>
+<h3 id="1-6-GET请求和POST请求的区别"><a href="#1-6-GET请求和POST请求的区别" class="headerlink" title="1.6 GET请求和POST请求的区别"></a>1.6 GET请求和POST请求的区别</h3><ul>
+<li><strong>HTTP报文层面：</strong>GET请求方式将请求信息放在URL后面，请求信息和URL直接以问号<code>?</code>隔开，请求信息的格式为键值对。而POST请求方式则将请求信息放置在报文体中，想获得请求信息必须解析报文，因此安全性较GET方式要高一些。事实上要获得报文体中的请求信息也很容易，因此安全性上两者并没有太多的区别。具体解决传输过程中的安全性问题，还要靠HTTPS。因为GET中的请求信息是放置在URL中的，因此是有长度限制的。因为这样URL本身是没有长度限制的，但是浏览器，如Chrome或者FireFox等会对URL的长度做出限制。POST的请求信息是放置在报文体当中的，因此对数据的长度没有限制。</li>
+<li><strong>数据库层面：</strong>GET请求方式符合幂等性和安全性，POST不符合。幂等性的定义是对数据库的一次操作和多次操作获得的结果是一致的，则认为符合幂等性。安全性的定义就是对数据库的操作没有改变数据库中的数据，则认为符合安全性。GET请求是做查询操作的，因此不会改变数据库中原有的数据，大致上可以认为是符合安全性和幂等性。POST请求方式是既不幂等、又不安全的。首先POST请求方式会往数据库中提交数据，因此会改变数据库中的数据；其次，POST请求方式每次获得的结果都有可能不一样，因为POST请求是作用在上一级的URL上的，则每一次请求都会添加一份新资源，这也是POST和PUT方式的最大区别。PUT方式是幂等的。</li>
+<li><strong>其他层面：</strong>GET请求能够被缓存，GET请求会保存在浏览器的浏览记录中，以GET请求的URL能够保存为浏览器书签；而POST方式不具备上述功能。缓存也是GET请求被广泛应用的根本。</li>
+<li>在现在网络上，每天产生的请求数目是巨大的，并且其中绝大部分的请求均为只读请求，如果所有这些请求都要交由Web服务器直接处理，这无疑是巨大的资源浪费。从数据库层面知道，GET表达的是一种幂等的、安全的，因此绝大部分GET请求（通常差不多90%）都直接被CDN（内容分发网络）缓存了，这能大大减少Web服务器的负担。而POST是非幂等的，有副作用的操作，所以必须交由Web服务器处理。</li>
+</ul>
+<h3 id="1-7-Cookie和Session的区别"><a href="#1-7-Cookie和Session的区别" class="headerlink" title="1.7 Cookie和Session的区别"></a>1.7 Cookie和Session的区别</h3><p>因为HTTP是无状态的，也就意味着我们每次访问某个有登陆需求的页面时，都要不厌其烦的输入账号密码。现实生活中没有出现这种情况，是因为我们引入了某些机制，让HTTP具备了状态，其中的两个便是Cookie和Session。</p>
+<h4 id="1-7-1-Cookie简介"><a href="#1-7-1-Cookie简介" class="headerlink" title="1.7.1 Cookie简介"></a>1.7.1 Cookie简介</h4><ul>
+<li>Cookie技术是客户端的解决方案。Cookie就是由服务器发送给客户端的特殊信息，而这些信息以文本文件的形式存放在客户端。客户端每次向服务器发送请求的时候，都会带上这些特殊的信息。具体为，当用户使用浏览器访问一个支持Cookie的网站时，用户会提供包括用户名在内的个人信息，并且提交至服务器。紧接着服务器在向客户端回传响应的超文本的同时，也会发回这些个人信息。当然这些信息并不是存放在HTTP响应体，即Response Body中的，而是存放在HTTP响应头，即Response Header中的。当用户端接收到来自服务器的响应之后，浏览器会将这些信息存放在一个统一的位置。</li>
+<li>客户端再次向服务器发送请求的时候，都会把响应的Cookie再次发回到服务器中。而这次Cookie信息则存放在HTTP请求头里面了。</li>
+<li>有了Cookie这样的技术实现，服务器在接收到来自浏览器的请求之后，就能够通过分析存放于请求头的Cookie，得到客户端特有的信息，从而动态生成与该客户端相对应的内容。通常我们可以在很多网站的登录界面中看到“请记住我”这样的选项，如果勾选了它，之后再登录。那么在下一次访问该网站的时候，就不需要进行重复和繁琐的登录动作了。此功能就是通过Cookie来实现的。</li>
+</ul>
+<h4 id="1-7-2-Cookie的设置及发送过程"><a href="#1-7-2-Cookie的设置及发送过程" class="headerlink" title="1.7.2 Cookie的设置及发送过程"></a>1.7.2 Cookie的设置及发送过程</h4><ul>
+<li>客户端发送一个HTTP请求到服务端。</li>
+<li>服务端发送一个HTTP响应到客户端，其中包括了一个Set-Cookie的头部。</li>
+<li>客户端再发送一个HTTP请求到服务端，其中包括了Cookie头部。</li>
+<li>服务端发送一个HTTP响应到客户端。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/25Cookie%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%8F%8A%E5%8F%91%E9%80%81%E8%BF%87%E7%A8%8B.png?raw=true" alt="25Cookieçè®¾ç½®ååéè¿ç¨.png"></p>
+<h4 id="1-7-3-Session简介"><a href="#1-7-3-Session简介" class="headerlink" title="1.7.3 Session简介"></a>1.7.3 Session简介</h4><ul>
+<li>Session机制是一种服务器端的机制，服务器使用了一种类似散列表的结构来保存信息。</li>
+<li>当程序需要为某个客户端的请求创建一个Session的时候，服务器首先检查客户端的请求中是否已包含了一个Session标识（称为Session id）。如果已包含一个Session id，则说明以前已经为此客户端创建了Session，服务器就按照Session id把这个Session检索出来使用，如果检索不到就可能新建一个。如果客户端请求不包含Session id，则为此客户端创建一个Session，并且生成一个与此Session相关的Session id，Session id的值应该是一个既不会重复，又不容易被找到规律以防捏造的字符串。这个Session id将会在本次响应中被回发给客户端进行保存。</li>
+</ul>
+<h4 id="1-7-4-Session实现方式"><a href="#1-7-4-Session实现方式" class="headerlink" title="1.7.4 Session实现方式"></a>1.7.4 Session实现方式</h4><p><strong>主要有两种：</strong></p>
+<ul>
+<li>使用Cookie来实现。服务器给每个Session分配一个唯一的JSESSIONID，并通过Cookie发送给客户端。当客户端发起新的请求时，将在Cookie头中携带此JSESSIONID，这样服务器能够找到客户端对应的Session。</li>
+<li>使用URL回写来实现。URL回写是指服务器在发送给浏览器的所有连接中，都携带JSESSIONID的参数，这样客户端点击任何一个连接，都会把JSESSIONID带回服务器。如果直接在浏览器输入服务端资源的URL来请求该资源，那么Session是匹配不到的。Tomcat对Session的实现是一开始同时使用Cookie和URL回写机制，如果发现客户端支持Cookie，就继续使用Cookie，停止使用URL回写。如果发现Cookie被禁用，就一直使用URL回写。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/26session%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F.png?raw=true" alt="26sessionçå®ç°æ¹å¼.png"></p>
+<h4 id="1-7-5-Cookie和Session的区别"><a href="#1-7-5-Cookie和Session的区别" class="headerlink" title="1.7.5 Cookie和Session的区别"></a>1.7.5 Cookie和Session的区别</h4><ul>
+<li>Cookie数据存放在客户的浏览器上，Session数据存放在服务器上。</li>
+<li>Cookie不是很安全，别人可以分析存放在本地的Cookie并执行Cookie欺骗，考虑到安全应当使用Session。</li>
+<li>Session会在一定时间内保存在服务器上，当访问增多，会比较占用服务器的性能，考虑到减轻服务器性能方面的开销，应当使用Cookie。</li>
+</ul>
+<h3 id="1-8-HTTP和HTTPS的区别"><a href="#1-8-HTTP和HTTPS的区别" class="headerlink" title="1.8 HTTP和HTTPS的区别"></a>1.8 HTTP和HTTPS的区别</h3><h4 id="1-8-1-HTTPS简介"><a href="#1-8-1-HTTPS简介" class="headerlink" title="1.8.1 HTTPS简介"></a>1.8.1 HTTPS简介</h4><p>HTTPS，即超文本传输安全协议，其是一种以计算机网络安全通信为目的的传输协议。在HTTP下面，加入了一个SSL层，从而具有了保护交换数据隐私以及完整性，还有提供对网站服务器身份认证的功能。简单来说，HTTPS就是安全版的HTTP。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/27https.png?raw=true" alt="27https.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/28https.png?raw=true" alt="28https.png"></p>
+<h4 id="1-8-2-SSL"><a href="#1-8-2-SSL" class="headerlink" title="1.8.2 SSL"></a>1.8.2 SSL</h4><p>SSL（Security Sockets Layer，安全套接层）</p>
+<ul>
+<li>为网络通信提供安全及数据完整性的一种安全协议</li>
+<li>SSL位于TCP与各应用层之间，是操作系统对外提供的API。SSL3.0后更名为TLS</li>
+<li>SSL采用身份验证和数据加密两种手段来保证网络通信的安全和数据的完整性</li>
+</ul>
+<p>HTTPS并不是一个新兴的协议，Google很早就开始启用了，初衷是为了保证数据安全。近两年Google、Baidu、Facebook等互联网巨头，不谋而合的开始大力推行HTTPS。国内外的大型互联网公司也都启用了全站HTTPS，这也是未来互联网发展的趋势。在HTTP中，不管是GET还是POST，客户端与服务器之间没有任何身份确认的过程，数据全部明文传输在互联网上。客户端发出的请求很容易被黑客截获，如果此时黑客冒充服务器，则其可返回任意信息给客户端而不被客户端察觉，这便是所谓的劫持。</p>
+<h4 id="1-8-3-加密的方式"><a href="#1-8-3-加密的方式" class="headerlink" title="1.8.3 加密的方式"></a>1.8.3 加密的方式</h4><p>我们都知道https能够加密信息，以免敏感信息被第三方获取与篡改，所以很多网站或电子邮箱等安全级别较高的服务都会采用https协议，关于加密与解密，首先我们要了解加密方式。</p>
+<ul>
+<li><strong>对称加密：</strong>加密和解密都使用同一个密钥，效率比之非对称加密要高很多。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/29%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png?raw=true" alt="29å¯¹ç§°å å¯.png"></p>
+<ul>
+<li><strong>非对称加密：</strong>加密使用的密钥和解密使用的密钥是不同的，分别称为公钥和私钥。公钥和算法都是公开的，私钥是保密的。非对称加密算法性能较低，但是安全性超强，由于其加密特性，非对称加密算法能加密的数据长度也是有限的。例如区块链技术很多就是用到了非对称加密。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/30%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png?raw=true" alt="30éå¯¹ç§°å å¯.png"></p>
+<ul>
+<li><strong>哈希算法：</strong>将任意长度的信息转化为固定长度的值，算法不可逆，常见的有MD5算法。</li>
+<li><strong>数字签名：</strong>签名就是在信息的后面加上一段内容，这些内容是经过哈希后的值，可以证明信息没有被修改过。哈希值一般都会加密后，也就是签名之后，再和信息一起发送。以保证哈希值不被修改。</li>
+</ul>
+<p>在实际的执行中发现，仅使用其中的某种加密方式，并不能满足生产要求。要么非对称加密性能过低，要么对称密钥容易泄露。因此HTTPS使用的是证书配合各种加密手段的方式，进行相对安全的组合加密。</p>
+<h4 id="1-8-4-HTTPS数据传输流程"><a href="#1-8-4-HTTPS数据传输流程" class="headerlink" title="1.8.4 HTTPS数据传输流程"></a>1.8.4 HTTPS数据传输流程</h4><p>HTTPS在进行数据传输之前，会与网站服务器和Web浏览器进行一次握手。在握手时，确定双方的加密密码信息，具体过程：</p>
+<ul>
+<li>Web浏览器将支持的加密算法信息发送给网站服务器。例如本地仅支持AES对称加密、ECC非对称加密之类的。即告诉服务器我仅支持这类加密，使服务器回发时选用这类加密算法。</li>
+<li>服务器依据浏览器提供的支持加密的方式，在自己支持的加密方式中，选出一套加密算法和哈希算法，将验证身份的信息以证书的形式发送给Web浏览器。证书里面的信息包含了证书发布的CA机构、证书有效期、公钥、证书所有者以及签名等等。CA机构是具备证书颁发资格的权威机构，就好比全国大学英语四六级考试委员会颁发给自己英语四六级证书一样，是具有权威的。</li>
+<li>当浏览器收到证书之后，首先要验证证书的合法性，如果证书受到浏览器信任，则在浏览器地址栏会有标志显示，否则就会显示不受信的标识。当证书受信之后，Web浏览器会随机生成一串密码，并使用证书中的公钥加密。之后就是使用约定好的哈希算法握手消息，并生成随机数对消息进行加密，再将之前生成的信息回发给服务器。</li>
+<li>当网站服务器接收到浏览器发送过来的数据后，会使用网站本身的私钥将信息解密确定密码，然后通过密码解密Web浏览器发送过来的握手信息，并验证哈希是否与Web浏览器一致。然后服务器会使用密码加密新的握手信息，发送给浏览器。</li>
+<li>客户端浏览器解密并计算经过哈希算法加密的握手消息，如果与服务器发送过来的哈希值一致，则此握手过程结束后，服务器与浏览器会使用之前浏览器生成的随机密码和对称加密算法进行加密，然后交换数据。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/31https%E5%8A%A0%E5%AF%86.png?raw=true" alt="31httpså å¯.png"></p>
+<h4 id="1-8-5-HTTP和HTTPS的区别"><a href="#1-8-5-HTTP和HTTPS的区别" class="headerlink" title="1.8.5 HTTP和HTTPS的区别"></a>1.8.5 HTTP和HTTPS的区别</h4><ul>
+<li><strong>证书：</strong>HTTPS协议需要到CA去申请证书*，一般免费证书较少，因而需要一定的费用（必要的验证费），HTTP不需要。</li>
+<li><strong>明文密文：</strong>HTTP是超文本传输协议，信息是明文传输的；HTTPS则是具有安全性的SSL加密传输协议，因此它是密文传输的。</li>
+<li><strong>端口号：</strong>HTTPS使用的是完全不同的连接方式，与HTTP所使用的端口也不同。HTTP默认使用的是80端口，而HTTPS默认使用的是443端口。</li>
+<li><strong>安全性：</strong>HTTP的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，SSL是有状态的。HTTPS=HTTP+加密+认证+完整性保护，因此HTTPS比HTTP协议更安全。</li>
+</ul>
+<h4 id="1-8-6-HTTPS真的很安全么"><a href="#1-8-6-HTTPS真的很安全么" class="headerlink" title="1.8.6 HTTPS真的很安全么"></a>1.8.6 HTTPS真的很安全么</h4><p>当网站传输协议从HTTP转换到HTTPS之后，数据传输也不见得会安全。</p>
+<ul>
+<li>由于用户习惯，通常准备访问某个网站时，在浏览器中只会输入一个域名，不会在域名前面加上“http://”或者“https://”，而是由浏览器自动填充。当前所有浏览器默认填充的都是“http://”，一般情况网站管理员会采用301、302跳转的方式，由HTTP跳转到HTTPS。但这个过程中会使用到HTTP，再经过HTTP转发到HTTPS上面，因此很容易发生劫持，受到第三方的攻击。</li>
+<li>可以使用HSTS（HTTP Strict Transport Security，即HTTP严格安全传输）优化。由于HSTS目前正在推行中，并未成为主流，面试里很少被问到。</li>
+</ul>
+<h2 id="4-Socket相关知识"><a href="#4-Socket相关知识" class="headerlink" title="4. Socket相关知识"></a>4. Socket相关知识</h2><h3 id="4-1-Socket简介"><a href="#4-1-Socket简介" class="headerlink" title="4.1 Socket简介"></a>4.1 Socket简介</h3><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/34Socket%E7%AE%80%E4%BB%8B.png?raw=true" alt="34Socketç®ä&quot;.png"></p>
+<ul>
+<li>两个进程如果需要进行通信，最基本的前提是能够唯一的标识一个进程。在本地的进程通信中，我们可以使用PID来唯一标识一个进程。但PID只在本地唯一，网络中的两个进程PID冲突的几率是有的，于是需要另辟蹊径。IP层的IP地址，可以唯一标识一个主机。而TCP协议和端口号可以唯一标识主机的一个进程，这样我们可以用IP地址+协议+端口号来唯一标识网络中的一个进程。能够唯一标识网络中的进程后，它们就可以利用Socket进行通信了。</li>
+<li>Socket跟TCP/IP协议没有必然的联系，Socket编程接口在设计的时候就希望能适应其他的网络协议。所以Socket的出现只是使得程序员更方便的使用TCP/IP协议栈而已，是对TCP/IP协议的抽象，从而形成了一些我们知道的最基本的函数接口，比如Create、Listen、Connect、Accept、Send、Read、Write等等。Socket起源于Unix，而Unix是遵从一切皆文件的哲学。Socket是基于一种从打开，到读和写，再到关闭的模式去实现的。服务器和客户端各自维护一个文件，在建立连接打开后，可以向自己文件写入内容，供对方读取或者读取对方内容。在通信结束时，就会关闭文件。</li>
+</ul>
+<h3 id="4-2-Socket通信流程"><a href="#4-2-Socket通信流程" class="headerlink" title="4.2 Socket通信流程"></a>4.2 Socket通信流程</h3><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/32Socket%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B.png?raw=true" alt="32Socketéä¿¡æµç¨.png"></p>
+<ul>
+<li>服务器首先先创建socket。</li>
+<li>为socket绑定ip地址和端口号。</li>
+<li>服务器的socket就会监听端口号的请求，随时准备接收客户端发来的连接。这时服务器的socket只是listen，并没有打开。此时我们假设客户端创建了socket，然后打开了socket，并根据服务器的ip地址和端口号尝试去连接服务器的socket。</li>
+<li>服务器的socket接收到客户端的socket请求，被动打开，开始接收客户端的请求，直到客户端返回连接信息。这时服务器的socket进入到阻塞状态，所谓阻塞是指accept()方法需要一直等待客户端返回连接信息后才返回。同时开始接收下一个客户端的连接请求。</li>
+<li>客户端在连接成功之后，就会向服务器发送连接状态信息。</li>
+<li>服务器端在接收到客户端的连接信息之后，就会将accept()方法返回，并提示连接成功。</li>
+<li>之后客户端就可以向socket中写入信息了。</li>
+<li>服务器就能收到并且读取相关的信息。</li>
+<li>在发送完数据后，客户端就会关闭socket，紧接着服务端也需要关闭socket。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/33Socket%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B.png?raw=true" alt="33Socketéä¿¡æµç¨.png"></p>
+<h3 id="4-3-Socket相关的面试题"><a href="#4-3-Socket相关的面试题" class="headerlink" title="4.3 Socket相关的面试题"></a>4.3 Socket相关的面试题</h3><p><strong>题目：</strong>编写一个网络程序，有客户端与服务端，客户端向服务端发送一个字符串，服务器收到该字符串后将其打印到命令行上，然后向客户端返回该字符串的长度，最后，客户端输出服务端返回的该字符串长度，分别用TCP和UDP两种方式去实现。</p>
+<h4 id="4-3-1-TCP实现"><a href="#4-3-1-TCP实现" class="headerlink" title="4.3.1 TCP实现"></a>4.3.1 TCP实现</h4><p><strong>①TCPServer</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TCPServer</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">//创建socket，并将socket绑定到65000端口</span></span><br><span class="line">		ServerSocket ss = <span class="keyword">new</span> ServerSocket(<span class="number">65000</span>);</span><br><span class="line">		<span class="comment">//死循环，使得socket一直等待并处理客户端发送过来的请求</span></span><br><span class="line">		<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">			<span class="comment">//监听65000端口，直到客户端返回连接信息后才返回</span></span><br><span class="line">			Socket socket = ss.accept();</span><br><span class="line">			<span class="comment">//获取客户端的请求信息后，执行相关业务的逻辑</span></span><br><span class="line">			<span class="keyword">new</span> LengthCalculator(socket).start();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>②TCPClient</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TCPClient</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">//创建socket，并指定连接的是本机的端口号为65000的服务器socket</span></span><br><span class="line">		Socket socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>, <span class="number">65000</span>);</span><br><span class="line">		<span class="comment">//获取输出流</span></span><br><span class="line">		OutputStream os = socket.getOutputStream();</span><br><span class="line">		<span class="comment">//获取输入流</span></span><br><span class="line">		InputStream is = socket.getInputStream();</span><br><span class="line">		<span class="comment">//将要传递给server的字符串参数转换成byte数组，并将数组写入到输出流中</span></span><br><span class="line">		os.write(<span class="keyword">new</span> String(<span class="string">"hello world"</span>).getBytes());</span><br><span class="line">		<span class="keyword">int</span> ch = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">byte</span>[] buff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">		<span class="comment">//buff主要用来读取输入的内容，存成byte数组，ch主要用来获取读取数组的长度</span></span><br><span class="line">		ch = is.read(buff);</span><br><span class="line">		<span class="comment">//将接收流的byte数组转换成字符串，这里是从服务端回发回来的字符串参数的长</span></span><br><span class="line">		String content = <span class="keyword">new</span> String(buff, <span class="number">0</span> , ch);</span><br><span class="line">		System.out.println(content);</span><br><span class="line">		<span class="comment">//不要忘记关闭输入输出流以及socket</span></span><br><span class="line">		is.close();</span><br><span class="line">		os.close();</span><br><span class="line">		socket.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>③功能实现LengthCalculator线程类</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LengthCalculator</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">	<span class="comment">//以socket为成员变量</span></span><br><span class="line">	<span class="keyword">private</span> Socket socket;</span><br><span class="line">    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">LengthCalculator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">LengthCalculator</span><span class="params">(Socket socket)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.socket = socket;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//获取socket的输入流</span></span><br><span class="line">			OutputStream os = socket.getOutputStream();</span><br><span class="line">			<span class="comment">//获取socket的输入流</span></span><br><span class="line">			InputStream is = socket.getInputStream();</span><br><span class="line">			<span class="keyword">int</span> ch = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">byte</span>[] buff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">			<span class="comment">//buff主要用来读取输入的内容，存成byte数组，ch主要用来获取读取</span></span><br><span class="line">			ch = is.read(buff);</span><br><span class="line">			<span class="comment">//将接收流的byte数组转换成字符串，这里获取的内容是客户端发送过</span></span><br><span class="line">			String content = <span class="keyword">new</span> String(buff, <span class="number">0</span>, ch);</span><br><span class="line">			System.out.println(content);</span><br><span class="line">			<span class="comment">//往输入流里写入获得的字符串的长度，回发给客户端</span></span><br><span class="line">			os.write(String.valueOf(content.length()).getBytes());</span><br><span class="line">			<span class="comment">//不要忘记关闭输入输出流以及socket</span></span><br><span class="line">			is.close();</span><br><span class="line">			os.close();</span><br><span class="line">			socket.close();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>④效果</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/35%E7%BB%93%E6%9E%9C.png?raw=true" alt="35ç&quot;æ.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/36%E7%BB%93%E6%9E%9C.png?raw=true" alt="36ç&quot;æ.png"></p>
+<h4 id="4-3-2-UDP实现"><a href="#4-3-2-UDP实现" class="headerlink" title="4.3.2 UDP实现"></a>4.3.2 UDP实现</h4><p><strong>①UDPServer</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.DatagramPacket;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramSocket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UDPServer</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">//服务端接受客户端发送的数据报</span></span><br><span class="line">		DatagramSocket socket = <span class="keyword">new</span> DatagramSocket(<span class="number">65001</span>); <span class="comment">//监听的端口号</span></span><br><span class="line">		<span class="keyword">byte</span>[] buff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">100</span>]; <span class="comment">//存储从客户端接收到的内容</span></span><br><span class="line">		DatagramPacket packet = <span class="keyword">new</span> DatagramPacket(buff, buff.length);</span><br><span class="line">		<span class="comment">//接收客户端发送过来的内容，并将内容封装进DatagramPacket对象中</span></span><br><span class="line">		socket.receive(packet);</span><br><span class="line">		</span><br><span class="line">        <span class="keyword">byte</span>[] data = packet.getData(); <span class="comment">//从DatagramPacket对象中获取到真正存储的数据</span></span><br><span class="line">		<span class="comment">//将数据从二进制转换成字符串形式</span></span><br><span class="line">		String content = <span class="keyword">new</span> String(data, <span class="number">0</span>, packet.getLength());</span><br><span class="line">		System.out.println(content);</span><br><span class="line">		<span class="comment">//将要发送给客户端的数据转换成二进制</span></span><br><span class="line">		<span class="keyword">byte</span>[] sendedContent = String.valueOf(content.length()).getBytes();</span><br><span class="line">		<span class="comment">//服务端给客户端发送数据报</span></span><br><span class="line">		<span class="comment">//从DatagramPacket对象中获取到数据的来源地址与端口号</span></span><br><span class="line">		DatagramPacket packetToClient = <span class="keyword">new</span> DatagramPacket(sendedContent,</span><br><span class="line">                sendedContent.length, packet.getAddress(), packet.getPort());</span><br><span class="line">        socket.send(packetToClient); <span class="comment">//发送数据给客户端</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>②UDPClient</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.DatagramPacket;</span><br><span class="line"><span class="keyword">import</span> java.net.DatagramSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UDPClient</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 客户端发数据报给服务端</span></span><br><span class="line">        DatagramSocket socket = <span class="keyword">new</span> DatagramSocket();</span><br><span class="line">        <span class="comment">// 要发送给服务端的数据</span></span><br><span class="line">        <span class="keyword">byte</span>[] buf = <span class="string">"Hello World"</span>.getBytes();</span><br><span class="line">        <span class="comment">// 将IP地址封装成InetAddress对象</span></span><br><span class="line">        InetAddress address = InetAddress.getByName(<span class="string">"127.0.0.1"</span>);</span><br><span class="line">        <span class="comment">// 将要发送给服务端的数据封装成DatagramPacket对象 需要填写上ip地址与端口号</span></span><br><span class="line">        DatagramPacket packet = <span class="keyword">new</span> DatagramPacket(buf, buf.length, address,</span><br><span class="line">                <span class="number">65001</span>);</span><br><span class="line">        <span class="comment">// 发送数据给服务端</span></span><br><span class="line">        socket.send(packet);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 客户端接受服务端发送过来的数据报</span></span><br><span class="line">        <span class="keyword">byte</span>[] data = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">100</span>];</span><br><span class="line">        <span class="comment">// 创建DatagramPacket对象用来存储服务端发送过来的数据</span></span><br><span class="line">        DatagramPacket receivedPacket = <span class="keyword">new</span> DatagramPacket(data, data.length);</span><br><span class="line">        <span class="comment">// 将接受到的数据存储到DatagramPacket对象中</span></span><br><span class="line">        socket.receive(receivedPacket);</span><br><span class="line">        <span class="comment">// 将服务器端发送过来的数据取出来并打印到控制台</span></span><br><span class="line">        String content = <span class="keyword">new</span> String(receivedPacket.getData(), <span class="number">0</span>,</span><br><span class="line">                receivedPacket.getLength());</span><br><span class="line">        System.out.println(content);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>③效果</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/37%E7%BB%93%E6%9E%9C.png?raw=true" alt="37ç&quot;æ.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/38%E7%BB%93%E6%9E%9C.png?raw=true" alt="38ç&quot;æ.png"></p>
+<h2 id="5-网络知识总结"><a href="#5-网络知识总结" class="headerlink" title="5. 网络知识总结"></a>5. 网络知识总结</h2><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-03-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AF%87/39%E6%80%BB%E7%BB%93.png?raw=true" alt="39æ&quot;ç&quot;.png"></p>
+<p><strong>问题：IP协议相关的IPV4和IPV6的区别以及他们对地址的定义？</strong></p>
+<p><strong>（1）报文</strong></p>
+<p>IPv6报头占40字节，相对于IPv4报头（变长的24字节）看似长。其实，IPv6报头的结构比IPv4简单， IPv6报头中去掉了了IPv4报头中许多不常用的域，放入了可选项和报头扩展，其可选项有更严格的定义。IPv6报头中有6个域和2个地址空间，相对于IPv4中的10个固定长度的域、2个地址空间和若干个选项的结构来说IPV6更简单。</p>
+<p><strong>（2）地址</strong></p>
+<p>IPv6协议的地址长度是128位，全部可分配地址数为2的128次方（2^128）个，不再存在地址匮乏问题。同时，IPv6地址表示方式和IPv4也不同：IPv4地址表示为点分十进制格式，32位的地址分成4个8位分组，每个8位以十进制数显式，中间用点号分隔。而IPv6采用的是十六进制格式，既128位地址是以16位为一分组，每个16位分组写成4个十六进制数，中间用冒号分十六进制格式。当然IPv6的地址还有其他简化表示方法，此处不再赘述。</p>
+<p><strong>（3）地址配置</strong></p>
+<p>有人问：IPV6这么多地址分配起来得多麻烦？其实是多虑了，IPv6协议支持地址自动配置，这是一种即插即用的机制。IPv6节点通过地址自动配置得到IPv6地址和网关地址。IPv6支持无状态地址自动配置和状态地址自动配置两种地址自动配置方式。它会给配置128位的地址带来很大的方便，特别是无状态地址自动配置。至于如何实现，简单一说：“即插即用”是指无需人为干涉，将一个节点插入IPv6网络并在网络中启动，IPv6使用了两种不同的机制来支持即插即用网络连接：启动协议（BOOTstrap Protocol，BOOTP）和动态主机配置协议（DHCP）。 这两种机制允许IP节点从特殊的BOOTP服务器或DHCP服务器获取配置信息。这些协议采用“状态自动配置”（Stateful Autoconfiguration），即服务器必须保持每个节点的状态信息，并管理这些保存的信息。</p>
+<p><strong>（4）域名解析</strong></p>
+<p>IPv6中的DNS与IPv4的在体系结构上相同，都采用树型结构域名空间。IPv4和IPv6共同拥有统一的域名空间。IPv6可以自动发现提供解析服务的DNS，有两种方式：(1) 无状态的DNS服务器发现；(2) 有状态的DNS服务器发现。有状态的DNS服务器发现方式是通过类似DHCP的服务器把DNS服务器地址、域名和搜索路径等DNS信息告知节点。无状态DNS服务器自动发现有多种方式，有兴趣的朋友建议您找相关资料阅读，比如《IPV6技术白皮书》等。</p>
+<p><strong>（5）网上邻居</strong></p>
+<p>任何设备单独工作是没意义的。同样，IPv6定义了邻居发现协议NDP，它使用一系列IPv6控制信息报文（ICMPv6）来实现相邻节点（同一链路上的节点）的交互管理，并在一个子网中保持网络层地址和链路层地址之间的映射。</p>
+<p><strong>（6）路由技术</strong></p>
+<p>IPv6主要使用三种路由协议：RIPv6（路由信息协议）、OSPFv6（开放最短路径优先）和IDRPv2（域间路由协议），以及可能的EIGRP和双层的IS-IS。而IPv4可路由的协议有IP、IPX等，不可路由的主要有DEC，NETBIOS等。针对现在无线网络的强势，移动IPv6协议为用户提供可移动的IP数据服务，让用户可以在世界各地都使用同样的IPv6地址。</p>
+<p><strong>（7）安全问题</strong></p>
+<p>IP安全（IP Security，IPSec）协议用于保护IP通信的安全。它既可以用于IPv4也可用于IPv6。在IPv6中IPSec是的一个组成部分，而IPv4中只是一个可选扩展协议。它更好的支持了IPv6，使我们有机会在将网络转换到这种新型协议的同时发展端到端安全性。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="艾曼爷爷 wechat" style="width: 200px; max-width: 100%;">
+    <div>扫描二维码关注微信公众号，了解更多</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赞赏是最好的支持与鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="艾曼爷爷 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="艾曼爷爷 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    艾曼爷爷
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://aimanyeye.github.io/2019/08/03/2019-08-03-Java面试知识点总结-计算机网络篇/" title="Java面试知识点总结-计算机网络篇">https://aimanyeye.github.io/2019/08/03/2019-08-03-Java面试知识点总结-计算机网络篇/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://aimanyeye.github.io/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java面试/" rel="tag"># Java面试</a>
+          
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/02/2019-08-02-如何从无序链表中移除重复项/" rel="next" title="如何从无序链表中移除重复项">
+                <i class="fa fa-chevron-left"></i> 如何从无序链表中移除重复项
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="艾曼爷爷">
+            
+              <p class="site-author-name" itemprop="name">艾曼爷爷</p>
+              <p class="site-description motion-element" itemprop="description">微信公众号：aimanyeye</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#1-网路基础知识"><span class="nav-number"></span> <span class="nav-text">1. 网路基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-OSI开放式互联参考模型"><span class="nav-number">1.</span> <span class="nav-text">1.1 OSI开放式互联参考模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-物理层"><span class="nav-number">1.1.</span> <span class="nav-text">1.1.1 物理层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-数据链路层"><span class="nav-number">1.2.</span> <span class="nav-text">1.1.2 数据链路层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-3-网络层"><span class="nav-number">1.3.</span> <span class="nav-text">1.1.3 网络层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-4-传输层"><span class="nav-number">1.4.</span> <span class="nav-text">1.1.4 传输层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-5-会话层"><span class="nav-number">1.5.</span> <span class="nav-text">1.1.5 会话层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-6-表示层"><span class="nav-number">1.6.</span> <span class="nav-text">1.1.6 表示层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-7-应用层"><span class="nav-number">1.7.</span> <span class="nav-text">1.1.7 应用层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络数据处理流程"><span class="nav-number">2.</span> <span class="nav-text">网络数据处理流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-TCP-IP参考模型"><span class="nav-number">3.</span> <span class="nav-text">1.2 TCP/IP参考模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-TCP与UDP"><span class="nav-number"></span> <span class="nav-text">2. TCP与UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-TCP的三次握手"><span class="nav-number">1.</span> <span class="nav-text">2.1 TCP的三次握手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-IP协议"><span class="nav-number">1.1.</span> <span class="nav-text">2.1.1 IP协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-TCP协议"><span class="nav-number">1.2.</span> <span class="nav-text">2.1.2 TCP协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-TCP报文头部"><span class="nav-number">1.3.</span> <span class="nav-text">2.1.3 TCP报文头部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-4-三次握手"><span class="nav-number">1.4.</span> <span class="nav-text">2.1.4 三次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）过程："><span class="nav-number">1.5.</span> <span class="nav-text">（1）过程：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）为什么需要三次握手才能建立起连接，两次不可以么？"><span class="nav-number">1.6.</span> <span class="nav-text">（2）为什么需要三次握手才能建立起连接，两次不可以么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）首次握手的隐患——SYN超时"><span class="nav-number">1.7.</span> <span class="nav-text">（3）首次握手的隐患——SYN超时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（4）建立连接后，Client出现故障怎么办"><span class="nav-number">1.8.</span> <span class="nav-text">（4）建立连接后，Client出现故障怎么办</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-TCP的四次挥手"><span class="nav-number">2.</span> <span class="nav-text">2.2 TCP的四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）过程"><span class="nav-number">2.1.</span> <span class="nav-text">（1）过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）为什么会有TIME-WAIT状态"><span class="nav-number">2.2.</span> <span class="nav-text">（2）为什么会有TIME-WAIT状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）为什么需要四次挥手来中断连接"><span class="nav-number">2.3.</span> <span class="nav-text">（3）为什么需要四次挥手来中断连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（4）服务器出现大量CLOSE-WAIT状态的原因"><span class="nav-number">2.4.</span> <span class="nav-text">（4）服务器出现大量CLOSE-WAIT状态的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（5）查看网络机器状况的指令"><span class="nav-number">2.5.</span> <span class="nav-text">（5）查看网络机器状况的指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-TCP和UDP的区别"><span class="nav-number">3.</span> <span class="nav-text">2.3 TCP和UDP的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-UDP简介"><span class="nav-number">3.1.</span> <span class="nav-text">2.3.1 UDP简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-UDP报文结构"><span class="nav-number">3.2.</span> <span class="nav-text">2.3.2 UDP报文结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3-UDP特点"><span class="nav-number">3.3.</span> <span class="nav-text">2.3.3 UDP特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-4-TCP和UDP的区别"><span class="nav-number">3.4.</span> <span class="nav-text">2.3.4 TCP和UDP的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-TCP的滑动窗口"><span class="nav-number">4.</span> <span class="nav-text">2.4 TCP的滑动窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-RTT和RTO"><span class="nav-number">4.1.</span> <span class="nav-text">2.4.1 RTT和RTO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-滑动窗口"><span class="nav-number">4.2.</span> <span class="nav-text">2.4.2 滑动窗口</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-HTTP相关知识"><span class="nav-number"></span> <span class="nav-text">3. HTTP相关知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-概述"><span class="nav-number">1.</span> <span class="nav-text">1.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-主要特点"><span class="nav-number">2.</span> <span class="nav-text">1.2 主要特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-HTTP的请求响应模型"><span class="nav-number">3.</span> <span class="nav-text">1.3 HTTP的请求响应模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-HTTP的请求结构"><span class="nav-number">3.1.</span> <span class="nav-text">1.3.1 HTTP的请求结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-HTTP的响应结构"><span class="nav-number">3.2.</span> <span class="nav-text">1.3.2 HTTP的响应结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-总结"><span class="nav-number">3.3.</span> <span class="nav-text">1.3.3 总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-4-请求-响应步骤"><span class="nav-number">3.4.</span> <span class="nav-text">1.3.4 请求/响应步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-在浏览器地址栏输入URL，按下回车之后经历的流程"><span class="nav-number">4.</span> <span class="nav-text">1.4 在浏览器地址栏输入URL，按下回车之后经历的流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-HTTP状态码"><span class="nav-number">5.</span> <span class="nav-text">1.5 HTTP状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-GET请求和POST请求的区别"><span class="nav-number">6.</span> <span class="nav-text">1.6 GET请求和POST请求的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-Cookie和Session的区别"><span class="nav-number">7.</span> <span class="nav-text">1.7 Cookie和Session的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-1-Cookie简介"><span class="nav-number">7.1.</span> <span class="nav-text">1.7.1 Cookie简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-2-Cookie的设置及发送过程"><span class="nav-number">7.2.</span> <span class="nav-text">1.7.2 Cookie的设置及发送过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-3-Session简介"><span class="nav-number">7.3.</span> <span class="nav-text">1.7.3 Session简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-4-Session实现方式"><span class="nav-number">7.4.</span> <span class="nav-text">1.7.4 Session实现方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-5-Cookie和Session的区别"><span class="nav-number">7.5.</span> <span class="nav-text">1.7.5 Cookie和Session的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-HTTP和HTTPS的区别"><span class="nav-number">8.</span> <span class="nav-text">1.8 HTTP和HTTPS的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-1-HTTPS简介"><span class="nav-number">8.1.</span> <span class="nav-text">1.8.1 HTTPS简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-2-SSL"><span class="nav-number">8.2.</span> <span class="nav-text">1.8.2 SSL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-3-加密的方式"><span class="nav-number">8.3.</span> <span class="nav-text">1.8.3 加密的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-4-HTTPS数据传输流程"><span class="nav-number">8.4.</span> <span class="nav-text">1.8.4 HTTPS数据传输流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-5-HTTP和HTTPS的区别"><span class="nav-number">8.5.</span> <span class="nav-text">1.8.5 HTTP和HTTPS的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-6-HTTPS真的很安全么"><span class="nav-number">8.6.</span> <span class="nav-text">1.8.6 HTTPS真的很安全么</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Socket相关知识"><span class="nav-number"></span> <span class="nav-text">4. Socket相关知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Socket简介"><span class="nav-number">1.</span> <span class="nav-text">4.1 Socket简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Socket通信流程"><span class="nav-number">2.</span> <span class="nav-text">4.2 Socket通信流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-Socket相关的面试题"><span class="nav-number">3.</span> <span class="nav-text">4.3 Socket相关的面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-1-TCP实现"><span class="nav-number">3.1.</span> <span class="nav-text">4.3.1 TCP实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-2-UDP实现"><span class="nav-number">3.2.</span> <span class="nav-text">4.3.2 UDP实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-网络知识总结"><span class="nav-number"></span> <span class="nav-text">5. 网络知识总结</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">艾曼爷爷</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '3b1b21d6164dbd9a4aad',
+          clientSecret: '699e21661be860daeb91d1daf05d9b9daa2570ba',
+          repo: 'aimanyeye.github.io',
+          owner: 'aimanyeye',
+          admin: ['aimanyeye'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
