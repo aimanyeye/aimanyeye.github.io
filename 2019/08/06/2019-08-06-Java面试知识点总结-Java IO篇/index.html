@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java面试,Java IO,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="目录 什么是IO? Java中的IO类库的基本架构 Java访问磁盘文件 Java序列化技术 网络IO工作机制">
+<meta name="keywords" content="Java面试,Java IO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java面试知识点总结-Java IO篇">
+<meta property="og:url" content="https://aimanyeye.github.io/2019/08/06/2019-08-06-Java面试知识点总结-Java IO篇/index.html">
+<meta property="og:site_name" content="aimanyeye">
+<meta property="og:description" content="目录 什么是IO? Java中的IO类库的基本架构 Java访问磁盘文件 Java序列化技术 网络IO工作机制">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/01Java%E6%B5%81.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/02%E6%B0%B4%E6%B5%81.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/03%E8%BE%93%E5%85%A5%E6%B5%81.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/04%E8%BE%93%E5%87%BA%E6%B5%81.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/05%E5%86%99%E5%AD%97%E7%AC%A6.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/06%E8%AF%BB%E5%AD%97%E7%AC%A6.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/07%E5%AD%97%E8%8A%82%E4%B8%8E%E5%AD%97%E7%AC%A6%E7%9A%84%E8%BD%AC%E5%8C%96.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/08%E5%AD%97%E8%8A%82%E4%B8%8E%E5%AD%97%E7%AC%A6%E7%9A%84%E8%BD%AC%E5%8C%96.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/09%E4%BB%8E%E7%A3%81%E7%9B%98%E8%AF%BB%E5%8F%96%E4%B8%80%E6%AE%B5%E6%96%87%E6%9C%AC%E5%AD%97%E7%AC%A6.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/10%E6%8A%A5%E9%94%99.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/11socket%E9%80%9A%E4%BF%A1.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/16BIO.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/12BIO.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/13BIO.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/14NIO.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/15NIO.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/17NIO.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/18NIO.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/19buffer.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/20buffer.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/21NIO.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/22BIO.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/23NIO.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/25%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/24AIO.png?raw=true">
+<meta property="og:updated_time" content="2019-08-09T05:00:31.838Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java面试知识点总结-Java IO篇">
+<meta name="twitter:description" content="目录 什么是IO? Java中的IO类库的基本架构 Java访问磁盘文件 Java序列化技术 网络IO工作机制">
+<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/01Java%E6%B5%81.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aimanyeye.github.io/2019/08/06/2019-08-06-Java面试知识点总结-Java IO篇/">
+
+
+
+
+
+  <title>Java面试知识点总结-Java IO篇 | aimanyeye</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aimanyeye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">刻苦学习，解决眼前的苟且，追寻诗和远方...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/08/06/2019-08-06-Java面试知识点总结-Java IO篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="艾曼爷爷">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aimanyeye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java面试知识点总结-Java IO篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T13:50:32+08:00">
+                2019-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java面试/" itemprop="url" rel="index">
+                    <span itemprop="name">Java面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java面试/Java-IO/" itemprop="url" rel="index">
+                    <span itemprop="name">Java IO</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  10.7k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  38 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h3><ol>
+<li>什么是IO?</li>
+<li>Java中的IO类库的基本架构</li>
+<li>Java访问磁盘文件</li>
+<li>Java序列化技术</li>
+<li>网络IO工作机制</li>
+</ol>
+<a id="more"></a>
+<h2 id="1-什么是IO？"><a href="#1-什么是IO？" class="headerlink" title="1. 什么是IO？"></a>1. 什么是IO？</h2><p><code>IO</code>即输入<code>Input</code> 输出<code>Output</code>的缩写，最容易让人联想到的就是屏幕这样的输出设备以及键盘鼠标这一类的输入设备， <code>IO</code>技术是非常实用的技术，<strong>用于处理设备之间的数据传输</strong>。如读/写文件，网络通讯等。</p>
+<p>我们可以从定义上看到问题的核心就是：<strong>数据/ 输入/ 输出</strong>，在Java中，主要就是涉及到<code>磁盘 IO</code> 和<code>网络 IO</code> 两种了。</p>
+<p>Java程序中，对于数据的输入/输出操作以 <code>流(stream)</code> 的方式进行。</p>
+<p><strong>简单理解Java 流（Stream）</strong></p>
+<p>通常我们说 <code>IO</code> 都会涉及到诸如输入流、输出流这样的概念，那么什么是流呢？流是一个抽象但形象的概念，你可以简单理解成<strong>一个数据的序列</strong>，输入流表示从一个源读取数据，输出流则表示向一个目标写数据，在Java程序中，对于数据的输入和输出都是采用 “流” 这样的方式进行的，其设备可以是文件、网络、内存等。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/01Java%E6%B5%81.png?raw=true" alt="01Javaæµ.png"></p>
+<p>流具有方向性，至于是输入流还是输出流则是一个相对的概念，一般以程序为参考，如果数据的流向是程序至设备，我们成为输出流，反之我们称为输入流。</p>
+<p>可以将流想象成一个<code>水流管道</code>，水流就在这管道中形成了，自然就出现了方向的概念。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/02%E6%B0%B4%E6%B5%81.png?raw=true" alt="02æ°´æµ.png"></p>
+<h2 id="2-Java中的IO类库的基本架构"><a href="#2-Java中的IO类库的基本架构" class="headerlink" title="2. Java中的IO类库的基本架构"></a>2. Java中的IO类库的基本架构</h2><p>I/O 问题是任何编程语言都无法回避的问题，因为 I/O 操作是人机交互的核心，是机器获取和交换信息的主要渠道，所以如何设计 I/O 系统变成了一大难题，特别是在当今大流量大数据的时代，I/O 问题尤其突出，很容易称为一个性能的瓶颈，也正因为如此，在 I/O 库上也一直在做持续的优化，例如<code>JDK1.4</code>引入的 <code>NIO</code>，<code>JDK1.7</code>引入的 <code>NIO 2.0</code>，都一定程度上的提升了 I/O 的性能。</p>
+<p>Java的 I/O 操作类在包 <code>java.io</code>下，有将近80个类，这些类大概可以分成如下 4 组：</p>
+<ul>
+<li><strong>基于字节操作的 I/O 接口</strong>：<code>InputStream</code> 和 <code>OutputStream</code>；</li>
+<li><strong>基于字符操作的 I/O 接口</strong>：<code>Writer</code> 和 <code>Reader</code>；</li>
+<li><strong>基于磁盘操作的 I/O 接口</strong>：<code>File</code>；</li>
+<li><strong>基于网络操作的 I/O 接口</strong>：<code>Socket</code>；</li>
+</ul>
+<p>前两组主要是传输数据的数据格式，后两组主要是传输数据的方式，虽然<code>Socket</code>类并不在<code>java.io</code>包下，但这里仍然把它们划分在了一起；<strong>I/O 只是人机交互的一种手段，除了它们能够完成这个交互功能外，我们更多的应该是关注如何提高它的运行效率</strong>。</p>
+<h3 id="2-1-基于字节的-I-O-操作接口"><a href="#2-1-基于字节的-I-O-操作接口" class="headerlink" title="2.1 基于字节的 I/O 操作接口"></a>2.1 基于字节的 I/O 操作接口</h3><p>基于字节的 I/O 操作的接口输入和输出分别对应是 <code>InputStream</code> 和 <code>OutputStream</code>，<code>InputStream</code> 的类层次结构如下图：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/03%E8%BE%93%E5%85%A5%E6%B5%81.png?raw=true" alt="03è¾å¥æµ.png"></p>
+<p>输入流根据数据类型和操作方式又被划分成若干个子类，每个子类分别处理不同操作类型。</p>
+<p><code>OutputStream</code> 输出流的类层次结构也是类似，如下图所示：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/04%E8%BE%93%E5%87%BA%E6%B5%81.png?raw=true" alt="04è¾åºæµ.png"></p>
+<p>这里就不详细解释每个子类如何使用了，如果感兴趣可以自己去看一下JDK的源码，而且的话从类名也能大致看出一二该类是在处理怎样的一些东西..这里需要说明两点：</p>
+<p><strong>（1）操作数据的方式是可以组合使用的：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OutputStream out = <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">"fileName"</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>（2）必须要指定流最终写到什么地方：</strong></p>
+<p>要么是写到磁盘，要么是写到网络中，但重点是你必须说明这一点，而且你会发现其实SocketOutputStream是属于FileOutputStream下的，也就是说写网络实际上也是写文件，只不过写网络还有一步需要处理，就是让底层的操作系统知道我这个数据是需要传送到其他地方而不是本地磁盘上的。</p>
+<h3 id="2-2-基于字符的-I-O-操作接口"><a href="#2-2-基于字符的-I-O-操作接口" class="headerlink" title="2.2 基于字符的 I/O 操作接口"></a>2.2 基于字符的 I/O 操作接口</h3><p><strong>不管是磁盘还是网络传输，最小的存储单元都是字节，</strong>而不是字符，所以 I/O 操作的都是字节而不是字符，但是在我们日常的程序中操作的数据几乎都是字符，所以为了操作方便当然要提供一个可以直接写字符的 I/O 接口。而且从字符到字节必须经过编码转换，而这个编码又非常耗时，还经常出现乱码的问题，所以 I/O 的编码问题经常是让人头疼的问题。</p>
+<p>下图是写字符的<code>I/O</code> 操作接口涉及到的类，<code>Writer</code> 类提供了一个抽象方法 <code>write(char cbuf[], int off, int len)</code> 由子类去实现：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/05%E5%86%99%E5%AD%97%E7%AC%A6.png?raw=true" alt="05åå­ç¬¦.png"></p>
+<p><code>Read</code>读字符的操作接口也有类似的类结构，如下图所示：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/06%E8%AF%BB%E5%AD%97%E7%AC%A6.png?raw=true" alt="06è¯&quot;å­ç¬¦.png"></p>
+<p>读字符的操作接口中也是 <code>int read(char cbuf[], int off, int len)</code>，返回读到的 n 个字节数，<strong>不管是 Writer 还是 Reader 类它们都只定义了读取或写入的数据字符的方式</strong>，也就是怎么写或读，但是并没有规定数据要写到哪去，写到哪去就是我们后面要讨论的基于磁盘和网络的工作机制。</p>
+<h3 id="2-3-字节与字符的转化接口"><a href="#2-3-字节与字符的转化接口" class="headerlink" title="2.3 字节与字符的转化接口"></a>2.3 字节与字符的转化接口</h3><p>另外数据持久化或网络传输都是以字节进行的，所以必须要有字符到字节或字节到字符的转化。字符到字节需要转化，其中读的转化过程如下图所示：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/07%E5%AD%97%E8%8A%82%E4%B8%8E%E5%AD%97%E7%AC%A6%E7%9A%84%E8%BD%AC%E5%8C%96.png?raw=true" alt="07å­èä¸å­ç¬¦çè½¬å.png"><br><code>InputStreamReader</code> 类是字节到字符的转化桥梁，<code>InputStream</code> 到 <code>Reader</code> 的过程要指定编码字符集，否则将采用操作系统默认字符集，很可能会出现乱码问题。<code>StreamDecoder</code> 正是完成字节到字符的解码的实现类。也就是当你用如下方式读取一个文件时：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123; </span><br><span class="line">       StringBuffer str = <span class="keyword">new</span> StringBuffer(); </span><br><span class="line">       <span class="keyword">char</span>[] buf = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1024</span>]; </span><br><span class="line">       FileReader f = <span class="keyword">new</span> FileReader(<span class="string">"file"</span>); </span><br><span class="line">       <span class="keyword">while</span>(f.read(buf)&gt;<span class="number">0</span>)&#123; </span><br><span class="line">           str.append(buf); </span><br><span class="line">       &#125; </span><br><span class="line">       str.toString(); </span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p><code>FileReader</code> 类就是按照上面的工作方式读取文件的，<code>FileReader</code> 是继承了 <code>InputStreamReader</code> 类，实际上是读取文件流，然后通过 <code>StreamDecoder</code> 解码成 <code>char</code>，只不过这里的解码字符集是默认字符集。</p>
+<p>写入也是类似的过程如下图所示：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/08%E5%AD%97%E8%8A%82%E4%B8%8E%E5%AD%97%E7%AC%A6%E7%9A%84%E8%BD%AC%E5%8C%96.png?raw=true" alt="08å­èä¸å­ç¬¦çè½¬å.png"></p>
+<p>通过 <code>OutputStreamWriter</code> 类完成，字符到字节的编码过程，由 <code>StreamEncoder</code> 完成编码过程。</p>
+<h2 id="3-Java访问磁盘文件"><a href="#3-Java访问磁盘文件" class="headerlink" title="3. Java访问磁盘文件"></a>3. Java访问磁盘文件</h2><p>我们知道数据在磁盘的唯一最小描述就是文件，也就是说上层应用程序只能通过文件来操作磁盘上的数据，文件也是操作系统和磁盘驱动器交互的一个最小单元。值得注意的是 Java 中通常的 File 并不代表一个真实存在的文件对象，当你通过指定一个路径描述符时，它就会返回一个代表这个路径相关联的一个虚拟对象，这个可能是一个真实存在的文件或者是一个包含多个文件的目录。为何要这样设计？因为大部分情况下，我们并不关心这个文件是否真的存在，而是关心这个文件到底如何操作。例如我们手机里通常存了几百个朋友的电话号码，但是我们通常关心的是我有没有这个朋友的电话号码，或者这个电话号码是什么，但是这个电话号码到底能不能打通，我们并不是时时刻刻都去检查，而只有在真正要给他打电话时才会看这个电话能不能用。也就是使用这个电话记录要比打这个电话的次数多很多。</p>
+<p>何时真正会要检查一个文件存不存？就是在真正要读取这个文件时，例如 <code>FileInputStream</code> 类都是操作一个文件的接口，注意到在创建一个 <code>FileInputStream</code> 对象时，会创建一个 <code>FileDescriptor</code> 对象，其实这个对象就是真正代表一个存在的文件对象的描述，当我们在操作一个文件对象时可以通过 <code>getFD()</code> 方法获取真正操作的与底层操作系统关联的文件描述。例如可以调用 <code>FileDescriptor.sync()</code> 方法将操作系统缓存中的数据强制刷新到物理磁盘中。</p>
+<p>下面以上文读取文件的程序为例，介绍下如何从磁盘读取一段文本字符。如下图所示：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/09%E4%BB%8E%E7%A3%81%E7%9B%98%E8%AF%BB%E5%8F%96%E4%B8%80%E6%AE%B5%E6%96%87%E6%9C%AC%E5%AD%97%E7%AC%A6.png?raw=true" alt="09ä&quot;ç£çè¯&quot;åä¸æ®µææ¬å­ç¬¦.png"></p>
+<p>当传入一个文件路径，将会根据这个路径创建一个 <code>File</code> 对象来标识这个文件，然后将会根据这个 <code>File</code> 对象创建真正读取文件的操作对象，这时将会真正创建一个关联真实存在的磁盘文件的文件描述符 <code>FileDescriptor</code>，通过这个对象可以直接控制这个磁盘文件。由于我们需要读取的是字符格式，所以需要 <code>StreamDecoder</code> 类将 <code>byte</code> 解码为 <code>char</code> 格式，至于如何从磁盘驱动器上读取一段数据，由操作系统帮我们完成。至于操作系统是如何将数据持久化到磁盘以及如何建立数据结构需要根据当前操作系统使用何种文件系统来回答，至于文件系统的相关细节可以参考另外的文章。</p>
+<h2 id="4-Java序列化技术"><a href="#4-Java序列化技术" class="headerlink" title="4. Java序列化技术"></a>4. Java序列化技术</h2><p>Java序列化就是将一个对象转化成一串二进制表示的字节数组，通过保存或转移这些字节数据来达到持久化的目的（如用于网络传输或保存到磁盘上）。需要持久化，对象必须继承 <code>java.io.Serializable</code> 接口。</p>
+<h3 id="4-1-一个实际的序列化例子"><a href="#4-1-一个实际的序列化例子" class="headerlink" title="4.1 一个实际的序列化例子"></a>4.1 一个实际的序列化例子</h3><p><strong>第一步：创建一个用于序列化的对象</strong></p>
+<p>为了具体说明序列化在Java中是如何运作的，我们来写一个实际的例子，首先我们来写一个用于序列化的对象，然后实现上述的接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用于演示Java中序列化的工作流程...</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: <span class="doctag">@aimanyeye</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span>: 2019-08-06-下午 14:37</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">transient</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello,My Name is "</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>一个类的对象想要序列化成功，必须满足两个条件</p>
+<p>①实现上述的接口；</p>
+<p>②保证该类的所有属性必须都是可序列化的，如果不希望某个属性序列化（例如一些敏感信息），可以加上<code>transient</code>关键字；</p>
+<p><strong>第二步：序列化对象</strong></p>
+<p>如下的代码完成了实例化一个 People 对象并其序列化到D盘的根目录下的一个操作，这里呢按照 Java 的标准约定将文件的后缀写成 .ser 的样子，你也可以写成其他的…</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">People people = <span class="keyword">new</span> People();</span><br><span class="line">people.name = <span class="string">"aimanyeye"</span>;</span><br><span class="line">people.age = <span class="number">21</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    FileOutputStream fileOutputStream = <span class="keyword">new</span> FileOutputStream(<span class="string">"D:/people.ser"</span>);</span><br><span class="line">    ObjectOutputStream out = <span class="keyword">new</span> ObjectOutputStream(fileOutputStream);</span><br><span class="line">    out.writeObject(people);</span><br><span class="line">    out.close();</span><br><span class="line">    fileOutputStream.close();</span><br><span class="line">    System.out.println(<span class="string">"Serialized data is saved in D:/"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>第三步：反序列化对象</strong></p>
+<p>下面的程序完成了对刚才我们序列化的文件还原成一个<code>People</code>对象的过程，并获取了其中的参数，但是注意，由于我们希望 <code>age</code> 属性是短暂的加入了<code>transient</code>关键字， 所以我们无法获取到序列化时 <code>People</code> 的 <code>age</code> 属性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">People people = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    FileInputStream fileIn = <span class="keyword">new</span> FileInputStream(<span class="string">"D:/people.ser"</span>);</span><br><span class="line">    ObjectInputStream in = <span class="keyword">new</span> ObjectInputStream(fileIn);</span><br><span class="line">    people = (People) in.readObject();</span><br><span class="line">    in.close();</span><br><span class="line">    fileIn.close();</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException i) &#123;</span><br><span class="line">    i.printStackTrace();</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125; <span class="keyword">catch</span> (ClassNotFoundException c) &#123;</span><br><span class="line">    System.out.println(<span class="string">"People class not found"</span>);</span><br><span class="line">    c.printStackTrace();</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">"Deserialized People..."</span>);</span><br><span class="line">System.out.println(<span class="string">"Name: "</span> + people.name);</span><br><span class="line">System.out.println(<span class="string">"Age: "</span> + people.age);</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Deserialized People...</span><br><span class="line">Name: aimanyeye</span><br><span class="line">Age: 0</span><br></pre></td></tr></table></figure>
+<p><strong>serialVersionUID的作用</strong></p>
+<p>上述的例子中我们完成了对一个 People 对象序列化和反序列化的过程，我们现在来做一点简单的修改，例如把age字段的<code>transient</code>关键字去掉：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello,My Name is "</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们再运行我们刚才反序列化的代码，会发现，这个时候程序竟然报错了，说是<code>serialVersionUID</code>不一致：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/10%E6%8A%A5%E9%94%99.png?raw=true" alt="10æ¥é.png"></p>
+<p>事实上，如果你经常看别人的代码的话，或许会有留意到诸如这样的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">876323262645176354L</span>;</span><br></pre></td></tr></table></figure>
+<p>就这一长串的东西也不知道是在干嘛的，但这其实<strong>是为了保证序列化版本的兼容性，即在版本升级后序列化仍保持对象的唯一性；</strong>我们通过上述的修改也感受到了其中的一二，<strong>但是问题是：我们并没有在需要序列化的对象中写任何关于这个UID的代码呀？</strong></p>
+<p>这是个有趣的问题，通常情况下，如果我们实现了序列化接口，但是没有自己显式的声明这个UID的话，那么JVM就会根据该类的类名、属性名、方法名等自己计算出一个独一无二的变量值，然后将这个变量值一同序列化到文件之中，而在反序列化的时候同样，会根据该类计算出一个独一无二的变量然后进行比较，不一致就会报错。</p>
+<ul>
+<li><strong>不显式声明的缺点：</strong>一旦写好了某一个类，那么想要修改就不行了，所以我们最好自己显式的去声明；</li>
+<li><strong>显式声明的方式：</strong>①使用默认的1L作用UID；②根据类名、接口名等生成一个64位的哈希字段，现在的编译器如IDEA、Eclipse都有这样的功能，大家感兴趣去了解下；</li>
+</ul>
+<h3 id="4-2-序列化用来干什么？"><a href="#4-2-序列化用来干什么？" class="headerlink" title="4.2 序列化用来干什么？"></a>4.2 序列化用来干什么？</h3><p>虽然我们上面的程序成功将一个对象序列化保存到磁盘，然后从磁盘还原，但是这样的功能到底可以应用在哪些场景？到底可以干一些什么样的事情呢？下面举一些在实际应用中的例子：</p>
+<ul>
+<li>Web服务器中保存<code>Session</code>对象，如<code>Tomcat</code>会在服务器关闭时把<code>session</code>序列化存储到一个名为<code>session.ser</code>的文件之中，这个过程称为<code>session</code>的钝化；</li>
+<li>网络上传输对象，如分布式应用等；</li>
+</ul>
+<p><strong>关于序列化的一些细节</strong></p>
+<ul>
+<li>如果一个类没有实现<code>Serializable</code>接口，但是它的父类实现了，那么这个类也是可以序列化的；</li>
+<li>相反，如果一个类实现了<code>Serializable</code>接口，但是它的父类没有实现，那么这个类还是可以序列化（Object是所有类的父类），但是序列化该子类对象，然后反序列化后输出父类定义的某变量的数值，会发现该变量数值与序列化时的数值不同（一般为null或者其他默认值），而且这个父类里面<strong>必须有无参的构造方法</strong>，不然子类反序列化的时候会报错。</li>
+</ul>
+<h2 id="5-网络IO工作机制"><a href="#5-网络IO工作机制" class="headerlink" title="5. 网络IO工作机制"></a>5. 网络IO工作机制</h2><p>数据从一台主机发送到网络中的另一台主机需要经过很多步骤，首先双方需要有沟通的意向，然后要有能够沟通的物理渠道（物理链路），其次，还要保障双方能够正常的进行交流，例如语言一致的问题、说话顺序的问题等等等。</p>
+<h3 id="5-1-Socket-的工作机制"><a href="#5-1-Socket-的工作机制" class="headerlink" title="5.1 Socket 的工作机制"></a>5.1 Socket 的工作机制</h3><p>看到有地方说：<strong>网络 I/O 的实质其实就是对 Socket 的读取；</strong>那Socket 这个概念没有对应到一个具体的实体，它是描述计算机之间完成相互通信一种抽象功能。打个比方，可以把 Socket 比作为两个城市之间的交通工具，有了它，就可以在城市之间来回穿梭了。交通工具有多种，每种交通工具也有相应的交通规则。Socket 也一样，也有多种。大部分情况下我们使用的都是基于 TCP/IP 的流套接字，它是一种稳定的通信协议。</p>
+<p>下图是典型的基于 Socket 的通信的场景：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/11socket%E9%80%9A%E4%BF%A1.png?raw=true" alt="11socketéä¿¡.png"></p>
+<p>主机 A 的应用程序要能和主机 B 的应用程序通信，必须通过 Socket 建立连接，而建立 Socket 连接必须需要底层 TCP/IP 协议来建立 TCP 连接。建立 TCP 连接需要底层 IP 协议来寻址网络中的主机。我们知道网络层使用的 IP 协议可以帮助我们根据 IP 地址来找到目标主机，但是一台主机上可能运行着多个应用程序，如何才能与指定的应用程序通信就要通过 TCP 或 UPD 的地址也就是端口号来指定。这样就可以通过一个 Socket 实例唯一代表一个主机上的一个应用程序的通信链路了。</p>
+<h3 id="5-2-建立通信链路"><a href="#5-2-建立通信链路" class="headerlink" title="5.2 建立通信链路"></a>5.2 建立通信链路</h3><p>当客户端要与服务端通信，客户端首先要创建一个 Socket 实例，操作系统将为这个 Socket 实例分配一个没有被使用的本地端口号，并创建一个包含本地和远程地址和端口号的套接字数据结构，这个数据结构将一直保存在系统中直到这个连接关闭。在创建 Socket 实例的构造函数正确返回之前，将要进行 <strong>TCP 的三次握手协议</strong>，TCP 握手协议完成后，Socket 实例对象将创建完成，否则将抛出 IOException 错误。</p>
+<p>与之对应的服务端将创建一个 ServerSocket 实例，ServerSocket 创建比较简单只要指定的端口号没有被占用，一般实例创建都会成功，同时操作系统也会为 ServerSocket 实例创建一个底层数据结构，这个数据结构中包含指定监听的端口号和包含监听地址的通配符，通常情况下都是“*”即监听所有地址。之后当调用 accept() 方法时，将进入阻塞状态，等待客户端的请求。当一个新的请求到来时，将为这个连接创建一个新的套接字数据结构，该套接字数据的信息包含的地址和端口信息正是请求源地址和端口。这个新创建的数据结构将会关联到 ServerSocket 实例的一个未完成的连接数据结构列表中，注意这时服务端与之对应的 Socket 实例并没有完成创建，而要等到与客户端的三次握手完成后，这个服务端的 Socket 实例才会返回，并将这个 Socket 实例对应的数据结构从未完成列表中移到已完成列表中。所以 ServerSocket 所关联的列表中每个数据结构，都代表与一个客户端的建立的 TCP 连接。</p>
+<h3 id="5-3-数据传输"><a href="#5-3-数据传输" class="headerlink" title="5.3 数据传输"></a>5.3 数据传输</h3><p>传输数据是我们建立连接的主要目的，如何通过 Socket 传输数据，下面将详细介绍。</p>
+<p>当连接已经建立成功，服务端和客户端都会拥有一个 Socket 实例，每个 Socket 实例都有一个 InputStream 和 OutputStream，正是通过这两个对象来交换数据。同时我们也知道网络 I/O 都是以字节流传输的。当 Socket 对象创建时，操作系统将会为 InputStream 和 OutputStream 分别分配一定大小的缓冲区，数据的写入和读取都是通过这个缓存区完成的。写入端将数据写到 OutputStream 对应的 SendQ 队列中，当队列填满时，数据将被发送到另一端 InputStream 的 RecvQ 队列中，如果这时 RecvQ 已经满了，那么 OutputStream 的 write 方法将会阻塞直到 RecvQ 队列有足够的空间容纳 SendQ 发送的数据。值得特别注意的是，这个缓存区的大小以及写入端的速度和读取端的速度非常影响这个连接的数据传输效率，由于可能会发生阻塞，所以网络 I/O 与磁盘 I/O 在数据的写入和读取还要有一个协调的过程，如果两边同时传送数据时可能会产生死锁，在后面 NIO 部分将介绍避免这种情况。</p>
+<h3 id="5-4-BIO阻塞IO"><a href="#5-4-BIO阻塞IO" class="headerlink" title="5.4 BIO阻塞IO"></a>5.4 BIO阻塞IO</h3><p>BIO 即阻塞 I/O，不管是磁盘 I/O 还是网络 I/O，数据在写入 OutputStream 或者从 InputStream 读取时都有可能会阻塞。<strong>一旦有线程阻塞将会失去 CPU 的使用权，这在当前的大规模访问量和有性能要求情况下是不能接受的。</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/16BIO.png?raw=true" alt="16BIO.png"></p>
+<p>虽然当前的网络 I/O 有一些解决办法，如一个客户端一个处理线程，出现阻塞时只是一个线程阻塞而不会影响其它线程工作。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/12BIO.png?raw=true" alt="12BIO.png"></p>
+<p>还有为了减少系统线程的开销，采用线程池的办法来减少线程创建和回收的成本。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/13BIO.png?raw=true" alt="13BIO.png"></p>
+<p>但是有一些使用场景仍然是无法解决的。<strong>如当前一些需要大量 HTTP 长连接的情况</strong>，像淘宝现在使用的 Web 旺旺项目，服务端需要同时保持几百万的 HTTP 连接，但是并不是每时每刻这些连接都在传输数据，这种情况下不可能同时创建这么多线程来保持连接。<strong>即使线程的数量不是问题，仍然有一些问题还是无法避免的。</strong>如这种情况，<strong>我们想给某些客户端更高的服务优先级</strong>，很难通过设计线程的优先级来完成，另外一种情况是，<strong>我们需要让每个客户端的请求在服务端可能需要访问一些竞争资源，由于这些客户端是在不同线程中，因此需要同步，而往往要实现这些同步操作要远远比用单线程复杂很多。</strong>以上这些情况都说明，我们需要另外一种新的 I/O 操作方式。</p>
+<h3 id="5-5-NIO非阻塞IO"><a href="#5-5-NIO非阻塞IO" class="headerlink" title="5.5 NIO非阻塞IO"></a>5.5 NIO非阻塞IO</h3><p>很多人都把NIO翻译成New IO，但我更觉得No-Block IO更接近它的本意，也就是非阻塞式IO，它虽然是非阻塞式的，但它是同步的，我们先看一下 NIO 涉及到的关联类图，如下：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/14NIO.png?raw=true" alt="14NIO.png"></p>
+<p><strong>上图中有两个关键类：Channel 和 Selector</strong>，它们是 NIO 中两个核心概念。我们还用前面的城市交通工具来继续比喻 NIO 的工作方式，这里的 Channel 要比 Socket 更加具体，它可以比作为某种具体的交通工具，如汽车或是高铁等，而 Selector 可以比作为一个车站的车辆运行调度系统，它将负责监控每辆车的当前运行状态：是已经出战还是在路上等等，也就是它可以轮询每个 Channel 的状态。<strong>这里还有一个 Buffer 类</strong>，它也比 Stream 更加具体化，我们可以将它比作为车上的座位，Channel 是汽车的话就是汽车上的座位，高铁上就是高铁上的座位，它始终是一个具体的概念，与 Stream 不同。Stream 只能代表是一个座位，至于是什么座位由你自己去想象，也就是你在去上车之前并不知道，这个车上是否还有没有座位了，也不知道上的是什么车，因为你并不能选择，这些信息都已经被封装在了运输工具（Socket）里面了，对你是透明的。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/15NIO.png?raw=true" alt="15NIO.png"></p>
+<p><strong>NIO 引入了 Channel、Buffer 和 Selector 就是想把这些信息具体化，让程序员有机会控制它们</strong>，如：当我们调用 write() 往 SendQ 写数据时，当一次写的数据超过 SendQ 长度是需要按照 SendQ 的长度进行分割，这个过程中需要有将用户空间数据和内核地址空间进行切换，而这个切换不是你可以控制的。而在 Buffer 中我们可以控制 Buffer 的 capacity，并且是否扩容以及如何扩容都可以控制。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/17NIO.png?raw=true" alt="17NIO.png"></p>
+<p>理解了这些概念后我们看一下，实际上它们是如何工作的，下面是典型的一段 NIO 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">selector</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ByteBuffer buffer = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">        Selector selector = Selector.open();</span><br><span class="line">        ServerSocketChannel ssc = ServerSocketChannel.open();</span><br><span class="line">        ssc.configureBlocking(<span class="keyword">false</span>);<span class="comment">//设置为非阻塞方式</span></span><br><span class="line">        ssc.socket().bind(<span class="keyword">new</span> InetSocketAddress(<span class="number">8080</span>));</span><br><span class="line">        ssc.register(selector, SelectionKey.OP_ACCEPT);<span class="comment">//注册监听的事件</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            Set selectedKeys = selector.selectedKeys();<span class="comment">//取得所有key集合</span></span><br><span class="line">            Iterator it = selectedKeys.iterator();</span><br><span class="line">            <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">                SelectionKey key = (SelectionKey) it.next();</span><br><span class="line">                <span class="keyword">if</span> ((key.readyOps() &amp; SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) &#123;</span><br><span class="line">                    ServerSocketChannel ssChannel = (ServerSocketChannel) key.channel();</span><br><span class="line">                 SocketChannel sc = ssChannel.accept();<span class="comment">//接受到服务端的请求</span></span><br><span class="line">                    sc.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">                    sc.register(selector, SelectionKey.OP_READ);</span><br><span class="line">                    it.remove();</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> </span><br><span class="line">                ((key.readyOps() &amp; SelectionKey.OP_READ) == SelectionKey.OP_READ) &#123;</span><br><span class="line">                    SocketChannel sc = (SocketChannel) key.channel();</span><br><span class="line">                    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                        buffer.clear();</span><br><span class="line">                        <span class="keyword">int</span> n = sc.read(buffer);<span class="comment">//读取数据</span></span><br><span class="line">                        <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        buffer.flip();</span><br><span class="line">                    &#125;</span><br><span class="line">                    it.remove();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用 Selector 的静态工厂创建一个选择器，创建一个服务端的 Channel 绑定到一个 Socket 对象，并把这个通信信道注册到选择器上，把这个通信信道设置为非阻塞模式。然后就可以调用 Selector 的 selectedKeys 方法来检查已经注册在这个选择器上的所有通信信道是否有需要的事件发生，如果有某个事件发生时，将会返回所有的 SelectionKey，通过这个对象 Channel 方法就可以取得这个通信信道对象从而可以读取通信的数据，而这里读取的数据是 Buffer，这个 Buffer 是我们可以控制的缓冲器。</p>
+<p>在上面的这段程序中，是将 Server 端的监听连接请求的事件和处理请求的事件放在一个线程中，但是在实际应用中，我们通常会把它们放在两个线程中，<strong>一个线程专门负责监听客户端的连接请求，而且是阻塞方式执行的；另外一个线程专门来处理请求，这个专门处理请求的线程才会真正采用 NIO 的方式</strong>，像 Web 服务器 Tomcat 和 Jetty 都是这个处理方式。</p>
+<p>下图是描述了基于 NIO 工作方式的 Socket 请求的处理过程：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/18NIO.png?raw=true" alt="18NIO.png"></p>
+<p>上图中的 Selector 可以同时监听一组通信信道（Channel）上的 I/O 状态，前提是这个 Selector 要已经注册到这些通信信道中。选择器 Selector 可以调用 select() 方法检查已经注册的通信信道上的是否有 I/O 已经准备好，如果没有至少一个信道 I/O 状态有变化，那么 select 方法会阻塞等待或在超时时间后会返回 0。上图中如果有多个信道有数据，那么将会将这些数据分配到对应的数据 Buffer 中。所以关键的地方是有一个线程来处理所有连接的数据交互，每个连接的数据交互都不是阻塞方式，所以可以同时处理大量的连接请求。</p>
+<h3 id="5-6-Buffer-的工作方式"><a href="#5-6-Buffer-的工作方式" class="headerlink" title="5.6 Buffer 的工作方式"></a>5.6 Buffer 的工作方式</h3><p>上面介绍了 Selector 将检测到有通信信道 I/O 有数据传输时，通过 selelct() 取得 SocketChannel，将数据读取或写入 Buffer 缓冲区。下面讨论一下 Buffer 如何接受和写出数据？</p>
+<p>Buffer 可以简单的理解为一组基本数据类型的元素列表，它通过几个变量来保存这个数据的当前位置状态，也就是有四个索引。如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">索引</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">capacity</td>
+<td style="text-align:left">缓冲区数组的总长度</td>
+</tr>
+<tr>
+<td style="text-align:left">position</td>
+<td style="text-align:left">下一个要操作的数据元素的位置</td>
+</tr>
+<tr>
+<td style="text-align:left">limit</td>
+<td style="text-align:left">缓冲区数组中不可操作的下一个元素的位置，limit&lt;=capacity</td>
+</tr>
+<tr>
+<td style="text-align:left">mark</td>
+<td style="text-align:left">用于记录当前 position 的前一个位置或者默认是 0</td>
+</tr>
+</tbody>
+</table>
+<p>在实际操作数据时它们有如下关系图：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/19buffer.png?raw=true" alt="19buffer.png"></p>
+<p>我们通过 ByteBuffer.allocate(11) 方法创建一个 11 个 byte 的数组缓冲区，初始状态如上图所示，position 的位置为 0，capacity 和 limit 默认都是数组长度。当我们写入 5 个字节时位置变化如下图所示：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/20buffer.png?raw=true" alt="20buffer.png"></p>
+<p>这时底层操作系统就可以从缓冲区中正确读取这 5 个字节数据发送出去了。在下一次写数据之前我们在调一下 clear() 方法。缓冲区的索引状态又回到初始位置。</p>
+<p>这里还要说明一下 mark，当我们调用 mark() 时，它将记录当前 position 的前一个位置，当我们调用 reset 时，position 将恢复 mark 记录下来的值。</p>
+<p>还有一点需要说明，通过 Channel 获取的 I/O 数据首先要经过操作系统的 Socket 缓冲区再将数据复制到 Buffer 中，这个的操作系统缓冲区就是底层的 TCP 协议关联的 RecvQ 或者 SendQ 队列，从操作系统缓冲区到用户缓冲区复制数据比较耗性能，Buffer 提供了另外一种直接操作操作系统缓冲区的的方式即 ByteBuffer.allocateDirector(size)，这个方法返回的 byteBuffer 就是与底层存储空间关联的缓冲区，它的操作方式与 linux2.4 内核的 sendfile 操作方式类似。</p>
+<p>上面从 NIO 中引入了一些概念，下面我们对这些概念再来进行简单的复述和补充：</p>
+<p><strong>缓冲区Buffer：</strong>缓冲区是一个对象，里面存的是数据，NIO进行通讯，传递的数据，都包装到Buffer中，Buffer是一个抽象类。子类有ByteBuffer、CharBuffer等，常用的是字节缓冲区，也就是ByteBuffer；</p>
+<p> <strong>通道Channel：</strong>channel是一个通道，通道就是通流某种物质的管道，在这里就是通流数据，他和流的不同之处就在于，流是单向的，只能向一个方向流动，而通道是一个管道，有两端，是双向的，可以进行读操作，也可以写操作，或者两者同时进行；</p>
+<p> <strong>多路复用器Selector：</strong>多路复用器是一个大管家，他管理着通道，通道把自己注册到Selector上面，Selector会<strong>轮询</strong>注册到自己的管道，通过判断这个管道的不同的状态，来进行相应的操作；</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/21NIO.png?raw=true" alt="21NIO.png"></p>
+<p><strong>NIO 工作机制的核心思想就是：</strong>客户端和服务器端都是使用的通道，通道具有事件，可以将事件注册到多路复选器上，事件有就绪和非就绪两种状态，就绪的状态会放到多路复选器的就绪键的集合中，起一个线程不断地去轮询就绪的状态，根据不同的状态做不同的处理。</p>
+<h3 id="5-7-NIO-和-IO-的主要区别"><a href="#5-7-NIO-和-IO-的主要区别" class="headerlink" title="5.7 NIO 和 IO 的主要区别"></a>5.7 NIO 和 IO 的主要区别</h3><p><strong>（1）面向流与面向缓冲</strong></p>
+<p>Java NIO和IO之间第一个最大的区别是，IO是面向流的，NIO是面向缓冲区的。Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。 Java NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。</p>
+<p><strong>（2）阻塞与非阻塞IO</strong></p>
+<p>Java IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。 Java NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。</p>
+<p><strong>（3）选择器（Selectors）</strong></p>
+<p>Java NIO的选择器允许一个单独的线程来监视多个输入通道，你可以注册多个通道使用一个选择器，然后使用一个单独的线程来“选择”通道：这些通道里已经有可以处理的输入，或者选择已准备写入的通道。这种选择机制，使得一个单独的线程很容易来管理多个通道。</p>
+<h3 id="5-8-Java-AIO-简单了解"><a href="#5-8-Java-AIO-简单了解" class="headerlink" title="5.8 Java AIO 简单了解"></a>5.8 Java AIO 简单了解</h3><p>AIO就是异步非阻塞IO，A就是asynchronous的意思，因为NIO1.0虽然面向缓冲，利用多路复选器实现了同步非阻塞IO，可是在NIO1.0中需要使用一个线程不断去轮询就绪集合，开销也是比较大的，所以在jdk1.7中扩展了NIO，称之为NIO2.0，NIO2.0中引入了AIO，此外NIO2.0中还引入了异步文件通道，那么究竟是怎么实现异步的呢？</p>
+<p>AIO 有三个特点，它的特点也可以说明它是如何完成异步这样的操作的：</p>
+<p>①读完了再通知我；</p>
+<p>②不会加快 I/O，只是在读完后进行通知；</p>
+<p>③使用回调函数，进行业务处理；</p>
+<p><strong>AIO 的核心原理就是：</strong>对客户端和服务器端的各种操作进行回调函数的注册（通过实现一个CompletionHandler接口，其中定义了一个completed的成功操作方法和一个fail的失败方法）。在完成某个操作之后，就会自己去调用该注册到该操作的回调函数，达到异步的效果。</p>
+<p><strong>BIO/ NIO/ AIO 的简单理解</strong></p>
+<p>我们在这里假设一个烧了一排开水的场景，</p>
+<ul>
+<li><strong>BIO（同步阻塞IO）</strong>的做法就是，叫一个线程停留在一个水壶那，直到这个水壶烧开我再去处理下一个水壶；</li>
+<li><strong>NIO（准备好再通知我，同步非阻塞IO）</strong>的做法就是叫一个线程不断地去询问每个水壶的状态，看看是否有水壶的状态发生了变化，变化则再去做相应的处理；</li>
+<li><strong>AIO（读完了再通知我，异步非阻塞IO）</strong>的做法是在每个水壶上都安装一个装置，当水壶烧开之后就会自动通知我水壶烧开了让我做相应的处理。</li>
+</ul>
+<p><strong>同步与异步</strong></p>
+<p><code>同步与异步</code>的概念, 关注的是 <strong>消息通信机制</strong></p>
+<ul>
+<li><code>同步</code>是指发出一个请求, 在没有得到结果之前该请求就不返回结果, 请求返回时, 也就得到结果了.</li>
+</ul>
+<p>比如洗衣服, 把衣服放在洗衣机里, 没有洗好之前我们一直看着, 直到洗好了才拿出来晾晒.</p>
+<ul>
+<li><code>异步</code>是指发出一个请求后, 立刻得到了回应, 但没有返回结果. 这时我们可以再处理别的事情(发送其他请求), 所以这种方式需要我们通过状态主动查看是否有了结果, 或者可以设置一个回调来通知调用者.</li>
+</ul>
+<p>比如洗衣服时, 把衣服放到洗衣机里, 我们就可以去做别的事情, 过会儿来看看有没有洗好(通过状态查询); 或者我们设置洗衣机洗完后响铃来通知我们洗好了(回调通知)</p>
+<p><strong>阻塞与非阻塞</strong></p>
+<p><code>阻塞与非阻塞</code>很容易和<code>同步与异步</code>混淆, 但两者关注点是不一样的. <code>阻塞与非阻塞</code>关注的是 <strong>程序在等待调用结果时的状态</strong></p>
+<ul>
+<li><code>阻塞</code>是指请求结果返回之前, 当前线程会被挂起(被阻塞), 这时线程什么也做不了</li>
+<li><code>非阻塞</code>是指请求结果返回之前, 当前线程没有被阻塞, 仍然可以做其他事情.</li>
+</ul>
+<p><code>阻塞</code>有个明显的特征就是线程通常是处于<code>BLOCKED</code>状态(BIO中的<code>read()</code>操作时, 线程阻塞是JVM配合OS完成的, 此时Java获取到线程的状态仍是<code>RUNNABLE</code>但它确实已经被阻塞了)</p>
+<p>如果要拿<code>同步</code>来做比较的话, 同步通信方式中的线程在发送请求之后等待结果这个过程中应该处于<code>RUNNABLE</code>状态, 同步必须一步一步来完成, 就像是代码必须执行完一行才能执行下一行, 所以必须等待这个请求返回之后才可进行下一个请求, 即使等待结果的时间长, 也是在执行这个请求的过程中. 而<code>异步</code>则不用等上一条执行完, 可以先执行别的代码, 等请求有了结果再来获取结果.</p>
+<h3 id="IO模型对比"><a href="#IO模型对比" class="headerlink" title="IO模型对比"></a>IO模型对比</h3><p>Java中的IO操作是JVM配合操作系统来完成的. 对于一个IO的读操作, 数据会先被拷贝到操作系统内核的缓冲区中, 然后从操作系统内核的缓冲区拷贝到应用程序的地址空间. 所以整个过程可分为两个阶段:</p>
+<ol>
+<li>等待I/O数据准备好. 这取决于IO目标返回数据的速度, 如网络IO时看网速和数据本身的大小.</li>
+<li>数据从内核缓冲区拷贝到进程内.</li>
+</ol>
+<p>根据这两个阶段, 产生了常见的几种不同的IO模型: <code>BIO</code>, <code>NIO</code>, <code>IO多路复用</code>和<code>AIO</code>.</p>
+<p><strong>BIO</strong></p>
+<p><code>BIO</code>即<code>Blocking I/O</code>(阻塞 I/O), BIO整个过程如下图:</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/22BIO.png?raw=true" alt="22BIO.png"></p>
+<p>程序发送请求给内核, 然后由内核去进行通信, 在内核准备好数据之前这个线程是被挂起的, 所以在两个阶段程序都处于挂起状态.</p>
+<ul>
+<li>BIO的特点就是在IO执行的两个阶段都被block了</li>
+</ul>
+<p><strong>NIO</strong></p>
+<p><code>NIO</code>即<code>Non-Blocking I/O</code>(非阻塞 I/O), NIO整个过程如下图:</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/23NIO.png?raw=true" alt="23NIO.png"></p>
+<p>与BIO的明显区别是, 发起第一次请求后, 线程并没有被阻塞, 它反复检查数据是否准备好, 把原来大块不能用的阻塞时间分成了许多”小阻塞”(检查), 所以进程不断有机会被执行. 这个检查有没有准备好数据的过程有点类似于”轮询”.</p>
+<ul>
+<li>NIO的特点就是程序需要不断的主动询问内核数据是否准备好。第一个阶段非阻塞, 第二个阶段阻塞</li>
+</ul>
+<p><strong>IO多路复用</strong></p>
+<p>IO多路复用(<code>I/O Multiplexing</code>)有<code>select</code>, <code>poll</code>, <code>epoll</code>等不同方式, 它的优点在于单个线程可以同时处理多个网络IO.</p>
+<p><code>NIO</code>中轮询操作是用户线程进行的, 如果把这个任务交给其他线程, 则用户线程就不用这么费劲的查询状态了. <code>IO多路复用</code>调用系统级别的<code>select</code>或<code>poll</code>模型, 由系统进行监控IO状态. select轮询可以监控许多socket的IO请求, 当有一个socket的数据准备好时就可以返回.</p>
+<ul>
+<li>select: 注册事件由数组管理, 数组是有长度的, 32位机上限1024, 64位机上限2048. 轮询查找时需要遍历数组.</li>
+<li>poll: 把select的数组采用链表实现, 因此没了最大数量的限制</li>
+<li>epoll方式: 基于事件回调机制, 回调时直接通知进程, 无须使用某种方式来查看状态.</li>
+</ul>
+<p>多路复用IO过程图:</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/25%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8.png?raw=true" alt="25å¤è·¯å¤ç¨.png"></p>
+<p>用户线程有一段时间是阻塞的, 从上图来看, 与<code>NIO</code>很像, 但与NIO不一样的是, select不是等到所有数据准备好才返回, 而是只要有一个准备好就返回, 它的优势在于可以同时处理多个连接. 若连接不是很多的话, 它的效率不一定高, 可能还会更差.</p>
+<p><code>Java 1.4</code>开始支持<code>NIO(New IO)</code>, 就是采用了这种方式, 在套接字上提供<code>selector</code>选择机制, 当发起<code>select()</code>时会阻塞等待至少一个事件返回.</p>
+<ul>
+<li>多路复用IO的特点是用户进程能同时等待多个IO请求, 系统来监控IO状态, 其中的任意一个进入读就绪状态, select函数就可以返回.</li>
+</ul>
+<p><strong>AIO</strong></p>
+<p><code>AIO</code>即<code>Asynchronous I/O</code>(异步 I/O), 这是<code>Java 1.7</code>引入的<code>NIO 2.0</code>中用到的. 整个过程中, 用户线程发起一个系统调用之后无须等待, 可以处理别的事情. 由操作系统等待接收内容, 接收后把数据拷贝到用户进程中, 最后通知用户程序已经可以使用数据了, 两个阶段都是非阻塞的. AIO整个过程如下图:</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-06-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%20IO%E7%AF%87/24AIO.png?raw=true" alt="24AIO.png"></p>
+<p><code>AIO</code>属于异步模型, 用户线程可以同时处理别的事情, 我们怎么进一步加工处理结果呢? Java在这个模型中提供了两种方法:</p>
+<ol>
+<li>一种是基于”回调”, 我们可以实现<code>CompletionHandler</code>接口, 在调用时把回调函数传递给对应的API即可</li>
+<li>另一种是返回一个<code>Future</code>. 处理完别的事情, 可以通过<code>isDone()</code>可查看是否已经准备好数据, 通过<code>get()</code>方法等待返回数据.</li>
+</ol>
+<p>上面这几种模式, <code>BIO</code>整个过程都等待返回, <code>NIO</code>和<code>IO多路复用</code>在第二个阶段等待返回, 因此从整个过程来看, 这三个模式都属于同步方式. <code>AIO</code>在整个过程中没有等待返回, 属于异步方式.</p>
+<p><strong>BIO、NIO、AIO适用场景分析</strong></p>
+<p><strong>BIO方式适用于连接数目比较小且固定的架构</strong>，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。</p>
+<p> <strong>NIO方式适用于连接数目多且连接比较短（轻操作）的架构</strong>，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK1.4开始支持。</p>
+<p> <strong>AIO方式使用于连接数目多且连接比较长（重操作）的架构</strong>，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="艾曼爷爷 wechat" style="width: 200px; max-width: 100%;">
+    <div>扫描二维码关注微信公众号，了解更多</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赞赏是最好的支持与鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="艾曼爷爷 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="艾曼爷爷 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    艾曼爷爷
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://aimanyeye.github.io/2019/08/06/2019-08-06-Java面试知识点总结-Java IO篇/" title="Java面试知识点总结-Java IO篇">https://aimanyeye.github.io/2019/08/06/2019-08-06-Java面试知识点总结-Java IO篇/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://aimanyeye.github.io/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java面试/" rel="tag"># Java面试</a>
+          
+            <a href="/tags/Java-IO/" rel="tag"># Java IO</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/05/2019-08-05-Java面试知识点总结-Java Web篇/" rel="next" title="Java面试知识点总结-Java Web篇">
+                <i class="fa fa-chevron-left"></i> Java面试知识点总结-Java Web篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="艾曼爷爷">
+            
+              <p class="site-author-name" itemprop="name">艾曼爷爷</p>
+              <p class="site-description motion-element" itemprop="description">微信公众号：aimanyeye</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是IO？"><span class="nav-number"></span> <span class="nav-text">1. 什么是IO？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Java中的IO类库的基本架构"><span class="nav-number"></span> <span class="nav-text">2. Java中的IO类库的基本架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基于字节的-I-O-操作接口"><span class="nav-number">1.</span> <span class="nav-text">2.1 基于字节的 I/O 操作接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-基于字符的-I-O-操作接口"><span class="nav-number">2.</span> <span class="nav-text">2.2 基于字符的 I/O 操作接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-字节与字符的转化接口"><span class="nav-number">3.</span> <span class="nav-text">2.3 字节与字符的转化接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Java访问磁盘文件"><span class="nav-number"></span> <span class="nav-text">3. Java访问磁盘文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Java序列化技术"><span class="nav-number"></span> <span class="nav-text">4. Java序列化技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-一个实际的序列化例子"><span class="nav-number">1.</span> <span class="nav-text">4.1 一个实际的序列化例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-序列化用来干什么？"><span class="nav-number">2.</span> <span class="nav-text">4.2 序列化用来干什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-网络IO工作机制"><span class="nav-number"></span> <span class="nav-text">5. 网络IO工作机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-Socket-的工作机制"><span class="nav-number">1.</span> <span class="nav-text">5.1 Socket 的工作机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-建立通信链路"><span class="nav-number">2.</span> <span class="nav-text">5.2 建立通信链路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-数据传输"><span class="nav-number">3.</span> <span class="nav-text">5.3 数据传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-BIO阻塞IO"><span class="nav-number">4.</span> <span class="nav-text">5.4 BIO阻塞IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-NIO非阻塞IO"><span class="nav-number">5.</span> <span class="nav-text">5.5 NIO非阻塞IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-Buffer-的工作方式"><span class="nav-number">6.</span> <span class="nav-text">5.6 Buffer 的工作方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7-NIO-和-IO-的主要区别"><span class="nav-number">7.</span> <span class="nav-text">5.7 NIO 和 IO 的主要区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-8-Java-AIO-简单了解"><span class="nav-number">8.</span> <span class="nav-text">5.8 Java AIO 简单了解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO模型对比"><span class="nav-number">9.</span> <span class="nav-text">IO模型对比</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">艾曼爷爷</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '3b1b21d6164dbd9a4aad',
+          clientSecret: '699e21661be860daeb91d1daf05d9b9daa2570ba',
+          repo: 'aimanyeye.github.io',
+          owner: 'aimanyeye',
+          admin: ['aimanyeye'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
