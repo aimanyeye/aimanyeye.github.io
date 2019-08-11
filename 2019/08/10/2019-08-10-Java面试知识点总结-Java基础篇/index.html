@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java面试,Java基础,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="网上收集了一些Java常考的知识点。">
+<meta name="keywords" content="Java面试,Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java面试知识点总结-Java基础篇">
+<meta property="og:url" content="https://aimanyeye.github.io/2019/08/10/2019-08-10-Java面试知识点总结-Java基础篇/index.html">
+<meta property="og:site_name" content="aimanyeye">
+<meta property="og:description" content="网上收集了一些Java常考的知识点。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/01%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E7%9A%84%E8%AE%BE%E8%AE%A1.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/02%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/03%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/04%E5%80%BC%E4%BC%A0%E9%80%92.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/05%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/06integer%E7%9A%84%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/07String%E5%AF%B9%E8%B1%A1.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/08%E8%87%AA%E5%A2%9E%E5%8F%98%E9%87%8F.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/09%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/10%E9%80%92%E5%BD%92.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/11%E7%BB%93%E6%9E%9C.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/12%E5%BE%AA%E7%8E%AF.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/12%E7%BB%93%E6%9E%9C.png?raw=true">
+<meta property="og:updated_time" content="2019-08-11T08:10:15.397Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java面试知识点总结-Java基础篇">
+<meta name="twitter:description" content="网上收集了一些Java常考的知识点。">
+<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/01%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E7%9A%84%E8%AE%BE%E8%AE%A1.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aimanyeye.github.io/2019/08/10/2019-08-10-Java面试知识点总结-Java基础篇/">
+
+
+
+
+
+  <title>Java面试知识点总结-Java基础篇 | aimanyeye</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aimanyeye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">刻苦学习，解决眼前的苟且，追寻诗和远方...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/08/10/2019-08-10-Java面试知识点总结-Java基础篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="艾曼爷爷">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aimanyeye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java面试知识点总结-Java基础篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-10T13:50:32+08:00">
+                2019-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java面试/" itemprop="url" rel="index">
+                    <span itemprop="name">Java面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java面试/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  9.3k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  37 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>网上收集了一些Java常考的知识点。</p>
+<a id="more"></a>
+<h2 id="1-面向对象的特性有哪些？"><a href="#1-面向对象的特性有哪些？" class="headerlink" title="1. 面向对象的特性有哪些？"></a>1. 面向对象的特性有哪些？</h2><p>封装、继承和多态（应要多算一个那就是抽象）</p>
+<ul>
+<li>（1）封装是指将对象的实现细节隐藏起来，然后通过公共的方法来向外暴露出该对象的功能。最常见的例子 <code>private + getter/setter</code></li>
+<li>（2）继承是面向对象实现软件复用的重要手段，当子类继承父类后，子类是一种特殊的父类，能直接或间接获得父类里的成员。</li>
+</ul>
+<p><strong>继承的缺点：</strong></p>
+<ol>
+<li>继承是一种强耦合关系，父类变子类也必须变；</li>
+<li>继承破坏了封装，对于父类而言，它的实现细节对子类来说都是透明的。</li>
+</ol>
+<ul>
+<li>（3）多态简而言之就是同一个行为具有多个不同表现形式或形态的能力。</li>
+</ul>
+<p>比如说，有一杯水，我不知道它是温的、冰的还是烫的，但是我一摸我就知道了，我摸水杯的这个动作，对于不同温度的水，就会得到不同的结果，这就是多态。</p>
+<p><strong>多态的条件</strong>：<strong>1）</strong>继承；<strong>2）</strong>重写；<strong>3）</strong>向上转型。</p>
+<p><strong>多态的好处</strong>：当把不同的子类对象都当作父类类型来看，<strong>可以屏蔽不同子类对象之间的实现差异，</strong>从而写出通用的代码达到通用编程，以适应需求的不断变化。</p>
+<ul>
+<li>（4）抽象是指从特定的角度出发，从已经存在的一些事物中抽取我们所关注的特性、行为，从而形成一个新的事物的思维过程，是一种从复杂到简洁的思维方式。</li>
+</ul>
+<h2 id="2-面向对象和面向过程的区别？"><a href="#2-面向对象和面向过程的区别？" class="headerlink" title="2.面向对象和面向过程的区别？"></a>2.面向对象和面向过程的区别？</h2><p>面向过程是<strong>一种站在过程的角度思考问题的思想，强调的是功能行为，功能的执行过程</strong>，即先干啥，后干啥。</p>
+<p><strong>面向过程的设计：</strong>最小的程序单元是函数，每个函数负责完成某一个功能，用以接受输入数据，函数对输入数据进行处理，然后输出结果数据。整个软件系统由一个个的函数组成，其中作为程序入口的函数称之为主函数，主函数依次调用其他函数，普通函数之间可以相互调用，从而实现整个系统功能。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/01%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E7%9A%84%E8%AE%BE%E8%AE%A1.png?raw=true" alt="01é¢åè¿ç¨çè®¾è®¡.png"></p>
+<p><strong>面向过程的缺陷：</strong>向过程的设计,是<strong>采用置顶而下的设计方式</strong>，在设计阶段就需要考虑每一个模块应该分解成哪些子模块，每一个子模块有细分为更小的子模块，如此类推，直到将模块细化为一个个函数。</p>
+<p><strong>问题：</strong></p>
+<ul>
+<li>1）设计不够直观，与人类的习惯思维不一致；</li>
+<li>2）系统软件适应性差，可扩展性差，维护性低。</li>
+</ul>
+<p>面向过程最大的问题在于随着系统的膨胀，面向过程将无法应付，最终导致系统的崩溃。为了解决这一种软件危机，我们提出<strong>面向对象</strong>思想。</p>
+<p>面向对象是一种基于面向过程的新的编程思想，是<strong>一种站在对象的角度思考问题</strong>的思想，我们把多个功能合理的放到不同对象里，<strong>强调的是具备某些功能的对象。</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/02%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1.png?raw=true" alt="02é¢åå¯¹è±¡çè®¾è®¡.png"></p>
+<p>面向对象更加符合我们常规的思维方式，稳定性好，可重用性强，易于开发大型软件产品，有良好的可维护性。在软件工程上，面向对象可以使工程更加模块化，实现更低的耦合和更高的内聚。</p>
+<p><strong>注意：</strong> 不要粗浅的认为面向对象一定就优于面向过程的设计</p>
+<h2 id="3-JDK-和-JRE-的区别是什么？"><a href="#3-JDK-和-JRE-的区别是什么？" class="headerlink" title="3.JDK 和 JRE 的区别是什么？"></a>3.JDK 和 JRE 的区别是什么？</h2><p>Java 运行时环境（JRE-Java Runtime Environment），它包括 Java 虚拟机、Java 核心类库和支持文件，但并不包含开发工具（JDK-Java Development Kit）——编译器、调试器和其他工具。</p>
+<p>Java 开发工具包（JDK）是完整的 Java 软件开发包，包含了 JRE，编译器和其他的工具（比如 JavaDoc， Java 调试器），可以让开发者开发、编译、执行 Java 应用程序。</p>
+<h2 id="4-Java-中覆盖和重载是什么意思？"><a href="#4-Java-中覆盖和重载是什么意思？" class="headerlink" title="4.Java 中覆盖和重载是什么意思？"></a>4.Java 中覆盖和重载是什么意思？</h2><p><strong>覆盖（Override）是指子类对父类方法的一种重写，</strong>只能比父类抛出更少的异常，访问权限不能比父类的小，被覆盖的方法不能是 private 的，否则只是在子类中重新定义了一个新方法。</p>
+<p><strong>重载（Overload）表示同一个类中可以有多个名称相同的方法，但这些方法的参数列表各不相同。</strong></p>
+<p>问：构成重载的条件有哪些？</p>
+<p>答：参数类型不同、参数个数不同、参数顺序不同。</p>
+<p>问：函数的返回值不同可以构成重载吗？为什么？</p>
+<p>答：不可以，因为 Java 中调用函数并不需要强制赋值。</p>
+<h2 id="5-抽象类和接口的区别有哪些？"><a href="#5-抽象类和接口的区别有哪些？" class="headerlink" title="5.抽象类和接口的区别有哪些？"></a>5.抽象类和接口的区别有哪些？</h2><ul>
+<li>（1）抽象类中可以没有抽象方法；接口中的方法必须是抽象方法；</li>
+<li>（2）抽象类中可以有普通的成员变量；接口中的变量必须是 static final 类型的，必须被初始化,接口中只有常量，没有变量。</li>
+<li>（3）抽象类只能单继承，接口可以继承多个父接口；</li>
+<li>（4）Java 8 中接口中会有 default 方法，即方法可以被实现。</li>
+</ul>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/03%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB.png?raw=true" alt="03æ½è±¡ç±&quot;åæ¥å£çåºå&quot;.png"></p>
+<p>抽象类和接口如何选择？</p>
+<ul>
+<li>（1）如果要创建不带任何方法定义和成员变量的基类，那么就应该选择接口而不是抽象类。</li>
+<li>（2）如果知道某个类应该是基类，那么第一个选择的应该是让它成为一个接口，只有在必须要有方法定义和成员变量的时候，才应该选择抽象类。因为抽象类中允许存在一个或多个被具体实现的方法，只要方法没有被全部实现该类就仍是抽象类。</li>
+</ul>
+<h2 id="6-static关键字是什么意思？"><a href="#6-static关键字是什么意思？" class="headerlink" title="6.static关键字是什么意思？"></a>6.<code>static</code>关键字是什么意思？</h2><p><code>static</code> 关键字表明一个成员变量或者是成员方法可以在没有所属的类的实例变量的情况下被访问。</p>
+<p>Java中是否可以覆盖(override)一个 private 或者是 static 的方法？</p>
+<p>Java 中 static 方法不能被覆盖，因为方法覆盖是基于运行时动态绑定的，而 static 方法是编译时静态绑定的。static 方法跟类的任何实例都不相关，所以概念上不适用。</p>
+<p>Java 中也不可以覆盖 private 的方法，因为 private 修饰的变量和方法只能在当前类中使用，如果是其他的类继承当前类是不能访问到 private 变量或方法的，当然也不能覆盖。</p>
+<h2 id="7-Java-是值传递还是引用传递？"><a href="#7-Java-是值传递还是引用传递？" class="headerlink" title="7.Java 是值传递还是引用传递？"></a>7.Java 是值传递还是引用传递？</h2><p>值传递是对基本型变量而言的,传递的是该变量的一个副本,改变副本不影响原变量。引用传递一般是对于对象型变量而言的,传递的是该对象地址的一个副本, 并不是原对象本身 。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/04%E5%80%BC%E4%BC%A0%E9%80%92.png?raw=true" alt="04å¼ä¼ é.png"></p>
+<p>这是一个很经典的例子，我们希望在调用了 swap() 方法之后交换 arg1 和 arg2 的值，但事实上并没有，为什么会这样？</p>
+<p>这就是因为 Java 是值传递的，也就是说，我们在调用一个需要传递参数的函数时，传递给函数的参数并不是我们传递进去的参数本身，而是它的一个副本，我们改变了数据其实只是改变了副本的数据而已，并不会对原来的参数有任何的改变。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/05%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92.png?raw=true" alt="05å¼ç¨ä¼ é.png"></p>
+<p>我们自己定义了一个内部类 Person ，该类只有一个 int 类型的 age 属性，然后有 getter/setter ，我们希望通过 changeAge() 函数来改变 Person 对象的 age 属性，为什么这次成功了呢？</p>
+<p>你依然可以理解为，主函数将 person 复制了一份到 changeAge 函数中去，最终还是只改变了 changeAge 中复制的那一份参数的值，而原本的参数并没有改变，但 changeAge 中的那一份和原本的参数指向了同一个内存区域！</p>
+<h2 id="8-JDK-中常用的包有哪些？"><a href="#8-JDK-中常用的包有哪些？" class="headerlink" title="8.JDK 中常用的包有哪些？"></a>8.JDK 中常用的包有哪些？</h2><p>java.lang、java.util、java.io、java.net、java.sql。</p>
+<h2 id="9-Integer-的缓存机制"><a href="#9-Integer-的缓存机制" class="headerlink" title="9.Integer 的缓存机制"></a>9.Integer 的缓存机制</h2><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/06integer%E7%9A%84%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6.png?raw=true" alt="06integerçç¼å­æºå¶.png"></p>
+<ul>
+<li><p>第一个返回true很好理解，就像上面讲的，a和b指向相同的地址。</p>
+</li>
+<li><p>第二个返回false是为什么呢？这是因为 Integer 有缓存机制，在 JVM 启动初期就缓存了 -128 到 127 这个区间内的所有数字。</p>
+</li>
+<li><p>第三个返回false是因为用了new关键字来开辟了新的空间，i和j两个对象分别指向堆区中的两块内存空间。</p>
+</li>
+</ul>
+<p>因为你只需要知道这是 Java 的一个缓存机制。Integer 类的内部类缓存了 -128 到 127 的所有数字。</p>
+<h2 id="10-下述两种方法分别创建了几个-Sring-对象？"><a href="#10-下述两种方法分别创建了几个-Sring-对象？" class="headerlink" title="10.下述两种方法分别创建了几个 Sring 对象？"></a>10.下述两种方法分别创建了几个 Sring 对象？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种：直接赋一个字面量</span></span><br><span class="line">String str1 = <span class="string">"ABCD"</span>;</span><br><span class="line"><span class="comment">// 第二种：通过构造器创建</span></span><br><span class="line">String str2 = <span class="keyword">new</span> String(<span class="string">"ABCD"</span>);</span><br></pre></td></tr></table></figure>
+<p><code>String str1 = &quot;ABCD&quot;;</code>最多创建一个String对象,最少不创建String对象.如果常量池中,存在”ABCD”,那么str1直接引用,此时不创建String对象.否则,先在常量池先创建”ABCD”内存空间,再引用.</p>
+<p><code>String str2 = new String(&quot;ABCD&quot;);</code>最多创建两个String对象，至少创建一个String对象。new关键字绝对会在堆空间创建一块新的内存区域，所以至少创建一个String对象。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/07String%E5%AF%B9%E8%B1%A1.png?raw=true" alt="07Stringå¯¹è±¡.png"></p>
+<ul>
+<li>当执行第一句话的时候，会在常量池中添加一个新的ABCD字符，str1指向常量池的ABCD</li>
+<li>当执行第二句话的时候，因为有new操作符，所以会在堆空间新开辟一块空间用来存储新的String对象，因为此时常量池中已经有了ABCD字符，所以堆中的String对象指向常量池中的ABCD，而str2则指向堆空间中的String对象。</li>
+</ul>
+<h2 id="11-i-与-i-到底有什么不同？"><a href="#11-i-与-i-到底有什么不同？" class="headerlink" title="11.i++ 与 ++i 到底有什么不同？"></a>11.i++ 与 ++i 到底有什么不同？</h2><p>解析：对于这两个的区别，熟悉的表述是：前置++是先将变量的值加 1，然后使用加 1 后的值参与运算，而后置++则是先使用该值参与运算，然后再将该值加 1 .但事实上，<strong>前置++和后置++一样，在参与运算之前都会将变量的值加 1</strong></p>
+<p>实际上，不管是前置 ++，还是后置 ++，都是先将变量的值加 1，然后才继续计算的。<strong>二者之间真正的区别是：前置 ++ 是将变量的值加 1 后，使用增值后的变量进行运算的，而后置 ++ 是首先将变量赋值给一个临时变量，接下来对变量的值加 1，然后使用那个临时变量进行运算。</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/08%E8%87%AA%E5%A2%9E%E5%8F%98%E9%87%8F.png?raw=true" alt="08èªå¢åé.png"></p>
+<h2 id="12-交换变量的三种方式"><a href="#12-交换变量的三种方式" class="headerlink" title="12.交换变量的三种方式"></a>12.交换变量的三种方式</h2><ul>
+<li>第一种：通过一个第三变量</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">int</span> y = <span class="number">10</span>;</span><br><span class="line">        swap(x,y);</span><br><span class="line">        System.out.println(x);</span><br><span class="line">        System.out.println(y);</span><br><span class="line"></span><br><span class="line">        Value v = <span class="keyword">new</span> Value(<span class="number">5</span>,<span class="number">10</span>);</span><br><span class="line">        swap(v);</span><br><span class="line">        System.out.println(v.x);</span><br><span class="line">        System.out.println(v.y);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 无效的交换：形参的改变无法反作用于实参</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = x;</span><br><span class="line">        x = y;</span><br><span class="line">        y = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 有效的交换：通过引用（变量指向一个对象）来修改成员变量</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Value value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = value.x;</span><br><span class="line">        value.x = value.y;</span><br><span class="line">        value.y = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Value</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">int</span> y;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Value</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.x = x;</span><br><span class="line">        <span class="keyword">this</span>.y = y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输出的结果：</span><br><span class="line">5</span><br><span class="line">10</span><br><span class="line">10</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+<p>事实上，其实如果把基础类型int改成对应的包装类的话其实可以更加简单的完成这个操作，不过需要付出更多的内存代价。</p>
+<ul>
+<li>第二种：通过通过相加的方式（相同的 Value 类不再重复展示）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Value v1 = <span class="keyword">new</span> Value(<span class="number">5</span>,<span class="number">10</span>);</span><br><span class="line">        swap(v1);</span><br><span class="line">        System.out.println(<span class="string">"v1交换之后的结果为："</span>);</span><br><span class="line">        System.out.println(v1.x);</span><br><span class="line">        System.out.println(v1.y);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Value v)</span> </span>&#123;</span><br><span class="line">        v.x = v.x + v.y;<span class="comment">// 把v.x与v.y的和存储在v.x中</span></span><br><span class="line">        v.y = v.x - v.y;<span class="comment">// v.x减掉v.y本来的值即为v.x</span></span><br><span class="line">        v.x = v.x - v.y;<span class="comment">// v.x减掉v.y的值也就是以前x.y的值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输出的结果：</span><br><span class="line">v1的交换结果：</span><br><span class="line">10</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+<p>这样就可以不通过临时变量，来达到交换两个变量的目的，该方法不太容易理解，但并<strong>不推荐这种做法</strong>，原因在于当数值很大的时候，16进制的求和运算可能造成数据的溢出，虽然最后的结果依然会是我们所期望的那样，但仍然不是十分可取。</p>
+<ul>
+<li>第三种：通过异或的方式：</li>
+</ul>
+<p>位异或运算符（^）有这样的一个性质，就是两个整型的数据x与y，有：<br><code>（x ^ y ^ y） == x</code>这说明，如果一个变量x异或另外一个变量y两次，结果为x。通过这一点，可以实现交换两个变量的值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Value v1 = <span class="keyword">new</span> Value(<span class="number">5</span>,<span class="number">10</span>);</span><br><span class="line">        swap(v1);</span><br><span class="line">        System.out.println(<span class="string">"v1交换之后的结果为："</span>);</span><br><span class="line">        System.out.println(v1.x);</span><br><span class="line">        System.out.println(v1.y);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Value v)</span> </span>&#123;</span><br><span class="line">        v.x = v.x ^ v.y;</span><br><span class="line">        v.y = v.x ^ v.y;</span><br><span class="line">        v.x = v.x ^ v.y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输出的结果：</span><br><span class="line">v1交换之后的结果为：</span><br><span class="line">10</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+<p>跟上面相加的方式过程几乎类似，只不过运算的方式不同而已。<strong>异或的方法比相加更加可取的地方在于，异或不存在数据溢出。</strong></p>
+<h2 id="13-Java-对象初始化顺序？"><a href="#13-Java-对象初始化顺序？" class="headerlink" title="13.Java 对象初始化顺序？"></a>13.Java 对象初始化顺序？</h2><p>不考虑静态成员的初始化，调用一个对象的构造函数时，程序<strong>先调用父类的构造函数</strong>（可以通过super关键字指定父类的构造函数，否则默认调用无参的构造函数，并且需要在子类的构造函数的第一行调用），<strong>之后静态成员变量的初始化函数和静态初始化块则按照在代码当中的顺序执行</strong>，成员变量如果没有指定值的话则赋予默认值，即基本数据类型为0或false等，对象则为null；<strong>最后调用自身构造函数。</strong></p>
+<p>我们可以写一段程序来对初始化顺序进行一个简单的验证：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Derive</span> <span class="keyword">extends</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Member m1 = <span class="keyword">new</span> Member(<span class="string">"Member 1"</span>);</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">"Initial Block()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Derive</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Derive()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Member m2 = <span class="keyword">new</span> Member(<span class="string">"Member 2"</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> i = getInt();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getInt</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"getInt()"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Derive();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Base</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Base()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Member</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Member</span><span class="params">(String m)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Member() "</span>+m);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">程序的输出结果是：</span><br><span class="line">Base()</span><br><span class="line">Member() Member 1</span><br><span class="line">Initial Block()</span><br><span class="line">Member() Member 2</span><br><span class="line">getInt()</span><br><span class="line">Derive()</span><br></pre></td></tr></table></figure>
+<h2 id="14-true、false-与-null-是关键字吗？"><a href="#14-true、false-与-null-是关键字吗？" class="headerlink" title="14.true、false 与 null 是关键字吗？"></a>14.true、false 与 null 是关键字吗？</h2><p>不是。true、false 是布尔类型的字面常量，null 是引用类型的字面常量。</p>
+<p>那 goto 与 const 呢？</p>
+<p>是。goto 与 const 均是 Java 语言保留的关键字，即没有任何语法应用。</p>
+<h2 id="15-exception-和-error-有什么区别？"><a href="#15-exception-和-error-有什么区别？" class="headerlink" title="15.exception 和 error 有什么区别？"></a>15.exception 和 error 有什么区别？</h2><p>exception 和 error都是 Throwable 的子类。exception 用于用户程序可以捕获的异常情况；error 定义了不期望被用户程序捕获的异常。</p>
+<p>exception 表示一种设计或设计的问题，也就是说只要程序正常运行，从不会发生的情况；而 error 表示回复不是不可能但是很困难的情况下的一种严重问题，比如内存溢出，不可能指望程序处理这样的情况。</p>
+<h2 id="16-throw-和-throws-有什么区别？"><a href="#16-throw-和-throws-有什么区别？" class="headerlink" title="16.throw 和 throws 有什么区别？"></a>16.throw 和 throws 有什么区别？</h2><p>throw 关键字用来在程序中明确的抛出异常，相反，throws 语句用来表明方法不能处理的异常。每一个方法都必须要指定哪些异常不能处理，所以方法的调用者才能够确保处理可能发生的异常，多个异常是用逗号分隔的。</p>
+<h2 id="17-生产者-消费者问题"><a href="#17-生产者-消费者问题" class="headerlink" title="17.生产者-消费者问题"></a>17.生产者-消费者问题</h2><p>这绝对是属于重点了，不管是考察对于该重要模型的理解还是考察代码能力，这都是一道很好的考题，所以很有必要的，我们先来回顾一下什么是生产者-消费者问题；</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/09%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85.png?raw=true" alt="09çäº§èæ¶è´¹è.png"></p>
+<p>该问题描述了共享固定大小<a href="https://zh.wikipedia.org/wiki/%E7%BC%93%E5%86%B2%E5%8C%BA" target="_blank" rel="noopener">缓冲区</a>的两个线程——即所谓的“生产者”和“消费者”——在实际运行时会发生的问题。生产者的主要作用是生成一定量的数据放到缓冲区中，然后重复此过程。与此同时，消费者也在缓冲区消耗这些数据。<strong>该问题的关键就是要保证生产者不会在缓冲区满时加入数据，消费者也不会在缓冲区中空时消耗数据。</strong></p>
+<p><strong>几种实现方式</strong></p>
+<p>上面说到该问题的关键是：<strong>如何保证生产者不会在缓冲区满时加入数据，消费者也不会在缓冲区空时消耗数据；</strong>解决思路可以简单概括为：</p>
+<ul>
+<li>生产者持续生产，直到缓冲区满，<strong>满时阻塞</strong>；缓冲区不满后，继续生产；</li>
+<li>消费者持续消费，直到缓冲区空，<strong>空时阻塞</strong>；缓冲区不空后，继续消费；</li>
+<li>生产者和消费者都可以有多个；</li>
+</ul>
+<p>那么在 Java 语言中，能达到上述要求的，自然而然的就会有如下的几种写法，但是问题的核心都是能够让消费者和生产者在各自满足条件需要阻塞时能够起到正确的作用：</p>
+<ul>
+<li><code>wait()</code>/<code>notify()</code>方式；</li>
+<li><code>await()</code>/<code>signal()</code>方式；</li>
+<li><code>BlockingQueue</code>阻塞队列方式；</li>
+<li><code>PipedInputStream</code>/<code>PipedOutputStream</code>方式；</li>
+</ul>
+<p>手写代码，我们着重掌握上面对应的第一种和第三种写法就足够了；</p>
+<p><strong>（1）wait()/notify()方式实现</strong></p>
+<p><strong>生产者代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> isRunning = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Vector sharedQueue;                            <span class="comment">// 内存缓冲区</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> SIZE;                                      <span class="comment">// 缓冲区大小</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> AtomicInteger count = <span class="keyword">new</span> AtomicInteger();    <span class="comment">// 总数，原子操作</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SLEEPTIME = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(Vector sharedQueue, <span class="keyword">int</span> SIZE)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sharedQueue = sharedQueue;</span><br><span class="line">        <span class="keyword">this</span>.SIZE = SIZE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> data;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"start producer id = "</span> + Thread.currentThread().getId());</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (isRunning) &#123;</span><br><span class="line">                <span class="comment">// 模拟延迟</span></span><br><span class="line">                Thread.sleep(r.nextInt(SLEEPTIME));</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 当队列满时阻塞等待</span></span><br><span class="line">                <span class="keyword">while</span> (sharedQueue.size() == SIZE) &#123;</span><br><span class="line">                    <span class="keyword">synchronized</span> (sharedQueue) &#123;</span><br><span class="line">                        System.out.println(<span class="string">"Queue is full, producer "</span> + Thread.currentThread().getId()</span><br><span class="line">                                + <span class="string">" is waiting, size："</span> + sharedQueue.size());</span><br><span class="line">                        sharedQueue.wait();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 队列不满时持续创造新元素</span></span><br><span class="line">                <span class="keyword">synchronized</span> (sharedQueue) &#123;</span><br><span class="line">                    data = count.incrementAndGet();                 <span class="comment">// 构造任务数据</span></span><br><span class="line">                    sharedQueue.add(data);</span><br><span class="line">                    System.out.println(<span class="string">"producer create data:"</span> + data + <span class="string">", size："</span> + sharedQueue.size());</span><br><span class="line">                    sharedQueue.notifyAll();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            Thread.currentThread().interrupted();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        isRunning = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有了上面的提到的解决思路，应该很容易实现，但是这里主要提一下一些细节和重点：</p>
+<p><strong>创造数据</strong>：生产者-消费者解决的问题就是数据在多线程间的共享，所以我们首要关心的问题就应该是数据，我们这里采用的是使用一个<code>AtomicInteger</code>类来为我们创造数据，使用它的好处是该类是一个保证原子操作的类，我们使用其中的<code>incrementAndGet()</code>方法不仅能够保证线程安全，还可以达到一个计数的效果，所以是一个既简单又实用的选择，当然也可以使用其他的数据来代替，<strong>这里注意的是要保证该类在内存中只存在一份，使用static修饰</strong>；</p>
+<p> <strong>内存缓冲区</strong>：要保证在多线程环境下内存缓冲区的安全，所以我们考虑使用简单的<code>Vector</code>类来作为我们的内存缓冲区，并且使用<code>final</code>修饰保证内存缓冲区的唯一，然后的话我们需要判断队列是否满，需要手动添加一个标识缓冲区大小的变量<code>SIZE</code>，注意也是<code>final</code>修饰；</p>
+<p> <strong>模拟延迟</strong>：这里主要模拟的是一个网络延迟，我们首先定义了一个<code>SLEEPTIME</code>的延迟范围，<strong>注意使用的是static final修饰</strong>，然后使用<code>Random()</code>类的<code>nextInt()</code>方法来随机选取一个该范围内的值来模拟网络环境中的延迟；</p>
+<p> <strong>停止方法</strong>：首先需要知道在<code>Thread</code>类中有一个弃用的<code>stop()</code>方法，我们自己增加一个标志位<code>isRunning</code>来完成我们自己的<code>stop()</code>功能，<strong>需要注意的是使用volatile来修饰</strong>，保证该标志位的可见性；</p>
+<p> <strong>错误处理</strong>：当捕获到错误时，我们应该使用<code>Thread</code>类中的<code>interrupted()</code>方法来终止当前的进程；</p>
+<p> <strong>消息提示</strong>：我们主要是要在控制台输出该生产者的信息，包括当前队列的状态，大小，当前线程的生产者信息等，<strong>注意的是信息格式的统一(后面的消费者同样的)</strong>；</p>
+<p><strong>消费者代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Vector sharedQueue;                            <span class="comment">// 内存缓冲区</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> SIZE;                                      <span class="comment">// 缓冲区大小</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SLEEPTIME = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Consumer</span><span class="params">(Vector sharedQueue, <span class="keyword">int</span> SIZE)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sharedQueue = sharedQueue;</span><br><span class="line">        <span class="keyword">this</span>.SIZE = SIZE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"start consumer id = "</span> + Thread.currentThread().getId());</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="comment">// 模拟延迟</span></span><br><span class="line">                Thread.sleep(r.nextInt(SLEEPTIME));</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 当队列空时阻塞等待</span></span><br><span class="line">                <span class="keyword">while</span> (sharedQueue.isEmpty()) &#123;</span><br><span class="line">                    <span class="keyword">synchronized</span> (sharedQueue) &#123;</span><br><span class="line">                        System.out.println(<span class="string">"Queue is empty, consumer "</span> + Thread.currentThread().getId()</span><br><span class="line">                                + <span class="string">" is waiting, size："</span> + sharedQueue.size());</span><br><span class="line">                        sharedQueue.wait();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 队列不空时持续消费元素</span></span><br><span class="line">                <span class="keyword">synchronized</span> (sharedQueue) &#123;</span><br><span class="line">                    System.out.println(<span class="string">"consumer consume data："</span> + sharedQueue.remove(<span class="number">0</span>) + <span class="string">", size："</span> + sharedQueue.size());</span><br><span class="line">                    sharedQueue.notifyAll();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            Thread.currentThread().interrupt();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>跟生产者相同的，你需要注意<strong>内存缓冲区</strong>/ <strong>模拟延迟</strong>/ <strong>错误处理</strong>/ <strong>消息提示</strong>这些方面的细节问题，总体来说消费者就是持续不断的消费，也比较容易实现；</p>
+<p><strong>主线程代码</strong></p>
+<p>有了我们的消费者和生产者代码，我们需要来验证一下它们的正确性，照常理来说我们直接创建一些消费者和生产者的线程让它们执行就可以了啊，但是为了“加分”考虑呢，我们还是使用线程池吧..也不是特别复杂：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">// 1.构建内存缓冲区</span></span><br><span class="line">    Vector sharedQueue = <span class="keyword">new</span> Vector();</span><br><span class="line">    <span class="keyword">int</span> size = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.建立线程池和线程</span></span><br><span class="line">    ExecutorService service = Executors.newCachedThreadPool();</span><br><span class="line">    Producer prodThread1 = <span class="keyword">new</span> Producer(sharedQueue, size);</span><br><span class="line">    Producer prodThread2 = <span class="keyword">new</span> Producer(sharedQueue, size);</span><br><span class="line">    Producer prodThread3 = <span class="keyword">new</span> Producer(sharedQueue, size);</span><br><span class="line">    Consumer consThread1 = <span class="keyword">new</span> Consumer(sharedQueue, size);</span><br><span class="line">    Consumer consThread2 = <span class="keyword">new</span> Consumer(sharedQueue, size);</span><br><span class="line">    Consumer consThread3 = <span class="keyword">new</span> Consumer(sharedQueue, size);</span><br><span class="line">    service.execute(prodThread1);</span><br><span class="line">    service.execute(prodThread2);</span><br><span class="line">    service.execute(prodThread3);</span><br><span class="line">    service.execute(consThread1);</span><br><span class="line">    service.execute(consThread2);</span><br><span class="line">    service.execute(consThread3);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.睡一会儿然后尝试停止生产者</span></span><br><span class="line">    Thread.sleep(<span class="number">10</span> * <span class="number">1000</span>);</span><br><span class="line">    prodThread1.stop();</span><br><span class="line">    prodThread2.stop();</span><br><span class="line">    prodThread3.stop();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4.再睡一会儿关闭线程池</span></span><br><span class="line">    Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">    service.shutdown();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>大家可以自行去看看运行的结果，是没有问题的，不会出现多生产或者多消费之类的多线程问题，运行一段时间等生产者都停止之后，我们可以观察到控制台三个消费者都在等待数据的情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Queue is empty, consumer 17 is waiting, size：0</span><br><span class="line">Queue is empty, consumer 15 is waiting, size：0</span><br><span class="line">Queue is empty, consumer 16 is waiting, size：0</span><br></pre></td></tr></table></figure>
+<p><strong>（2）BlockingQueue阻塞队列方式实现</strong></p>
+<p>该方式对比起上面一种方式实现起来要简单一些，因为不需要手动的去通知其他线程了，生产者直接往队列中放数据直到队列满，消费者直接从队列中获取数据直到队列空，BlockingQueue会自动帮我们完成阻塞这个动作，还是先来看看代码</p>
+<p><strong>生产者代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> isRunning = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">private</span> BlockingQueue&lt;Integer&gt; queue;                        <span class="comment">// 内存缓冲区</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> AtomicInteger count = <span class="keyword">new</span> AtomicInteger();    <span class="comment">// 总数，原子操作</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SLEEPTIME = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(BlockingQueue&lt;Integer&gt; queue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.queue = queue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> data;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"start producer id = "</span> + Thread.currentThread().getId());</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (isRunning) &#123;</span><br><span class="line">                <span class="comment">// 模拟延迟</span></span><br><span class="line">                Thread.sleep(r.nextInt(SLEEPTIME));</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 往阻塞队列中添加数据</span></span><br><span class="line">                data = count.incrementAndGet();                 <span class="comment">// 构造任务数据</span></span><br><span class="line">                System.out.println(<span class="string">"producer "</span> + Thread.currentThread().getId() + <span class="string">" create data："</span> + data</span><br><span class="line">                        + <span class="string">", size："</span> + queue.size());</span><br><span class="line">                <span class="keyword">if</span> (!queue.offer(data, <span class="number">2</span>, TimeUnit.SECONDS)) &#123;</span><br><span class="line">                    System.err.println(<span class="string">"failed to put data："</span> + data);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            Thread.currentThread().interrupted();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        isRunning = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>跟上面一种方式没有很大的差别，倒是代码更加简单通透，不过需要注意的是对<strong>阻塞队列添加失败的错误处理</strong>；</p>
+<p><strong>消费者代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> BlockingQueue&lt;Integer&gt; queue;                            <span class="comment">// 内存缓冲区</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SLEEPTIME = <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Consumer</span><span class="params">(BlockingQueue&lt;Integer&gt; queue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.queue = queue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> data;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"start consumer id = "</span> + Thread.currentThread().getId());</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="comment">// 模拟延迟</span></span><br><span class="line">                Thread.sleep(r.nextInt(SLEEPTIME));</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 从阻塞队列中获取数据</span></span><br><span class="line">                <span class="keyword">if</span> (!queue.isEmpty()) &#123;</span><br><span class="line">                    data = queue.take();</span><br><span class="line">                    System.out.println(<span class="string">"consumer "</span> + Thread.currentThread().getId() + <span class="string">" consume data："</span> + data</span><br><span class="line">                            + <span class="string">", size："</span> + queue.size());</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    System.out.println(<span class="string">"Queue is empty, consumer "</span> + Thread.currentThread().getId()</span><br><span class="line">                            + <span class="string">" is waiting, size："</span> + queue.size());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            Thread.currentThread().interrupt();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>主线程代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">// 1.构建内存缓冲区</span></span><br><span class="line">    BlockingQueue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedBlockingDeque&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.建立线程池和线程</span></span><br><span class="line">    ExecutorService service = Executors.newCachedThreadPool();</span><br><span class="line">    Producer prodThread1 = <span class="keyword">new</span> Producer(queue);</span><br><span class="line">    Producer prodThread2 = <span class="keyword">new</span> Producer(queue);</span><br><span class="line">    Producer prodThread3 = <span class="keyword">new</span> Producer(queue);</span><br><span class="line">    Consumer consThread1 = <span class="keyword">new</span> Consumer(queue);</span><br><span class="line">    Consumer consThread2 = <span class="keyword">new</span> Consumer(queue);</span><br><span class="line">    Consumer consThread3 = <span class="keyword">new</span> Consumer(queue);</span><br><span class="line">    service.execute(prodThread1);</span><br><span class="line">    service.execute(prodThread2);</span><br><span class="line">    service.execute(prodThread3);</span><br><span class="line">    service.execute(consThread1);</span><br><span class="line">    service.execute(consThread2);</span><br><span class="line">    service.execute(consThread3);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.睡一会儿然后尝试停止生产者</span></span><br><span class="line">    Thread.sleep(<span class="number">10</span> * <span class="number">1000</span>);</span><br><span class="line">    prodThread1.stop();</span><br><span class="line">    prodThread2.stop();</span><br><span class="line">    prodThread3.stop();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4.再睡一会儿关闭线程池</span></span><br><span class="line">    Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">    service.shutdown();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为队列中添加和删除的操作比较频繁，所以这里使用<code>LinkedBlockingQueue</code>来作为阻塞队列，所以这里除了内存缓冲区有所不同以外，其他的都差不多…当然你也可以指定一个队列的大小；</p>
+<p><strong>总结</strong></p>
+<p>生产者-消费者模式很好地对生产者线程和消费者线程进行解耦，优化了系统整体的结构，同时由于缓冲区的作用，允许生产者线程和消费者线程存在执行上的性能差异，从一定程度上缓解了性能瓶颈对系统性能的影响；上面两种写法都是非常常规的写法，只能说能起码能在及格的基础上加个那么点儿分数，如果想要得高分可以去搜索搜搜 Disruptor 来实现一个无锁的生产者-消费者模型….这里就不提及了..</p>
+<h2 id="18-单例设计模式"><a href="#18-单例设计模式" class="headerlink" title="18.单例设计模式"></a>18.单例设计模式</h2><p>单例设计模式是软件开发中最常用的设计模式之一。单：唯一，例：实例。即某个类在整个系统中只能有一个实例对象可被获取和使用的代码模式。</p>
+<p>例如：代表JVM运行环境的Runtime类</p>
+<p><strong>要点：</strong></p>
+<ul>
+<li>（1）某个类只能有一个实例</li>
+</ul>
+<p>含有一个该类类型的静态变量来保存这个唯一的实例</p>
+<ul>
+<li>（2）它必须自行创建这个实例</li>
+</ul>
+<p>构造器私有化</p>
+<ul>
+<li>（3）它必须自行向整个系统提供这个实例</li>
+</ul>
+<p>对外提供获取该实例对象的方式：（1）直接暴露（2）用静态变量的get方法获取</p>
+<p><strong>几种常见形式</strong></p>
+<p>（1）饿汉式：直接创建对象，不存在线程安全问题</p>
+<ul>
+<li>直接实例化饿汉式（简洁直观）</li>
+<li>枚举式（最简洁）</li>
+<li>静态代码块饿汉式（适合复杂实例化）</li>
+</ul>
+<p>（2）懒汉式：延迟创建对象</p>
+<ul>
+<li>线程不安全（适用于单线程）</li>
+<li>线程安全（适用于多线程）</li>
+<li>静态内部类形式（适用于多线程）</li>
+</ul>
+<p><strong>饿汉式：</strong></p>
+<p>直接实例化饿汉式（简洁直观）:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> 直接实例化饿汉式（简介直观）</span></span><br><span class="line"><span class="comment"> * 直接创建实例对象的饿汉式，不管你是否需要这个对象都会创建</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * （1）构造器私有化</span></span><br><span class="line"><span class="comment"> * （2）自行创建，并且静态变量保存</span></span><br><span class="line"><span class="comment"> * （3）向外提供实例</span></span><br><span class="line"><span class="comment"> * （4）强调这是一个单例，我们可以用final关键字修饰</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton1 INSTANCE = <span class="keyword">new</span> Singleton1();</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton1</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> Singleton1测试类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSingleton1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Singleton1 s = Singleton1.INSTANCE;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>枚举式（最简洁）:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> 枚举式（最简洁）</span></span><br><span class="line"><span class="comment"> * 枚举类型：表示该类型的对象是有限个</span></span><br><span class="line"><span class="comment"> * 我们可以设定为1个，即成为了单例</span></span><br><span class="line"><span class="comment"> * 枚举默认即为private</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Singleton2 &#123;</span><br><span class="line">    INSTANCE</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> Singleton2测试类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSingleton2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Singleton2 s = Singleton2.INSTANCE;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>静态代码块饿汉式（适合复杂实例化）:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> 静态代码块饿汉式（适合复杂实例化）</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton3</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton3 INSTANCE;</span><br><span class="line">    <span class="keyword">private</span> String info;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//饿汉式，直接创建对象，不存在线程安全问题</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String path = System.getProperty(<span class="string">"user.dir"</span>)+<span class="string">"/src/main/resources/singleton.properties"</span>;</span><br><span class="line">            properties.load(<span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(path)));</span><br><span class="line">            INSTANCE = <span class="keyword">new</span> Singleton3(properties.getProperty(<span class="string">"info"</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setInfo</span><span class="params">(String info)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.info = info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Singleton3&#123;"</span> +</span><br><span class="line">                <span class="string">"info='"</span> + info + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton3</span><span class="params">(String info)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.info = info;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> Singleton3测试类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSingleton3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Singleton3 s = Singleton3.INSTANCE;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>懒汉式：</strong></p>
+<p>线程不安全（适用于单线程）:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> 懒汉式1</span></span><br><span class="line"><span class="comment"> * 线程不安全（适合于单线程）</span></span><br><span class="line"><span class="comment"> * 延迟创建实例对象,存在线程安全问题</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * （1）构造器私有化</span></span><br><span class="line"><span class="comment"> * （2）用一个静态变量保存这个唯一的实例</span></span><br><span class="line"><span class="comment"> * （3）提供一个静态方法，获取这个实例对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton4</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton4 instance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton4</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton4 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">100</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            instance = <span class="keyword">new</span> Singleton4();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> Singleton4测试类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSingleton4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">/*//单线程情况下</span></span><br><span class="line"><span class="comment">        Singleton4 s1 = Singleton4.getInstance();</span></span><br><span class="line"><span class="comment">        Singleton4 s2 = Singleton4.getInstance();</span></span><br><span class="line"><span class="comment">        System.out.println(s1 == s2);</span></span><br><span class="line"><span class="comment">        System.out.println(s1);</span></span><br><span class="line"><span class="comment">        System.out.println(s2);*/</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//多线程情况下</span></span><br><span class="line">        Callable&lt;Singleton4&gt; c = <span class="keyword">new</span> Callable&lt;Singleton4&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Singleton4 <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> Singleton4.getInstance();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">//创建线程池</span></span><br><span class="line">        ExecutorService es = Executors.newFixedThreadPool(<span class="number">2</span>);</span><br><span class="line">        Future&lt;Singleton4&gt; f1 = es.submit(c);</span><br><span class="line">        Future&lt;Singleton4&gt; f2 = es.submit(c);</span><br><span class="line"></span><br><span class="line">        Singleton4 s3 = f1.get();</span><br><span class="line">        Singleton4 s4 =f2.get();</span><br><span class="line"></span><br><span class="line">        System.out.println(s3 == s4);</span><br><span class="line">        System.out.println(s3);</span><br><span class="line">        System.out.println(s4);</span><br><span class="line"></span><br><span class="line">        es.shutdown();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>线程安全（适用于多线程）:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> 懒汉式2</span></span><br><span class="line"><span class="comment"> * 线程安全（适合于多线程）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton5</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton5 instance;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton5</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton5 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton5.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    instance = <span class="keyword">new</span> Singleton5();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> Singleton5测试类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSingleton5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">//多线程情况下</span></span><br><span class="line">        Callable&lt;Singleton5&gt; c = <span class="keyword">new</span> Callable&lt;Singleton5&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Singleton5 <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> Singleton5.getInstance();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">//创建线程池</span></span><br><span class="line">        ExecutorService es = Executors.newFixedThreadPool(<span class="number">2</span>);</span><br><span class="line">        Future&lt;Singleton5&gt; f1 = es.submit(c);</span><br><span class="line">        Future&lt;Singleton5&gt; f2 = es.submit(c);</span><br><span class="line"></span><br><span class="line">        Singleton5 s3 = f1.get();</span><br><span class="line">        Singleton5 s4 =f2.get();</span><br><span class="line"></span><br><span class="line">        System.out.println(s3 == s4);</span><br><span class="line">        System.out.println(s3);</span><br><span class="line">        System.out.println(s4);</span><br><span class="line"></span><br><span class="line">        es.shutdown();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>静态内部类形式（适用于多线程）:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> 懒汉式3</span></span><br><span class="line"><span class="comment"> * 静态内部类形式（适合多线程）</span></span><br><span class="line"><span class="comment"> * 在内部类被加载和初始化时，才创建INSTANCE对象</span></span><br><span class="line"><span class="comment"> * 静态内部类不会自动随着外部类的加载和初始化而初始化，它是要单独去加载和初始化的。</span></span><br><span class="line"><span class="comment"> * 因为是在内部类加载和初始化时，创建的，因此线程是安全的</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton6</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton6</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton6 INSTANCE = <span class="keyword">new</span> Singleton6();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton6 <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Inner.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> 单例设计模式;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> Singleton6测试类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSingleton6</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">/*//单线程情况下</span></span><br><span class="line"><span class="comment">        Singleton6 s1 = Singleton6.getInstance();</span></span><br><span class="line"><span class="comment">        Singleton6 s2 = Singleton6.getInstance();</span></span><br><span class="line"><span class="comment">        System.out.println(s1 == s2);</span></span><br><span class="line"><span class="comment">        System.out.println(s1);</span></span><br><span class="line"><span class="comment">        System.out.println(s2);*/</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//多线程情况下</span></span><br><span class="line">        Callable&lt;Singleton6&gt; c = <span class="keyword">new</span> Callable&lt;Singleton6&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Singleton6 <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> Singleton6.getInstance();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">//创建线程池</span></span><br><span class="line">        ExecutorService es = Executors.newFixedThreadPool(<span class="number">2</span>);</span><br><span class="line">        Future&lt;Singleton6&gt; f1 = es.submit(c);</span><br><span class="line">        Future&lt;Singleton6&gt; f2 = es.submit(c);</span><br><span class="line"></span><br><span class="line">        Singleton6 s3 = f1.get();</span><br><span class="line">        Singleton6 s4 =f2.get();</span><br><span class="line"></span><br><span class="line">        System.out.println(s3 == s4);</span><br><span class="line">        System.out.println(s3);</span><br><span class="line">        System.out.println(s4);</span><br><span class="line"></span><br><span class="line">        es.shutdown();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：</p>
+<ul>
+<li>如果是饿汉式，枚举形式最简单</li>
+<li>如果是懒汉式，静态内部类形式最简单</li>
+</ul>
+<h2 id="19-有n步台阶，一次只能上1步或2步，共有多少种走法？"><a href="#19-有n步台阶，一次只能上1步或2步，共有多少种走法？" class="headerlink" title="19.有n步台阶，一次只能上1步或2步，共有多少种走法？"></a>19.有n步台阶，一次只能上1步或2步，共有多少种走法？</h2><p>递归分析：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/10%E9%80%92%E5%BD%92.png?raw=true" alt="10éå½.png"></p>
+<p>递归实现代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 递归与迭代;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> 递归实现</span></span><br><span class="line"><span class="comment"> * 有n阶台阶，1次只能上一步或者2步，有多少种走法</span></span><br><span class="line"><span class="comment"> * 递归</span></span><br><span class="line"><span class="comment"> * 迭代</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestStep</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">        System.out.println(f(<span class="number">40</span>)); <span class="comment">//165580141</span></span><br><span class="line">        <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">        System.out.println(end - start); <span class="comment">//641ms</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//递归实现f(n)：求n步台阶，一共有几种走法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(n + <span class="string">"不能小于1"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> f(n - <span class="number">1</span>) + f(n - <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/11%E7%BB%93%E6%9E%9C.png?raw=true" alt="11ç&quot;æ.png"></p>
+<p>迭代分析：</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/12%E5%BE%AA%E7%8E%AF.png?raw=true" alt="12å¾ªç¯.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 递归与迭代;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Describe</span> 迭代实现</span></span><br><span class="line"><span class="comment"> * 有n阶台阶，1次只能上一步或者2步，有多少种走法</span></span><br><span class="line"><span class="comment"> * 递归</span></span><br><span class="line"><span class="comment"> * 迭代</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestStep2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">        System.out.println(loop(<span class="number">40</span>)); <span class="comment">//165580141</span></span><br><span class="line">        <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">        System.out.println(end - start); <span class="comment">//&lt;1ms</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">loop</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(n + <span class="string">"不能小于1"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> one = <span class="number">2</span>; <span class="comment">//走到第二级台阶的初始化值</span></span><br><span class="line">        <span class="keyword">int</span> two = <span class="number">1</span>; <span class="comment">//走到第一级台阶的初始化值</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//最后跨两步+最后跨一步的走法</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            sum = two + one;</span><br><span class="line">            two = one;</span><br><span class="line">            one = sum;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p>.<img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E9%9D%A2%E8%AF%95/2019-08-10-Java%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-Java%E5%9F%BA%E7%A1%80%E7%AF%87/12%E7%BB%93%E6%9E%9C.png?raw=true" alt="12ç&quot;æ.png"></p>
+<p>总结：</p>
+<ul>
+<li>方法调用自身成为递归，利用变量的原值推出新值称为迭代。</li>
+<li>递归</li>
+</ul>
+<p>优点：大问题转化为小问题，可以减少代码量，同时代码精简，可读性好；</p>
+<p>缺点：递归调用浪费了空间，而且递归太深容易造成堆栈的溢出。</p>
+<ul>
+<li>迭代</li>
+</ul>
+<p>优点：代码运行效率好，因为时间只因循环次数增加而增加，而且没有额外的空间开销；</p>
+<p>缺点：代码不如递归简介，可读性好。</p>
+<h2 id="20-多线程练习"><a href="#20-多线程练习" class="headerlink" title="20.多线程练习"></a>20.多线程练习</h2><p>问题：</p>
+<p> 请按要求编写多线程应用程序，模拟多个人通过一个山洞：</p>
+<ol>
+<li>这个山洞每次只能通过一个人，每个人通过山洞的时间为5秒；</li>
+<li>随机生成10个人，同时准备过此山洞，并且定义一个变量用于记录通过隧道的人数。显示每次通过山洞人的姓名，和通过顺序；</li>
+</ol>
+<p><strong>操作步骤描述</strong></p>
+<blockquote>
+<p>1.定义一个隧道类，实现Runnable接口：</p>
+<p>​    1.1 定义一个变量，用来记录通过隧道的人数；</p>
+<p>​        1.2 重写Runnable的run方法；</p>
+<p>​        1.3 定义一个同步方法，模拟每个人通过隧道需要5秒钟：</p>
+<p>​            1.3.1 子线程睡眠5秒钟，模拟每个人通过隧道需要5秒钟；</p>
+<p>​            1.3.2 改变通过的人次；</p>
+<p>​            1.3.3 打印线程名称及其通过隧道的顺序，模拟人通过隧道及其顺序；</p>
+<p>​        1.4 调用通过隧道的方法；</p>
+<p> 2.定义一个测试类：</p>
+<p>​    2.1 在main方法中创建一个隧道类对象；</p>
+<p>​    2.2 在main方法中，循环创建10个子线程对象，通过构造方法把隧道对象和线程名（作为人的姓名）传递进去，并开启子线程；</p>
+</blockquote>
+<p><strong>操作步骤答案</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 1.定义一个隧道类，实现Runnable接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tunnel</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 1.1 定义一个变量，用来记录通过隧道的人数</span></span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">int</span> crossNum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">  * 1.2 重写Runnable的run方法</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="meta">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 1.4 调用通过隧道的方法</span></span><br><span class="line">  cross();</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">  * 1.3 定义一个同步方法，模拟每个人通过隧道需要5秒钟</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">cross</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 1.3.1 子线程睡眠5秒钟，模拟每个人通过隧道需要5秒钟</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">   Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">   e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 1.3.2 改变通过的人次</span></span><br><span class="line">  crossNum++;</span><br><span class="line">  <span class="comment">// 1.3.3 打印线程名称及其通过隧道的顺序，模拟人通过隧道及其顺序</span></span><br><span class="line">  System.out.println(Thread.currentThread().getName() + <span class="string">"已经通过隧道，TA是第"</span> + crossNum + <span class="string">"通过的！"</span>);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 2.定义一个测试类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TunnelDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 2.1 在main方法中创建一个隧道类对象</span></span><br><span class="line">  Tunnel tul = <span class="keyword">new</span> Tunnel();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2.2 在main方法中，循环创建10个子线程对象，通过构造方法把隧道对象和// 线程名（作为人的姓名）传递进去，并开启子线程</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">   Thread t = <span class="keyword">new</span> Thread(tul, <span class="string">"p"</span> + i);</span><br><span class="line">   t.start();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="艾曼爷爷 wechat" style="width: 200px; max-width: 100%;">
+    <div>扫描二维码关注微信公众号，了解更多</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赞赏是最好的支持与鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="艾曼爷爷 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="艾曼爷爷 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    艾曼爷爷
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://aimanyeye.github.io/2019/08/10/2019-08-10-Java面试知识点总结-Java基础篇/" title="Java面试知识点总结-Java基础篇">https://aimanyeye.github.io/2019/08/10/2019-08-10-Java面试知识点总结-Java基础篇/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://aimanyeye.github.io/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java面试/" rel="tag"># Java面试</a>
+          
+            <a href="/tags/Java基础/" rel="tag"># Java基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/09/2019-08-09-Java面试知识点总结-Java集合篇/" rel="next" title="Java面试知识点总结-Java集合篇">
+                <i class="fa fa-chevron-left"></i> Java面试知识点总结-Java集合篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="艾曼爷爷">
+            
+              <p class="site-author-name" itemprop="name">艾曼爷爷</p>
+              <p class="site-description motion-element" itemprop="description">微信公众号：aimanyeye</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-面向对象的特性有哪些？"><span class="nav-number">1.</span> <span class="nav-text">1. 面向对象的特性有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-面向对象和面向过程的区别？"><span class="nav-number">2.</span> <span class="nav-text">2.面向对象和面向过程的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-JDK-和-JRE-的区别是什么？"><span class="nav-number">3.</span> <span class="nav-text">3.JDK 和 JRE 的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Java-中覆盖和重载是什么意思？"><span class="nav-number">4.</span> <span class="nav-text">4.Java 中覆盖和重载是什么意思？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-抽象类和接口的区别有哪些？"><span class="nav-number">5.</span> <span class="nav-text">5.抽象类和接口的区别有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-static关键字是什么意思？"><span class="nav-number">6.</span> <span class="nav-text">6.static关键字是什么意思？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Java-是值传递还是引用传递？"><span class="nav-number">7.</span> <span class="nav-text">7.Java 是值传递还是引用传递？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-JDK-中常用的包有哪些？"><span class="nav-number">8.</span> <span class="nav-text">8.JDK 中常用的包有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Integer-的缓存机制"><span class="nav-number">9.</span> <span class="nav-text">9.Integer 的缓存机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-下述两种方法分别创建了几个-Sring-对象？"><span class="nav-number">10.</span> <span class="nav-text">10.下述两种方法分别创建了几个 Sring 对象？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-i-与-i-到底有什么不同？"><span class="nav-number">11.</span> <span class="nav-text">11.i++ 与 ++i 到底有什么不同？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-交换变量的三种方式"><span class="nav-number">12.</span> <span class="nav-text">12.交换变量的三种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-Java-对象初始化顺序？"><span class="nav-number">13.</span> <span class="nav-text">13.Java 对象初始化顺序？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-true、false-与-null-是关键字吗？"><span class="nav-number">14.</span> <span class="nav-text">14.true、false 与 null 是关键字吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-exception-和-error-有什么区别？"><span class="nav-number">15.</span> <span class="nav-text">15.exception 和 error 有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-throw-和-throws-有什么区别？"><span class="nav-number">16.</span> <span class="nav-text">16.throw 和 throws 有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-生产者-消费者问题"><span class="nav-number">17.</span> <span class="nav-text">17.生产者-消费者问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-单例设计模式"><span class="nav-number">18.</span> <span class="nav-text">18.单例设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-有n步台阶，一次只能上1步或2步，共有多少种走法？"><span class="nav-number">19.</span> <span class="nav-text">19.有n步台阶，一次只能上1步或2步，共有多少种走法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-多线程练习"><span class="nav-number">20.</span> <span class="nav-text">20.多线程练习</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">艾曼爷爷</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '3b1b21d6164dbd9a4aad',
+          clientSecret: '699e21661be860daeb91d1daf05d9b9daa2570ba',
+          repo: 'aimanyeye.github.io',
+          owner: 'aimanyeye',
+          admin: ['aimanyeye'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
