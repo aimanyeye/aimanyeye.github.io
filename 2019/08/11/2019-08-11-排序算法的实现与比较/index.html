@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构与算法,排序,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="排序就是将一组对象按照某种逻辑顺序重新排列的过程。比如，订单按照日期排序的——这种排序很可能使用了某种排序算法。在计算时代早期，大家普遍认为30% 的计算周期都用在了排序上。如果今天这个比例降低了，可能的原因之一是如今的排序算法更加高效，而并非排序的重要性降低了。现在计算机的广泛使用使得数据无处不在，而整理数据的第一步通常就是进行排序。几乎所有的计算机系统都实现了各种排序算法以供系统和用户使用。">
+<meta name="keywords" content="数据结构与算法,排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法的实现与比较">
+<meta property="og:url" content="https://aimanyeye.github.io/2019/08/11/2019-08-11-排序算法的实现与比较/index.html">
+<meta property="og:site_name" content="aimanyeye">
+<meta property="og:description" content="排序就是将一组对象按照某种逻辑顺序重新排列的过程。比如，订单按照日期排序的——这种排序很可能使用了某种排序算法。在计算时代早期，大家普遍认为30% 的计算周期都用在了排序上。如果今天这个比例降低了，可能的原因之一是如今的排序算法更加高效，而并非排序的重要性降低了。现在计算机的广泛使用使得数据无处不在，而整理数据的第一步通常就是进行排序。几乎所有的计算机系统都实现了各种排序算法以供系统和用户使用。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/01%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A3.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/02%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/03%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/04%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/05%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/06%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/07%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/08%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/09%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/10%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/11%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/12%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/13%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/14%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/15%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/16%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/17%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/18%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/19%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/20%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/21%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/22%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/23%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/24%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93.png?raw=true">
+<meta property="og:updated_time" content="2019-08-13T07:28:03.834Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="排序算法的实现与比较">
+<meta name="twitter:description" content="排序就是将一组对象按照某种逻辑顺序重新排列的过程。比如，订单按照日期排序的——这种排序很可能使用了某种排序算法。在计算时代早期，大家普遍认为30% 的计算周期都用在了排序上。如果今天这个比例降低了，可能的原因之一是如今的排序算法更加高效，而并非排序的重要性降低了。现在计算机的广泛使用使得数据无处不在，而整理数据的第一步通常就是进行排序。几乎所有的计算机系统都实现了各种排序算法以供系统和用户使用。">
+<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/01%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A3.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aimanyeye.github.io/2019/08/11/2019-08-11-排序算法的实现与比较/">
+
+
+
+
+
+  <title>排序算法的实现与比较 | aimanyeye</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aimanyeye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">刻苦学习，解决眼前的苟且，追寻诗和远方...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/08/11/2019-08-11-排序算法的实现与比较/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="艾曼爷爷">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aimanyeye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">排序算法的实现与比较</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T13:50:32+08:00">
+                2019-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/排序/" itemprop="url" rel="index">
+                    <span itemprop="name">排序</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  15 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>排序就是将一组对象按照某种逻辑顺序重新排列的过程。比如，订单按照日期排序的——这种排序很可能使用了某种排序算法。在计算时代早期，大家普遍认为30% 的计算周期都用在了排序上。如果今天这个比例降低了，可能的原因之一是如今的排序算法更加高效，而并非排序的重要性降低了。现在计算机的广泛使用使得数据无处不在，而整理数据的第一步通常就是进行排序。几乎所有的计算机系统都实现了各种排序算法以供系统和用户使用。</p>
+<a id="more"></a>
+<h2 id="1-冒泡排序"><a href="#1-冒泡排序" class="headerlink" title="1. 冒泡排序"></a>1. 冒泡排序</h2><p>冒泡排序（Bubble Sorting）的基本思想是：通过对待排序序列从前向后（从下标较少的元素开始），<strong>依次比较相邻元素的值，若发现逆序则交换</strong>，使值较大的元素逐渐从前移向后部，就像水底下的气泡一样逐渐向上冒。</p>
+<p>优化：因为排序的过程中，各元素不断接近自己的位置，<strong>如果一趟比较下来没有进行过比较</strong>，就说明序列有序，因此要在排序过程中设置一个标志flag判断元素是否进行过交换。从而减少不必要的比较。</p>
+<p><strong>冒泡排序过程：</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/01%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%9B%BE%E8%A7%A3.png?raw=true" alt="01åæ³¡æåºå¾è§£.png"></p>
+<p><strong>冒泡排序规则：</strong></p>
+<p>（1）一共进行（ <code>数组的大小-1</code>） 次 大的循环</p>
+<p>（2）每一趟排序比较的次数（<code>数组的大小-趟次</code>）在逐渐的减少</p>
+<p>（3） 如果我们发现在某趟排序中，没有发生一次交换， 可以提前结束冒泡排序。这个就是优化</p>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//冒泡排序</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">int</span> temp = <span class="number">0</span>;<span class="comment">//临时变量</span></span><br><span class="line">	<span class="keyword">boolean</span> flag = <span class="keyword">false</span>;<span class="comment">//标识变量，表示是否进行过交换</span></span><br><span class="line">		</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++)&#123;<span class="comment">//(1) 一共进行（ 数组的大小-1） 次 大的循环</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j &lt; arr.length-<span class="number">1</span>-i; j++)&#123;<span class="comment">//(2)每一趟排序的次数（数组的大小-趟次）在逐渐的减少</span></span><br><span class="line">			<span class="keyword">if</span>(arr[j] &gt; arr[j+<span class="number">1</span>])&#123;<span class="comment">//如果前面的数比后面的数大，则交换</span></span><br><span class="line">				flag = <span class="keyword">true</span>;</span><br><span class="line">				temp = arr[j];</span><br><span class="line">				arr[j] = arr[j+<span class="number">1</span>];</span><br><span class="line">				arr[j+<span class="number">1</span>] = temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.print(<span class="string">"第"</span>+ (i+<span class="number">1</span>) + <span class="string">"轮结果："</span>);</span><br><span class="line">		System.out.println(Arrays.toString(arr));</span><br><span class="line">		<span class="keyword">if</span>(!flag)&#123;<span class="comment">//（3）在某一趟排序中，一次交换也没有发生，可以提前结束排序</span></span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			flag = <span class="keyword">false</span>;<span class="comment">//重置flag！！！进行下次判断</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-选择排序"><a href="#2-选择排序" class="headerlink" title="2.选择排序"></a>2.选择排序</h2><p>选择排序（select sorting）也是一种简单的排序算法。它的基本思想是：<code>第一次</code>从<code>arr[0]~arr[n-1]</code>中选取最小值，与<code>arr[0]</code>交换，<code>第二次</code>从<code>arr[1]~arr[n-1]</code>中选取最小值，与<code>arr[1]</code>交换，<code>第三次</code>从<code>arr[2]~arr[n-1]</code>中选取最小值，与<code>arr[2]</code>交换，…，<code>第i次</code>从<code>arr[i-1]~arr[n-1]</code>中选取最小值，与<code>arr[i-1]</code>交换，…，第<code>n-1</code>次从<code>arr[n-2]~arr[n-1]</code>中选取最小值，与<code>arr[n-2]</code>交换，总共通过<code>n-1次</code>，得到一个按排序码从小到大排列的有序序列。</p>
+<p><strong>选择排序过程：</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/02%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="02éæ©æåºè¿ç¨.png"></p>
+<p><strong>选择排序规则：</strong></p>
+<p>（1）一共进行（ <code>数组的大小-1</code>） 次 大的循环</p>
+<p>（2）每一趟（k）排序从<code>arr[k-1]~arr[n-1]</code>中选取最小值，与<code>arr[k-1]</code>交换</p>
+<p>（3）如果第一个元素（<code>arr[k-1]</code>）就是最小元素，那么不用进行交换</p>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//选择排序</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length-<span class="number">1</span>; i++) &#123;<span class="comment">//(1) 一共进行（ 数组的大小-1） 次 大的循环</span></span><br><span class="line">		<span class="keyword">int</span> minIndex = i;<span class="comment">//最小值下标 默认值为0</span></span><br><span class="line">		<span class="keyword">int</span> min = arr[minIndex];<span class="comment">//最小值 默认值为0</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; arr.length; j++) &#123;<span class="comment">//(2)每一趟（i）排序从`arr[i-1]~arr[n-1]`中选取最小值，与`arr[i-1]`交换</span></span><br><span class="line">			<span class="keyword">if</span>(min&gt;arr[j])&#123;</span><br><span class="line">				minIndex=j;<span class="comment">//找到最小值下标</span></span><br><span class="line">				min=arr[minIndex];<span class="comment">//找到最小值</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(minIndex!=i)&#123;<span class="comment">//如果第一个元素不是最小元素，进行交换</span></span><br><span class="line">			arr[minIndex]=arr[i];</span><br><span class="line">			arr[i]=min;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-插入排序"><a href="#3-插入排序" class="headerlink" title="3.插入排序"></a>3.插入排序</h2><p>插入排序（Insertion Sorting）的基本思想是：<strong>把n个待排序的元素看成为一个有序表和一个无序表</strong>，开始时<code>有序表</code>中只包含<strong>一个元素</strong>，<code>无序表</code>中包含有<strong>n-1个元素</strong>，排序过程中每次从无序表中取出第一个元素，把它的排序码依次与有序表元素的排序码进行比较，将它插入到有序表中的适当位置，使之成为新的有序表。</p>
+<p><strong>插入排序过程：</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/03%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="03æå¥æåºè¿ç¨.png"></p>
+<p><strong>插入排序规则：</strong></p>
+<p>（1）一共进行（ <code>数组的大小-1</code>） 次 大的循环</p>
+<p>（2）对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
+<p>（3）如果第一个元素（<code>insertIndex+1==i</code>）就是合适的位置，那么不用进行交换</p>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//插入排序</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> insertVal = <span class="number">0</span>;<span class="comment">//插入的值 默认值为0</span></span><br><span class="line">	<span class="keyword">int</span> insertIndex = <span class="number">0</span>;<span class="comment">//插入的下标 默认值为0</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;<span class="comment">//从未排序数据中遍历</span></span><br><span class="line">		insertVal = arr[i];<span class="comment">//定义待插入的数</span></span><br><span class="line">		insertIndex = i-<span class="number">1</span>;<span class="comment">//即arr[i]的前面这个数的下标</span></span><br><span class="line">			</span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * 给insertVal找到插入的位置insertIndex</span></span><br><span class="line"><span class="comment">		 * 1.insertIndex &gt;= 0 保证在给insertVal找插入的位置，不越界</span></span><br><span class="line"><span class="comment">		 * 2.insertVal&lt;arr[insertIndex]待插入的数，代表还没找到插入的位置</span></span><br><span class="line"><span class="comment">		 * 3.就需要将arr[insertIndex]后移一位</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">while</span>(insertIndex&gt;=<span class="number">0</span>&amp;&amp;insertVal&lt;arr[insertIndex])&#123;</span><br><span class="line">			arr[insertIndex+<span class="number">1</span>] = arr[insertIndex];<span class="comment">//将arr[insertIndex]后移一位</span></span><br><span class="line">			insertIndex--;<span class="comment">//从后向前找</span></span><br><span class="line">		&#125;</span><br><span class="line">			</span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * 当退出while循环时，说明插入的位置找到了，insertIndex+1</span></span><br><span class="line"><span class="comment">		 * 如果第一个元素（`insertIndex+1==i`）就是合适的位置，那么不用进行交换</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">if</span>(insertIndex+<span class="number">1</span>!=i)&#123;</span><br><span class="line">			arr[insertIndex+<span class="number">1</span>]=insertVal;<span class="comment">//把插入值插入到正确的位置</span></span><br><span class="line">		&#125;</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-希尔排序"><a href="#4-希尔排序" class="headerlink" title="4.希尔排序"></a>4.希尔排序</h2><p>希尔排序是希尔（Donald Shell）于1959年提出的一种排序算法。希尔排序也是一种<strong>插入排序</strong>，它是简单插入排序经过改进之后的一个<strong>更高效的版本</strong>，也称为缩小增量排序。</p>
+<p>希尔排序是把记录按下标的一定增量分组，对每组使用直接插入排序算法排序；随着增量逐渐减少，每组包含的关键词越来越多，<strong>当增量减至1时</strong>，整个文件恰被分成一组，算法便终止。</p>
+<p><strong>希尔排序过程：</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/04%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="04å¸å°æåºè¿ç¨.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/05%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="05å¸å°æåºè¿ç¨.png"></p>
+<p><strong>希尔排序规则：</strong></p>
+<p>（1）把记录按下标的一定增量分组，对每组使用直接插入排序算法排序</p>
+<p>（2）增量逐渐减少（<code>gap=gap/2</code>）,当整个文件恰被分成一组，算法结束</p>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//插入排序 采用移位方式</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> len = arr.length;<span class="comment">//数组的长度</span></span><br><span class="line">	<span class="keyword">int</span> gap = len/<span class="number">2</span>;<span class="comment">//增量gap,并逐步的缩小增量</span></span><br><span class="line">	<span class="keyword">int</span> currentValue;<span class="comment">//组内待排序的数据</span></span><br><span class="line">	<span class="keyword">while</span>(gap&gt;<span class="number">0</span>)&#123;<span class="comment">//当整个文件恰被分成一组，算法结束</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i =gap;i&lt;len;i++)&#123;<span class="comment">//从第gap个元素开始，逐个对其所在的组进行直接插入排序</span></span><br><span class="line">			currentValue = arr[i];<span class="comment">//定义待插入的数</span></span><br><span class="line">			<span class="keyword">int</span> preIndex = i - gap;<span class="comment">//即该组arr[i]前面这个数的下标</span></span><br><span class="line">				</span><br><span class="line">			<span class="comment">/*</span></span><br><span class="line"><span class="comment">			 * 给currentValue找到插入的位置preIndex</span></span><br><span class="line"><span class="comment">			 * 1.preIndex &gt;= 0 保证在给currentValue找插入的位置，不越界</span></span><br><span class="line"><span class="comment">			 * 2.currentValue &lt; arr[preIndex],代表还没找到插入的位置</span></span><br><span class="line"><span class="comment">			 * 3.就需要将arr[preIndex]后移gap位</span></span><br><span class="line"><span class="comment">			 */</span></span><br><span class="line">			<span class="keyword">while</span>(preIndex&gt;=<span class="number">0</span>&amp;&amp;currentValue&lt;arr[preIndex])&#123;</span><br><span class="line">				arr[preIndex+gap] = arr[preIndex];<span class="comment">//将arr[preIndex]后移gap位</span></span><br><span class="line">				preIndex = preIndex - gap;<span class="comment">//从后往前找</span></span><br><span class="line">			&#125;</span><br><span class="line">				</span><br><span class="line">			<span class="comment">/*</span></span><br><span class="line"><span class="comment">			 * 当退出while循环时，说明插入的位置找到了，preIndex+gap</span></span><br><span class="line"><span class="comment">			 * 如果第一个元素（preIndex+gap==i）就是合适的位置，那么不用进行交换</span></span><br><span class="line"><span class="comment">			 */</span></span><br><span class="line">			<span class="keyword">if</span>(preIndex+gap!=i)&#123;</span><br><span class="line">				arr[preIndex+gap] = currentValue;<span class="comment">//把插入值插入到正确的位置</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		gap = gap / <span class="number">2</span>;<span class="comment">//逐步的缩小增量</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-归并排序"><a href="#5-归并排序" class="headerlink" title="5.归并排序"></a>5.归并排序</h2><p>归并排序（MERGE-SORT）是利用归并的思想实现的排序方法，该算法采用经典的<strong>分治（divide-and-conquer）策略</strong>（分治法将问题分(divide)成一些<strong>小的问题然后递归求解</strong>，而治(conquer)的阶段则将分的阶段得到的各答案”修补”在一起，即分而治之)。</p>
+<p><strong>归并排序过程：</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/06%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="06å½å¹¶æåºè¿ç¨.png"></p>
+<p>再来看看<strong>治</strong>阶段，我们需要将两个已经有序的子序列合并成一个有序序列，比如上图中的最后一次合并，要将[4,5,7,8]和[1,2,3,6]两个已经有序的子序列，合并为最终序列[1,2,3,4,5,6,7,8]，来看下实现步骤</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/07%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="07å½å¹¶æåºè¿ç¨.png"></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/08%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="08å½å¹¶æåºè¿ç¨.png"></p>
+<p><strong>归并排序规则：</strong></p>
+<p>（1）先将数组划分为左右两个子表</p>
+<p>（2）然后继续左右两个子表拆分；对最后的拆分的子表，两两进行排序</p>
+<p>（3）对有序的子表进行排序和比较合并</p>
+<p>（4）对合并后的子表继续比较合并</p>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//归并排序 分+合方法</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] mergeSort(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">	<span class="keyword">if</span>(arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr;<span class="comment">//分到一个就可以返回了</span></span><br><span class="line">	<span class="keyword">int</span> mid = arr.length/<span class="number">2</span>;<span class="comment">//切分的位置</span></span><br><span class="line">	<span class="keyword">int</span>[] left = Arrays.copyOfRange(arr, <span class="number">0</span>, mid);<span class="comment">//左子表</span></span><br><span class="line">	<span class="keyword">int</span>[] right = Arrays.copyOfRange(arr, mid, arr.length);<span class="comment">//右子表</span></span><br><span class="line">	<span class="keyword">return</span> merge(mergeSort(left),mergeSort(right));<span class="comment">//先向左递归分解， 再向右递归分解， 最后合并左右子表</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//合并</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] merge(<span class="keyword">int</span>[] left, <span class="keyword">int</span>[] right) &#123;</span><br><span class="line">	<span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[left.length+right.length];<span class="comment">//定义一个返回结果数组</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> index=<span class="number">0</span>,leftIndex=<span class="number">0</span>,rightIndex=<span class="number">0</span>;index&lt;result.length;index++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(leftIndex&gt;=left.length)&#123;<span class="comment">//（1）如果左子表，已经遍历完了</span></span><br><span class="line">			result[index] = right[rightIndex++];<span class="comment">//把右子表剩余的元素加入到表中</span></span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(rightIndex&gt;=right.length)&#123;<span class="comment">//（2）如果右子表，已经遍历完了</span></span><br><span class="line">			result[index] = left[leftIndex++];<span class="comment">//把左子表剩余的元素加入到表中</span></span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(left[leftIndex]&gt;right[rightIndex])&#123;<span class="comment">//（3）如果左子表大于右子表</span></span><br><span class="line">			result[index] = right[rightIndex++];<span class="comment">//把右子表的元素加入到表中</span></span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;<span class="comment">//(4)否则左子表小于等于右子表</span></span><br><span class="line">			result[index] = left[leftIndex++];<span class="comment">//把左子表的元素加入到表中</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;<span class="comment">//返回结果</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-快速排序"><a href="#6-快速排序" class="headerlink" title="6.快速排序"></a>6.快速排序</h2><p>快速排序（Quicksort）是对<strong>冒泡排序</strong>的一种改进。基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，<strong>整个排序过程可以递归进行</strong>，以此达到整个数据变成有序序列</p>
+<p><strong>快速排序过程：</strong></p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/09%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="09å¿&quot;éæåºè¿ç¨.png"></p>
+<p>随机选择数组的一个数，比如48为基准，切分数组 同时引入一个分割指示器，这个分割指示器初始值是数组头元素下标减一，这里就是<code>-1</code>。同时交换基准数和数组尾元素 。</p>
+<p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/10%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="10å¿&quot;éæåºè¿ç¨.png"></p>
+<p>进行数组的遍历，将数组中的元素和基准数进行比较，为了满足所有比基准数小的数都放到基准数前面，所有比基准数大的数都放到基准数后面，我们需要遵循着这样的规则：</p>
+<ul>
+<li>（1）<strong>当前元素小于等于基准数时</strong>，分割指示器右移一位 ，当前元素下标小于等于分割指示器时当前元素保持不动，<strong>当前元素下标大于分割指示器时</strong>，当前元素和分割指示器所指元素交换；</li>
+<li>（2）<strong>当前元素大于基准数</strong>，分割指示器保持不变 ，元素也无需交换。</li>
+</ul>
+<p>所以接下来随着数组的遍历，其中元素的变动情况是：</p>
+<ol>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/11%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="11å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/12%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="12å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/13%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="13å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/14%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="14å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/15%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="15å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/16%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="16å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/17%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="17å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/18%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="18å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/19%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="19å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/20%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="20å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/21%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="21å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/22%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="22å¿&quot;éæåºè¿ç¨.png"></li>
+<li><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/23%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B.png?raw=true" alt="23å¿&quot;éæåºè¿ç¨.png"></li>
+</ol>
+<p><strong>快速排序规则：</strong></p>
+<p>（1）找个数做基准数，把小于它的数移到它左边，把大于它的数移到它右边</p>
+<p>（2）让基准数左边的重复上面的步骤，让基准数右边的再重复上面的步骤，递归。</p>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 递归的数据结构就是栈</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr 待排序数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> left 数组起点</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> right 数组终点</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//已经不满足条件就代表可以不用递归了</span></span><br><span class="line">    <span class="keyword">if</span> (left &gt; right) &#123;</span><br><span class="line">    	<span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">int</span> partitionIndex = partition(arr,left,right);<span class="comment">//分区指示器</span></span><br><span class="line">	<span class="keyword">if</span>(partitionIndex&gt;left)&#123;</span><br><span class="line">		quickSort(arr,left,partitionIndex-<span class="number">1</span>);<span class="comment">//左子表递归</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(partitionIndex&lt;right)&#123;</span><br><span class="line">		quickSort(arr,partitionIndex+<span class="number">1</span>,right);<span class="comment">//右子表递归</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 把小于基准的数移到它左边，把大于基准的数移到它右边</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> pivot = (<span class="keyword">int</span>)(left+Math.random()*(right-left+<span class="number">1</span>));<span class="comment">//随机选取一个数作为基准</span></span><br><span class="line">	<span class="comment">//System.out.println(pivot);</span></span><br><span class="line">	<span class="keyword">int</span> index = left-<span class="number">1</span>;<span class="comment">//index指向小于基准的最右边数</span></span><br><span class="line">	swap(arr,pivot,right);<span class="comment">//交换基准数和尾元素</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=left;i&lt;=right;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(arr[i]&lt;=arr[right])&#123;<span class="comment">//对所有小于等于基准的数进行处理</span></span><br><span class="line">			index++;</span><br><span class="line">			<span class="keyword">if</span>(i&gt;index)&#123;<span class="comment">//当i和index不同时，才交换位置</span></span><br><span class="line">				swap(arr,i,index);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> index;<span class="comment">//返回基准归位的位置</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 交换数组内两个元素</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> temp = arr[i];</span><br><span class="line">	arr[i] = arr[j];</span><br><span class="line">	arr[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="排序算法总结"><a href="#排序算法总结" class="headerlink" title="排序算法总结"></a>排序算法总结</h2><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/2019-08-11-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E6%AF%94%E8%BE%83/24%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93.png?raw=true" alt="24æåºç®æ³æ&quot;ç&quot;.png"></p>
+<p><strong>名词解释</strong></p>
+<p><strong>（1）算法的稳定性</strong></p>
+<p><strong>稳定：</strong>如果a原本在b前面，而a=b，排序之后a仍然在b的前面；</p>
+<p><strong>不稳定：</strong>如果a原本在b的前面，而a=b，排序之后a可能会出现在b的后面；</p>
+<p><strong>（2）时间复杂度</strong></p>
+<p>一个算法执行所耗费的时间。</p>
+<p><strong>（3）空间复杂度</strong></p>
+<p>对一个算法在运行过程中临时占用存储空间大小的量度。</p>
+<p><strong>常见复杂度</strong></p>
+<p>在各种不同算法中，若算法中语句执行次数(占用空间)为一个常数，则复杂度为O(1)； 当一个算法的复杂度与以2为底的n的对数成正比时，可表示为O(log n)；当一个算法的复杂度与n成线性比例关系时，可表示为O (n)，依次类推。</p>
+<p><strong>由小到大：</strong>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) </p>
+<p><strong>排序算法时间复杂度助记</strong></p>
+<p>冒泡、选择、插入排序需要两个for循环，每次只关注一个元素，平均时间复杂度为O(n^2)（外循环找元素O(n)，内循环找位置O(n)）</p>
+<p>快速、归并、希尔、堆基于分治思想，log以2为底，平均时间复杂度往往和O(nlogn)（外循环找元素O(n)，内循环找位置O(logn)）相关</p>
+<p>基数排序时间复杂度为O（N*M），其中N为数据个数，M为数据位数 </p>
+<p><strong>快速排序的优势</strong></p>
+<p>从平均时间来看，快速排序是效率最高的：</p>
+<p>快速排序中平均时间复杂度O(nlog n)，这个公式中隐含的常数因子很小，比归并排序的O(nlog n)中的要小很多，所以大多数情况下，快速排序总是优于合并排序的。</p>
+<p>而堆排序的平均时间复杂度也是O(nlog n)，但是堆排序存在着重建堆的过程，它把根节点移除后，把最后的叶子结点拿上来，是为了重建堆，但是，拿上的值是要比它的两个叶子结点要差很多的，它要比较很多次，才能回到合适的位置。堆排序就会有很多的时间耗在堆调整上。</p>
+<p>虽然快速排序的最坏情况为排序规模（n）的平方关系，但是这种最坏情况取决于每次选择的基准， 对于这种情况，已经提出了很多优化的方法，比如三取样划分和Dual-Pivot快排。</p>
+<p>同时，当排序规模较小时，划分的平衡性容易被打破，而且频繁的方法调用超过了O(nlog n)为O(n^2)省出的时间，所以一般排序规模较小时，会改用插入排序或者其他排序算法。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="艾曼爷爷 wechat" style="width: 200px; max-width: 100%;">
+    <div>扫描二维码关注微信公众号，了解更多</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赞赏是最好的支持与鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="艾曼爷爷 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="艾曼爷爷 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    艾曼爷爷
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://aimanyeye.github.io/2019/08/11/2019-08-11-排序算法的实现与比较/" title="排序算法的实现与比较">https://aimanyeye.github.io/2019/08/11/2019-08-11-排序算法的实现与比较/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://aimanyeye.github.io/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构与算法/" rel="tag"># 数据结构与算法</a>
+          
+            <a href="/tags/排序/" rel="tag"># 排序</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/10/2019-08-10-Java面试知识点总结-Java基础篇/" rel="next" title="Java面试知识点总结-Java基础篇">
+                <i class="fa fa-chevron-left"></i> Java面试知识点总结-Java基础篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="艾曼爷爷">
+            
+              <p class="site-author-name" itemprop="name">艾曼爷爷</p>
+              <p class="site-description motion-element" itemprop="description">微信公众号：aimanyeye</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-冒泡排序"><span class="nav-number">1.</span> <span class="nav-text">1. 冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-选择排序"><span class="nav-number">2.</span> <span class="nav-text">2.选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-插入排序"><span class="nav-number">3.</span> <span class="nav-text">3.插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-希尔排序"><span class="nav-number">4.</span> <span class="nav-text">4.希尔排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-归并排序"><span class="nav-number">5.</span> <span class="nav-text">5.归并排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-快速排序"><span class="nav-number">6.</span> <span class="nav-text">6.快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序算法总结"><span class="nav-number">7.</span> <span class="nav-text">排序算法总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">艾曼爷爷</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '3b1b21d6164dbd9a4aad',
+          clientSecret: '699e21661be860daeb91d1daf05d9b9daa2570ba',
+          repo: 'aimanyeye.github.io',
+          owner: 'aimanyeye',
+          admin: ['aimanyeye'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
