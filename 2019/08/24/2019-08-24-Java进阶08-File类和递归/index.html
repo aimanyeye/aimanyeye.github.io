@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,Java进阶,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="主要内容 File类 递归">
+<meta name="keywords" content="Java,Java进阶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java进阶08-File类和递归">
+<meta property="og:url" content="https://aimanyeye.github.io/2019/08/24/2019-08-24-Java进阶08-File类和递归/index.html">
+<meta property="og:site_name" content="aimanyeye">
+<meta property="og:description" content="主要内容 File类 递归">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Java/Java%E8%BF%9B%E9%98%B6/2019-08-24-Java%E8%BF%9B%E9%98%B608-File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/01%E9%80%92%E5%BD%92%E5%9B%BE%E8%A7%A3.png?raw=true">
+<meta property="og:updated_time" content="2019-08-25T11:13:51.951Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java进阶08-File类和递归">
+<meta name="twitter:description" content="主要内容 File类 递归">
+<meta name="twitter:image" content="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Java/Java%E8%BF%9B%E9%98%B6/2019-08-24-Java%E8%BF%9B%E9%98%B608-File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/01%E9%80%92%E5%BD%92%E5%9B%BE%E8%A7%A3.png?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aimanyeye.github.io/2019/08/24/2019-08-24-Java进阶08-File类和递归/">
+
+
+
+
+
+  <title>Java进阶08-File类和递归 | aimanyeye</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aimanyeye</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">刻苦学习，解决眼前的苟且，追寻诗和远方...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aimanyeye.github.io/2019/08/24/2019-08-24-Java进阶08-File类和递归/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="艾曼爷爷">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aimanyeye">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java进阶08-File类和递归</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-24T14:50:32+08:00">
+                2019-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Java进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Java进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  8.6k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  35 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><ul>
+<li>File类</li>
+<li>递归</li>
+</ul>
+<a id="more"></a>
+<h2 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h2><ul>
+<li style="list-style: none"><input type="checkbox" checked> 能够说出File对象的创建方式</li>
+<li style="list-style: none"><input type="checkbox" checked> 能够说出File类获取名称的方法名称</li>
+<li style="list-style: none"><input type="checkbox" checked> 能够说出File类获取绝对路径的方法名称</li>
+<li style="list-style: none"><input type="checkbox" checked> 能够说出File类获取文件大小的方法名称</li>
+<li style="list-style: none"><input type="checkbox" checked> 能够说出File类判断是否是文件的方法名称</li>
+<li style="list-style: none"><input type="checkbox" checked> 能够说出File类判断是否是文件夹的方法名称</li>
+<li style="list-style: none"><input type="checkbox" checked> 能够辨别相对路径和绝对路径</li>
+<li style="list-style: none"><input type="checkbox" checked> 能够遍历文件夹</li>
+<li style="list-style: none"><input type="checkbox" checked> 能够解释递归的含义</li>
+<li style="list-style: none"><input type="checkbox" checked> 能够使用递归的方式计算5的阶乘</li>
+<li style="list-style: none"><input type="checkbox" checked> 能够说出使用递归会内存溢出隐患的原因</li>
+</ul>
+<h1 id="第一章-File类"><a href="#第一章-File类" class="headerlink" title="第一章 File类"></a>第一章 File类</h1><h2 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h2><p><code>java.io.File</code> 类是文件和目录路径名的抽象表示，主要用于文件和目录的创建、查找和删除等操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileConstructorTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 请问 : 为什么要学习 File 类 ???  File 代表 `文件和目录 (文件夹)`.</span></span><br><span class="line">        <span class="comment">// File 在硬盘上的形式, 类似于数据的永久性存储. (关闭后, 重新开机, 数据依然存在)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 程序中的数据, `变量, 数组, 集合`, 程序一旦结束, 所有程序中的数据都会被销毁.</span></span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>&#125;;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Collections.addAll(list, <span class="string">"张三"</span>, <span class="string">"李四"</span>, <span class="string">"王五"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 请问 : 如果我们想将程序中的数据, 实现永久性的存储, 如何做呢 ???</span></span><br><span class="line">        <span class="comment">// 程序如何与硬盘实现交互 ???</span></span><br><span class="line">        <span class="comment">// 方向1 : 将程序中的数据写入到硬盘, 实现永久性存储.</span></span><br><span class="line">        <span class="comment">// 方向2 : 从硬盘中将数据读取到程序中, 实现操作.</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 参照物 : 内存</span></span><br><span class="line">        <span class="comment">// 输入流 : 从硬盘上流入到内存的操作类, 被称为输入流类.       InputStream / Reader</span></span><br><span class="line">        <span class="comment">// 输出流 : 从内存中写出到硬盘中的操作类, 被称为输出流类.     OutputStream / Writer</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 流分成两大类 :</span></span><br><span class="line">        <span class="comment">// 字节流 : 所有数据皆字节数据. (文字, 图片, 音频, 视频 ...) 01010101010...</span></span><br><span class="line">        <span class="comment">// 字符流 : 字节流 + 编码表(翻译)   `中国人` (2个字节 `GBK` / 3个字节 `UTF-8`)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// File类 : 所有数据最终都存储在文件中, 文件可以存储到文件夹中进行管理.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-构造方法"><a href="#1-2-构造方法" class="headerlink" title="1.2 构造方法"></a>1.2 构造方法</h2><ul>
+<li><code>public File(String pathname)</code> ：通过将给定的<strong>路径名字符串</strong>转换为抽象路径名来创建新的 File实例。  </li>
+<li><code>public File(String parent, String child)</code> ：从<strong>父路径名字符串和子路径名字符串</strong>创建新的 File实例。</li>
+<li><code>public File(File parent, String child)</code> ：从<strong>父抽象路径名和子路径名字符串</strong>创建新的 File实例。  </li>
+</ul>
+<ul>
+<li>构造举例，代码如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileConstructorTest2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 需求 : 如何创建一个 File 对象</span></span><br><span class="line">        <span class="comment">// File 类的说明 : 文件和目录路径名的抽象表示</span></span><br><span class="line">        <span class="comment">// 目的 : 创建文件, 创建文件夹, 判断是文件还是文件夹, 删除文件, 重命名 ...</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 1. public File(String pathname) ：通过将给定的路径名字符串转换为抽象路径名来创建新的 File实例。</span></span><br><span class="line">        File file1 = <span class="keyword">new</span> File(<span class="string">"D:\\aaa.txt"</span>);</span><br><span class="line">        System.out.println(<span class="string">"file1 = "</span> + file1);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. public File(String parent, String child) ：从父路径名字符串和子路径名字符串创建新的 File实例。</span></span><br><span class="line">        String parent = <span class="string">"D:\\aaa"</span>;</span><br><span class="line">        String child = <span class="string">"aaa.txt"</span>;</span><br><span class="line">        File file2 = <span class="keyword">new</span> File(parent, child);</span><br><span class="line">        System.out.println(<span class="string">"file2 = "</span> + file2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. public File(File parent, String child) ：从父抽象路径名和子路径名字符串创建新的 File实例。</span></span><br><span class="line">        File parent2 = <span class="keyword">new</span> File(<span class="string">"D:\\aaa"</span>);</span><br><span class="line">        String child2 = <span class="string">"aaa.txt"</span>;</span><br><span class="line">        File file3 = <span class="keyword">new</span> File(parent2, child2);</span><br><span class="line">        System.out.println(<span class="string">"file3 = "</span> + file3);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">file1 = D:\aaa.txt</span><br><span class="line">file2 = D:\aaa\aaa.txt</span><br><span class="line">file3 = D:\aaa\aaa.txt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>小贴士：</p>
+<ol>
+<li>一个File对象代表硬盘中实际存在的一个文件或者目录。</li>
+<li>无论该路径下是否存在文件或者目录，都不影响File对象的创建。</li>
+</ol>
+</blockquote>
+<h2 id="1-3-常用方法"><a href="#1-3-常用方法" class="headerlink" title="1.3 常用方法"></a>1.3 常用方法</h2><h3 id="获取功能的方法"><a href="#获取功能的方法" class="headerlink" title="获取功能的方法"></a>获取功能的方法</h3><ul>
+<li><p><code>public String getAbsolutePath()</code> ：返回此File的绝对路径名字符串。</p>
+</li>
+<li><p><code>public String getPath()</code> ：将此File转换为路径名字符串。 </p>
+</li>
+<li><p><code>public String getName()</code>  ：返回由此File表示的文件或目录的名称。  </p>
+</li>
+<li><p><code>public long length()</code>  ：返回由此File表示的文件的长度。 </p>
+<p>方法演示，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileMethodTest3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 绝对路径 : 从根盘符开始的路径, 被称为 `绝对路径`.</span></span><br><span class="line">        <span class="comment">// 相对路径 : 针对当前而言.</span></span><br><span class="line"></span><br><span class="line">        File file1 = <span class="keyword">new</span> File(<span class="string">"D:/aaa.txt"</span>);        <span class="comment">// 绝对路径</span></span><br><span class="line">        File file2 = <span class="keyword">new</span> File(<span class="string">"aaa.txt"</span>);           <span class="comment">// 相对路径 (相对当前项目而言)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//- public String getAbsolutePath() ：返回此File的绝对路径名字符串。</span></span><br><span class="line">        System.out.println(<span class="string">"file1的绝对路径 : "</span> + file1.getAbsolutePath());</span><br><span class="line">        System.out.println(<span class="string">"file2的绝对路径 : "</span> + file2.getAbsolutePath());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- public String getPath() ：将此File转换为路径名字符串。  (构造路径)</span></span><br><span class="line">        System.out.println(<span class="string">"file1的构造路径 : "</span> + file1.getPath());</span><br><span class="line">        System.out.println(<span class="string">"file2的构造路径 : "</span> + file2.getPath());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- public String getName()  ：返回由此File表示的文件或目录的名称。</span></span><br><span class="line">        System.out.println(<span class="string">"file1对象的文件名称 : "</span> + file1.getName());</span><br><span class="line">        System.out.println(<span class="string">"file2对象的文件名称 : "</span> + file2.getName());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//- public long length()  ：返回由此File表示的文件的长度。</span></span><br><span class="line">        System.out.println(<span class="string">"file1对象的文件长度为 : "</span> + file1.length());   <span class="comment">// 文件中数据的字节数</span></span><br><span class="line"></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"D:/aaa"</span>);  <span class="comment">// 如果此路径名表示目录，则返回值未指定。</span></span><br><span class="line">        System.out.println(<span class="string">"file文件夹的长度 : "</span> + file.length());   <span class="comment">// 说明 : 获取文件夹的长度是不固定的.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">file1的绝对路径 : D:\aaa.txt</span><br><span class="line">file2的绝对路径 : D:\Java\IdeaProjects\<span class="number">44</span>期\Day08\aaa.txt</span><br><span class="line">file1的构造路径 : D:\aaa.txt</span><br><span class="line">file2的构造路径 : aaa.txt</span><br><span class="line">file1对象的文件名称 : aaa.txt</span><br><span class="line">file2对象的文件名称 : aaa.txt</span><br><span class="line">file1对象的文件长度为 : <span class="number">1508</span></span><br><span class="line">file文件夹的长度 : <span class="number">0</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>API中说明：length()，表示文件的长度。但是File对象表示目录，则返回值未指定。</p>
+</blockquote>
+<h3 id="绝对路径和相对路径"><a href="#绝对路径和相对路径" class="headerlink" title="绝对路径和相对路径"></a>绝对路径和相对路径</h3><ul>
+<li><strong>绝对路径</strong>：从盘符开始的路径，这是一个完整的路径。</li>
+<li><strong>相对路径</strong>：相对于项目目录的路径，这是一个便捷的路径，开发中经常使用。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 绝对路径 : 从盘符开始的路径, 这是一个完整的路径.</span></span><br><span class="line">        File file1 = <span class="keyword">new</span> File(<span class="string">"D:\\bbb.java"</span>);</span><br><span class="line">        System.out.println(<span class="string">"file1 = "</span> + file1.getAbsolutePath());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 相对路径 : 相对于项目目录的路径, 这是一个便捷的路径, 开发中经常使用.</span></span><br><span class="line">        File file2 = <span class="keyword">new</span> File(<span class="string">"bbb.java"</span>);</span><br><span class="line">        System.out.println(<span class="string">"file2 = "</span> + file2.getAbsolutePath());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">file1 = D:\bbb.java</span><br><span class="line">file2 = D:\Java\IdeaProjects\MyTest1\bbb.java</span><br></pre></td></tr></table></figure>
+<h3 id="判断功能的方法"><a href="#判断功能的方法" class="headerlink" title="判断功能的方法"></a>判断功能的方法</h3><ul>
+<li><code>public boolean exists()</code> ：此File表示的文件或目录是否实际存在。</li>
+<li><code>public boolean isDirectory()</code> ：此File表示的是否为目录。</li>
+<li><code>public boolean isFile()</code> ：此File表示的是否为文件。</li>
+</ul>
+<p>方法演示，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        File file1 = <span class="keyword">new</span> File(<span class="string">"D:\\aaa\\bbb.java"</span>);</span><br><span class="line">        File file2 = <span class="keyword">new</span> File(<span class="string">"D:\\aaa"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// public boolean exists() ：此File表示的文件或目录是否实际存在。</span></span><br><span class="line">        System.out.println(<span class="string">"file1描述的文件是否存在 : "</span> + file1.exists());</span><br><span class="line">        System.out.println(<span class="string">"file2描述的目录是否存在 : "</span> + file2.exists());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// public boolean isDirectory() ：此File表示的是否为目录。</span></span><br><span class="line">        System.out.println(<span class="string">"file1描述的是目录吗 ? "</span> + file1.isDirectory());</span><br><span class="line">        System.out.println(<span class="string">"file2描述的是目录吗 ? "</span> + file2.isDirectory());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// public boolean isFile() ：此File表示的是否为文件。</span></span><br><span class="line">        System.out.println(<span class="string">"file1描述的是文件吗 ? "</span> + file1.isFile());</span><br><span class="line">        System.out.println(<span class="string">"file2描述的是文件吗 ? "</span> + file2.isFile());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">file1描述的文件是否存在 : <span class="keyword">true</span></span><br><span class="line">file2描述的目录是否存在 : <span class="keyword">true</span></span><br><span class="line">file1描述的是目录吗 ? <span class="keyword">false</span></span><br><span class="line">file2描述的是目录吗 ? <span class="keyword">true</span></span><br><span class="line">file1描述的是文件吗 ? <span class="keyword">true</span></span><br><span class="line">file2描述的是文件吗 ? <span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建删除功能的方法"><a href="#创建删除功能的方法" class="headerlink" title="创建删除功能的方法"></a>创建删除功能的方法</h3><ul>
+<li><code>public boolean createNewFile()</code> ：当且仅当具有该名称的文件尚不存在时，创建一个新的空文件。 </li>
+<li><code>public boolean delete()</code> ：删除由此File表示的文件或目录。  </li>
+<li><code>public boolean mkdir()</code> ：创建由此File表示的目录。</li>
+<li><code>public boolean mkdirs()</code> ：创建由此File表示的目录，包括任何必需但不存在的父目录。</li>
+</ul>
+<p>方法演示，代码如下：</p>
+<p><strong>文件的创建演示 :</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        File file1 = <span class="keyword">new</span> File(<span class="string">"D:\\aaa.txt"</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"file1表示的文件是否存在 ? "</span> + file1.exists());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// public boolean createNewFile() ：当且仅当具有该名称的文件尚不存在时，创建一个新的空文件。</span></span><br><span class="line">        <span class="keyword">boolean</span> result = file1.createNewFile();</span><br><span class="line">        System.out.println(<span class="string">"file1表示的文件是否创建 ? "</span> + result);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"file1表示的文件是否存在 ? "</span> + file1.exists());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">file1表示的文件是否存在 ? <span class="keyword">false</span></span><br><span class="line">file1表示的文件是否创建 ? <span class="keyword">true</span></span><br><span class="line">file1表示的文件是否存在 ? <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>目录的创建演示 :</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test6</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        File file1 = <span class="keyword">new</span> File(<span class="string">"D:\\bbb"</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"file1表示的目录是否存在 ? "</span> + file1.exists());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// public boolean mkdir() ：创建由此File表示的目录。</span></span><br><span class="line">        <span class="keyword">boolean</span> result = file1.mkdir();</span><br><span class="line">        System.out.println(<span class="string">"file1表示的目录是否创建成功 ? "</span> + result);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"file1表示的目录是否存在 ? "</span> + file1.exists());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"-----------------------------"</span>);</span><br><span class="line"></span><br><span class="line">        File file2 = <span class="keyword">new</span> File(<span class="string">"D:\\ccc\\ddd\\eee"</span>);</span><br><span class="line">        System.out.println(<span class="string">"file2表示的目录是否存在 ? "</span> + file2.exists());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// public boolean mkdirs() ：创建由此File表示的目录，包括任何必需但不存在的父目录。</span></span><br><span class="line">        <span class="keyword">boolean</span> result2 = file2.mkdirs();</span><br><span class="line">        System.out.println(<span class="string">"file2表示的目录是否创建成功 ? "</span> + result2);</span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="string">"file2表示的目录是否存在 ? "</span> + file2.exists());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">file1表示的目录是否存在 ? <span class="keyword">true</span></span><br><span class="line">file1表示的目录是否创建成功 ? <span class="keyword">false</span></span><br><span class="line">file1表示的目录是否存在 ? <span class="keyword">true</span></span><br><span class="line">-----------------------------</span><br><span class="line">file2表示的目录是否存在 ? <span class="keyword">false</span></span><br><span class="line">file2表示的目录是否创建成功 ? <span class="keyword">true</span></span><br><span class="line">file2表示的目录是否存在 ? <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>删除文件与目录 :</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test7</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// public boolean delete() ：删除由此File表示的文件或目录。</span></span><br><span class="line"></span><br><span class="line">        File file1 = <span class="keyword">new</span> File(<span class="string">"D:\\aaa.txt"</span>);</span><br><span class="line">        File file2 = <span class="keyword">new</span> File(<span class="string">"D:\\aaa"</span>);</span><br><span class="line">        File file3 = <span class="keyword">new</span> File(<span class="string">"D:\\bbb"</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"file1文件是否删除成功 ? "</span> + file1.delete());</span><br><span class="line">        System.out.println(<span class="string">"file2非空文件夹是否删除成功 ? "</span> + file2.delete());</span><br><span class="line">        System.out.println(<span class="string">"file3空文件夹是否删除成功 ? "</span> + file3.delete());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">file1文件是否删除成功 ? <span class="keyword">true</span></span><br><span class="line">file2非空文件夹是否删除成功 ? <span class="keyword">false</span></span><br><span class="line">file3空文件夹是否删除成功 ? <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>API中说明：delete方法，如果此File表示目录，则目录必须为空才能删除。</p>
+</blockquote>
+<p><code>补充说明 :</code> 在文件夹中直接创建文件, 一步到位, 如何实现 ???</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileCreateFileTest3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"D:/zzz/yyy/hello.txt"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建文件</span></span><br><span class="line">        <span class="comment">// 注意点 : 如果创建文件的父目录不存在, 文件就会创建失败!</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 1. 获取文件的父目录对象</span></span><br><span class="line">        File parentFile = file.getParentFile();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 判断父目录文件夹是否存在</span></span><br><span class="line">        <span class="keyword">if</span> (parentFile.exists() == <span class="keyword">false</span>) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 3. 如果父目录不存在, 需要创建父目录</span></span><br><span class="line">            parentFile.mkdirs();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4. 程序来到这里, 就能够保证父目录文件夹一定存在. 文件就可以被创建成功.</span></span><br><span class="line">        <span class="keyword">boolean</span> result = file.createNewFile();</span><br><span class="line">        System.out.println(<span class="string">"result = "</span> + result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">result = <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-4-目录的遍历"><a href="#1-4-目录的遍历" class="headerlink" title="1.4 目录的遍历"></a>1.4 目录的遍历</h2><ul>
+<li><code>public String[] list()</code> ：返回一个String数组，表示该File目录中的所有子文件或目录。</li>
+</ul>
+<ul>
+<li><code>public File[] listFiles()</code> ：返回一个File数组，表示该File目录中的所有的子文件或目录。  </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test8</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"D:\\课程资料"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// public String[] list() ：返回一个String数组，表示该File目录中的所有子文件或目录。</span></span><br><span class="line">        String[] names = file.list();</span><br><span class="line">        <span class="keyword">for</span> (String name : names) &#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"--------------"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// public File[] listFiles() ：返回一个File数组，表示该File目录中的所有的子文件或目录。</span></span><br><span class="line">        File[] files = file.listFiles();</span><br><span class="line">        <span class="keyword">for</span> (File f : files) &#123;</span><br><span class="line">            System.out.println(f);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line"><span class="number">1</span>.jpg</span><br><span class="line"><span class="number">2</span>.jpg</span><br><span class="line"><span class="number">3</span>.jpg</span><br><span class="line">--------------</span><br><span class="line">D:\课程资料\<span class="number">1</span>.jpg</span><br><span class="line">D:\课程资料\<span class="number">2</span>.jpg</span><br><span class="line">D:\课程资料\<span class="number">3</span>.jpg</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>小贴士：</p>
+<p>调用listFiles方法的File对象，表示的必须是实际存在的目录，否则返回null，无法进行遍历。</p>
+</blockquote>
+<h1 id="第二章-递归"><a href="#第二章-递归" class="headerlink" title="第二章 递归"></a>第二章 递归</h1><h2 id="2-1-概述"><a href="#2-1-概述" class="headerlink" title="2.1 概述"></a>2.1 概述</h2><ul>
+<li><strong>递归</strong>：指在当前方法内调用自己的这种现象。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"main"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// StackOverflowError 栈内存溢出错误!</span></span><br><span class="line">        main(args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-递归累和"><a href="#2-2-递归累和" class="headerlink" title="2.2 递归累和"></a>2.2 递归累和</h2><h3 id="计算1-n的和"><a href="#计算1-n的和" class="headerlink" title="计算1 ~ n的和"></a>计算1 ~ n的和</h3><p><strong>分析</strong>：num的累和 = num + (num-1)的累和，所以可以把累和的操作定义成一个方法，递归调用。</p>
+<p><strong>实现代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 需求 : 计算 1 ~ n 的累积和</span></span><br><span class="line">        <span class="comment">// num = 5; result = 5 + 4 + 3 + 2 + 1;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 方式一 : 打印实现</span></span><br><span class="line">        System.out.println(<span class="number">5</span> + <span class="number">4</span> + <span class="number">3</span> + <span class="number">2</span> + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 方式二 : 循环实现</span></span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = num; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">            result += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"result = "</span> + result);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 方式三 : 递归实现</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        问 : 1到5的累加值是多少 ???  不知道, 但是等于 5 + 1到4的累加和.</span></span><br><span class="line"><span class="comment">        问 : 1到4的累加值是多少 ???  不知道, 但是等于 4 + 1到3的累加和.</span></span><br><span class="line"><span class="comment">        问 : 1到3的累加值是多少 ???  不知道, 但是等于 3 + 1到2的累加和.</span></span><br><span class="line"><span class="comment">        问 : 1到2的累加值是多少 ???  不知道, 但是等于 2 + 1到1的累加和.</span></span><br><span class="line"><span class="comment">        问 : 1到1的累加值是多少 ???  等于 1.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">int</span> sum = getResult(<span class="number">5</span>);</span><br><span class="line">        System.out.println(<span class="string">"sum = "</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义一个方法 : 求指定数值的累加和</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getResult</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> num + getResult(num - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="代码执行图解"><a href="#代码执行图解" class="headerlink" title="代码执行图解"></a>代码执行图解</h3><p><img src="https://github.com/aimanyeye/blog-images/blob/master/blog-img/Java/Java%E8%BF%9B%E9%98%B6/2019-08-24-Java%E8%BF%9B%E9%98%B608-File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/01%E9%80%92%E5%BD%92%E5%9B%BE%E8%A7%A3.png?raw=true" alt="01éå½å¾è§£.png"></p>
+<blockquote>
+<p>小贴士：递归一定要有条件限定，保证递归能够停止下来，次数不要太多，否则会发生栈内存溢出。</p>
+</blockquote>
+<h2 id="2-3-递归求阶乘"><a href="#2-3-递归求阶乘" class="headerlink" title="2.3 递归求阶乘"></a>2.3 递归求阶乘</h2><ul>
+<li><strong>阶乘</strong>：所有小于及等于该数的正整数的积。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n的阶乘：n! = n * (n-<span class="number">1</span>) *...* <span class="number">3</span> * <span class="number">2</span> * <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>分析</strong>：这与累和类似,只不过换成了乘法运算，学员可以自己练习，需要注意阶乘值符合int类型的范围。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">推理得出：n! = n * (n-1)!</span><br></pre></td></tr></table></figure>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 方式 : 递归实现</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        问 : 5的阶乘是多少 ???  不知道, 但是5的阶乘等于 5 * 4的阶乘.</span></span><br><span class="line"><span class="comment">        问 : 4的阶乘是多少 ???  不知道, 但是4的阶乘等于 4 * 3的阶乘.</span></span><br><span class="line"><span class="comment">        问 : 3的阶乘是多少 ???  不知道, 但是3的阶乘等于 3 * 2的阶乘.</span></span><br><span class="line"><span class="comment">        问 : 2的阶乘是多少 ???  不知道, 但是2的阶乘等于 2 * 1的阶乘.</span></span><br><span class="line"><span class="comment">        问 : 1的阶乘是多少 ???  1的阶乘等于 1.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> result = getFactorial(<span class="number">5</span>);</span><br><span class="line">        System.out.println(<span class="string">"result = "</span> + result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getFactorial</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> n * getFactorial(n - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">result = <span class="number">120</span></span><br></pre></td></tr></table></figure>
+<p><code>求年龄 :</code> 有 5 个人, 问 : 第 5 个人多大 ? 我比第 4 个人大 2 岁. 问 : 第 4 个人多大 ? 我比第 3 个人大 2 岁…第1个人10岁, 请问, 第5个人多大 ???</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RecursiveCallTest3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        需求 : 有 5 个人,</span></span><br><span class="line"><span class="comment">        问 : 第 5 个人多大 ? 我比第 4 个人大 2 岁.</span></span><br><span class="line"><span class="comment">        问 : 第 4 个人多大 ? 我比第 3 个人大 2 岁.</span></span><br><span class="line"><span class="comment">        问 : 第 3 个人多大 ? 我比第 2 个人大 2 岁.</span></span><br><span class="line"><span class="comment">        问 : 第 2 个人多大 ? 我比第 1 个人大 2 岁.</span></span><br><span class="line"><span class="comment">        问 : 第 1 个人多大 ? 第 10 岁.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        步骤一 : 定义一个方法.       int getAge(int n);</span></span><br><span class="line"><span class="comment">        步骤二 : 结束递归 ???        n == 1; return 10;</span></span><br><span class="line"><span class="comment">        步骤三 : 继续递归 ???        n != 1; getAge(n - 1) + 2;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">int</span> age = getAge(<span class="number">5</span>);</span><br><span class="line">        System.out.println(<span class="string">"age = "</span> + age);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 求年龄</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> getAge(n - <span class="number">1</span>) + <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">age = <span class="number">18</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-4-递归打印多级目录"><a href="#2-4-递归打印多级目录" class="headerlink" title="2.4 递归打印多级目录"></a>2.4 递归打印多级目录</h2><p><strong>分析</strong>：多级目录的打印，就是当目录的嵌套。遍历之前，无从知道到底有多少级目录，所以我们还是要使用递归实现。</p>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 递归打印多级目录 :</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"D:\\课程资料"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用方法</span></span><br><span class="line">        scanFolders(file);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">scanFolders</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// listFiles();</span></span><br><span class="line">        File[] files = file.listFiles();</span><br><span class="line">        <span class="comment">// 遍历</span></span><br><span class="line">        <span class="keyword">for</span> (File f : files) &#123;</span><br><span class="line">            <span class="comment">// 判断是否为文件夹</span></span><br><span class="line">            <span class="keyword">if</span> (f.isDirectory()) &#123;</span><br><span class="line">                <span class="comment">// 递归调用 ...</span></span><br><span class="line">                scanFolders(f);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 输出</span></span><br><span class="line">                System.out.println(f);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">D:\课程资料\<span class="number">1</span>.jpg</span><br><span class="line">D:\课程资料\<span class="number">2</span>.jpg</span><br><span class="line">D:\课程资料\<span class="number">3</span>.jpg</span><br><span class="line">D:\课程资料\BEYOND-不再犹豫.mp3</span><br><span class="line">D:\课程资料\Beyond-冲上云霄.mp3</span><br><span class="line">D:\课程资料\Beyond-曾经拥有.mp3</span><br><span class="line">D:\课程资料\Demo.java</span><br><span class="line">D:\课程资料\folders\<span class="number">1</span>.jpg</span><br><span class="line">D:\课程资料\folders\<span class="number">2</span>.jpg</span><br><span class="line">D:\课程资料\folders\<span class="number">3</span>.jpg</span><br></pre></td></tr></table></figure>
+<h1 id="第三章-综合案例"><a href="#第三章-综合案例" class="headerlink" title="第三章 综合案例"></a>第三章 综合案例</h1><h2 id="3-1-文件搜索"><a href="#3-1-文件搜索" class="headerlink" title="3.1 文件搜索"></a>3.1 文件搜索</h2><p>搜索<code>D:\aaa</code> 目录中的<code>.java</code> 文件。</p>
+<p><strong>分析</strong>：</p>
+<ol>
+<li>目录搜索，无法判断多少级目录，所以使用递归，遍历所有目录。</li>
+<li>遍历目录时，获取的子文件，通过文件名称，判断是否符合条件。</li>
+</ol>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test5</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件搜索</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"D:\\课程资料"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用方法 :</span></span><br><span class="line">        searchFile(file);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">searchFile</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 获取文件数组</span></span><br><span class="line">        File[] files = file.listFiles();</span><br><span class="line">        <span class="comment">// 2. 遍历文件数组</span></span><br><span class="line">        <span class="keyword">for</span> (File f : files) &#123;</span><br><span class="line">            <span class="comment">// 3. 判断当前遍历文件对象是文件还是文件夹</span></span><br><span class="line">            <span class="keyword">if</span> (f.isDirectory()) &#123;</span><br><span class="line">                <span class="comment">// 3.1 文件夹, 递归遍历</span></span><br><span class="line">                searchFile(f);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 3.2 文件对象, 判断是否为指定或后缀名</span></span><br><span class="line">                <span class="keyword">if</span> (f.getName().endsWith(<span class="string">".java"</span>)) &#123;</span><br><span class="line">                    System.out.println(f);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">D:\课程资料\Demo.java</span><br><span class="line">D:\课程资料\folders\Demo.java</span><br><span class="line">D:\课程资料\folders\folder2\Demo.java</span><br><span class="line">D:\课程资料\folders\folder2\HelloWorld.java</span><br><span class="line">D:\课程资料\folders\HelloWorld.java</span><br><span class="line">D:\课程资料\HelloWorld.java</span><br><span class="line">D:\课程资料\HelloWorld3.java</span><br><span class="line">D:\课程资料\HelloWorld5.java</span><br><span class="line">D:\课程资料\HelloWorld6.java</span><br><span class="line">D:\课程资料\HelloWorld7.java</span><br><span class="line">D:\课程资料\HelloWorld8.java</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-文件过滤器优化"><a href="#3-2-文件过滤器优化" class="headerlink" title="3.2 文件过滤器优化"></a>3.2 文件过滤器优化</h2><p><code>java.io.FileFilter</code>是一个接口，是File的过滤器。 该接口的对象可以传递给File类的<code>listFiles(FileFilter)</code> 作为参数， 接口中只有一个方法。</p>
+<p><code>boolean accept(File pathname)</code> ：测试pathname是否应该包含在当前File目录中，符合则返回true。</p>
+<p><strong>分析</strong>：</p>
+<ol>
+<li>接口作为参数，需要传递子类对象，重写其中方法。我们选择匿名内部类方式，比较简单。</li>
+<li><code>accept</code>方法，参数为File，表示当前File下所有的子文件和子目录。保留住则返回true，过滤掉则返回false。保留规则：<ol>
+<li>要么是.java文件。</li>
+<li>要么是目录，用于继续遍历。</li>
+</ol>
+</li>
+<li>通过过滤器的作用，<code>listFiles(FileFilter)</code>返回的数组元素中，子文件对象都是符合条件的，可以直接打印。</li>
+</ol>
+<p><strong>代码实现一：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFileFilter</span> <span class="keyword">implements</span> <span class="title">FileFilter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">accept</span><span class="params">(File pathname)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> result = pathname.isDirectory() || pathname.getName().endsWith(<span class="string">".java"</span>);</span><br><span class="line">        <span class="comment">// System.out.println("pathname = " + pathname + ", result = " + result);</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件搜索</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"D:\\课程资料"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用方法 :</span></span><br><span class="line">        searchFile(file);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">searchFile</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 获取文件数组, 传递一个文件过滤器对象</span></span><br><span class="line">        File[] files = file.listFiles(<span class="keyword">new</span> MyFileFilter());</span><br><span class="line">        <span class="keyword">for</span> (File f : files) &#123;</span><br><span class="line">            <span class="comment">// 判断</span></span><br><span class="line">            <span class="keyword">if</span> (f.isDirectory()) &#123;</span><br><span class="line">                searchFile(f);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(f);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">D:\课程资料\Demo.java</span><br><span class="line">D:\课程资料\folders\Demo.java</span><br><span class="line">D:\课程资料\folders\folder2\Demo.java</span><br><span class="line">D:\课程资料\folders\folder2\HelloWorld.java</span><br><span class="line">D:\课程资料\folders\HelloWorld.java</span><br><span class="line">D:\课程资料\HelloWorld.java</span><br><span class="line">D:\课程资料\HelloWorld3.java</span><br><span class="line">D:\课程资料\HelloWorld5.java</span><br><span class="line">D:\课程资料\HelloWorld6.java</span><br><span class="line">D:\课程资料\HelloWorld7.java</span><br><span class="line">D:\课程资料\HelloWorld8.java</span><br></pre></td></tr></table></figure>
+<p><strong>代码实现二 :</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileFilter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件搜索</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"D:\\课程资料"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用方法 :</span></span><br><span class="line">        searchFile(file);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">searchFile</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 获取文件数组, 传递一个文件过滤器对象</span></span><br><span class="line">        File[] files = file.listFiles(<span class="keyword">new</span> FileFilter() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">accept</span><span class="params">(File pathname)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> pathname.isDirectory() || pathname.getName().endsWith(<span class="string">".java"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">for</span> (File f : files) &#123;</span><br><span class="line">            <span class="comment">// 判断</span></span><br><span class="line">            <span class="keyword">if</span> (f.isDirectory()) &#123;</span><br><span class="line">                searchFile(f);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(f);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">D:\课程资料\Demo.java</span><br><span class="line">D:\课程资料\folders\Demo.java</span><br><span class="line">D:\课程资料\folders\folder2\Demo.java</span><br><span class="line">D:\课程资料\folders\folder2\HelloWorld.java</span><br><span class="line">D:\课程资料\folders\HelloWorld.java</span><br><span class="line">D:\课程资料\HelloWorld.java</span><br><span class="line">D:\课程资料\HelloWorld3.java</span><br><span class="line">D:\课程资料\HelloWorld5.java</span><br><span class="line">D:\课程资料\HelloWorld6.java</span><br><span class="line">D:\课程资料\HelloWorld7.java</span><br><span class="line">D:\课程资料\HelloWorld8.java</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-Lambda优化"><a href="#3-3-Lambda优化" class="headerlink" title="3.3 Lambda优化"></a>3.3 Lambda优化</h2><p><strong>分析：</strong><code>FileFilter</code>是只有一个方法的接口，因此可以用lambda表达式简写。</p>
+<p>lambda格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">()-&gt; &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileFilter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 文件搜索</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"D:\\课程资料"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用方法 :</span></span><br><span class="line">        searchFile(file);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">searchFile</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 获取文件数组, 传递一个文件过滤器对象</span></span><br><span class="line">        File[] files = file.listFiles(f -&gt; f.isDirectory() || f.getName().endsWith(<span class="string">".java"</span>));</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (File f : files) &#123;</span><br><span class="line">            <span class="comment">// 判断</span></span><br><span class="line">            <span class="keyword">if</span> (f.isDirectory()) &#123;</span><br><span class="line">                searchFile(f);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(f);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 :</span><br><span class="line">D:\课程资料\Demo.java</span><br><span class="line">D:\课程资料\folders\Demo.java</span><br><span class="line">D:\课程资料\folders\folder2\Demo.java</span><br><span class="line">D:\课程资料\folders\folder2\HelloWorld.java</span><br><span class="line">D:\课程资料\folders\HelloWorld.java</span><br><span class="line">D:\课程资料\HelloWorld.java</span><br><span class="line">D:\课程资料\HelloWorld3.java</span><br><span class="line">D:\课程资料\HelloWorld5.java</span><br><span class="line">D:\课程资料\HelloWorld6.java</span><br><span class="line">D:\课程资料\HelloWorld7.java</span><br><span class="line">D:\课程资料\HelloWorld8.java</span><br></pre></td></tr></table></figure>
+<h1 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h1><h2 id="练习一-相对路径和绝对路径的使用"><a href="#练习一-相对路径和绝对路径的使用" class="headerlink" title="练习一:相对路径和绝对路径的使用"></a>练习一:相对路径和绝对路径的使用</h2><p><strong>描述:</strong>创建两个文件对象，分别使用相对路径和绝对路径创建。</p>
+<p><strong>答案</strong></p>
+<p><strong>操作步骤:</strong></p>
+<p>绝对路径创建文件对象：使用File类一个参数的构造方法。</p>
+<p>相对路径创建文件对象：使用File类两个参数的构造方法。</p>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01_01</span> </span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"><span class="comment">// 创建文件对象：绝对路径</span></span><br><span class="line">		File f1 = <span class="keyword">new</span> File(<span class="string">"d:/aaa/a.txt"</span>);</span><br><span class="line">		<span class="comment">// 创建文件对象：相对路径</span></span><br><span class="line">		File f2 = <span class="keyword">new</span> File(<span class="string">"a.txt"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习二-检查文件是否存在-文件的创建"><a href="#练习二-检查文件是否存在-文件的创建" class="headerlink" title="练习二:检查文件是否存在,文件的创建"></a>练习二:检查文件是否存在,文件的创建</h2><p><strong>描述:</strong>检查D盘下是否存在文件a.txt,如果不存在则创建该文件。</p>
+<p><strong>答案</strong></p>
+<p><strong>操作步骤:</strong></p>
+<ol>
+<li><p>使用绝对路径创建对象关联到D盘的a.txt。</p>
+</li>
+<li><p>通过文件对象方法判断文件是否存在。</p>
+</li>
+<li><p>不存在则调用创建文件的方法创建文件。</p>
+</li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01_02</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		<span class="comment">// 创建文件对象：绝对路径</span></span><br><span class="line">		File f = <span class="keyword">new</span> File(<span class="string">"d:/a.txt"</span>);</span><br><span class="line">		<span class="comment">// 如果文件不存在，则创建文件</span></span><br><span class="line">		<span class="keyword">if</span>(!f.exists()) &#123;</span><br><span class="line">			f.createNewFile();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习三-单级文件夹的创建"><a href="#练习三-单级文件夹的创建" class="headerlink" title="练习三:单级文件夹的创建"></a>练习三:单级文件夹的创建</h2><p><strong>描述:</strong>在D盘下创建一个名为bbb的文件夹。</p>
+<p><strong>答案</strong></p>
+<p><strong>操作步骤:</strong></p>
+<ol>
+<li><p>创建文件对象指定路径为d:/bbb</p>
+</li>
+<li><p>调用文件对象创建文件夹的方法</p>
+</li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01_03</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 创建文件对象</span></span><br><span class="line">		File f = <span class="keyword">new</span> File(<span class="string">"d:/bbb"</span>);</span><br><span class="line">		<span class="comment">// 创建单级文件夹</span></span><br><span class="line">		f.mkdir();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习四-多级文件夹的创建"><a href="#练习四-多级文件夹的创建" class="headerlink" title="练习四:多级文件夹的创建"></a>练习四:多级文件夹的创建</h2><p><strong>描述:</strong>在D盘下创建一个名为ccc的文件夹，要求如下：</p>
+<p>1.ccc文件夹中要求包含bbb子文件夹</p>
+<p>2.bbb子文件夹要求包含aaa文件夹</p>
+<p><strong>答案:</strong></p>
+<p><strong>操作步骤:</strong></p>
+<ol>
+<li><p>创建文件对象关联路径：d:/ccc/bbb/aaa</p>
+</li>
+<li><p>调用文件对象创建多级文件夹的方法</p>
+</li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01_04</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 创建文件对象</span></span><br><span class="line">		File f = <span class="keyword">new</span> File(<span class="string">"d:/ccc/bbb/aaa"</span>);</span><br><span class="line">		<span class="comment">// 创建多级文件夹</span></span><br><span class="line">		f.mkdirs();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习五-删除文件和文件夹"><a href="#练习五-删除文件和文件夹" class="headerlink" title="练习五:删除文件和文件夹"></a>练习五:删除文件和文件夹</h2><p><strong>描述:</strong></p>
+<p>将D盘下a.txt文件删除</p>
+<p>将D盘下aaa文件夹删除,要求文件夹aaa是一个空文件夹。</p>
+<p><strong>答案:</strong></p>
+<p><strong>操作步骤:</strong></p>
+<ol>
+<li><p>创建文件对象关联路径：d:/a.txt</p>
+</li>
+<li><p>调用文件对象删除文件的方法</p>
+</li>
+<li><p>创建文件对象关联路径：d:/aaa</p>
+</li>
+<li><p>调用文件对象删除文件夹的方法</p>
+</li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01_05</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 创建文件对象</span></span><br><span class="line">		File f = <span class="keyword">new</span> File(<span class="string">"d:/a.txt"</span>);</span><br><span class="line">		<span class="comment">// 删除文件</span></span><br><span class="line">		f.delete();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 创建文件夹对象</span></span><br><span class="line">		File dir = <span class="keyword">new</span> File(<span class="string">"d:/aaa"</span>);</span><br><span class="line">		<span class="comment">// 删除文件夹</span></span><br><span class="line">		dir.delete();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习六-获取文件信息-文件名-文件大小-文件的绝对路径-文件的父路径"><a href="#练习六-获取文件信息-文件名-文件大小-文件的绝对路径-文件的父路径" class="headerlink" title="练习六:获取文件信息:文件名,文件大小,文件的绝对路径,文件的父路径"></a>练习六:获取文件信息:文件名,文件大小,文件的绝对路径,文件的父路径</h2><p><strong>描述:</strong></p>
+<p>获取D盘aaa文件夹中b.txt文件的文件名，文件大小，文件的绝对路径和父路径等信息，并将信息输出在控制台。</p>
+<p><strong>答案:</strong></p>
+<p><strong>操作步骤:</strong></p>
+<ol>
+<li><p>在D盘aaa文件夹中创建一个b.txt文件并输入数据</p>
+</li>
+<li><p>创建文件对象关联路径：d:/aaa/b.txt</p>
+</li>
+<li><p>调用文件对象的相关方法获得信息并输出。可以通过API帮助文档查询方法。</p>
+</li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01_06</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 创建文件对象</span></span><br><span class="line">		File f = <span class="keyword">new</span> File(<span class="string">"d:/aaa/b.txt"</span>);</span><br><span class="line">		<span class="comment">// 获得文件名</span></span><br><span class="line">		String filename = f.getName();</span><br><span class="line">		<span class="comment">// 获得文件大小</span></span><br><span class="line">		longfilesize = f.length();</span><br><span class="line">		<span class="comment">// 获得文件的绝对路径</span></span><br><span class="line">		String path = f.getAbsolutePath();</span><br><span class="line">		<span class="comment">// 获得父文件夹路径，返回字符串</span></span><br><span class="line">		String parentPath = f.getParent();</span><br><span class="line">		<span class="comment">// 获得父文件夹路径，返回文件对象</span></span><br><span class="line">		File parentFile = f.getParentFile();</span><br><span class="line">		<span class="comment">// 输出信息</span></span><br><span class="line">		System.out.println(<span class="string">"文件名："</span> + filename);</span><br><span class="line">		System.out.println(<span class="string">"文件大小："</span> + filesize);</span><br><span class="line">		System.out.println(<span class="string">"文件路径："</span> + path);</span><br><span class="line">		System.out.println(<span class="string">"文件父路径："</span> + parentPath);</span><br><span class="line">		System.out.println(<span class="string">"文件父路径："</span> + parentFile);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习七-文件夹或文件的判断"><a href="#练习七-文件夹或文件的判断" class="headerlink" title="练习七:文件夹或文件的判断"></a>练习七:文件夹或文件的判断</h2><p><strong>描述:</strong></p>
+<p>1.判断File对象是否是文件,是文件则输出：xxx是一个文件，否则输出：xxx不是一个文件。</p>
+<p>2.判断File对象是否是文件夹,是文件夹则输出：xxx是一个文件夹，否则输出：xxx不是一个文件夹。(xxx是文件名或文件夹名)</p>
+<p><strong>答案:</strong></p>
+<p><strong>操作步骤:</strong></p>
+<ol>
+<li><p>创建两个文件对象分别关联到不同的文件，比如：d:/a.txt，d:/aaa</p>
+</li>
+<li><p>调用文件对象的判断是否是文件或是否是文件夹的方法</p>
+</li>
+<li><p>获得文件名，根据判断结果输出信息。</p>
+</li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01_07</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 创建文件对象</span></span><br><span class="line">		File f1 = <span class="keyword">new</span> File(<span class="string">"d:/b.txt"</span>);</span><br><span class="line">		<span class="comment">// 判断是否是一个文件</span></span><br><span class="line">		<span class="keyword">if</span>(f1.isFile()) &#123;</span><br><span class="line">			System.out.println(f1.getName()+<span class="string">"是一个文件"</span>);</span><br><span class="line">		&#125;  <span class="keyword">else</span> &#123;</span><br><span class="line">			System.out.println(f1.getName()+<span class="string">"不是一个文件"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 创建文件对象</span></span><br><span class="line">		File f2 = <span class="keyword">new</span> File(<span class="string">"d:/aaaa"</span>);</span><br><span class="line">		<span class="comment">// 判断是否是一个文件夹</span></span><br><span class="line">		<span class="keyword">if</span>(f2.isDirectory()) &#123;</span><br><span class="line">			System.out.println(f2.getName()+<span class="string">"是一个文件夹"</span>);</span><br><span class="line">		&#125;  <span class="keyword">else</span> &#123;</span><br><span class="line">			System.out.println(f2.getName()+<span class="string">"不是一个文件夹"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习八-文件夹的获取方法"><a href="#练习八-文件夹的获取方法" class="headerlink" title="练习八:文件夹的获取方法"></a>练习八:文件夹的获取方法</h2><p><strong>描述:</strong></p>
+<p>获取指定文件夹下所有的文件，并将所有文件的名字输出到控制台。</p>
+<p><strong>注意：</strong>不包含子文件夹下的文件</p>
+<p><strong>答案</strong></p>
+<p><strong>操作步骤:</strong></p>
+<ol>
+<li><p>创建文件对象关联到指定文件夹，比如：c:/aaa</p>
+</li>
+<li><p>调用文件对象的listFiles方法获得文件数组</p>
+</li>
+<li><p>遍历文件数组将每一个文件的名字输出到控制台</p>
+</li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01_08</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 创建文件对象</span></span><br><span class="line">		File f = <span class="keyword">new</span> File(<span class="string">"d:/aaa"</span>);</span><br><span class="line">		<span class="comment">// 获得文件夹下所有文件</span></span><br><span class="line">		File[] files = f.listFiles();</span><br><span class="line">		<span class="comment">// 遍历文件数组</span></span><br><span class="line">		<span class="keyword">for</span> (File file :files) &#123;</span><br><span class="line">			<span class="comment">// 将文件的名字打印到控制台</span></span><br><span class="line">			System.out.println(file.getName());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习九-文件创建、判断功能、获取功能"><a href="#练习九-文件创建、判断功能、获取功能" class="headerlink" title="练习九:文件创建、判断功能、获取功能"></a>练习九:文件创建、判断功能、获取功能</h2><p><strong>描述:</strong></p>
+<p>键盘录入一个文件路径，根据文件路径创建文件对象，判断是文件还是文件夹</p>
+<p>如果是文件，则输出文件的大小</p>
+<p>如果是文件夹，则计算该文件夹下所有文件大小之和并输出(不包含子文件夹)。</p>
+<p><strong>答案</strong></p>
+<p><strong>操作步骤:</strong></p>
+<ol>
+<li><p>创建键盘录入对象</p>
+</li>
+<li><p>接收键盘录入的字符串路径</p>
+</li>
+<li><p>根据字符串路径创建文件对象</p>
+</li>
+<li><p>判断文件对象是文件还是文件夹，如果是文件，则直接输出文件大小</p>
+</li>
+<li><p>如果是文件夹，则获得该文件夹下所有的文件，定义一个求和变量，遍历文件数组获得每一个文件的大小并累加到求和变量中，最后输出求和变量的值。</p>
+</li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test02_01</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 创建键盘录入对象</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="comment">// 提示用户输入一个文件路径</span></span><br><span class="line">		System.out.println(<span class="string">"请输入一个文件路径:"</span>);</span><br><span class="line">		<span class="comment">// 接收用户输入的文件路径</span></span><br><span class="line">		String filePath = sc.nextLine();</span><br><span class="line">		<span class="comment">// 根据文件路径创建文件对象</span></span><br><span class="line">		File file = <span class="keyword">new</span> File(filePath);</span><br><span class="line">		<span class="comment">// 判断是否是文件</span></span><br><span class="line">		<span class="keyword">if</span>(file.isFile()) &#123;</span><br><span class="line">			<span class="comment">// 输出文件大小</span></span><br><span class="line">			System.out.println(<span class="string">"文件大小为："</span> + file.length());</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">// 是文件夹</span></span><br><span class="line">			<span class="comment">// 定义变量统计文件大小之和</span></span><br><span class="line">			<span class="keyword">long</span> length = <span class="number">0</span>;</span><br><span class="line">			<span class="comment">// 获得该文件夹下的所有文件</span></span><br><span class="line">			File[] files = file.listFiles();</span><br><span class="line">			<span class="comment">// 遍历文件数组</span></span><br><span class="line">			<span class="keyword">for</span> (File f :files) &#123;</span><br><span class="line">				<span class="keyword">if</span>(f.isFile()) &#123;</span><br><span class="line">					<span class="comment">// 累加文件大小</span></span><br><span class="line">					length += f.length();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 输出文件夹文件的总大小</span></span><br><span class="line">			System.out.println(<span class="string">"文件总大小为："</span> + length);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习十-递归的使用-一"><a href="#练习十-递归的使用-一" class="headerlink" title="练习十:递归的使用(一)"></a>练习十:递归的使用(一)</h2><p><strong>描述:</strong></p>
+<p>用递归实现不死神兔</p>
+<p>故事得从西元1202年说起，话说有一位意大利青年，名叫斐波那契。</p>
+<p>在他的一部著作中提出了一个有趣的问题：假设一对刚出生的小兔一个月后就能长成大兔，</p>
+<p>再过一个月就能生下一对小兔，并且此后每个月都生一对小兔，没有发生死亡，</p>
+<p><strong>问：</strong>现有一对刚出生的兔子2年后(24个月)会有多少对兔子?</p>
+<p><strong>答案</strong></p>
+<p><strong>解题思路:</strong></p>
+<p>用递归法求斐波那契数列第n项</p>
+<p>斐波那契数列，又称黄金分割数列，指的是这样一个数列：</p>
+<p>  1、1、2、3、5、8、13、21、……</p>
+<p>这个数列大家很容易的就推算出来后面好几项的值，那么到底有什么规律，简单说，就是前两项的和是第三项的值</p>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test02_02</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 键盘输入并接收</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">int</span> n = sc.nextInt();</span><br><span class="line">		<span class="comment">// 调用递归方法并打印</span></span><br><span class="line">		System.out.println(fun(n));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 判断如果是第1个或者第2个月就返回1</span></span><br><span class="line">		<span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">// 如果是第3个月就返回前两个月的值</span></span><br><span class="line">			<span class="keyword">return</span> fun(n - <span class="number">1</span>) + fun(n - <span class="number">2</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习十一-递归的使用-二"><a href="#练习十一-递归的使用-二" class="headerlink" title="练习十一:递归的使用(二)"></a>练习十一:递归的使用(二)</h2><p><strong>描述:</strong>猴子吃桃子问题，猴子第一天摘下若干个桃子，当即吃了快一半，还不过瘾，又多吃了一个。第二天又将仅剩下的桃子吃掉了一半，又多吃了一个。以后每天都吃了前一天剩下的一半多一个。到第十天，只剩下一个桃子。试求第一天共摘了多少桃子？</p>
+<p><strong>答案</strong></p>
+<p><strong>解题思路:</strong>采用逆向思维，从后往前推断，发现其中有相同的地方，即出现递推公式，可以采用递归方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">令S10=<span class="number">1</span>,容易看出S9=<span class="number">2</span>(S10+<span class="number">1</span>),简化一下</span><br><span class="line"></span><br><span class="line">S9=<span class="number">2</span>S10+<span class="number">2</span> </span><br><span class="line"></span><br><span class="line">S8=<span class="number">2</span>S9+<span class="number">2</span> </span><br><span class="line"></span><br><span class="line">….. </span><br><span class="line"></span><br><span class="line">Sn=<span class="number">2</span>S(n+<span class="number">1</span>)+<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test02_03</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 定义桃子数量调用递归方法</span></span><br><span class="line">		<span class="keyword">int</span> sum = sumPeach(<span class="number">1</span>);</span><br><span class="line">		<span class="comment">// 调用递归函数并打印</span></span><br><span class="line">		System.out.println(sum);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sumPeach</span><span class="params">(<span class="keyword">int</span> day)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 判断如果是第10天就返回1</span></span><br><span class="line">		<span class="keyword">if</span> (day == <span class="number">10</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">// 递归计算前一天的数量</span></span><br><span class="line">			<span class="keyword">return</span> <span class="number">2</span> * sumPeach(day + <span class="number">1</span>) + <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习十二-文件过滤器的使用"><a href="#练习十二-文件过滤器的使用" class="headerlink" title="练习十二:文件过滤器的使用"></a>练习十二:文件过滤器的使用</h2><p><strong>描述:</strong></p>
+<p>获得指定文件夹下所有的java文件(不考虑子文件夹的)并输出到控制台</p>
+<p><strong>答案</strong></p>
+<p><strong>操作步骤:</strong></p>
+<ol>
+<li><p>创建一个类实现文件过滤器FileFilter接口并重新accept方法，在该方法根据传入的文件判断是否文件Java文件，如果是则返回true，否则返回false。</p>
+</li>
+<li><p>根据文件夹路径字符串创建文件对象和创建文件过滤器接口实现类对象</p>
+</li>
+<li><p>调用文件对象的listFiles(FileFilter f) 方法，传递文件过滤器实现类对象。</p>
+</li>
+<li><p>遍历文件数组，输入每一个文件对象</p>
+</li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test02_04</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建文件夹对象</span></span><br><span class="line">        File file= <span class="keyword">new</span> File(<span class="string">"d:/aaa"</span>);</span><br><span class="line">        <span class="comment">// 获得该文件夹下的所有java文件</span></span><br><span class="line">        File[] files = file.listFiles(<span class="keyword">new</span> FileFilter() &#123;</span><br><span class="line">           		<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">accept</span><span class="params">(File pathname)</span> </span>&#123;</span><br><span class="line">           			<span class="comment">// 判断文件后缀名是否.java文件</span></span><br><span class="line">           			<span class="keyword">if</span> (pathname.getName().endsWith(<span class="string">".java"</span>)) &#123;</span><br><span class="line">              			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">           			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                  		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                   	&#125;</span><br><span class="line">           		&#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//遍历文件数组,打印所有的Java文件路径</span></span><br><span class="line">        <span class="keyword">for</span> (File f : files) &#123;</span><br><span class="line">        	System.out.println(f.getAbsolutePath());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习十三-文件和文件夹删除"><a href="#练习十三-文件和文件夹删除" class="headerlink" title="练习十三:文件和文件夹删除"></a>练习十三:文件和文件夹删除</h2><p><strong>描述:</strong></p>
+<p>键盘录入一个文件夹路径，删除该文件夹以及文件夹路径下的所有文件。</p>
+<p><strong>要求：</strong>录入的文件夹里面要有多个文件，不能包含有子文件夹。</p>
+<p><strong>提示：</strong>如果文件夹里面有文件，则需要先将文件删除才能删除文件夹。</p>
+<p><strong>答案</strong></p>
+<p><strong>操作步骤:</strong></p>
+<ol>
+<li><p>创建键盘录入对象Scanner</p>
+</li>
+<li><p>定义字符串接收用户输入的文件夹路径</p>
+</li>
+<li><p>根据文件夹路径创建文件对象</p>
+</li>
+<li><p>调用文件对象的listFiles方法获得文件数组</p>
+</li>
+<li><p>遍历文件数组，删除每一个文件</p>
+</li>
+<li><p>最后调用删除方法删除文件夹。</p>
+</li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test02_05</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 创建键盘录入对象</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="comment">// 提示用户输入一个文件路径</span></span><br><span class="line">		System.out.println(<span class="string">"请输入一个文件夹路径:"</span>);</span><br><span class="line">		<span class="comment">// 接收用户输入的文件夹路径</span></span><br><span class="line">		String dirPath = sc.nextLine();</span><br><span class="line">		<span class="comment">// 根据文件夹路径创建文件对象</span></span><br><span class="line">		File dir = <span class="keyword">new</span> File(dirPath);</span><br><span class="line">		<span class="comment">// 获得该文件夹下的所有文件</span></span><br><span class="line">		File[] files = dir.listFiles();</span><br><span class="line">		<span class="comment">// 遍历文件数组删除每一个文件</span></span><br><span class="line">		<span class="keyword">for</span> (File file :files) &#123;</span><br><span class="line">			<span class="comment">// 删除文件</span></span><br><span class="line">			file.delete();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 删除文件夹</span></span><br><span class="line">		System.out.println(dir.delete()?<span class="string">"删除成功"</span>:<span class="string">"删除失败"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习十四-文件获取方法-递归的使用"><a href="#练习十四-文件获取方法-递归的使用" class="headerlink" title="练习十四:文件获取方法,递归的使用"></a>练习十四:文件获取方法,递归的使用</h2><p><strong>描述:</strong>从键盘接收一个文件夹路径,获得该文件夹大小并输出到控制台。</p>
+<p><strong>答案</strong></p>
+<p><strong>操作步骤:</strong></p>
+<ol>
+<li><p>创建键盘录入对象Scanner</p>
+</li>
+<li><p>定义字符串接收用户输入的文件夹路径</p>
+</li>
+<li><p>根据文件夹路径创建文件对象</p>
+</li>
+<li><p>定义一个方法calculate用来计算指定文件夹的大小，接收文件参数，返回long类型数值表示文件夹的大小。</p>
+</li>
+<li><p>调用calculate方法传入文件夹对象，在该方法内部获得文件夹中所有文件，得到一个文件数组，定义一个变量size累加每一个文件的大小，遍历文件数组，判断是否是文件，如果是文件则获得文件大小并累加到变量size中，如果是文件夹，继续递归调用当前方法。</p>
+</li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test02_06</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 创建键盘输入对象</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(<span class="string">"请输入一个文件夹路径："</span>);</span><br><span class="line">		<span class="comment">// 接收用户输入的路径</span></span><br><span class="line">		String filePath = sc.nextLine();</span><br><span class="line">		<span class="comment">// 根据路径字符串创建文件对象</span></span><br><span class="line">		File dir = <span class="keyword">new</span> File(filePath);</span><br><span class="line">		<span class="comment">// 调用calculate方法获得文件大小</span></span><br><span class="line">		<span class="keyword">long</span> length = calculate(dir);</span><br><span class="line">		System.out.println(<span class="string">"文件夹总大小："</span> + length); </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 获得文件夹的大小</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">calculate</span><span class="params">(File dir)</span></span>&#123;</span><br><span class="line">		<span class="keyword">long</span> length = <span class="number">0</span>;</span><br><span class="line">		<span class="comment">// 获得文件数组</span></span><br><span class="line">		File files[] = dir.listFiles();</span><br><span class="line">		<span class="comment">// 遍历数组</span></span><br><span class="line">		<span class="keyword">for</span> (File file :files) &#123;</span><br><span class="line">			<span class="comment">// 判断是否是文件</span></span><br><span class="line">			<span class="keyword">if</span>(file.isFile()) &#123;</span><br><span class="line">				length += file.length();</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				length += calculate(file);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> length;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="艾曼爷爷 wechat" style="width: 200px; max-width: 100%;">
+    <div>扫描二维码关注微信公众号，了解更多</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>赞赏是最好的支持与鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="艾曼爷爷 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="艾曼爷爷 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    艾曼爷爷
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://aimanyeye.github.io/2019/08/24/2019-08-24-Java进阶08-File类和递归/" title="Java进阶08-File类和递归">https://aimanyeye.github.io/2019/08/24/2019-08-24-Java进阶08-File类和递归/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://aimanyeye.github.io/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Java进阶/" rel="tag"># Java进阶</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/24/2019-08-24-Java进阶07-线程池和Lambda表达式/" rel="next" title="Java进阶07-线程池和Lambda表达式">
+                <i class="fa fa-chevron-left"></i> Java进阶07-线程池和Lambda表达式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/25/2019-08-25-Java进阶09-字节流和字符流/" rel="prev" title="Java进阶09-字节流和字符流">
+                Java进阶09-字节流和字符流 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpg" alt="艾曼爷爷">
+            
+              <p class="site-author-name" itemprop="name">艾曼爷爷</p>
+              <p class="site-description motion-element" itemprop="description">微信公众号：aimanyeye</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要内容"><span class="nav-number">1.</span> <span class="nav-text">主要内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习目标"><span class="nav-number">2.</span> <span class="nav-text">学习目标</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-File类"><span class="nav-number"></span> <span class="nav-text">第一章 File类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-概述"><span class="nav-number">1.</span> <span class="nav-text">1.1 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-构造方法"><span class="nav-number">2.</span> <span class="nav-text">1.2 构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-常用方法"><span class="nav-number">3.</span> <span class="nav-text">1.3 常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取功能的方法"><span class="nav-number">3.1.</span> <span class="nav-text">获取功能的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绝对路径和相对路径"><span class="nav-number">3.2.</span> <span class="nav-text">绝对路径和相对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断功能的方法"><span class="nav-number">3.3.</span> <span class="nav-text">判断功能的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建删除功能的方法"><span class="nav-number">3.4.</span> <span class="nav-text">创建删除功能的方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-目录的遍历"><span class="nav-number">4.</span> <span class="nav-text">1.4 目录的遍历</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-递归"><span class="nav-number"></span> <span class="nav-text">第二章 递归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-概述"><span class="nav-number">1.</span> <span class="nav-text">2.1 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-递归累和"><span class="nav-number">2.</span> <span class="nav-text">2.2 递归累和</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算1-n的和"><span class="nav-number">2.1.</span> <span class="nav-text">计算1 ~ n的和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码执行图解"><span class="nav-number">2.2.</span> <span class="nav-text">代码执行图解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-递归求阶乘"><span class="nav-number">3.</span> <span class="nav-text">2.3 递归求阶乘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-递归打印多级目录"><span class="nav-number">4.</span> <span class="nav-text">2.4 递归打印多级目录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-综合案例"><span class="nav-number"></span> <span class="nav-text">第三章 综合案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-文件搜索"><span class="nav-number">1.</span> <span class="nav-text">3.1 文件搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-文件过滤器优化"><span class="nav-number">2.</span> <span class="nav-text">3.2 文件过滤器优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Lambda优化"><span class="nav-number">3.</span> <span class="nav-text">3.3 Lambda优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#练习题"><span class="nav-number"></span> <span class="nav-text">练习题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#练习一-相对路径和绝对路径的使用"><span class="nav-number">1.</span> <span class="nav-text">练习一:相对路径和绝对路径的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习二-检查文件是否存在-文件的创建"><span class="nav-number">2.</span> <span class="nav-text">练习二:检查文件是否存在,文件的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习三-单级文件夹的创建"><span class="nav-number">3.</span> <span class="nav-text">练习三:单级文件夹的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习四-多级文件夹的创建"><span class="nav-number">4.</span> <span class="nav-text">练习四:多级文件夹的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习五-删除文件和文件夹"><span class="nav-number">5.</span> <span class="nav-text">练习五:删除文件和文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习六-获取文件信息-文件名-文件大小-文件的绝对路径-文件的父路径"><span class="nav-number">6.</span> <span class="nav-text">练习六:获取文件信息:文件名,文件大小,文件的绝对路径,文件的父路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习七-文件夹或文件的判断"><span class="nav-number">7.</span> <span class="nav-text">练习七:文件夹或文件的判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习八-文件夹的获取方法"><span class="nav-number">8.</span> <span class="nav-text">练习八:文件夹的获取方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习九-文件创建、判断功能、获取功能"><span class="nav-number">9.</span> <span class="nav-text">练习九:文件创建、判断功能、获取功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习十-递归的使用-一"><span class="nav-number">10.</span> <span class="nav-text">练习十:递归的使用(一)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习十一-递归的使用-二"><span class="nav-number">11.</span> <span class="nav-text">练习十一:递归的使用(二)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习十二-文件过滤器的使用"><span class="nav-number">12.</span> <span class="nav-text">练习十二:文件过滤器的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习十三-文件和文件夹删除"><span class="nav-number">13.</span> <span class="nav-text">练习十三:文件和文件夹删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习十四-文件获取方法-递归的使用"><span class="nav-number">14.</span> <span class="nav-text">练习十四:文件获取方法,递归的使用</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">艾曼爷爷</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '3b1b21d6164dbd9a4aad',
+          clientSecret: '699e21661be860daeb91d1daf05d9b9daa2570ba',
+          repo: 'aimanyeye.github.io',
+          owner: 'aimanyeye',
+          admin: ['aimanyeye'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
